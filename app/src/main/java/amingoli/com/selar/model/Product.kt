@@ -1,25 +1,31 @@
 package amingoli.com.selar.model
 
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.sql.Date
 
-class ProductModel {
-    val id :Int? = null
-    val qrcode :String? = null
-    val name :String? = null
-    val image_defult :String? = null
-    val image_code :String? = null
-    val descrption :Int? = null
-    val branch :Int? = null
-    val status :Int? = null
-    val stock :Double? = null
-    val price_buy :Double? = null
-    val price_sale :Double? = null
-    val price_discount :Double? = null
-    val min_selection :Double? = null
-    val max_selection :Double? = null
-    val increase :Int? = null
-    val created_at :Date? = null
-    val update_at :Date? = null
-    val tax_percent :Int? = null
-    val user :Int? = null
+@Entity
+class Product {
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    var id :Int? = null
+    var qrcode :String? = null
+    var name :String? = null
+    var image_defult :String? = null
+    var image_code :String? = null
+    var descrption :Int? = null
+    var branch :Int? = null
+    var status :Int? = null
+    var stock :Double? = null
+    var price_buy :Double? = null
+    var price_sale :Double? = null
+    var price_discount :Double? = null
+    var min_selection :Double? = null
+    var max_selection :Double? = null
+    var increase :Int? = null
+//    val created_at :Date? = null
+//    val update_at :Date? = null
+    var tax_percent :Int? = null
+    var user :Int? = null
 }

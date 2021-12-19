@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">selar</string>
+    <string name="title">عنوان</string>
+    <string name="name">نام</string>
+    <string name="barcode">بارکد</string>
+    <string name="price_buy">قیمت خرید</string>
+    <string name="price_sela">قیمت فروش</string>
+    <string name="price_discount">مبلغ تخفیف</string>
+    <string name="percent_tax">درصد مالیات</string>
+    <string name="info">مشخصات</string>
+    <string name="finance_data">اطلاعات مالی</string>
+    <string name="detail">جزئیات</string>
+    <string name="stock">موجودی</string>
+    <string name="increase_product">واحد کالا</string>
+    <string name="description">توضیحات</string>
 </resources>

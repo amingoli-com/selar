@@ -1,9 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="never"
     tools:context=".activity.product.ProductActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            layout="@layout/include_toolbar"
+            android:id="@+id/toolbar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <androidx.cardview.widget.CardView
+                style="@style/Margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:textColor="@color/primaryVariant"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="start"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_add_photo_alternate_black_24dp" />
+
+                        <LinearLayout
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical"
+                            android:layout_toEndOf="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <EditText
+                                android:id="@+id/edt_name"
+                                style="@style/Edittext.product"
+                                android:drawableStart="@drawable/ic_name_image_black_24dp"
+                                android:hint="@string/name" />
+
+                            <EditText
+                                android:id="@+id/edt_barcode"
+                                style="@style/Edittext.product"
+                                android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
+                                android:hint="@string/barcode" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                style="@style/Margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:textColor="@color/primaryVariant"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/finance_data" />
+
+                    <EditText
+                        android:id="@+id/edt_price_buy"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                        android:hint="@string/price_buy" />
+
+                    <EditText
+                        android:id="@+id/edt_price_sela"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_local_sela_black_24dp"
+                        android:hint="@string/price_sela" />
+
+                    <EditText
+                        android:id="@+id/edt_price_discount"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_discount_black_24dp"
+                        android:hint="@string/price_discount" />
+
+                    <EditText
+                        android:id="@+id/edt_percent_tax"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_percent_black_24dp"
+                        android:hint="@string/percent_tax" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                style="@style/Margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:textColor="@color/primaryVariant"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail" />
+
+                    <Spinner
+                        android:id="@+id/spinner_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_spinner" />
+                    <View style="@style/Line" />
+
+                    <Spinner
+                        android:id="@+id/spinner_branch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_spinner" />
+                    <View style="@style/Line"/>
+
+                    <EditText
+                        android:id="@+id/edt_stock"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_stock_black_24dp"
+                        android:hint="@string/stock" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/atc_unit"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_unit_symbols_black_24dp"
+                        android:hint="@string/increase_product" />
+
+                    <EditText
+                        android:id="@+id/edt_desc"
+                        style="@style/Edittext.product"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:drawableStart="@drawable/ic_baseline_description_24"
+                        android:hint="@string/description" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

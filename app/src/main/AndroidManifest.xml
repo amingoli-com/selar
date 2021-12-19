@@ -3,6 +3,7 @@
     package="amingoli.com.selar">
 
     <application
+        android:name=".helper.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Selar">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.product.ProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
