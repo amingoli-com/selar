@@ -13,4 +13,6 @@
     <string name="stock">موجودی</string>
     <string name="increase_product">واحد کالا</string>
     <string name="description">توضیحات</string>
+    <string name="permission_required" />
+    <string name="permission_message" />
 </resources>

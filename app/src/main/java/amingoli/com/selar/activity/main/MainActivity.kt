@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.BarcodeScannerActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Product
@@ -41,6 +42,6 @@ class MainActivity : AppCompatActivity() {
         var i = App.database.getAppDao().selectProduct().size
         Log.e("qqqq", "onCreate: $i" )
 
-        startActivity(Intent(this,ProductActivity::class.java))
+        startActivity(Intent(this,BarcodeScannerActivity::class.java))
     }
 }

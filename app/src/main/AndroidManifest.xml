@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="amingoli.com.selar">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".helper.App"
         android:allowBackup="true"
@@ -12,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Selar"
         tools:ignore="AllowBackup">
+        <activity
+            android:name=".activity.BarcodeScannerActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.product.ProductActivity"
             android:exported="true" />
