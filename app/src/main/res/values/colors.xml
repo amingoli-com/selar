@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black_fill">#FF000000</color>
+    <color name="black_box">#2E373E</color>
     <color name="black">#333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#EAEAEA</color>
+    <color name="orange">#FF9218</color>
 
     <color name="primary">#ce2b52</color>
     <color name="primaryVariant">#A81B3D</color>
     <color name="secondary">#8beec3</color>
+    <color name="background_message_box">#FFF9DB</color>
 
     <color name="background_activity">@color/gray</color>
 </resources>

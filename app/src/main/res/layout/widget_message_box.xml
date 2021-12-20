@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_radius"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_5sdp"
+    tools:layout_margin="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        tools:text="هشدار مهم\n
+۱۷ روز دیگر از اشتراک شما باقی مانده" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        tools:text="شما میتوانید با خرید بسته های اشتراکی یکساله ۴۰ درصد در هزینه های خود صرفه جویی کنید!" />
+
+    <TextView
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/desc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/background_radius"
+        android:backgroundTint="@color/black_box"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:ignore="UnusedAttribute"
+        tools:text="خرید اشتراک"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ic_close"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_baseline_close_24"
+        tools:ignore="UnusedAttribute" />
 
 </RelativeLayout>

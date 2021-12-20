@@ -2,6 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="انتخاب کنید"
+    android:text="انتخاب کنید"
     android:padding="@dimen/_5sdp"
     android:textSize="@dimen/_12ssp"
     android:layout_width="match_parent"

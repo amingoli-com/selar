@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:width="@dimen/_1sdp" android:color="@color/background_message_box"/>
     <corners android:radius="@dimen/_7sdp"/>
-    <padding android:top="@dimen/_7sdp"
-        android:bottom="@dimen/_5sdp"
-        android:left="@dimen/_5sdp"
+    <padding android:top="@dimen/_5sdp"
+        android:bottom="@dimen/_7sdp"
+        android:left="@dimen/_7sdp"
         android:right="@dimen/_5sdp"/>
 </shape>
