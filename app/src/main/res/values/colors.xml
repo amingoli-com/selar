@@ -5,7 +5,9 @@
     <color name="black">#333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#EAEAEA</color>
+    <color name="gray_30">#4DEAEAEA</color>
     <color name="orange">#FF9218</color>
+    <color name="blue">#039BE5</color>
 
     <color name="primary">#ce2b52</color>
     <color name="primaryVariant">#A81B3D</color>
