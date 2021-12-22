@@ -17,19 +17,23 @@ class CardBoxMain (context: Context?, attrs: AttributeSet?) : RelativeLayout(con
     }
 
     fun build(title:String, drawable:Drawable, buttonTitle:String, actOneTitle:String,
-              actTwoTitle:String, actTreeTitle:String, onListener: Listener){
+              actTwoTitle:String, actTreeTitle:String?, onListener: Listener){
         this.listener = onListener
         tv_title.setCompoundDrawablesWithIntrinsicBounds(null,null,drawable,null)
         tv_title.setText(title)
         tv_add.setText(buttonTitle)
         tv_act_one.setText(actOneTitle)
         tv_act_two.setText(actTwoTitle)
-        tv_act_tree.setText(actTreeTitle)
 
         tv_add.setOnClickListener { listener?.onAddClicked() }
         tv_act_one.setOnClickListener { listener?.onActOneClicked() }
         tv_act_two.setOnClickListener { listener?.onActTwoClicked() }
-        tv_act_tree.setOnClickListener { listener?.onActTreeClicked() }
+
+        if (actTreeTitle != null){
+            tv_act_tree.visibility = View.VISIBLE
+            tv_act_tree.setText(actTreeTitle)
+            tv_act_tree.setOnClickListener { listener?.onActTreeClicked() }
+        }
     }
 
     interface Listener{

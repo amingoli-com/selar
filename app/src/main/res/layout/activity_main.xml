@@ -15,14 +15,16 @@
 
     <amingoli.com.selar.widget.MessageBox
         android:id="@+id/messageBox"
-        style="@style/Margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <amingoli.com.selar.widget.CardBoxMain
         android:id="@+id/cardBoxProduct"
-        android:layout_margin="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <amingoli.com.selar.widget.CardBoxMain
+        android:id="@+id/cardBoxCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

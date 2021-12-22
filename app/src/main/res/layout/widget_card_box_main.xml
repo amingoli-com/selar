@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_7sdp"
+    style="@style/Margin"
     xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:padding="@dimen/_5sdp"
@@ -69,6 +70,8 @@
 
             <TextView
                 android:id="@+id/tv_act_tree"
+                android:visibility="gone"
+                tools:visibility="visible"
                 android:padding="@dimen/_7sdp"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 style="@style/Text.Body1"

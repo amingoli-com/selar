@@ -4,7 +4,7 @@
     android:background="@drawable/background_radius"
     android:layout_width="match_parent"
     android:padding="@dimen/_5sdp"
-    tools:layout_margin="@dimen/_10sdp"
+    style="@style/Margin"
     android:layout_height="wrap_content">
 
     <TextView

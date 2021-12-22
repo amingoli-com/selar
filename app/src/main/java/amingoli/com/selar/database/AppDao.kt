@@ -13,4 +13,8 @@ interface AppDao {
 
     @Query("select * from product")
     fun selectProduct(): List<Product>
+
+    @Query("select id from product")
+    fun productSize(): List<Int>
+
 }

@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         cardBoxProduct.build("محصولات",
             App.getDrawable(this,R.drawable.ic_baseline_extension_24),
             "+ محصول جدید",
-            "280\nثبت شده","190\nپرفروش","32\nتمام شده",
+            "${App.database.getAppDao().productSize().size}\nثبت شده","190\nپرفروش","32\nتمام شده",
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
                     startActivity(Intent(this@MainActivity,ProductActivity::class.java))
@@ -57,6 +57,25 @@ class MainActivity : AppCompatActivity() {
 
             })
 
+        cardBoxCategory.build("دسته‌بندی‌ها",
+            App.getDrawable(this, R.drawable.ic_baseline_category_24),
+            "+ دسته‌بندی جدید",
+            "280\nثبت شده","190\nمنتخب",null,
+            object : CardBoxMain.Listener{
+                override fun onAddClicked() {
+//                    startActivity(Intent(this@MainActivity,ProductActivity::class.java))
+                }
+
+                override fun onActOneClicked() {
+                }
+
+                override fun onActTwoClicked() {
+                }
+
+                override fun onActTreeClicked() {
+                }
+
+            })
 
         val p = Product()
         p.name = ""
