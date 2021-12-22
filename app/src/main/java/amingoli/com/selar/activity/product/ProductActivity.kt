@@ -2,24 +2,16 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
-import amingoli.com.selar.activity.ChooseCameraActivity
-import amingoli.com.selar.dialog.PikeImageDialog
 import amingoli.com.selar.helper.Config
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.include_toolbar.view.*
-import java.io.File
 
 class ProductActivity : AppCompatActivity()  {
 

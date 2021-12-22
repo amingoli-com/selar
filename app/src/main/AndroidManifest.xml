@@ -16,9 +16,6 @@
         android:theme="@style/Theme.Selar"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".activity.ChooseCameraActivity"
-            android:exported="true" />
-        <activity
             android:name=".activity.BarcodeScannerActivity"
             android:exported="true" />
         <activity
@@ -33,19 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
-        </provider>
     </application>
 
 </manifest>

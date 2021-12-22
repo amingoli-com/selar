@@ -18,13 +18,7 @@
         <item name="android:windowBackground">@color/background_activity</item>
     </style>
 
-    <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog">
-        <item name="android:windowMinWidthMajor">97%</item>
-        <item name="android:windowMinWidthMinor">97%</item>
-    </style>
-
-    <style name="CardView">
-    </style>
+    <style name="CardView"></style>
 
     <style name="Margin">
         <item name="android:layout_marginTop">@dimen/_5sdp</item>
