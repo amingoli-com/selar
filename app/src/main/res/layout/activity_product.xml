@@ -11,8 +11,8 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/include_toolbar"
-            android:id="@+id/toolbar"/>
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,11 +47,13 @@
 
                         <ImageView
                             android:id="@+id/image"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="start"
                             android:padding="@dimen/_5sdp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_add_photo_alternate_black_24dp" />
 
                         <LinearLayout
@@ -66,11 +68,28 @@
                                 android:drawableStart="@drawable/ic_name_image_black_24dp"
                                 android:hint="@string/name" />
 
-                            <EditText
-                                android:id="@+id/edt_barcode"
-                                style="@style/Edittext.product"
-                                android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
-                                android:hint="@string/barcode" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/edt_barcode"
+                                    android:paddingStart="0dp"
+                                    android:paddingEnd="@dimen/_35sdp"
+                                    style="@style/Edittext.product"
+                                    android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
+                                    android:hint="@string/barcode" />
+
+                                <ImageView
+                                    android:id="@+id/btn_scanBarCodeByCamera"
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_photo_camera_24" />
+                            </RelativeLayout>
                         </LinearLayout>
 
                     </RelativeLayout>

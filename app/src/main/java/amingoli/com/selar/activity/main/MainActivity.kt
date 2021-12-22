@@ -4,8 +4,11 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.KEY_EXTRA_BARCODE
+import amingoli.com.selar.helper.Config.REQUEST_INTENT_GET_BARCODE
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.widget.MessageBox
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +45,6 @@ class MainActivity : AppCompatActivity() {
         var i = App.database.getAppDao().selectProduct().size
         Log.e("qqqq", "onCreate: $i" )
 
-        startActivity(Intent(this,BarcodeScannerActivity::class.java))
+        startActivity(Intent(this,ProductActivity::class.java))
     }
 }

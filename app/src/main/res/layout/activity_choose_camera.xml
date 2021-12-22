@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cropScaleType="fitCenter"
+    android:background="@color/black_box"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.ChooseCameraActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/submit"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        style="@style/Text.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/secondary"
+        android:text="@string/submit"
+        android:textAlignment="center"
+        android:textColor="@color/primaryText"
+        android:textSize="@dimen/_18sdp"
+        android:padding="@dimen/_5sdp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/submit"
+        app:cropScaleType="fitCenter" />
+</RelativeLayout>

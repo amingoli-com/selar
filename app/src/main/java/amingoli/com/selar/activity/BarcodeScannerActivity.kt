@@ -2,9 +2,14 @@ package amingoli.com.selar.activity
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.SingalItemAdapter
+import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.KEY_EXTRA_BARCODE
+import amingoli.com.selar.helper.Config.KEY_EXTRA_TYPE_SCAN
 import amingoli.com.selar.helper.Config.REQUEST_CODE
-import amingoli.com.selar.helper.Config.SCAN_BARCODE
+import amingoli.com.selar.helper.Config.SCAN_BARCODE_ARRAY
+import amingoli.com.selar.helper.Config.SCAN_BARCODE_SINGLE
 import android.Manifest.permission.CAMERA
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -26,11 +31,14 @@ class BarcodeScannerActivity : AppCompatActivity() {
 
     private var adapter: SingalItemAdapter? = null
     private var codeScanner: CodeScanner? = null
-    private var TYPE_SCAN = SCAN_BARCODE
+    private var TYPE_SCAN = SCAN_BARCODE_SINGLE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_barcode_scanner)
+        if (intent?.extras != null){
+            TYPE_SCAN = intent?.extras?.getInt(KEY_EXTRA_TYPE_SCAN, SCAN_BARCODE_SINGLE)!!
+        }
         if (checkPermission()) initScaner()
         initListOrder()
     }
@@ -62,14 +70,12 @@ class BarcodeScannerActivity : AppCompatActivity() {
         // Callbacks
         codeScanner?.decodeCallback = DecodeCallback {
             runOnUiThread {
-                adapter?.addItem("محصولی با بارکد ${it.text} ثبت شد!")
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                resultScan(it.text)
             }
         }
         codeScanner?.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
-                Toast.makeText(this, "Camera initialization error: ${it.message}",
-                    Toast.LENGTH_LONG).show()
+                App.toast("Camera initialization error: ${it.message}")
             }
         }
 
@@ -87,6 +93,20 @@ class BarcodeScannerActivity : AppCompatActivity() {
         })
         recyclerView.adapter = adapter
 
+    }
+
+    private fun resultScan(barcode:String){
+        when(TYPE_SCAN){
+            SCAN_BARCODE_SINGLE ->{
+                val intent = Intent()
+                intent.putExtra(KEY_EXTRA_BARCODE, barcode)
+                setResult(RESULT_OK, intent)
+                finish()
+            }
+            SCAN_BARCODE_ARRAY ->{
+                adapter?.addItem(barcode)
+            }
+        }
     }
 
 
@@ -128,8 +148,8 @@ class BarcodeScannerActivity : AppCompatActivity() {
         alertBuilder.setCancelable(false)
         alertBuilder.setTitle(R.string.permission_required)
         alertBuilder.setMessage(R.string.permission_message)
-        alertBuilder.setPositiveButton("باشه") { _, _ -> requestPermissions(permissions) }
-        alertBuilder.setNegativeButton("بیخیال") { _, _ ->  }
+        alertBuilder.setPositiveButton(R.string.positive_button) { _, _ -> requestPermissions(permissions) }
+        alertBuilder.setNegativeButton(R.string.negative_button) { _, _ -> finish() }
         val alert = alertBuilder.create()
         alert.show()
     }

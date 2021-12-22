@@ -13,4 +13,5 @@
     <color name="background_message_box">#FFF9DB</color>
 
     <color name="background_activity">@color/gray</color>
+    <color name="primaryText">@color/black</color>
 </resources>

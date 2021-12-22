@@ -4,6 +4,7 @@ import amingoli.com.selar.database.AppDatabase
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.widget.Toast
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 
@@ -20,5 +21,9 @@ class App : MultiDexApplication() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
         lateinit var database: AppDatabase
+
+        fun toast(message: String){
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        }
     }
 }
