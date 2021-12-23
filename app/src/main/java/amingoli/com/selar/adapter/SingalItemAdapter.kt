@@ -36,8 +36,8 @@ class SingalItemAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText(model)
-        item.title.setOnClickListener { listener.onItemClicked(position, model) }
+        item.textView.setText(model)
+        item.textView.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
     @SuppressLint("NotifyDataSetChanged")

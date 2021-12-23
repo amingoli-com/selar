@@ -1,4 +1,4 @@
-package amingoli.com.selar.widget;
+package amingoli.com.selar.widget.text_watcher;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,20 +7,15 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
-class NumberTextWatcher implements TextWatcher {
+public class PriceTextWatcher implements TextWatcher {
 
     private DecimalFormat df;
     private DecimalFormat dfnd;
     private boolean hasFractionalPart;
     private EditText et;
-    private ListenerEditText listener;
+    private ListenerTextWatcher listener;
 
-
-    interface ListenerEditText{
-        void onTextChanged(String text);
-    }
-
-    public NumberTextWatcher(EditText et, ListenerEditText listener) {
+    public PriceTextWatcher(EditText et, ListenerTextWatcher listener) {
         df = new DecimalFormat("###,###,###");
         df.setDecimalSeparatorAlwaysShown(false);
         dfnd = new DecimalFormat("###,###,###");
@@ -29,7 +24,7 @@ class NumberTextWatcher implements TextWatcher {
         this.listener = listener;
     }
 
-    public NumberTextWatcher(EditText et) {
+    public PriceTextWatcher(EditText et) {
         df = new DecimalFormat("###,###,###");
         df.setDecimalSeparatorAlwaysShown(false);
         dfnd = new DecimalFormat("###,###,###");

@@ -6,6 +6,7 @@ import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.KEY_EXTRA_BARCODE
 import amingoli.com.selar.helper.Config.REQUEST_INTENT_GET_BARCODE
+import amingoli.com.selar.model.Branch
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.widget.CardBoxMain
 import amingoli.com.selar.widget.MessageBox
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         cardBoxProduct.build("محصولات",
             App.getDrawable(this,R.drawable.ic_baseline_extension_24),
-            "+ محصول جدید",
+            null,
             "${App.database.getAppDao().productSize().size}\nثبت شده","190\nپرفروش","32\nتمام شده",
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         cardBoxCategory.build("دسته‌بندی‌ها",
             App.getDrawable(this, R.drawable.ic_baseline_category_24),
-            "+ دسته‌بندی جدید",
+            "",
             "280\nثبت شده","190\nمنتخب",null,
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
@@ -77,10 +78,11 @@ class MainActivity : AppCompatActivity() {
 
             })
 
-        val p = Product()
-        p.name = ""
+        val p = Branch()
+        p.name = "صفائییه"
+        p.type = "شیرینی فروشی"
 
-        App.database.getAppDao().insertProduct(p)
+        App.database.getAppDao().insertBranch(p)
 
         var i = App.database.getAppDao().selectProduct().size
         Log.e("qqqq", "onCreate: $i" )

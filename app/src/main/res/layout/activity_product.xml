@@ -124,25 +124,25 @@
                         android:hint="@string/price_buy" />
 
                     <EditText
+                        android:id="@+id/edt_price_sela_on_product"
+                        android:inputType="numberDecimal"
+                        style="@style/Edittext.product"
+                        android:drawableStart="@drawable/ic_local_sela_black_24dp"
+                        android:hint="@string/price_sela_on_product" />
+
+                    <EditText
                         android:id="@+id/edt_price_sela"
                         android:inputType="numberDecimal"
                         style="@style/Edittext.product"
                         android:drawableStart="@drawable/ic_local_sela_black_24dp"
                         android:hint="@string/price_sela" />
 
-                    <EditText
-                        android:id="@+id/edt_price_discount"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
+                    <TextView
+                        android:drawablePadding="@dimen/_5sdp"
                         android:drawableStart="@drawable/ic_discount_black_24dp"
-                        android:hint="@string/price_discount" />
-
-                    <EditText
-                        android:id="@+id/edt_percent_tax"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
-                        android:drawableStart="@drawable/ic_percent_black_24dp"
-                        android:hint="@string/percent_tax" />
+                        tools:text="این کالا شامل ۸,۰۰۰ تومان تخفیف معادل ۲ درصد می‌باشد"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

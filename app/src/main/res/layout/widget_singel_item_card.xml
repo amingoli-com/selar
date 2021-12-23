@@ -1,87 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    android:id="@+id/view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_7sdp"
     style="@style/Margin"
-    xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+    <LinearLayout
+        android:orientation="vertical"
         android:padding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/box_top"
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Text.Title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:drawablePadding="@dimen/_5sdp"
+            android:drawableTint="@color/primary"
+            android:drawableTop="@drawable/ic_baseline_account_tree_24"
+            android:text="شعب" />
 
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/Text.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/tv_add"
-                android:drawablePadding="@dimen/_5sdp"
-                android:drawableTint="@color/primary"
-                tools:drawableStart="@drawable/ic_baseline_extension_24"
-                tools:text="محصولات" />
-
-            <TextView
-                android:id="@+id/tv_add"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                style="@style/Text.Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/blue"
-                tools:text="+ افزودن" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_below="@+id/box_top"
-            android:orientation="horizontal"
+        <View
+            android:id="@+id/line"
+            android:alpha="0.1"
+            android:visibility="visible"
+            tools:visibility="visible"
+            style="@style/Line"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="1dp"/>
 
-            <TextView
-                android:id="@+id/tv_act_one"
-                android:padding="@dimen/_7sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                style="@style/Text.Body1"
-                android:textAlignment="center"
-                tools:text="270 \n ثبت شده"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:alpha="0.7"
+            style="@style/Text.Body2"
+            android:textAlignment="center"
+            android:text="8 شعبه"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/tv_act_two"
-                android:padding="@dimen/_7sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                style="@style/Text.Body1"
-                android:textAlignment="center"
-                tools:text="270 \n پر فروش"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_act_tree"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:padding="@dimen/_7sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                style="@style/Text.Body1"
-                android:textAlignment="center"
-                tools:text="270 \n تمام شده"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

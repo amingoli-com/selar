@@ -16,4 +16,7 @@ object Config {
     const val CAMERA = "camera"
     const val GALLERY = "gallery"
 
+    const val JPG = ".jpg"
+    const val PATH = "/Sealer2"
+
 }

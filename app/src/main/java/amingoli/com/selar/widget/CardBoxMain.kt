@@ -16,12 +16,16 @@ class CardBoxMain (context: Context?, attrs: AttributeSet?) : RelativeLayout(con
         View.inflate(context, R.layout.widget_card_box_main, this)
     }
 
-    fun build(title:String, drawable:Drawable, buttonTitle:String, actOneTitle:String,
+    fun build(title:String, drawable:Drawable, buttonTitle:String?, actOneTitle:String,
               actTwoTitle:String, actTreeTitle:String?, onListener: Listener){
         this.listener = onListener
         tv_title.setCompoundDrawablesWithIntrinsicBounds(null,null,drawable,null)
         tv_title.setText(title)
-        tv_add.setText(buttonTitle)
+
+        if (!buttonTitle.isNullOrEmpty()){
+            tv_add.setText(buttonTitle)
+        }
+
         tv_act_one.setText(actOneTitle)
         tv_act_two.setText(actTwoTitle)
 

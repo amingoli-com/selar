@@ -4,7 +4,8 @@
     <string name="name">نام</string>
     <string name="barcode">بارکد</string>
     <string name="price_buy">قیمت خرید</string>
-    <string name="price_sela">قیمت فروش</string>
+    <string name="price_sela_on_product">قیمت روی کالا</string>
+    <string name="price_sela">قیمت نهایی فروش</string>
     <string name="price_discount">مبلغ تخفیف</string>
     <string name="percent_tax">درصد مالیات</string>
     <string name="info">مشخصات</string>

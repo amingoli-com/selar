@@ -1,5 +1,5 @@
-package ir.trano.keeper.widget;
+package amingoli.com.selar.widget.text_watcher;
 
-public interface ListenerEditText {
+public interface ListenerTextWatcher {
     void onTextChanged(String text);
 }

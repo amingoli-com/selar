@@ -1,6 +1,7 @@
 package amingoli.com.selar.database
 
 import amingoli.com.selar.BuildConfig
+import amingoli.com.selar.model.Branch
 import amingoli.com.selar.model.Product
 import android.content.Context
 import android.util.Log
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-@Database(entities = [Product::class], version = AppDatabase.VERSION)
+@Database(entities = [Product::class,Branch::class], version = AppDatabase.VERSION)
 abstract class AppDatabase : RoomDatabase() {
 
     /**
