@@ -5,6 +5,7 @@ import amingoli.com.selar.database.AppDatabase
 import amingoli.com.selar.helper.Config.JPG
 import amingoli.com.selar.helper.Config.MONEY
 import amingoli.com.selar.helper.Config.PATH
+import amingoli.com.selar.helper.Config.PATH_IMAGES
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
@@ -87,9 +88,9 @@ class App : MultiDexApplication() {
         fun saveFile(byteArray: ByteArray) : String{
             val outStream: FileOutputStream
             try {
-                val path = File(Environment.getExternalStorageDirectory(),"/AAAA/image")
+                val path = File(Environment.getExternalStorageDirectory(), PATH_IMAGES)
                 path.mkdirs()
-                val fileName = "trano_keeper_" + System.currentTimeMillis() + ".jpg"
+                val fileName = "image_${System.currentTimeMillis()}$JPG"
                 val file = File(path,fileName)
                 Log.e("qqqq", "saveFile: ${file.path}" )
                 outStream = FileOutputStream(file)

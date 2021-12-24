@@ -2,21 +2,15 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
-import amingoli.com.selar.adapter.SpinnerAdapter
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.App.Companion.context
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Branch
 import amingoli.com.selar.model.Product
-import amingoli.com.selar.model.Spinner
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,14 +22,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_product.*
+
 import kotlinx.android.synthetic.main.include_toolbar.view.*
-import java.io.File
 
 class ProductActivity : AppCompatActivity()  {
 
+    private var _PRODUCT_OBJECT : Product? = null
+    private var _ID_PRODUCT : Int? = null
     private var _DISCOUNT = 0.0
     private var _IMAGE_DEFULT_PATH = ""
 
@@ -49,6 +46,7 @@ class ProductActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
+        initObject()
         initToolbar()
         initActionOnClick()
         initTextWatcherPrice()
@@ -66,6 +64,13 @@ class ProductActivity : AppCompatActivity()  {
                 val error = result.error
             }
         }
+    }
+
+    private fun initObject(){
+        _PRODUCT_OBJECT = if (intent != null && intent?.extras != null){
+            val extra = intent!!.extras!!.getString("product")
+            Gson().fromJson(extra,Product::class.java)
+        }else Product()
     }
 
     private fun initToolbar(){
@@ -86,15 +91,15 @@ class ProductActivity : AppCompatActivity()  {
         submit.btn.setOnClickListener {
             if (formIsValid()){
                 submit.showLoader()
-                App.database.getAppDao().insertProduct(insertValue())
-                Handler().postDelayed({finish()},1000)
+                App.database.getAppDao().insertProduct(getValue())
+                Handler().postDelayed({finish()},500)
             }
         }
     }
 
     private fun initTextWatcherPrice(){
         edt_price_buy.addTextChangedListener(PriceTextWatcher(edt_price_buy) {initDiscount()})
-        edt_price_sela_on_product.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {initDiscount()})
+        edt_price_sela_on_product?.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {initDiscount()})
         edt_price_sela.addTextChangedListener(PriceTextWatcher(edt_price_sela) {initDiscount()})
     }
 
@@ -140,71 +145,80 @@ class ProductActivity : AppCompatActivity()  {
     }
 
     private fun formIsValid() : Boolean{
-        val product = insertValue()
+        getValue()
+        var value_is_true = "true"
 
-        if (product.name.isNullOrEmpty()){
-
+        if (_PRODUCT_OBJECT?.name.isNullOrEmpty()){
+            edt_name.setError(resources.getString(R.string.not_valid))
+            value_is_true = "false"
         }
 
-        if (product.image_defult.isNullOrEmpty()){
-
+        if (_PRODUCT_OBJECT?.image_defult.isNullOrEmpty()){
+            image.requestFocus()
+            App.toast(resources.getString(R.string.image_not_valid))
+            value_is_true = "false"
         }
 
-        if (product.increase.isNullOrEmpty()){
-
+        if (_PRODUCT_OBJECT?.increase.isNullOrEmpty()){
+            atc_unit.setError(resources.getString(R.string.not_valid))
+            value_is_true = "false"
         }
 
-        if (product.branch == null){
-
+        if (_PRODUCT_OBJECT?.branch == null){
         }
 
-        if (product.status == null){
-
+        if (_PRODUCT_OBJECT?.status == null){
         }
 
-        if (product.stock == null){
-
+        if (_PRODUCT_OBJECT?.stock == null){
+            edt_stock.setError(resources.getString(R.string.not_valid))
+            value_is_true = "false"
         }
 
-        if (product.tax_percent == null){
-
+        if (_PRODUCT_OBJECT?.tax_percent == null){
         }
 
-        if (product.user == null){
-
+        if (_PRODUCT_OBJECT?.user == null){
         }
 
-
-
-        return true
+        if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
+            edt_price_buy.setError(resources.getString(R.string.not_valid))
+            value_is_true = "false"
+        }else if (_PRODUCT_OBJECT?.price_buy!! > 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
+            _PRODUCT_OBJECT?.price_sale = _PRODUCT_OBJECT?.price_buy
+            edt_price_sela.setText(_PRODUCT_OBJECT?.price_sale.toString())
+        }else if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! > 0){
+            _PRODUCT_OBJECT?.price_buy = _PRODUCT_OBJECT?.price_sale
+            edt_price_buy.setText(_PRODUCT_OBJECT?.price_buy.toString())
+        }
+        return value_is_true == "true"
     }
 
-    private fun insertValue(): Product{
-        val product = Product()
+    private fun getValue(): Product{
 
-//        product.id = ""
-        product.qrcode = App.getString(edt_barcode)
-        product.name = App.getString(edt_name)
-        product.image_defult = _IMAGE_DEFULT_PATH
-//        product.image_code = ""
-        product.descrption = App.getString(edt_desc)
-        product.branch = Session.getInstance().branch
-        product.status = 1
-        product.stock = App.convertToDouble(edt_stock)
-        product.price_buy = App.convertToDouble(edt_price_buy)
-        product.price_sale_on_product = App.convertToDouble(edt_price_sela_on_product)
-        product.price_sale = App.convertToDouble(edt_price_sela)
-        product.price_discount = _DISCOUNT
-        product.min_selection = 1.0
-        product.max_selection = 5.0
-        product.increase = App.getString(atc_unit)
-        product.tax_percent = 0
-        product.user = Session.getInstance().user
+        _PRODUCT_OBJECT?.id = _ID_PRODUCT
+        _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
+        _PRODUCT_OBJECT?.price_discount = _DISCOUNT
+        _PRODUCT_OBJECT?.branch = Session.getInstance().branch
+        _PRODUCT_OBJECT?.user = Session.getInstance().user
+        _PRODUCT_OBJECT?.qrcode = App.getString(edt_barcode)
+        _PRODUCT_OBJECT?.name = App.getString(edt_name)
+        _PRODUCT_OBJECT?.descrption = App.getString(edt_desc)
+        _PRODUCT_OBJECT?.increase = App.getString(atc_unit)
+        _PRODUCT_OBJECT?.stock = App.convertToDouble(edt_stock)
+        _PRODUCT_OBJECT?.price_buy = App.convertToDouble(edt_price_buy)
+        _PRODUCT_OBJECT?.price_sale_on_product = App.convertToDouble(edt_price_sela_on_product)
+        _PRODUCT_OBJECT?.price_sale = App.convertToDouble(edt_price_sela)
+        _PRODUCT_OBJECT?.max_selection = App.convertToDouble(edt_max_selection)
+        _PRODUCT_OBJECT?.min_selection = 1.0
+        _PRODUCT_OBJECT?.tax_percent = 0
+        _PRODUCT_OBJECT?.status = 1
 
-//        product.created_at = ""
-//        product.update_at = ""
+//        _PRODUCT_OBJECT?.image_code = ""
+//        _PRODUCT_OBJECT?.created_at = ""
+//        _PRODUCT_OBJECT?.update_at = ""
 
-        return product
+        return _PRODUCT_OBJECT!!
     }
 
     /**

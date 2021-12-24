@@ -63,36 +63,66 @@
                             android:layout_toEndOf="@+id/image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <EditText
-                                android:id="@+id/edt_name"
-                                style="@style/Edittext.product"
-                                android:drawableStart="@drawable/ic_name_image_black_24dp"
-                                android:hint="@string/name" />
-
-                            <RelativeLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-
                                 <EditText
-                                    android:id="@+id/edt_barcode"
-                                    android:paddingStart="0dp"
-                                    android:paddingEnd="@dimen/_35sdp"
-                                    style="@style/Edittext.product"
-                                    android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
-                                    android:hint="@string/barcode" />
+                                    android:id="@+id/edt_stock"
+                                    android:inputType="numberDecimal"
+                                    style="@style/Edittext.product.Decimal"
+                                    android:drawableStart="@drawable/ic_stock_black_24dp"
+                                    android:hint="@string/stock" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                                <ImageView
-                                    android:id="@+id/btn_scanBarCodeByCamera"
-                                    android:layout_width="@dimen/_30sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                                    android:padding="@dimen/_5sdp"
-                                    android:src="@drawable/ic_baseline_photo_camera_24" />
-                            </RelativeLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+                                <AutoCompleteTextView
+                                    android:id="@+id/atc_unit"
+                                    style="@style/Edittext.product"
+                                    android:drawableStart="@drawable/ic_unit_symbols_black_24dp"
+                                    android:hint="@string/increase_product" />
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
+                    </RelativeLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_name"
+                            style="@style/Edittext.product"
+                            android:drawableStart="@drawable/ic_name_image_black_24dp"
+                            android:hint="@string/name" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <EditText
+                                android:id="@+id/edt_barcode"
+                                android:paddingStart="@dimen/_35sdp"
+                                style="@style/Edittext.product"
+                                android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
+                                android:hint="@string/barcode"
+                                tools:ignore="RtlSymmetry" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:id="@+id/btn_scanBarCodeByCamera"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_baseline_photo_camera_24" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -117,27 +147,39 @@
                         android:layout_height="wrap_content"
                         android:text="@string/finance_data" />
 
-                    <EditText
-                        android:id="@+id/edt_price_buy"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product.Price"
-                        android:drawableStart="@drawable/ic_attach_money_black_24dp"
-                        android:hint="@string/price_buy" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_price_buy"
+                            android:inputType="numberDecimal"
+                            style="@style/Edittext.product.Price"
+                            android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                            android:hint="@string/price_buy" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/edt_price_sela_on_product"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product.Price"
-                        android:drawableStart="@drawable/ic_local_sela_black_24dp"
-                        android:hint="@string/price_sela_on_product" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_price_sela_on_product"
+                            android:inputType="numberDecimal"
+                            style="@style/Edittext.product.Price"
+                            android:drawableStart="@drawable/ic_local_sela_black_24dp"
+                            android:hint="@string/price_sela_on_product" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/edt_price_sela"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product.Price"
-                        android:drawableStart="@drawable/ic_local_sela_black_24dp"
-                        android:hint="@string/price_sela" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_price_sela"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:inputType="numberDecimal"
+                            style="@style/Edittext.product.Price"
+                            android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                            android:hint="@string/price_sela" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:id="@+id/tv_discount"
@@ -184,35 +226,40 @@
                         android:layout_height="wrap_content"
                         android:text="@string/detail" />
 
-                    <EditText
-                        android:id="@+id/edt_stock"
-                        android:inputType="numberDecimal"
-                        style="@style/Edittext.product.Decimal"
-                        android:drawableStart="@drawable/ic_stock_black_24dp"
-                        android:hint="@string/stock" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_max_selection"
+                            style="@style/Edittext.product.Decimal"
+                            android:inputType="numberDecimal"
+                            android:drawableStart="@drawable/ic_baseline_description_24"
+                            android:hint="حداکثر مجاز در سبد خرید" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <AutoCompleteTextView
-                        android:id="@+id/atc_unit"
-                        style="@style/Edittext.product"
-                        android:drawableStart="@drawable/ic_unit_symbols_black_24dp"
-                        android:hint="@string/increase_product" />
 
-                    <EditText
-                        android:id="@+id/edt_desc"
-                        style="@style/Edittext.product"
-                        android:imeOptions="actionDone"
-                        android:inputType="textMultiLine"
-                        android:drawableStart="@drawable/ic_baseline_description_24"
-                        android:hint="@string/description" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_desc"
+                            style="@style/Edittext.product"
+                            android:imeOptions="actionDone"
+                            android:inputType="textMultiLine"
+                            android:drawableStart="@drawable/ic_baseline_description_24"
+                            android:hint="@string/description" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+
         <amingoli.com.selar.widget.loader_button.LoaderButton
             android:id="@+id/submit"
-            android:layout_below="@+id/box"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_below="@+id/box"
             android:background="@color/complementary"
             android:clickable="true"
             android:focusable="true"

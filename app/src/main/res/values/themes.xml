@@ -44,6 +44,7 @@
         <item name="android:drawablePadding">@dimen/_10sdp</item>
         <item name="android:imeOptions">actionNext</item>
         <item name="android:inputType">textPersonName</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="Edittext.product.Price">
@@ -51,6 +52,7 @@
     </style>
 
     <style name="Edittext.product.Decimal">
+        <item name="android:gravity">start</item>
         <item name="android:digits">0123456789.</item>
     </style>
 

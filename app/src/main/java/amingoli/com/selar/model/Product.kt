@@ -18,10 +18,10 @@ class Product {
     var branch :Int? = null
     var status :Int? = null
     var stock :Double? = null
-    var price_buy :Double? = null
-    var price_sale_on_product :Double? = null
-    var price_sale :Double? = null
-    var price_discount :Double? = null
+    var price_buy :Double? = 0.0
+    var price_sale_on_product :Double? =  0.0
+    var price_sale :Double? =  0.0
+    var price_discount :Double? =  0.0
     var min_selection :Double? = null
     var max_selection :Double? = null
     var increase :String? = null

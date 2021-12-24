@@ -17,7 +17,8 @@ object Config {
     const val GALLERY = "gallery"
 
     const val JPG = ".jpg"
-    const val PATH = "/Sealer2"
+    const val PATH = "/Sealer"
+    const val PATH_IMAGES = "$PATH/image"
 
     const val MONEY = "تومان"
 
