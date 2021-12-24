@@ -1,4 +1,4 @@
-package ir.trano.keeper.widget;
+package amingoli.com.selar.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
-import ir.trano.keeper.R;
+import amingoli.com.selar.R;
 
 
 public class LoaderButton extends RelativeLayout {

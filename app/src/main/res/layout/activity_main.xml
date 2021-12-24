@@ -10,16 +10,24 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <include layout="@layout/include_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"/>
 
-
         <amingoli.com.selar.widget.MessageBox
             android:id="@+id/messageBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart_bar"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp" />
+
 
         <amingoli.com.selar.widget.CardBoxMain
             android:id="@+id/cardBoxProduct"

@@ -46,6 +46,14 @@
         <item name="android:inputType">textPersonName</item>
     </style>
 
+    <style name="Edittext.product.Price">
+        <item name="android:digits">0123456789</item>
+    </style>
+
+    <style name="Edittext.product.Decimal">
+        <item name="android:digits">0123456789.</item>
+    </style>
+
     <style name="Line">
         <item name="android:alpha">0.5</item>
         <item name="android:layout_marginStart">@dimen/_3sdp</item>

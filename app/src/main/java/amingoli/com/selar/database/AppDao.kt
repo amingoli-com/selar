@@ -15,8 +15,11 @@ interface AppDao {
     @Query("select * from product")
     fun selectProduct(): List<Product>
 
-    @Query("select id from product")
-    fun productSize(): List<Int>
+    @Query("select count(id) from product")
+    fun getAllProductCount(): Int
+
+    @Query("select count(id) from product where stock <= 1 ")
+    fun getOutOfStockProductCount(): Int
 
 
     @Query("select * from branch")

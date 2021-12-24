@@ -8,10 +8,13 @@
     <color name="gray_30">#4DEAEAEA</color>
     <color name="orange">#FF9218</color>
     <color name="blue">#039BE5</color>
+    <color name="red">#E53935</color>
 
     <color name="primary">#ce2b52</color>
     <color name="primaryVariant">#A81B3D</color>
     <color name="secondary">#8beec3</color>
+    <color name="complementary">#2CC84D</color>
+
     <color name="background_message_box">#FFF9DB</color>
 
     <color name="background_activity">@color/gray</color>

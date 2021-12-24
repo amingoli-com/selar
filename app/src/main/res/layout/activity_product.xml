@@ -15,6 +15,7 @@
             layout="@layout/include_toolbar" />
 
         <LinearLayout
+            android:id="@+id/box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
@@ -119,28 +120,45 @@
                     <EditText
                         android:id="@+id/edt_price_buy"
                         android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
+                        style="@style/Edittext.product.Price"
                         android:drawableStart="@drawable/ic_attach_money_black_24dp"
                         android:hint="@string/price_buy" />
 
                     <EditText
                         android:id="@+id/edt_price_sela_on_product"
                         android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
+                        style="@style/Edittext.product.Price"
                         android:drawableStart="@drawable/ic_local_sela_black_24dp"
                         android:hint="@string/price_sela_on_product" />
 
                     <EditText
                         android:id="@+id/edt_price_sela"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
+                        style="@style/Edittext.product.Price"
                         android:drawableStart="@drawable/ic_local_sela_black_24dp"
                         android:hint="@string/price_sela" />
 
                     <TextView
+                        android:id="@+id/tv_discount"
+                        android:visibility="gone"
+                        tools:visibility="visible"
                         android:drawablePadding="@dimen/_5sdp"
                         android:drawableStart="@drawable/ic_discount_black_24dp"
                         tools:text="این کالا شامل ۸,۰۰۰ تومان تخفیف معادل ۲ درصد می‌باشد"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_profit"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                        android:drawableTint="@color/complementary"
+                        android:textColor="@color/complementary"
+                        android:textStyle="bold"
+                        tools:text="سود خالص این کالا ۲۷,۰۰۰ تومان"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -173,17 +191,10 @@
                         tools:listitem="@layout/item_spinner" />
                     <View style="@style/Line" />
 
-                    <Spinner
-                        android:id="@+id/spinner_branch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_spinner" />
-                    <View style="@style/Line"/>
-
                     <EditText
                         android:id="@+id/edt_stock"
                         android:inputType="numberDecimal"
-                        style="@style/Edittext.product"
+                        style="@style/Edittext.product.Decimal"
                         android:drawableStart="@drawable/ic_stock_black_24dp"
                         android:hint="@string/stock" />
 
@@ -203,7 +214,18 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
+        <amingoli.com.selar.widget.LoaderButton
+            android:id="@+id/submit"
+            android:layout_below="@+id/box"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/complementary"
+            android:clickable="true"
+            android:focusable="true"
+            app:btnText="@string/submit"
+            app:btnTextSize="@dimen/_14ssp"
+            app:loaderIndicator="BallPulseIndicator"
+            app:loaderIndicatorColor="@color/white" />
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

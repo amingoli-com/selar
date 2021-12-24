@@ -1,4 +1,4 @@
-package ir.trano.keeper.widget;
+package amingoli.com.selar.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -53,22 +53,19 @@ public class Btn extends AppCompatButton {
 
     @Override
     public void setTypeface(Typeface tf, int style) {
-        String fontPath = "fonts/" + "IRANSansMobile(FaNum)" + ".ttf";
+        String fontPath = "fonts/iran_sans_mobile.ttf";
         if(style== Typeface.BOLD){
-            fontPath = "fonts/" + "IRANSansMobile(FaNum)_Bold" + ".ttf";
+            fontPath = "fonts/iran_sans_mobile.ttf";
         }
-
-        //tf = Typeface.createFromAsset(getContext().getAssets(), fontPath);
-        tf = FontCache.get(fontPath, getContext());
+        tf = Typeface.createFromAsset(getContext().getAssets(), fontPath);
         super.setTypeface(tf);
 
     }
 
     @Override
     public void setTypeface(Typeface tf) {
-        String fontPath = "fonts/" + "IRANSansMobile(FaNum)" + ".ttf";
-        //tf = Typeface.createFromAsset(getContext().getAssets(), fontPath);
-        tf = FontCache.get(fontPath, getContext());
+        String fontPath = "fonts/iran_sans_mobile.ttf";
+        tf = Typeface.createFromAsset(getContext().getAssets(), fontPath);
         super.setTypeface(tf);
     }
 

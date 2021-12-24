@@ -6,10 +6,13 @@ import amingoli.com.selar.adapter.SpinnerAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.App.Companion.context
 import amingoli.com.selar.helper.Config
+import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Branch
+import amingoli.com.selar.model.Product
 import amingoli.com.selar.model.Spinner
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -17,6 +20,7 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,6 +35,9 @@ import kotlinx.android.synthetic.main.include_toolbar.view.*
 import java.io.File
 
 class ProductActivity : AppCompatActivity()  {
+
+    private var _DISCOUNT = 0.0
+    private var _IMAGE_DEFULT_PATH = ""
 
     private val resultGetBarcodeCamera =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -47,13 +54,6 @@ class ProductActivity : AppCompatActivity()  {
         initTextWatcherPrice()
         initSpinnerBranch()
         initSpinnerStatus()
-
-
-        val file = File("/storage/emulated/0/Sealerimage_1640256121119.jpg")
-        if (file.exists()) {
-            val myBitmap: Bitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
-            image.setImageBitmap(myBitmap)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -63,7 +63,7 @@ class ProductActivity : AppCompatActivity()  {
             if (resultCode == RESULT_OK) {
                 val resultUri = result.uri
                 Glide.with(this).load(resultUri).into(image)
-                App.saveFile(App.getByte(resultUri                                                                     ))
+                _IMAGE_DEFULT_PATH = App.saveFile(App.getByte(resultUri))
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error
             }
@@ -84,14 +84,53 @@ class ProductActivity : AppCompatActivity()  {
                 CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this)
             }
         }
+
+        submit.btn.setOnClickListener {
+            if (formIsValid()){
+                submit.showLoader()
+                App.database.getAppDao().insertProduct(insertValue())
+                Handler().postDelayed({finish()},1000)
+            }
+        }
     }
 
     private fun initTextWatcherPrice(){
-        edt_price_buy.addTextChangedListener(PriceTextWatcher(edt_price_buy) {})
+        edt_price_buy.addTextChangedListener(PriceTextWatcher(edt_price_buy) {initDiscount()})
+        edt_price_sela_on_product.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {initDiscount()})
+        edt_price_sela.addTextChangedListener(PriceTextWatcher(edt_price_sela) {initDiscount()})
+    }
 
-        edt_price_sela_on_product.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {})
+    @SuppressLint("SetTextI18n")
+    private fun initDiscount(){
+        val _buy = App.convertToDouble(edt_price_buy)
+        val _sale_on_product = App.convertToDouble(edt_price_sela_on_product)
+        val _sale = App.convertToDouble(edt_price_sela)
+        val _discount_price = _sale_on_product - _sale
+        val _profit = _sale - _buy
 
-        edt_price_sela.addTextChangedListener(PriceTextWatcher(edt_price_sela) {})
+        if (_discount_price > 0 && _sale > 0){
+            if (tv_discount.visibility != View.VISIBLE) tv_discount.visibility = View.VISIBLE
+            tv_discount.setText("این کالا شامل " + App.priceFormat(_discount_price,true) + " تخفیف است")
+            _DISCOUNT = _discount_price
+        }else{
+            if (tv_discount.visibility != View.GONE) tv_discount.visibility = View.GONE
+        }
+
+        when {
+            _profit > 0 && _buy > 0 && _sale > 0 -> {
+                if (tv_profit.visibility != View.VISIBLE) tv_profit.visibility = View.VISIBLE
+                tv_profit.setText("سود شما از این کالا " + App.priceFormat(_profit, true))
+                tv_profit.setTextColor(resources.getColor(R.color.complementary))
+            }
+            _profit < 0 && _buy > 0 && _sale > 0 -> {
+                if (tv_profit.visibility != View.VISIBLE) tv_profit.visibility = View.VISIBLE
+                tv_profit.setText("ضرر شما از این کالا " + App.priceFormat(_profit, true))
+                tv_profit.setTextColor(resources.getColor(R.color.red))
+            }
+            else -> {
+                if (tv_profit.visibility != View.GONE) tv_profit.visibility = View.GONE
+            }
+        }
     }
 
     private fun initSpinnerBranch() {
@@ -118,6 +157,82 @@ class ProductActivity : AppCompatActivity()  {
 
         val adapter = SpinnerAdapter(context,spinner)
         spinner_status.adapter = adapter
+    }
+
+    /**
+     * Act
+     * */
+
+    private fun calculateDiscount(){
+
+    }
+
+    private fun formIsValid() : Boolean{
+        val product = insertValue()
+
+        if (product.name.isNullOrEmpty()){
+
+        }
+
+        if (product.image_defult.isNullOrEmpty()){
+
+        }
+
+        if (product.increase.isNullOrEmpty()){
+
+        }
+
+        if (product.branch == null){
+
+        }
+
+        if (product.status == null){
+
+        }
+
+        if (product.stock == null){
+
+        }
+
+        if (product.tax_percent == null){
+
+        }
+
+        if (product.user == null){
+
+        }
+
+
+
+        return true
+    }
+
+    private fun insertValue(): Product{
+        val product = Product()
+
+//        product.id = ""
+        product.qrcode = App.getString(edt_barcode)
+        product.name = App.getString(edt_name)
+        product.image_defult = _IMAGE_DEFULT_PATH
+//        product.image_code = ""
+        product.descrption = App.getString(edt_desc)
+        product.branch = Session.getInstance().branch
+        product.status = 1
+        product.stock = App.convertToDouble(edt_stock)
+        product.price_buy = App.convertToDouble(edt_price_buy)
+        product.price_sale_on_product = App.convertToDouble(edt_price_sela_on_product)
+        product.price_sale = App.convertToDouble(edt_price_sela)
+        product.price_discount = _DISCOUNT
+        product.min_selection = 1.0
+        product.max_selection = 5.0
+        product.increase = App.getString(atc_unit)
+        product.tax_percent = 0
+        product.user = Session.getInstance().user
+
+//        product.created_at = ""
+//        product.update_at = ""
+
+        return product
     }
 
     /**

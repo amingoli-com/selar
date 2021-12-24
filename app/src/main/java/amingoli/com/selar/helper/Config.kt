@@ -19,4 +19,9 @@ object Config {
     const val JPG = ".jpg"
     const val PATH = "/Sealer2"
 
+    const val MONEY = "تومان"
+
+    const val USER = "user"
+    const val BRANCH = "branch"
+
 }
