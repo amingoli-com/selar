@@ -1,4 +1,4 @@
-package amingoli.com.selar.widget;
+package amingoli.com.selar.widget.loader_button;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

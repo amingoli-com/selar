@@ -208,7 +208,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-        <amingoli.com.selar.widget.LoaderButton
+        <amingoli.com.selar.widget.loader_button.LoaderButton
             android:id="@+id/submit"
             android:layout_below="@+id/box"
             android:layout_width="match_parent"

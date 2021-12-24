@@ -1,4 +1,4 @@
-package amingoli.com.selar.widget;
+package amingoli.com.selar.widget.loader_button;
 
 import android.content.Context;
 import android.graphics.Typeface;
