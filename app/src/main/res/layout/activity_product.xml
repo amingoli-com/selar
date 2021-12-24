@@ -184,13 +184,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/detail" />
 
-                    <Spinner
-                        android:id="@+id/spinner_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_spinner" />
-                    <View style="@style/Line" />
-
                     <EditText
                         android:id="@+id/edt_stock"
                         android:inputType="numberDecimal"

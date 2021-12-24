@@ -52,8 +52,6 @@ class ProductActivity : AppCompatActivity()  {
         initToolbar()
         initActionOnClick()
         initTextWatcherPrice()
-        initSpinnerBranch()
-        initSpinnerStatus()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -131,32 +129,6 @@ class ProductActivity : AppCompatActivity()  {
                 if (tv_profit.visibility != View.GONE) tv_profit.visibility = View.GONE
             }
         }
-    }
-
-    private fun initSpinnerBranch() {
-        val branchList = ArrayList<Branch>(App.database.getAppDao().selectBranch())
-
-        val spinner = ArrayList<Spinner>()
-        spinner.add(0,Spinner(-1,"شعبه را انتخاب کنید"))
-        for (i in 0 until branchList.size) {
-            spinner.add(Spinner(branchList[i].id!!,branchList[i].name))
-        }
-
-        val adapter = SpinnerAdapter(context,spinner)
-        spinner_branch.adapter = adapter
-
-    }
-
-    private fun initSpinnerStatus() {
-        val statusList = resources.getStringArray(R.array.status_string)
-
-        val spinner = ArrayList<Spinner>()
-        for (i in 0 until statusList.size) {
-            spinner.add(Spinner(i,statusList[i]))
-        }
-
-        val adapter = SpinnerAdapter(context,spinner)
-        spinner_status.adapter = adapter
     }
 
     /**
