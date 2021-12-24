@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TvText">
+        <attr name="mey_textStyle">
+            <flag name="bold" value="1" />
+            <flag name="normal" value="0" />
+            <flag name="italic" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SearchableSpinner">
+        <attr name="defaultText" format="string" />
+        <attr name="invalidTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LoaderButton">
+        <attr name="btnText" format="string" />
+        <attr name="btnTextColor" format="color" />
+        <attr name="btnTextSize" format="dimension" />
+        <attr name="loaderIndicatorColor" format="color" />
+
+        <attr name="loaderIndicator" format="integer">
+            <flag name="BallPulseIndicator" value="0" />
+            <flag name="BallGridPulseIndicator" value="1" />
+            <flag name="BallClipRotateIndicator" value="2" />
+            <flag name="BallClipRotatePulseIndicator" value="3" />
+            <flag name="SquareSpinIndicator" value="4" />
+            <flag name="BallClipRotateMultipleIndicator" value="5" />
+            <flag name="BallPulseRiseIndicator" value="6" />
+            <flag name="BallRotateIndicator" value="7" />
+            <flag name="CubeTransitionIndicator" value="8" />
+            <flag name="BallZigZagIndicator" value="9" />
+            <flag name="BallZigZagDeflectIndicator" value="10" />
+            <flag name="BallTrianglePathIndicator" value="11" />
+            <flag name="BallScaleIndicator" value="12" />
+            <flag name="LineScaleIndicator" value="13" />
+            <flag name="LineScalePartyIndicator" value="14" />
+            <flag name="BallScaleMultipleIndicator" value="15" />
+            <flag name="BallPulseSyncIndicator" value="16" />
+            <flag name="BallBeatIndicator" value="17" />
+            <flag name="LineScalePulseOutIndicator" value="18" />
+            <flag name="LineScalePulseOutRapidIndicator" value="19" />
+            <flag name="BallScaleRippleIndicator" value="20" />
+            <flag name="BallScaleRippleMultipleIndicator" value="21" />
+            <flag name="BallSpinFadeLoaderIndicator" value="22" />
+            <flag name="LineSpinFadeLoaderIndicator" value="23" />
+            <flag name="TriangleSkewSpinIndicator" value="24" />
+            <flag name="PacmanIndicator" value="25" />
+            <flag name="BallGridBeatIndicator" value="26" />
+            <flag name="SemiCircleSpinIndicator" value="27" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color" />
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsUnderlineColor" format="color" />
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsDividerWidth" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsPaddingMiddle" format="boolean" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsTabTextSize" format="dimension" />
+        <attr name="pstsTabTextColor" format="reference" />
+        <attr name="pstsTabTextStyle" format="reference">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+        <attr name="pstsTabTextAllCaps" format="boolean" />
+        <attr name="pstsTabTextAlpha" format="integer" />
+        <attr name="pstsTabTextFontFamily" format="string" />
+
+        <attr name="pstsTabSwitch" format="boolean" />
+        <attr name="pstsActivateTextColor" format="color" />
+        <attr name="pstsDeactivateTextColor" format="color" />
+        <attr name="pstsTextAllCaps" format="boolean" />
+
+    </declare-styleable>
+
+</resources>
