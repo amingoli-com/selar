@@ -3,9 +3,11 @@ package amingoli.com.selar.model
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Date
+import androidx.room.TypeConverters
+import java.util.*
 
 @Entity
+@TypeConverters(DateConverter::class)
 class Product {
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -25,8 +27,8 @@ class Product {
     var min_selection :Double? = null
     var max_selection :Double? = null
     var increase :String? = null
-//    val created_at :Date? = null
-//    val update_at :Date? = null
+    var create_at : Date? = null
+    var update_at :Date? = null
     var tax_percent :Int? = null
     var user :Int? = null
 }

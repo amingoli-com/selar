@@ -10,5 +10,5 @@ class Branch {
     @PrimaryKey(autoGenerate = true)
     var id :Int? = null
     var name :String? = null
-    var type :String? = null
+    var type :String? = null //calss
 }

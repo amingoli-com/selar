@@ -12,13 +12,16 @@
         android:name=".helper.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:requestLegacyExternalStorage="true"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Selar"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity
+            android:name=".activity.product.ListProductActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.category.CategoryActivity"
             android:exported="true" />

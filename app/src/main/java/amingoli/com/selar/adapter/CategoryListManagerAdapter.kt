@@ -2,6 +2,7 @@ package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -13,25 +14,25 @@ import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_product.view.*
+import kotlinx.android.synthetic.main.item_category.view.*
 import java.io.File
 
-class ProductListManagerAdapter(
+class CategoryListManagerAdapter(
     val context: Context,
-    val list: ArrayList<Product>,
+    val list: ArrayList<Category>,
     val listener: Listener
-) : RecyclerView.Adapter<ProductListManagerAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<CategoryListManagerAdapter.ListViewHolder>() {
 
     private var packId = -1
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, product: Product)
+        fun onItemClicked(position: Int, category: Category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_category, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -44,18 +45,15 @@ class ProductListManagerAdapter(
         val model = list[position]
 
         try {
+            if (model.status == 0) item.alpha = 0.24f
+            else item.alpha = 1f
+
             item.title.text = model.name
-            item.price_sela.text = App.priceFormat(model.price_sale!!, true)
-            item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!, true)
-            item.price_buy.text = App.priceFormat(model.price_buy!!, true)
-
-            item.stock.text = "${model.stock} ${model.increase}"
-            item.barcode.text = model.qrcode
-
+            item.content.text = model.content
+            Glide.with(context).load(File(model.image)).into(item.image)
         }catch (e : Exception){
 
         }
-        Glide.with(context).load(File(model.image_defult)).into(item.image)
 
 
         item.setOnClickListener {

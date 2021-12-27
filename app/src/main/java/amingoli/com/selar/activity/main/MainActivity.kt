@@ -2,6 +2,8 @@ package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
+import amingoli.com.selar.activity.category.CategoryActivity
+import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.KEY_EXTRA_BARCODE
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onActOneClicked() {
+                    startActivity(Intent(this@MainActivity,ListProductActivity::class.java))
                 }
 
                 override fun onActTwoClicked() {
@@ -68,10 +71,10 @@ class MainActivity : AppCompatActivity() {
         cardBoxCategory.build("دسته‌بندی‌ها",
             App.getDrawable(this, R.drawable.ic_baseline_category_24),
             "",
-            "280\nثبت شده","190\nمنتخب",null,
+            "${App.database.getAppDao().selectCategory().size}\nثبت شده","190\nمنتخب",null,
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
-//                    startActivity(Intent(this@MainActivity,ProductActivity::class.java))
+                    startActivity(Intent(this@MainActivity,CategoryActivity::class.java))
                 }
 
                 override fun onActOneClicked() {

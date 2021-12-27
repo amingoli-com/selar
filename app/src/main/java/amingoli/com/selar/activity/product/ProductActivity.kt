@@ -28,6 +28,7 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_product.*
 
 import kotlinx.android.synthetic.main.include_toolbar.view.*
+import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class ProductActivity : AppCompatActivity()  {
 

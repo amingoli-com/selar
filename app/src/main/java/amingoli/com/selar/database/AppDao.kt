@@ -1,6 +1,7 @@
 package amingoli.com.selar.database
 
 import amingoli.com.selar.model.Branch
+import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.Product
 import androidx.room.Dao
 import androidx.room.Insert
@@ -9,6 +10,7 @@ import androidx.room.Query
 @Dao
 interface AppDao {
 
+//    Product
     @Insert
     fun insertProduct(product: Product)
 
@@ -21,7 +23,14 @@ interface AppDao {
     @Query("select count(id) from product where stock <= 1 ")
     fun getOutOfStockProductCount(): Int
 
+//    Category
+    @Insert
+    fun insertCategory(category: Category)
 
+    @Query("select * from category")
+    fun selectCategory(): List<Category>
+
+//    Branch
     @Query("select * from branch")
     fun selectBranch(): List<Branch>
 

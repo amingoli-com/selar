@@ -30,7 +30,7 @@
 
     <style name="Margin">
         <item name="android:layout_marginTop">@dimen/_5sdp</item>
-        <item name="android:layout_marginStart">@dimen/_10sdp</item>
+        <item name="android:layout_marginStart">@dimen/_5sdp</item>
         <item name="android:layout_marginEnd">@dimen/_5sdp</item>
         <item name="android:layout_marginBottom">@dimen/_5sdp</item>
     </style>
@@ -57,7 +57,7 @@
     </style>
 
     <style name="Line">
-        <item name="android:alpha">0.5</item>
+        <item name="android:alpha">0.24</item>
         <item name="android:layout_marginStart">@dimen/_3sdp</item>
         <item name="android:layout_marginEnd">@dimen/_3sdp</item>
         <item name="android:layout_width">match_parent</item>
