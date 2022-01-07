@@ -12,6 +12,7 @@ import amingoli.com.selar.model.Branch
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.widget.CardBoxMain
 import amingoli.com.selar.widget.MessageBox
+import amingoli.com.selar.widget.SingelItemCard
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -33,17 +34,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         toolbar.title.text = "پیشخان فروشنده"
 
+        branchBox.build("شعبه قم",
+            resources.getDrawable(R.drawable.ic_baseline_extension_24),
+            "",
+            object : SingelItemCard.Listener{
+                override fun onItemClicked() {
+
+                }
+            })
+
         messageBox.setValue("هشدار\nاشتراک شما منقضی شده","لطفا هرچه سریعنر نسبت به تمدید سرویس فروشنده اقدام نمایید","تمدید اشتراک",false,
             object : MessageBox.Listener{
-            override fun onButtonClicked() {
-                messageBox.visibility = View.GONE
-            }
+                override fun onButtonClicked() {
+                    messageBox.visibility = View.GONE
+                }
 
-            override fun onCloseClicked() {
-                messageBox.visibility = View.GONE
-            }
+                override fun onCloseClicked() {
+                    messageBox.visibility = View.GONE
+                }
 
-        })
+            })
 
         cardBoxProduct.build("محصولات",
             App.getDrawable(this,R.drawable.ic_baseline_extension_24),
