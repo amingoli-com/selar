@@ -1,12 +1,28 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
+import amingoli.com.selar.adapter.CategoryListManagerAdapter
+import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Session
+import amingoli.com.selar.model.Category
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.dialog_pike_image.*
+import android.view.WindowManager
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.dialog_insert_category.*
 
-class PikeImageDialog (context: Context, private val listener: Listener) : AlertDialog(context) {
+
+class InsertCategoryDialog(context: Context,val _category: Category?, val _position: Int,
+                           val listener: Listener) : AlertDialog(context) {
+
+    private var _ID = -1
+    private var _ID_MOTHER = 0
+    private var _IMAGE_PATH: String? = null
+    private var _POS = -1
+
 
     init {
         setCancelable(true)
@@ -14,14 +30,62 @@ class PikeImageDialog (context: Context, private val listener: Listener) : Alert
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_pike_image)
+        setContentView(R.layout.dialog_insert_category)
+        this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
 
-        choose_from_camera.setOnClickListener { listener.chooseImageFromCamera(this) }
-        choose_from_gallery.setOnClickListener { listener.chooseImageFromGallery(this) }
+
+        Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_ID_MOTHER - image: $_IMAGE_PATH - pos: $_POS ")
+
+        if (_category != null) setValue(_category, _position)
+
+        submit.btn.setOnClickListener {
+            if (formIsValid()) listener.insert(this, getValue(), _POS)
+        }
+        image.setOnClickListener {
+            listener.chooseImage(this)
+        }
+    }
+
+    fun initImage(resultUri: Uri){
+        Glide.with(context).load(resultUri).into(image)
+        _IMAGE_PATH = App.saveFile(App.getByte(resultUri))
     }
 
     interface Listener {
-        fun chooseImageFromCamera(dialog: AlertDialog)
-        fun chooseImageFromGallery(dialog: AlertDialog)
+        fun chooseImage(dialog: AlertDialog)
+        fun insert(dialog: AlertDialog, category: Category, position: Int)
+    }
+
+    private fun formIsValid() :Boolean{
+        if(App.getString(edt_name).isNullOrEmpty()){
+            edt_name.setError(context.resources.getString(R.string.not_valid))
+            return false
+        }
+        return true
+    }
+
+    private fun setValue(category: Category, position: Int){
+        _POS = position
+        if (category.id != null) _ID = category.id!!
+        if (category.id_mother != null) _ID_MOTHER = category.id_mother!!
+        if (!category.name.isNullOrEmpty()) edt_name.setText(category.name)
+        if (!category.content.isNullOrEmpty()) edt_content.setText(category.content)
+        checkbox.isChecked = category.status != null && category.status == 1
+        if (!category.image.isNullOrEmpty()) {
+            Glide.with(context).load(category.image).into(image)
+            _IMAGE_PATH = category.image
+        }
+    }
+
+    private fun getValue(): Category{
+        val category = Category()
+        if (_ID != -1) category.id = _ID
+        category.id_mother = _ID_MOTHER
+        category.name = App.getString(edt_name)
+        category.content = App.getString(edt_content)
+        category.image = _IMAGE_PATH
+        category.branch = Session.getInstance().branch
+        category.status = if(checkbox.isChecked) 1 else 0
+        return category
     }
 }

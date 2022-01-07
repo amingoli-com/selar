@@ -6,6 +6,7 @@ import amingoli.com.selar.model.Product
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface AppDao {
@@ -26,6 +27,9 @@ interface AppDao {
 //    Category
     @Insert
     fun insertCategory(category: Category)
+
+    @Update
+    fun UpdateCategory(category: Category)
 
     @Query("select * from category")
     fun selectCategory(): List<Category>

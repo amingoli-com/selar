@@ -24,4 +24,5 @@
     <string name="submit">ثبت</string>
     <string name="not_valid">مقدار وارد شده صحیح نیست</string>
     <string name="image_not_valid">عکسی برای این محصول انتهاب کنید</string>
+    <string name="category_is_enable">دسته‌بندی فعال باشد</string>
 </resources>

@@ -84,9 +84,7 @@ class ProductActivity : AppCompatActivity()  {
         }
 
         image.setOnClickListener {
-            if (checkPermission()){
-                CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this)
-            }
+            CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this)
         }
 
         submit.btn.setOnClickListener {
@@ -220,75 +218,5 @@ class ProductActivity : AppCompatActivity()  {
 //        _PRODUCT_OBJECT?.update_at = ""
 
         return _PRODUCT_OBJECT!!
-    }
-
-    /**
-     * Permission Alert For get Permissions Camera
-     * */
-    private val neededPermissions = arrayOf(Manifest.permission.CAMERA,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE)
-    //    Permos
-    private fun checkPermission(): Boolean {
-        val currentAPIVersion = Build.VERSION.SDK_INT
-        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
-            val permissionsNotGranted = ArrayList<String>()
-            for (permission in neededPermissions) {
-                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                    permissionsNotGranted.add(permission)
-                }
-            }
-            if (permissionsNotGranted.size > 0) {
-                var shouldShowAlert = false
-                for (permission in permissionsNotGranted) {
-                    shouldShowAlert = ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
-                }
-
-                val arr = arrayOfNulls<String>(permissionsNotGranted.size)
-                val permissions = permissionsNotGranted.toArray(arr)
-                if (shouldShowAlert) {
-                    showPermissionAlert(permissions)
-                } else {
-                    requestPermissions(permissions)
-                }
-                return false
-            }
-        }
-        return true
-    }
-
-    private fun showPermissionAlert(permissions: Array<String?>) {
-        val alertBuilder = AlertDialog.Builder(this)
-        alertBuilder.setCancelable(false)
-        alertBuilder.setTitle(R.string.permission_required)
-        alertBuilder.setMessage(R.string.permission_message)
-        alertBuilder.setPositiveButton(R.string.positive_button) { _, _ -> requestPermissions(permissions) }
-        alertBuilder.setNegativeButton(R.string.negative_button) { _, _ -> finish() }
-        val alert = alertBuilder.create()
-        alert.show()
-    }
-
-    private fun requestPermissions(permissions: Array<String?>) {
-        ActivityCompat.requestPermissions(this, permissions, Config.REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            Config.REQUEST_CODE -> {
-                for (result in grantResults) {
-                    Log.e("qqqRequestPelt", "" + result)
-                    if (result == PackageManager.PERMISSION_DENIED) {
-                        Log.e("qqqRequestPelt", "PERMISSION_DENIED " + result)
-
-                        // Not all permissions granted. Show some message and return.
-                        return
-                    }else{
-                        Log.e("qqqRequestPelt", "PERMISSION " + result)
-                    }
-                }
-                Log.e("qqqRequestPelt", "checkPermission.............. ")
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

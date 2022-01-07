@@ -35,17 +35,20 @@
         <item name="android:layout_marginBottom">@dimen/_5sdp</item>
     </style>
 
-    <style name="Edittext"></style>
-
-    <style name="Edittext.product">
+    <style name="Edittext">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:drawablePadding">@dimen/_10sdp</item>
         <item name="android:imeOptions">actionNext</item>
         <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="Edittext.product">
         <item name="android:background">@color/white</item>
     </style>
+
+
 
     <style name="Edittext.product.Price">
         <item name="android:digits">0123456789</item>

@@ -1,17 +1,14 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
-import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_category.view.*
@@ -44,20 +41,31 @@ class CategoryListManagerAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        try {
-            if (model.status == 0) item.alpha = 0.24f
-            else item.alpha = 1f
+        if (model.status == 0) item.alpha = 0.5f
+        else item.alpha = 1f
 
-            item.title.text = model.name
-            item.content.text = model.content
+        item.title.text = model.name
+        item.content.text = model.content
+        if (!model.image.isNullOrEmpty() && File(model.image).exists()){
             Glide.with(context).load(File(model.image)).into(item.image)
-        }catch (e : Exception){
-
         }
-
 
         item.setOnClickListener {
             listener.onItemClicked(position,model)
+        }
+    }
+
+    fun addItem(category: Category){
+        list.add(list.size,category)
+        notifyItemInserted(list.size)
+    }
+
+    fun addItem(category: Category, position: Int){
+        if (position == -1) addItem(category)
+        else {
+            Log.e("qqq", "addItem status is : ${category.status} - pos: $position" )
+            list[position] = category
+            notifyItemChanged(position,category)
         }
     }
 }
