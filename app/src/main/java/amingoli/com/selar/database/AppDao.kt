@@ -34,6 +34,9 @@ interface AppDao {
     @Query("select * from category")
     fun selectCategory(): List<Category>
 
+    @Query("select * from category where status = :status")
+    fun selectCategory(status: Int): List<Category>
+
 //    Branch
     @Query("select * from branch")
     fun selectBranch(): List<Branch>

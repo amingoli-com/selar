@@ -71,16 +71,23 @@ class MainActivity : AppCompatActivity() {
         cardBoxCategory.build("دسته‌بندی‌ها",
             App.getDrawable(this, R.drawable.ic_baseline_category_24),
             "",
-            "${App.database.getAppDao().selectCategory().size}\nثبت شده","190\nمنتخب",null,
+            "${App.database.getAppDao().selectCategory().size}\nهمه","${App.database.getAppDao().selectCategory(1).size}\nفعال",null,
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
-                    startActivity(Intent(this@MainActivity,CategoryActivity::class.java))
+                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
+                    i.putExtra("add",true)
+                    startActivity(i)
                 }
 
                 override fun onActOneClicked() {
-                }
+                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
+//                    i.putExtra("status",true)
+                    startActivity(i)                }
 
                 override fun onActTwoClicked() {
+                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
+                    i.putExtra("status",1)
+                    startActivity(i)
                 }
 
                 override fun onActTreeClicked() {
