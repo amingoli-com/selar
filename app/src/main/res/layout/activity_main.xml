@@ -12,16 +12,18 @@
         android:layout_height="wrap_content">
 
         <include layout="@layout/include_toolbar"
-            android:layout_width="match_parent"
+             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"/>
 
         <amingoli.com.selar.widget.MessageBox
             android:id="@+id/messageBox"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

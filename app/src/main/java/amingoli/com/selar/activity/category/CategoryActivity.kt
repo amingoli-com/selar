@@ -2,11 +2,12 @@ package amingoli.com.selar.activity.category
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.CategoryListManagerAdapter
-import amingoli.com.selar.adapter.ProductListManagerAdapter
+import amingoli.com.selar.adapter.TagListAdapter
 import amingoli.com.selar.dialog.InsertCategoryDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.TagList
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,12 +15,10 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_category.toolbar
-import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
@@ -34,7 +33,8 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
 
         initStart()
         initToolbar("دسته بندی ها")
-        initAdapter()
+        initAdapterTagList()
+        initAdapterCategory()
     }
 
 
@@ -65,7 +65,25 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         }
     }
 
-    private fun initAdapter(){
+    private fun initAdapterTagList(){
+
+        val array_tag = ArrayList<TagList>()
+        array_tag.add(TagList("همه", R.drawable.ic_baseline_category_24,"all"))
+        array_tag.add(TagList("فعال", R.drawable.ic_baseline_extension_24,"all"))
+        array_tag.add(TagList("منتخب", R.drawable.ic_baseline_category_24,"all"))
+
+        val adapterTagList = TagListAdapter(this,
+            array_tag,
+            object : TagListAdapter.Listener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onItemClicked(position: Int, item: TagList) {
+                }
+            })
+
+        recyclerView_tag.adapter = adapterTagList
+    }
+
+    private fun initAdapterCategory(){
         adapter = CategoryListManagerAdapter(this,
             array,
             object : CategoryListManagerAdapter.Listener {
