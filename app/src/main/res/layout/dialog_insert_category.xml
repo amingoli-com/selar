@@ -5,16 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/_5sdp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_add_photo_alternate_black_24dp" />
+        android:layout_height="@dimen/_90sdp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_photo_alternate_black_24dp" />
+        <ImageView
+            android:id="@+id/ic_delete"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:tint="@color/red" />
+    </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -48,7 +64,7 @@
     <amingoli.com.selar.widget.loader_button.LoaderButton
         android:id="@+id/submit"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_35sdp"
         android:background="@color/complementary"
         android:clickable="true"
         android:focusable="true"

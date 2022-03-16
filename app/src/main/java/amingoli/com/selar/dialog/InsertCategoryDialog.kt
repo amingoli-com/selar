@@ -9,8 +9,10 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.dialog_insert_category.*
 
@@ -32,18 +34,9 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_insert_category)
         this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-
-
         Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_ID_MOTHER - image: $_IMAGE_PATH - pos: $_POS ")
-
+        initOnClick()
         if (_category != null) setValue(_category, _position)
-
-        submit.btn.setOnClickListener {
-            if (formIsValid()) listener.insert(this, getValue(), _POS)
-        }
-        image.setOnClickListener {
-            listener.chooseImage(this)
-        }
     }
 
     fun initImage(resultUri: Uri){
@@ -54,6 +47,19 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
     interface Listener {
         fun chooseImage(dialog: AlertDialog)
         fun insert(dialog: AlertDialog, category: Category, position: Int)
+    }
+
+    private fun initOnClick(){
+        submit.btn.setOnClickListener {
+            if (formIsValid()) listener.insert(this, getValue(), _POS)
+        }
+        image.setOnClickListener {
+            listener.chooseImage(this)
+        }
+        ic_delete.setOnClickListener {
+            _IMAGE_PATH = null
+            image.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_add_photo_alternate_black_24dp))
+        }
     }
 
     private fun formIsValid() :Boolean{
@@ -74,6 +80,7 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
         if (!category.image.isNullOrEmpty()) {
             Glide.with(context).load(category.image).into(image)
             _IMAGE_PATH = category.image
+            ic_delete.visibility = View.VISIBLE
         }
     }
 

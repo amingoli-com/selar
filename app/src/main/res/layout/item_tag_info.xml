@@ -14,9 +14,9 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp">
+        app:cardCornerRadius="@dimen/_7sdp"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp">
         <ImageView
             android:id="@+id/image_icon"
             android:padding="@dimen/_7sdp"
@@ -30,6 +30,7 @@
         android:id="@+id/text_title"
         tools:text="درحال‌انقضا"
         style="@style/Text.Body2"
+        android:textSize="@dimen/_9ssp"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -45,10 +45,15 @@ class CategoryListManagerAdapter(
         else item.alpha = 1f
 
         item.title.text = model.name
-        item.content.text = model.content
+        if (!model.content.isNullOrEmpty()){
+            item.box_content.visibility = View.VISIBLE
+            item.content.text = model.content
+        }else item.box_content.visibility = View.GONE
+
         if (!model.image.isNullOrEmpty() && File(model.image).exists()){
             Glide.with(context).load(File(model.image)).into(item.image)
-        }
+            item.image.visibility = View.VISIBLE
+        }else item.image.visibility = View.GONE
 
         item.setOnClickListener {
             listener.onItemClicked(position,model)
