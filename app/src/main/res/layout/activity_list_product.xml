@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.product.ListProductActivity">
 
     <include
@@ -12,8 +13,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_tag"
-        android:layout_below="@+id/toolbar"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
@@ -21,6 +22,8 @@
         tools:itemCount="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <View style="@style/Line"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -30,8 +33,7 @@
         tools:listitem="@layout/item_product"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        android:layout_below="@+id/recyclerView_tag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>
