@@ -125,28 +125,50 @@
                             android:src="@drawable/ic_baseline_photo_camera_24" />
                     </RelativeLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/edt_date"
-                            android:inputType="date"
-                            android:paddingStart="@dimen/_35sdp"
-                            style="@style/Edittext.product"
-                            android:drawableStart="@drawable/ic_baseline_calendar_month_24"
-                            android:hint="@string/date_expire"
-                            tools:ignore="RtlSymmetry,TextFields" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView_date"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:orientation="horizontal"
-                        tools:listitem="@layout/item_tag"
-                        android:clipToPadding="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    <TextView
+                        android:id="@+id/tv_add_date_expire"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        style="@style/Text.Body1"
+                        android:drawableStart="@drawable/ic_baseline_add_circle_24"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableTint="@color/blue"
+                        android:text="ثبت تاریخ انقضا"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:id="@+id/box_date_expire"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <EditText
+                                android:id="@+id/edt_date"
+                                android:inputType="datetime"
+                                android:paddingStart="@dimen/_35sdp"
+                                style="@style/Edittext.product"
+                                android:drawableStart="@drawable/ic_baseline_calendar_month_24"
+                                android:hint="@string/date_expire"
+                                tools:ignore="RtlSymmetry,TextFields" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView_date"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:orientation="horizontal"
+                            tools:listitem="@layout/item_tag"
+                            android:clipToPadding="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

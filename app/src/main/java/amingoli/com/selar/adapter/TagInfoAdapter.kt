@@ -1,7 +1,6 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
-import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,15 +12,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_category.view.*
 import kotlinx.android.synthetic.main.item_tag_info.view.*
-import java.io.File
 
-class TagListAdapter(val context: Context,
+class TagInfoAdapter(val context: Context,
                      val list: ArrayList<TagList>,
                      val listener: Listener
-) : RecyclerView.Adapter<TagListAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<TagInfoAdapter.ListViewHolder>() {
 
     var position_selected = 0
 

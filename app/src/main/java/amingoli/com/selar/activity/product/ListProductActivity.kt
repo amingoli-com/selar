@@ -2,7 +2,7 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.ProductListManagerAdapter
-import amingoli.com.selar.adapter.TagListAdapter
+import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.model.TagList
@@ -11,13 +11,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_category.*
-import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.activity_list_product.recyclerView
 import kotlinx.android.synthetic.main.activity_list_product.recyclerView_tag
 import kotlinx.android.synthetic.main.activity_list_product.toolbar
-import kotlinx.android.synthetic.main.activity_product.*
-import kotlinx.android.synthetic.main.item_product.view.*
 import kotlinx.android.synthetic.main.item_product.view.title
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 
@@ -48,9 +44,9 @@ class ListProductActivity : AppCompatActivity() {
         array_tag.add(TagList("پرفروش", R.drawable.ic_baseline_extension_24,"all"))
         array_tag.add(TagList("منتشرشده", R.drawable.ic_baseline_category_24,"all"))
 
-        val adapterTagList = TagListAdapter(this,
+        val adapterTagList = TagInfoAdapter(this,
             array_tag,
-            object : TagListAdapter.Listener {
+            object : TagInfoAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
                 }

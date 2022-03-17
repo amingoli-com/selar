@@ -95,6 +95,11 @@ class ProductActivity : AppCompatActivity()  {
             CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this)
         }
 
+        tv_add_date_expire.setOnClickListener {
+            tv_add_date_expire.visibility = View.GONE
+            box_date_expire.visibility = View.VISIBLE
+        }
+
         submit.btn.setOnClickListener {
             if (formIsValid()){
                 submit.showLoader()
@@ -150,8 +155,8 @@ class ProductActivity : AppCompatActivity()  {
         array_tag.add(TagList("یکماه دیگر","30"))
         array_tag.add(TagList("سه ماه دیگر","90"))
         array_tag.add(TagList("شش ماه دیگر","180"))
-        array_tag.add(TagList("یکسال ماه دیگر","365"))
-        array_tag.add(TagList("دوسال ماه دیگر","730"))
+        array_tag.add(TagList("یکسال دیگر","365"))
+        array_tag.add(TagList("دوسال دیگر","730"))
 
         val adapterTagList = TagAdapter(this,
             array_tag,

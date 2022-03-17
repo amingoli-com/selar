@@ -19,7 +19,7 @@ class TagAdapter(val context: Context,
                  val listener: Listener
 ) : RecyclerView.Adapter<TagAdapter.ListViewHolder>() {
 
-    var position_selected = 0
+    var position_selected = -1
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -69,11 +69,11 @@ class TagAdapter(val context: Context,
 
     private fun setItemSelected(is_selected:Boolean, textView : TextView){
         if (is_selected){
-            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
-            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
+            textView.setTextColor(ContextCompat.getColor(context,R.color.blue))
+//            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
         }else{
             textView.setTextColor(ContextCompat.getColor(context,R.color.black))
-            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.transparent))
+//            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.transparent))
         }
     }
 }

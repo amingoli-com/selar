@@ -2,7 +2,7 @@ package amingoli.com.selar.activity.category
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.CategoryListManagerAdapter
-import amingoli.com.selar.adapter.TagListAdapter
+import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.dialog.InsertCategoryDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
@@ -72,9 +72,9 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         array_tag.add(TagList("فعال", R.drawable.ic_baseline_extension_24,"all"))
         array_tag.add(TagList("منتخب", R.drawable.ic_baseline_category_24,"all"))
 
-        val adapterTagList = TagListAdapter(this,
+        val adapterTagList = TagInfoAdapter(this,
             array_tag,
-            object : TagListAdapter.Listener {
+            object : TagInfoAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
                 }
