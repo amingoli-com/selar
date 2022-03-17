@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text_title"
     tools:text="همه محصولات"
     android:layout_margin="@dimen/_2sdp"
     android:paddingStart="@dimen/_10sdp"
