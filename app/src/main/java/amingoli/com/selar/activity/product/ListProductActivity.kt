@@ -7,24 +7,38 @@ import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.activity_list_product.recyclerView
 import kotlinx.android.synthetic.main.activity_list_product.recyclerView_tag
 import kotlinx.android.synthetic.main.activity_list_product.toolbar
+import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.item_product.view.*
+import kotlinx.android.synthetic.main.item_product.view.title
+import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class ListProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_product)
 
-        toolbar.title.text = "محصولات"
-
+        initToolbar()
         initAdapterTagList()
         initAdapterListProducts()
+    }
+
+    private fun initToolbar(){
+        toolbar.title.text = "محصولات"
+        toolbar.ic_back.visibility = View.VISIBLE
+        toolbar.ic_back.setOnClickListener { onBackPressed() }
+        toolbar.ic_add.visibility = View.VISIBLE
+        toolbar.ic_add.setOnClickListener {
+            startActivity(Intent(this,ProductActivity::class.java))
+        }
     }
 
     private fun initAdapterTagList(){

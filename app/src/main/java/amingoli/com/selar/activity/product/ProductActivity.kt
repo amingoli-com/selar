@@ -76,6 +76,8 @@ class ProductActivity : AppCompatActivity()  {
 
     private fun initToolbar(){
         toolbar.title.text = "ثبت محصول جدید"
+        toolbar.ic_back.visibility = View.VISIBLE
+        toolbar.ic_back.setOnClickListener { onBackPressed() }
     }
 
     private fun initActionOnClick() {
