@@ -41,8 +41,12 @@ class ListProductActivity : AppCompatActivity() {
 
         val array_tag = ArrayList<TagList>()
         array_tag.add(TagList("همه", R.drawable.ic_baseline_category_24,"all"))
-        array_tag.add(TagList("پرفروش", R.drawable.ic_baseline_extension_24,"all"))
-        array_tag.add(TagList("منتشرشده", R.drawable.ic_baseline_category_24,"all"))
+        array_tag.add(TagList("پرفروش", R.drawable.ic_baseline_extension_24,""))
+        array_tag.add(TagList("منتشرشده", R.drawable.ic_baseline_category_24,""))
+        array_tag.add(TagList("موجود", R.drawable.ic_baseline_category_24,""))
+        array_tag.add(TagList("درحال‌اتمام", R.drawable.ic_baseline_category_24,"out_of_stock_alarm"))
+        array_tag.add(TagList("درحال‌انقضا", R.drawable.ic_baseline_category_24,"date_expire_alarm"))
+        array_tag.add(TagList("تمام‌شده", R.drawable.ic_baseline_category_24,"out_of_stock"))
 
         val adapterTagList = TagInfoAdapter(this,
             array_tag,
