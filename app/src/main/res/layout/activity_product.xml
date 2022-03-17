@@ -48,11 +48,11 @@
 
                         <ImageView
                             android:id="@+id/image"
-                            android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_100sdp"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="start"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
                             android:padding="@dimen/_5sdp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_add_photo_alternate_black_24dp" />
@@ -125,6 +125,29 @@
                             android:src="@drawable/ic_baseline_photo_camera_24" />
                     </RelativeLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_date"
+                            android:inputType="date"
+                            android:paddingStart="@dimen/_35sdp"
+                            style="@style/Edittext.product"
+                            android:drawableStart="@drawable/ic_baseline_calendar_month_24"
+                            android:hint="@string/date_expire"
+                            tools:ignore="RtlSymmetry,TextFields" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_date"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_tag"
+                        android:clipToPadding="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -177,7 +200,7 @@
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:inputType="numberDecimal"
                             style="@style/Edittext.product.Price"
-                            android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                            android:drawableStart="@drawable/ic_baseline_store_24"
                             android:hint="@string/price_sela" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -233,7 +256,7 @@
                             android:id="@+id/edt_max_selection"
                             style="@style/Edittext.product.Decimal"
                             android:inputType="numberDecimal"
-                            android:drawableStart="@drawable/ic_baseline_description_24"
+                            android:drawableStart="@drawable/ic_unit_black_24dp"
                             android:hint="حداکثر مجاز در سبد خرید" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -245,7 +268,7 @@
                             android:id="@+id/edt_desc"
                             style="@style/Edittext.product"
                             android:imeOptions="actionDone"
-                            android:inputType="textMultiLine"
+                            android:inputType="textLongMessage"
                             android:drawableStart="@drawable/ic_baseline_description_24"
                             android:hint="@string/description" />
                     </com.google.android.material.textfield.TextInputLayout>

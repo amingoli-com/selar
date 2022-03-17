@@ -2,10 +2,13 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
+import amingoli.com.selar.adapter.TagAdapter
+import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.TagList
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.Manifest
 import android.annotation.SuppressLint
@@ -25,7 +28,9 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.activity_product.*
+import kotlinx.android.synthetic.main.activity_product.toolbar
 
 import kotlinx.android.synthetic.main.include_toolbar.view.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
@@ -51,6 +56,7 @@ class ProductActivity : AppCompatActivity()  {
         initToolbar()
         initActionOnClick()
         initTextWatcherPrice()
+        initDateExpire()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -135,6 +141,28 @@ class ProductActivity : AppCompatActivity()  {
                 if (tv_profit.visibility != View.GONE) tv_profit.visibility = View.GONE
             }
         }
+    }
+
+    private fun initDateExpire(){
+        val array_tag = ArrayList<TagList>()
+        array_tag.add(TagList("۷ روز دیگر","7"))
+        array_tag.add(TagList("۱۵ روز دیگر","15"))
+        array_tag.add(TagList("یکماه دیگر","30"))
+        array_tag.add(TagList("سه ماه دیگر","90"))
+        array_tag.add(TagList("شش ماه دیگر","180"))
+        array_tag.add(TagList("یکسال ماه دیگر","365"))
+        array_tag.add(TagList("دوسال ماه دیگر","730"))
+
+        val adapterTagList = TagAdapter(this,
+            array_tag,
+            object : TagAdapter.Listener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onItemClicked(position: Int, item: TagList) {
+                    edt_date.setText("1401/03/15")
+                }
+            })
+
+        recyclerView_date.adapter = adapterTagList
     }
 
     /**

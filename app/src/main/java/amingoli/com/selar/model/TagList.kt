@@ -6,12 +6,14 @@ class TagList {
     var tag:String? = null
 
 
-
+    constructor()
     constructor(title: String?, icon: Int?, tag: String?) {
         this.title = title
         this.icon = icon
         this.tag = tag
     }
-
-    constructor()
+    constructor(title: String?, tag: String?) {
+        this.title = title
+        this.tag = tag
+    }
 }

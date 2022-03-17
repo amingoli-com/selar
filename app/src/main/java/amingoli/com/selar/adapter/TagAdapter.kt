@@ -14,10 +14,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_tag_info.view.*
 
-class TagInfoAdapter(val context: Context,
-                     val list: ArrayList<TagList>,
-                     val listener: Listener
-) : RecyclerView.Adapter<TagInfoAdapter.ListViewHolder>() {
+class TagAdapter(val context: Context,
+                 val list: ArrayList<TagList>,
+                 val listener: Listener
+) : RecyclerView.Adapter<TagAdapter.ListViewHolder>() {
 
     var position_selected = 0
 
@@ -28,7 +28,7 @@ class TagInfoAdapter(val context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tag_info, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tag, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -40,11 +40,9 @@ class TagInfoAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        setItemSelected(position_selected != -1 && position_selected == position,
-            item.image_icon,item.text_title)
+        setItemSelected(position_selected != -1 && position_selected == position,item.text_title)
 
         item.text_title.text = model.title
-        item.image_icon.setImageDrawable(ContextCompat.getDrawable(context,model.icon!!))
 
         item.setOnClickListener {
             val back_position_selected = position_selected
@@ -69,15 +67,13 @@ class TagInfoAdapter(val context: Context,
         }
     }
 
-    private fun setItemSelected(is_selected:Boolean, imageView:ImageView, textView : TextView){
+    private fun setItemSelected(is_selected:Boolean, textView : TextView){
         if (is_selected){
-            imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
-            imageView.setColorFilter(ContextCompat.getColor(context, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-            textView.setTextColor(ContextCompat.getColor(context,R.color.blue))
+            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
+            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
         }else{
-            imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
-            imageView.setColorFilter(ContextCompat.getColor(context, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
             textView.setTextColor(ContextCompat.getColor(context,R.color.black))
+            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.transparent))
         }
     }
 }
