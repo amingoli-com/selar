@@ -150,27 +150,6 @@ class ProductActivity : AppCompatActivity()  {
     }
 
     private fun initDateExpire(){
-        btn_open_calender.setOnClickListener {
-            val picker = PersianDatePickerDialog(this)
-                .setPositiveButtonString("باشه")
-                .setNegativeButton("بیخیال")
-                .setTodayButton("امروز")
-                .setTodayButtonVisible(true)
-                .setMinYear(PersianDatePickerDialog.THIS_YEAR)
-                .setActionTextColor(Color.GRAY)
-                .setTypeFace(Typeface.createFromAsset(assets, "fonts/iran_sans_mobile.ttf"))
-                .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
-                .setShowInBottomSheet(true)
-                .setListener(object : PersianPickerListener {
-                    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
-                        edt_date.setText(App.getFormattedDate(persianPickerDate.timestamp))
-                    }
-                    override fun onDismissed() {}
-                })
-            picker.show()
-        }
-
-
         val array_tag = ArrayList<TagList>()
         array_tag.add(TagList("بدون انقضا","0"))
         array_tag.add(TagList("۷ روز دیگر","7"))
@@ -180,7 +159,6 @@ class ProductActivity : AppCompatActivity()  {
         array_tag.add(TagList("شش ماه دیگر","180"))
         array_tag.add(TagList("یکسال دیگر","365"))
         array_tag.add(TagList("دوسال دیگر","730"))
-
         val adapterTagList = TagAdapter(this,
             array_tag,
             object : TagAdapter.Listener {
@@ -198,8 +176,28 @@ class ProductActivity : AppCompatActivity()  {
                     }
                 }
             })
-
         recyclerView_date.adapter = adapterTagList
+
+        btn_open_calender.setOnClickListener {
+            val picker = PersianDatePickerDialog(this)
+                .setPositiveButtonString("باشه")
+                .setNegativeButton("بیخیال")
+                .setTodayButton("امروز")
+                .setTodayButtonVisible(true)
+                .setMinYear(PersianDatePickerDialog.THIS_YEAR)
+                .setActionTextColor(Color.GRAY)
+                .setTypeFace(Typeface.createFromAsset(assets, "fonts/iran_sans_mobile.ttf"))
+                .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
+                .setShowInBottomSheet(true)
+                .setListener(object : PersianPickerListener {
+                    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+                        edt_date.setText(App.getFormattedDate(persianPickerDate.timestamp))
+                        adapterTagList.updateItemSelected(-1)
+                    }
+                    override fun onDismissed() {}
+                })
+            picker.show()
+        }
     }
 
     private fun initAutoCompleteUnitsList(){
