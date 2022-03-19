@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/ic_back"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="match_parent"
             android:background="@drawable/btn_back_selector"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
@@ -66,7 +66,7 @@
             tools:visibility="visible"
             android:src="@drawable/ic_baseline_print_24"
             android:padding="@dimen/_10sdp"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
             android:layout_height="match_parent"
             app:tint="@color/white" />
 
@@ -77,7 +77,7 @@
             tools:visibility="visible"
             android:src="@drawable/ic_baseline_search_24"
             android:padding="@dimen/_10sdp"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
             android:layout_height="match_parent"
             app:tint="@color/white" />
 
@@ -89,7 +89,7 @@
             android:background="@drawable/btn_back_selector"
             android:src="@drawable/ic_baseline_add_circle_24"
             android:padding="@dimen/_10sdp"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
             android:layout_height="match_parent"
             app:tint="@color/white" />
 
@@ -101,7 +101,7 @@
             android:background="@drawable/btn_back_selector"
             android:src="@drawable/ic_baseline_more_vert_24"
             android:padding="@dimen/_10sdp"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
             android:layout_height="match_parent"
             app:tint="@color/white" />
 
