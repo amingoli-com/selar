@@ -15,7 +15,9 @@
 
         <ImageView
             android:id="@+id/image"
-            android:src="@drawable/image_product_test"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/image_product_test"
             android:scaleType="fitCenter"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"/>

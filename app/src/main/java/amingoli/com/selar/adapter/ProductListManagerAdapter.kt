@@ -53,10 +53,12 @@ class ProductListManagerAdapter(
             item.barcode.text = model.qrcode
 
         }catch (e : Exception){
-
         }
-        Glide.with(context).load(File(model.image_defult)).into(item.image)
 
+        if (!model.image_defult.isNullOrEmpty()){
+            item.image.visibility = View.VISIBLE
+            Glide.with(context).load(File(model.image_defult)).into(item.image)
+        }else item.image.visibility = View.GONE
 
         item.setOnClickListener {
             listener.onItemClicked(position,model)
