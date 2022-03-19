@@ -19,7 +19,7 @@ class TagAdapter(val context: Context,
                  val listener: Listener
 ) : RecyclerView.Adapter<TagAdapter.ListViewHolder>() {
 
-    var position_selected = -1
+    private var position_selected = -1
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -53,6 +53,17 @@ class TagAdapter(val context: Context,
         }
     }
 
+    private fun setItemSelected(is_selected:Boolean, textView : TextView){
+        if (is_selected){
+            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
+            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.blue)
+
+        }else{
+            textView.setTextColor(ContextCompat.getColor(context,R.color.black))
+            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.gray)
+        }
+    }
+
     fun addItem(item: TagList){
         list.add(list.size,item)
         notifyItemInserted(list.size)
@@ -67,14 +78,10 @@ class TagAdapter(val context: Context,
         }
     }
 
-    private fun setItemSelected(is_selected:Boolean, textView : TextView){
-        if (is_selected){
-            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
-            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.blue)
-
-        }else{
-            textView.setTextColor(ContextCompat.getColor(context,R.color.black))
-            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.gray)
-        }
+    fun updateItemSelected(item_selected: Int){
+        val back_position_selected = position_selected
+        position_selected = item_selected
+        notifyItemChanged(position_selected)
+        notifyItemChanged(back_position_selected)
     }
 }
