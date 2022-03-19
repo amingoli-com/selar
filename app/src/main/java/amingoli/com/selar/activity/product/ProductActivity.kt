@@ -14,19 +14,24 @@ import amingoli.com.selar.model.UnitModel
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
+import ir.hamsaa.persiandatepicker.api.PersianPickerListener
 import kotlinx.android.synthetic.main.activity_product.*
-import kotlinx.android.synthetic.main.activity_product.toolbar
-
 import kotlinx.android.synthetic.main.item_toolbar.view.*
+import java.util.*
+
 
 class ProductActivity : AppCompatActivity()  {
 
@@ -34,6 +39,7 @@ class ProductActivity : AppCompatActivity()  {
     private var _ID_PRODUCT : Int? = null
     private var _DISCOUNT = 0.0
     private var _IMAGE_DEFULT_PATH = ""
+    private var _DATE_EXPIRED: Date? = null
 
     private val resultGetBarcodeCamera =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -144,7 +150,29 @@ class ProductActivity : AppCompatActivity()  {
     }
 
     private fun initDateExpire(){
+        btn_open_calender.setOnClickListener {
+            val picker = PersianDatePickerDialog(this)
+                .setPositiveButtonString("باشه")
+                .setNegativeButton("بیخیال")
+                .setTodayButton("امروز")
+                .setTodayButtonVisible(true)
+                .setMinYear(PersianDatePickerDialog.THIS_YEAR)
+                .setActionTextColor(Color.GRAY)
+                .setTypeFace(Typeface.createFromAsset(assets, "fonts/iran_sans_mobile.ttf"))
+                .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
+                .setShowInBottomSheet(true)
+                .setListener(object : PersianPickerListener {
+                    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+                        edt_date.setText(App.getFormattedDate(persianPickerDate.timestamp))
+                    }
+                    override fun onDismissed() {}
+                })
+            picker.show()
+        }
+
+
         val array_tag = ArrayList<TagList>()
+        array_tag.add(TagList("بدون انقضا","0"))
         array_tag.add(TagList("۷ روز دیگر","7"))
         array_tag.add(TagList("۱۵ روز دیگر","15"))
         array_tag.add(TagList("یکماه دیگر","30"))
@@ -158,7 +186,16 @@ class ProductActivity : AppCompatActivity()  {
             object : TagAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
-                    edt_date.setText("1401/03/15")
+                    if (item.tag.equals("0")){
+                        edt_date.text.clear()
+                        tv_add_date_expire.visibility = View.VISIBLE
+                        box_date_expire.visibility = View.GONE
+                    }else{
+                        val calendar = Calendar.getInstance()
+                        calendar.time = Date()
+                        calendar.add(Calendar.DAY_OF_YEAR, +item.tag!!.toInt())
+                        edt_date.setText(App.getFormattedDate(calendar.timeInMillis))
+                    }
                 }
             })
 
@@ -240,6 +277,7 @@ class ProductActivity : AppCompatActivity()  {
 
         _PRODUCT_OBJECT?.id = _ID_PRODUCT
         _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
+        _PRODUCT_OBJECT?.date_expired = _DATE_EXPIRED
         _PRODUCT_OBJECT?.price_discount = _DISCOUNT
         _PRODUCT_OBJECT?.branch = Session.getInstance().branch
         _PRODUCT_OBJECT?.user = Session.getInstance().user

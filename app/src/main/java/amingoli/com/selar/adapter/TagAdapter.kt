@@ -69,11 +69,12 @@ class TagAdapter(val context: Context,
 
     private fun setItemSelected(is_selected:Boolean, textView : TextView){
         if (is_selected){
-            textView.setTextColor(ContextCompat.getColor(context,R.color.blue))
-//            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
+            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
+            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.blue)
+
         }else{
             textView.setTextColor(ContextCompat.getColor(context,R.color.black))
-//            textView.setBackgroundColor(ContextCompat.getColor(context,R.color.transparent))
+            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.gray)
         }
     }
 }

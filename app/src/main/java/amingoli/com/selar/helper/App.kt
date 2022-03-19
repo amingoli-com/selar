@@ -1,27 +1,27 @@
 package amingoli.com.selar.helper
 
-import amingoli.com.selar.R
 import amingoli.com.selar.database.AppDatabase
 import amingoli.com.selar.helper.Config.JPG
 import amingoli.com.selar.helper.Config.MONEY
-import amingoli.com.selar.helper.Config.PATH
 import amingoli.com.selar.helper.Config.PATH_IMAGES
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
+import android.text.format.DateFormat
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 import java.io.*
-import java.lang.Exception
-import java.net.URI
 import java.text.DecimalFormat
+import java.util.*
+
 
 class App : MultiDexApplication() {
 
@@ -39,6 +39,12 @@ class App : MultiDexApplication() {
 
         fun toast(message: String){
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        }
+
+        fun getFormattedDate(dateTime: Long?): String? {
+            val pdformater: PersianDateFormat
+            pdformater = PersianDateFormat("Y/m/d")
+            return pdformater.format(PersianDate(dateTime))
         }
 
         fun priceFormat(double: Double):String{
