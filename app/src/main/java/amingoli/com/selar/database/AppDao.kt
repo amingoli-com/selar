@@ -1,8 +1,6 @@
 package amingoli.com.selar.database
 
-import amingoli.com.selar.model.Branch
-import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.*
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -43,5 +41,17 @@ interface AppDao {
 
     @Insert
     fun insertBranch(branch: Branch)
+
+//    Unit
+    @Query("select * from unitmodel")
+    fun selectUnit(): List<UnitModel>
+
+    @Query("select * from unitmodel where title = :unit_title")
+    fun selectUnit(unit_title: String): UnitModel
+
+    @Insert
+    fun insertUnit(unit: UnitModel)
+
+
 
 }

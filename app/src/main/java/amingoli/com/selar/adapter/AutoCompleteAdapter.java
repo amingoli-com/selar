@@ -1,4 +1,4 @@
-package ir.trano.keeper.adapter;
+package amingoli.com.selar.adapter;
 
 
 import android.app.Activity;
@@ -17,19 +17,19 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.trano.keeper.R;
-import ir.trano.keeper.model.RegionBringer;
+import amingoli.com.selar.R;
+import amingoli.com.selar.model.Spinner;
 
 
-public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
+public class AutoCompleteAdapter extends ArrayAdapter<Spinner> {
 
     private Context context;
     private int resourceId;
-    private List<RegionBringer> items, tempItems, suggestions;
+    private List<Spinner> items, tempItems, suggestions;
+    private int selected_region_id = 0;
+    private boolean showAllItemWhenNull = false;
 
-    int selected_region_id = 0;
-
-    public RegionBringerAdaptor(@NonNull Context context, int resourceId, ArrayList<RegionBringer> items, int region_id) {
+    public AutoCompleteAdapter(@NonNull Context context, int resourceId, ArrayList<Spinner> items, int region_id, boolean showAllItemWhenNull) {
         super(context, resourceId, items);
         this.items = items;
         this.context = context;
@@ -37,7 +37,19 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
         tempItems = new ArrayList<>(items);
         suggestions = new ArrayList<>();
         this.selected_region_id = region_id;
+        this.showAllItemWhenNull = showAllItemWhenNull;
     }
+
+    public AutoCompleteAdapter(@NonNull Context context, ArrayList<Spinner> items, boolean showAllItemWhenNull) {
+        super(context, R.layout.item_list, items);
+        this.items = items;
+        this.context = context;
+        this.resourceId = R.layout.item_list;
+        tempItems = new ArrayList<>(items);
+        suggestions = new ArrayList<>();
+        this.showAllItemWhenNull = showAllItemWhenNull;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -47,9 +59,13 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
                 LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                 view = inflater.inflate(resourceId, parent, false);
             }
-            RegionBringer Region = getItem(position);
+            Spinner Spinner = getItem(position);
             TextView name = (TextView) view.findViewById(R.id.title);
-            name.setText(Region.getName() + " (" + Region.getPhone() + ") ");
+            if (Spinner.getContent() == null || Spinner.getContent().isEmpty()){
+                name.setText(Spinner.getName());
+            }else {
+                name.setText(Spinner.getName() + " (" + Spinner.getContent() + ") ");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +73,7 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
     }
     @Nullable
     @Override
-    public RegionBringer getItem(int position) {
+    public Spinner getItem(int position) {
         return items.get(position);
     }
     @Override
@@ -78,7 +94,7 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
     private Filter RegionFilter = new Filter() {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            RegionBringer Region = (RegionBringer) resultValue;
+            Spinner Region = (Spinner) resultValue;
             return Region.getName();
         }
         @Override
@@ -87,7 +103,7 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
             synchronized (filterResults) {
                 if (charSequence != null) {
                     // Clear and Retrieve the autocomplete results.
-                    List<RegionBringer> resultList = getFilteredResults(charSequence);
+                    List<Spinner> resultList = getFilteredResults(charSequence);
                     suggestions.addAll(resultList);
                     // Assign the data to the FilterResults
                     filterResults.values = resultList;
@@ -99,15 +115,15 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
         }
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            ArrayList<RegionBringer> tempValues = (ArrayList<RegionBringer>) filterResults.values;
+            ArrayList<Spinner> tempValues = (ArrayList<Spinner>) filterResults.values;
             Log.e("qqqq", "publishResults: " + charSequence + " - " + filterResults.count);
             if (filterResults != null && filterResults.count > 0) {
                 clear();
-                for (RegionBringer RegionObj : tempValues) {
+                for (Spinner RegionObj : tempValues) {
                     add(RegionObj);
                     //notifyDataSetChanged();
                 }
-            } else {
+            } else if (showAllItemWhenNull){
                 clear();
                 addAll(tempItems);
                 notifyDataSetChanged();
@@ -115,9 +131,9 @@ public class RegionBringerAdaptor extends ArrayAdapter<RegionBringer> {
         }
     };
 
-    private List<RegionBringer> getFilteredResults(CharSequence charSequence) {
-        List<RegionBringer> filteredResults = new ArrayList<>();
-        for (RegionBringer Region: tempItems) {
+    private List<Spinner> getFilteredResults(CharSequence charSequence) {
+        List<Spinner> filteredResults = new ArrayList<>();
+        for (Spinner Region: tempItems) {
             if (Region.getName().toLowerCase().contains(charSequence.toString().toLowerCase()) ) {
                 filteredResults.add(Region);
             }

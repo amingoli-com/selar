@@ -2,37 +2,30 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
+import amingoli.com.selar.adapter.AutoCompleteAdapter
 import amingoli.com.selar.adapter.TagAdapter
-import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.Spinner
 import amingoli.com.selar.model.TagList
+import amingoli.com.selar.model.UnitModel
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.activity_product.toolbar
 
-import kotlinx.android.synthetic.main.include_toolbar.view.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class ProductActivity : AppCompatActivity()  {
@@ -57,6 +50,7 @@ class ProductActivity : AppCompatActivity()  {
         initActionOnClick()
         initTextWatcherPrice()
         initDateExpire()
+        initAutoCompleteUnitsList()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -103,6 +97,7 @@ class ProductActivity : AppCompatActivity()  {
         submit.btn.setOnClickListener {
             if (formIsValid()){
                 submit.showLoader()
+                insertUnitList()
                 App.database.getAppDao().insertProduct(getValue())
                 Handler().postDelayed({finish()},500)
             }
@@ -170,12 +165,31 @@ class ProductActivity : AppCompatActivity()  {
         recyclerView_date.adapter = adapterTagList
     }
 
+    private fun initAutoCompleteUnitsList(){
+        val spinner = ArrayList<Spinner>()
+        val list_unit = App.database.getAppDao().selectUnit()
+        for (i in list_unit.indices) { spinner.add(Spinner(list_unit[i].id!!, list_unit[i].title )) }
+        val adapter = AutoCompleteAdapter(this, spinner, false)
+        atc_unit.setAdapter(adapter)
+        atc_unit.setOnItemClickListener { parent, view, position, id ->
+            val r: Spinner = parent.getItemAtPosition(position) as Spinner
+            App.toast(r.name)
+        }
+        atc_unit.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) atc_unit.showDropDown()
+        }
+        atc_unit.setOnClickListener { atc_unit.showDropDown() }
+    }
+
+
     /**
      * Act
      * */
 
-    private fun calculateDiscount(){
-
+    private fun insertUnitList(){
+        if (App.database.getAppDao().selectUnit(App.getString(atc_unit)) == null){
+            App.database.getAppDao().insertUnit(UnitModel(App.getString(atc_unit)))
+        }
     }
 
     private fun formIsValid() : Boolean{

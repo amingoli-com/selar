@@ -12,12 +12,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 @Database(entities = [Product::class,Branch::class,Category::class,Status::class,Increase::class,
         Descriptions::class,CategoryProduct::class,Users::class,Customers::class,Images::class,
         CheckOut::class,CheckOutDetail::class,Orders::class,OrderDetail::class,Permissions::class,
-        Setting::class], version = AppDatabase.VERSION)
+        Setting::class, UnitModel::class], version = AppDatabase.VERSION)
 abstract class AppDatabase : RoomDatabase() {
 
     /**
