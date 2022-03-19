@@ -21,6 +21,7 @@ import android.os.Handler
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
@@ -29,6 +30,11 @@ import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener
 import kotlinx.android.synthetic.main.activity_product.*
+import kotlinx.android.synthetic.main.activity_product.edt_name
+import kotlinx.android.synthetic.main.activity_product.ic_delete
+import kotlinx.android.synthetic.main.activity_product.image
+import kotlinx.android.synthetic.main.activity_product.submit
+import kotlinx.android.synthetic.main.dialog_insert_category.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 import java.util.*
 
@@ -93,6 +99,11 @@ class ProductActivity : AppCompatActivity()  {
 
         image.setOnClickListener {
             CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this)
+        }
+
+        ic_delete.setOnClickListener {
+            _IMAGE_DEFULT_PATH = ""
+            image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_add_photo_alternate_black_24dp))
         }
 
         tv_add_date_expire.setOnClickListener {
@@ -275,7 +286,7 @@ class ProductActivity : AppCompatActivity()  {
 
         _PRODUCT_OBJECT?.id = _ID_PRODUCT
         _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
-        _PRODUCT_OBJECT?.date_expired = _DATE_EXPIRED
+        _PRODUCT_OBJECT?.date_expired = App.getString(edt_date)
         _PRODUCT_OBJECT?.price_discount = _DISCOUNT
         _PRODUCT_OBJECT?.branch = Session.getInstance().branch
         _PRODUCT_OBJECT?.user = Session.getInstance().user
@@ -297,5 +308,9 @@ class ProductActivity : AppCompatActivity()  {
 //        _PRODUCT_OBJECT?.update_at = ""
 
         return _PRODUCT_OBJECT!!
+    }
+
+    private fun setValue(){
+
     }
 }

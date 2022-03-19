@@ -29,7 +29,7 @@ class Product {
     var increase :String? = null
     var create_at : Date? = null
     var update_at :Date? = null
-    var date_expired :Date? = null
+    var date_expired :String? = null
     var tax_percent :Int? = null
     var user :Int? = null
 }

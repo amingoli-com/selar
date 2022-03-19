@@ -49,7 +49,7 @@ class ProductListManagerAdapter(
             item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!, true)
             item.price_buy.text = App.priceFormat(model.price_buy!!, true)
 
-            item.stock.text = "${model.stock} ${model.increase}"
+            item.stock.text = "${App.priceFormat(model.stock!!)} ${model.increase}"
             item.barcode.text = model.qrcode
 
         }catch (e : Exception){
