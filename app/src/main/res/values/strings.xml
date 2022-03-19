@@ -26,4 +26,7 @@
     <string name="image_not_valid">عکسی برای این محصول انتخاب کنید</string>
     <string name="category_is_enable">دسته‌بندی فعال باشد</string>
     <string name="date_expire">تاریخ انقضا</string>
+    <string name="product_info">مشخصات محصول</string>
+    <string name="initial_balance">موجودی اولیه</string>
+    <string name="max_in_check_out">حداکثر مجاز در سبد خرید</string>
 </resources>

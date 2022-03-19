@@ -40,7 +40,7 @@
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/info" />
+                        android:text="@string/product_info" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -63,16 +63,33 @@
                             android:layout_toEndOf="@+id/image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <com.google.android.material.textfield.TextInputLayout
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-                                <EditText
-                                    android:id="@+id/edt_stock"
-                                    android:inputType="numberDecimal"
-                                    style="@style/Edittext.product.Decimal"
-                                    android:drawableStart="@drawable/ic_stock_black_24dp"
-                                    android:hint="@string/stock" />
-                            </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <EditText
+                                        android:id="@+id/edt_barcode"
+                                        android:paddingStart="@dimen/_35sdp"
+                                        style="@style/Edittext.product"
+                                        android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
+                                        android:hint="@string/barcode"
+                                        tools:ignore="RtlSymmetry" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <ImageView
+                                    android:id="@+id/btn_scanBarCodeByCamera"
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_photo_camera_24"
+                                    app:tint="@color/blue" />
+                            </RelativeLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
@@ -93,102 +110,32 @@
                         <EditText
                             android:id="@+id/edt_name"
                             style="@style/Edittext.product"
-                            android:drawableStart="@drawable/ic_name_image_black_24dp"
+                            android:drawableStart="@drawable/ic_baseline_create_24"
                             android:hint="@string/name" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-
-                    <RelativeLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edt_max_selection"
+                            style="@style/Edittext.product.Decimal"
+                            android:inputType="numberDecimal"
+                            android:drawableStart="@drawable/ic_unit_black_24dp"
+                            android:hint="@string/max_in_check_out" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <EditText
-                                android:id="@+id/edt_barcode"
-                                android:paddingStart="@dimen/_35sdp"
-                                style="@style/Edittext.product"
-                                android:drawableStart="@drawable/ic_baseline_qr_code_scanner_24"
-                                android:hint="@string/barcode"
-                                tools:ignore="RtlSymmetry" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <ImageView
-                            android:id="@+id/btn_scanBarCodeByCamera"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_baseline_photo_camera_24"
-                            app:tint="@color/blue" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/tv_add_date_expire"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:padding="@dimen/_5sdp"
-                        style="@style/Text.Body1"
-                        android:drawableStart="@drawable/ic_baseline_add_circle_24"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:drawableTint="@color/blue"
-                        android:text="ثبت تاریخ انقضا"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <LinearLayout
-                        android:id="@+id/box_date_expire"
-                        android:visibility="gone"
-                        tools:visibility="visible"
-                        android:orientation="vertical"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <EditText
-                                    android:id="@+id/edt_date"
-                                    android:enabled="false"
-                                    android:inputType="datetime"
-                                    android:paddingStart="@dimen/_35sdp"
-                                    style="@style/Edittext.product"
-                                    android:drawableStart="@drawable/ic_baseline_calendar_month_24"
-                                    android:hint="@string/date_expire"
-                                    tools:ignore="RtlSymmetry,TextFields" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <ImageView
-                                android:id="@+id/btn_open_calender"
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:foreground="?attr/selectableItemBackgroundBorderless"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_calendar_month_24"
-                                app:tint="@color/blue"  />
-                        </RelativeLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView_date"
-                            android:overScrollMode="never"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginBottom="@dimen/_3sdp"
-                            android:orientation="horizontal"
-                            tools:listitem="@layout/item_tag"
-                            android:clipToPadding="false"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
+                        <EditText
+                            android:id="@+id/edt_desc"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            style="@style/Edittext.product"
+                            android:inputType="textLongMessage"
+                            android:drawableStart="@drawable/ic_baseline_description_24"
+                            android:hint="@string/description" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -289,35 +236,87 @@
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/detail" />
+                        android:text="@string/initial_balance" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/edt_max_selection"
-                            style="@style/Edittext.product.Decimal"
+                            android:id="@+id/edt_stock"
                             android:inputType="numberDecimal"
-                            android:drawableStart="@drawable/ic_unit_black_24dp"
-                            android:hint="حداکثر مجاز در سبد خرید" />
+                            android:imeOptions="actionDone"
+                            style="@style/Edittext.product.Decimal"
+                            android:drawableStart="@drawable/ic_stock_black_24dp"
+                            android:hint="@string/stock" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <TextView
+                        android:id="@+id/tv_add_date_expire"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        style="@style/Text.Body1"
+                        android:drawableStart="@drawable/ic_baseline_add_circle_24"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableTint="@color/blue"
+                        android:text="ثبت تاریخ انقضا"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
+                        android:id="@+id/box_date_expire"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/edt_desc"
-                            style="@style/Edittext.product"
-                            android:imeOptions="actionDone"
-                            android:inputType="textLongMessage"
-                            android:drawableStart="@drawable/ic_baseline_description_24"
-                            android:hint="@string/description" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <EditText
+                                    android:id="@+id/edt_date"
+                                    android:enabled="false"
+                                    android:inputType="datetime"
+                                    android:paddingStart="@dimen/_35sdp"
+                                    style="@style/Edittext.product"
+                                    android:drawableStart="@drawable/ic_baseline_calendar_month_24"
+                                    android:hint="@string/date_expire"
+                                    tools:ignore="RtlSymmetry,TextFields" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageView
+                                android:id="@+id/btn_open_calender"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/ic_baseline_calendar_month_24"
+                                app:tint="@color/blue"  />
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView_date"
+                            android:overScrollMode="never"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:orientation="horizontal"
+                            tools:listitem="@layout/item_tag"
+                            android:clipToPadding="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
 
         <amingoli.com.selar.widget.loader_button.LoaderButton
