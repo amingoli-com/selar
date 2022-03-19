@@ -201,12 +201,6 @@ class ProductActivity : AppCompatActivity()  {
             value_is_true = "false"
         }
 
-        if (_PRODUCT_OBJECT?.image_defult.isNullOrEmpty()){
-            image.requestFocus()
-            App.toast(resources.getString(R.string.image_not_valid))
-            value_is_true = "false"
-        }
-
         if (_PRODUCT_OBJECT?.increase.isNullOrEmpty()){
             atc_unit.setError(resources.getString(R.string.not_valid))
             value_is_true = "false"
