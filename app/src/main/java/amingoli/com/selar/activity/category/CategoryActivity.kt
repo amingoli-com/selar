@@ -60,7 +60,7 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
             dialog_category = InsertCategoryDialog(this@CategoryActivity,
-                null,-1,this)
+                null,-1,0,this)
             dialog_category?.show()
         }
     }
@@ -89,8 +89,14 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
             object : CategoryListManagerAdapter.Listener {
                 override fun onItemClicked(position: Int, category: Category) {
                     Log.e("qqq", "onItemClicked status is : ${category.status}" )
+                    val i = Intent(this@CategoryActivity, UnderCategoryActivity::class.java)
+                    i.putExtra("id", category.id)
+                    startActivity(i)
+                }
+
+                override fun onLongItemClicked(position: Int, category: Category) {
                     dialog_category = InsertCategoryDialog(this@CategoryActivity,
-                        category,position,this@CategoryActivity)
+                        category,position,category.id_mother!!,this@CategoryActivity)
                     dialog_category?.show()
                 }
             })
@@ -101,27 +107,19 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         if (intent?.extras?.getBoolean("add") != null){
             Handler().postDelayed({
                 dialog_category = InsertCategoryDialog(this@CategoryActivity,
-                    null,-1,this@CategoryActivity)
+                    null,-1,0,this@CategoryActivity)
                 dialog_category?.show()
-            }, 500)
+            }, 100)
         }
 
         if (intent?.extras?.getInt("status", -1) != null){
             if (intent!!.extras!!.getInt("status",-1) != -1){
                 array = ArrayList(App.database.getAppDao()
-                    .selectCategory(intent!!.extras!!.getInt("status")))
+                    .selectCategoryByStatus(intent!!.extras!!.getInt("status")))
                 return
             }
         }
-        array = ArrayList(App.database.getAppDao().selectCategory())
-    }
-
-    private fun insertCategory(category: Category){
-        if (category.id != null){
-            App.database.getAppDao().UpdateCategory(category)
-        }else{
-            App.database.getAppDao().insertCategory(category)
-        }
+        array = ArrayList(App.database.getAppDao().selectUnderCategory(0))
     }
 
     /**
@@ -133,8 +131,8 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
     }
 
     override fun insert(dialog: AlertDialog, category: Category, position: Int) {
+        category.id = App.database.getAppDao().insertCategory(category).toInt()
         adapter?.addItem(category, position)
-        insertCategory(category)
         dialog.dismiss()
     }
 

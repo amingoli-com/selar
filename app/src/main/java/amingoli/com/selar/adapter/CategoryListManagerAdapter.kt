@@ -26,6 +26,7 @@ class CategoryListManagerAdapter(
 
     interface Listener{
         fun onItemClicked(position: Int, category: Category)
+        fun onLongItemClicked(position: Int, category: Category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -57,6 +58,11 @@ class CategoryListManagerAdapter(
 
         item.setOnClickListener {
             listener.onItemClicked(position,model)
+        }
+
+        item.setOnLongClickListener {
+            listener.onLongItemClicked(position,model)
+            return@setOnLongClickListener false
         }
     }
 

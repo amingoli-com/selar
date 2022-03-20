@@ -1,10 +1,7 @@
 package amingoli.com.selar.database
 
 import amingoli.com.selar.model.*
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface AppDao {
@@ -23,17 +20,20 @@ interface AppDao {
     fun getOutOfStockProductCount(): Int
 
 //    Category
-    @Insert
-    fun insertCategory(category: Category)
-
-    @Update
-    fun UpdateCategory(category: Category)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCategory(category: Category): Long
 
     @Query("select * from category")
     fun selectCategory(): List<Category>
 
+    @Query("select * from category where id = :id")
+    fun selectCategory(id: Int): Category
+
     @Query("select * from category where status = :status")
-    fun selectCategory(status: Int): List<Category>
+    fun selectCategoryByStatus(status: Int): List<Category>
+
+    @Query("select * from category where id_mother = :id_mother")
+    fun selectUnderCategory(id_mother: Int): List<Category>
 
 //    Branch
     @Query("select * from branch")

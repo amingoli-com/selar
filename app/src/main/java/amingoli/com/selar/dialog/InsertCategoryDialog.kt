@@ -18,10 +18,9 @@ import kotlinx.android.synthetic.main.dialog_insert_category.*
 
 
 class InsertCategoryDialog(context: Context,val _category: Category?, val _position: Int,
-                           val listener: Listener) : AlertDialog(context) {
+                           val _id_mother:Int, val listener: Listener) : AlertDialog(context) {
 
     private var _ID = -1
-    private var _ID_MOTHER = 0
     private var _IMAGE_PATH: String? = null
     private var _POS = -1
 
@@ -34,7 +33,7 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_insert_category)
         this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-        Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_ID_MOTHER - image: $_IMAGE_PATH - pos: $_POS ")
+        Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_id_mother - image: $_IMAGE_PATH - pos: $_POS ")
         initOnClick()
         if (_category != null) setValue(_category, _position)
     }
@@ -42,6 +41,7 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
     fun initImage(resultUri: Uri){
         Glide.with(context).load(resultUri).into(image)
         _IMAGE_PATH = App.saveFile(App.getByte(resultUri))
+        ic_delete.visibility = View.VISIBLE
     }
 
     interface Listener {
@@ -59,6 +59,7 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
         ic_delete.setOnClickListener {
             _IMAGE_PATH = null
             image.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_add_photo_alternate_black_24dp))
+            ic_delete.visibility = View.GONE
         }
     }
 
@@ -73,7 +74,6 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
     private fun setValue(category: Category, position: Int){
         _POS = position
         if (category.id != null) _ID = category.id!!
-        if (category.id_mother != null) _ID_MOTHER = category.id_mother!!
         if (!category.name.isNullOrEmpty()) edt_name.setText(category.name)
         if (!category.content.isNullOrEmpty()) edt_content.setText(category.content)
         checkbox.isChecked = category.status != null && category.status == 1
@@ -87,7 +87,7 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
     private fun getValue(): Category{
         val category = Category()
         if (_ID != -1) category.id = _ID
-        category.id_mother = _ID_MOTHER
+        category.id_mother = _id_mother
         category.name = App.getString(edt_name)
         category.content = App.getString(edt_content)
         category.image = _IMAGE_PATH

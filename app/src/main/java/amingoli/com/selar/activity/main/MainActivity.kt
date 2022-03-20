@@ -1,26 +1,20 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.BarcodeScannerActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Config.KEY_EXTRA_BARCODE
-import amingoli.com.selar.helper.Config.REQUEST_INTENT_GET_BARCODE
 import amingoli.com.selar.model.Branch
-import amingoli.com.selar.model.Product
 import amingoli.com.selar.widget.CardBoxMain
 import amingoli.com.selar.widget.MessageBox
 import amingoli.com.selar.widget.SingelItemCard
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -81,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         cardBoxCategory.build("دسته‌بندی‌ها",
             App.getDrawable(this, R.drawable.ic_baseline_category_24),
             "",
-            "${App.database.getAppDao().selectCategory().size}\nهمه","${App.database.getAppDao().selectCategory(1).size}\nفعال",null,
+            "${App.database.getAppDao().selectCategory().size}\nهمه","${App.database.getAppDao().selectCategoryByStatus(1).size}\nفعال",null,
             object : CardBoxMain.Listener{
                 override fun onAddClicked() {
                     val i = Intent(this@MainActivity,CategoryActivity::class.java)

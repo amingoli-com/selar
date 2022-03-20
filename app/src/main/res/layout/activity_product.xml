@@ -68,7 +68,7 @@
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_alignParentEnd="true"
                                 android:padding="@dimen/_3sdp"
-                                android:src="@drawable/ic_baseline_delete_24"
+                                android:src="@drawable/ic_baseline_close_24"
                                 android:visibility="gone"
                                 app:tint="@color/red"
                                 tools:visibility="visible" />

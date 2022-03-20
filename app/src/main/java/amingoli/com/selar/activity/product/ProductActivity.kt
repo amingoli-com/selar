@@ -73,6 +73,7 @@ class ProductActivity : AppCompatActivity()  {
                 val resultUri = result.uri
                 Glide.with(this).load(resultUri).into(image)
                 _IMAGE_DEFULT_PATH = App.saveFile(App.getByte(resultUri))
+                ic_delete.visibility = View.VISIBLE
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error
             }
@@ -104,6 +105,7 @@ class ProductActivity : AppCompatActivity()  {
         ic_delete.setOnClickListener {
             _IMAGE_DEFULT_PATH = ""
             image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_add_photo_alternate_black_24dp))
+            ic_delete.visibility = View.GONE
         }
 
         tv_add_date_expire.setOnClickListener {
