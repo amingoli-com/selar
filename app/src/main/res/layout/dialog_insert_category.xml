@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center"
+    android:padding="@dimen/_5sdp"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -85,7 +86,8 @@
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:background="@color/complementary"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/background_complementary"
         android:clickable="true"
         android:focusable="true"
         app:btnText="@string/submit"

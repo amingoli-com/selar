@@ -142,7 +142,48 @@
                             android:hint="@string/max_in_check_out" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_add_category"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:padding="@dimen/_5sdp"
+                            style="@style/Text.Body1"
+                            android:drawableStart="@drawable/ic_baseline_category_24"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:drawableTint="@color/blue"
+                            android:text="ثبت دسته‌بندی"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:id="@+id/box_category_list"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <View
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                style="@style/Line"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView_category"
+                                android:overScrollMode="never"
+                                android:layout_marginBottom="@dimen/_3sdp"
+                                android:orientation="horizontal"
+                                tools:listitem="@layout/item_tag"
+                                android:clipToPadding="false"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
@@ -174,7 +215,7 @@
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/finance_data" />
+                        android:text="@string/finance" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -253,7 +294,7 @@
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/initial_balance" />
+                        android:text="@string/balance" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"

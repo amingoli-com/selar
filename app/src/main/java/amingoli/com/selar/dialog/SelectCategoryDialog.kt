@@ -1,29 +1,20 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
-import amingoli.com.selar.adapter.CategoryListManagerAdapter
-import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Session
+import amingoli.com.selar.adapter.SelecCategoryAdapter
 import amingoli.com.selar.model.Category
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.dialog_insert_category.*
+import kotlinx.android.synthetic.main.dialog_insert_category.submit
+import kotlinx.android.synthetic.main.dialog_select_category.*
 
 
-class InsertCategoryDialog(context: Context,val _category: Category?, val _position: Int,
-                           val _id_mother:Int, val listener: Listener) : AlertDialog(context) {
-
-    private var _ID = -1
-    private var _IMAGE_PATH: String? = null
-    private var _POS = -1
-
+class SelectCategoryDialog(val _context: Context, val _categoryListDatabase: ArrayList<Category>,
+                           val _categoryList: ArrayList<Category>,
+                           val _listener: Listener) : AlertDialog(_context) {
 
     init {
         setCancelable(true)
@@ -31,68 +22,47 @@ class InsertCategoryDialog(context: Context,val _category: Category?, val _posit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_insert_category)
+        setContentView(R.layout.dialog_select_category)
         this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-        Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_id_mother - image: $_IMAGE_PATH - pos: $_POS ")
-        initOnClick()
-        if (_category != null) setValue(_category, _position)
-    }
 
-    fun initImage(resultUri: Uri){
-        Glide.with(context).load(resultUri).into(image)
-        _IMAGE_PATH = App.saveFile(App.getByte(resultUri))
-        ic_delete.visibility = View.VISIBLE
+        recyclerView.adapter = SelecCategoryAdapter(_context,_categoryListDatabase,_categoryList,
+            object : SelecCategoryAdapter.Listener{
+            override fun onItemClicked(position: Int, item: Category) {
+                _listener.onUnderCategory(this@SelectCategoryDialog, item)
+            }
+            override fun onItemCheckBox(position: Int, item: Category, isChecked: Boolean) {
+                if (isChecked) addItemCategoryListManager(item)
+                else removeItemCategoryListManager(item)
+            }
+        })
+
+        initOnClick()
     }
 
     interface Listener {
-        fun chooseImage(dialog: AlertDialog)
-        fun insert(dialog: AlertDialog, category: Category, position: Int)
+        fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?)
+        fun onUnderCategory(dialog: SelectCategoryDialog, item: Category)
     }
 
     private fun initOnClick(){
         submit.btn.setOnClickListener {
-            if (formIsValid()) listener.insert(this, getValue(), _POS)
-        }
-        image.setOnClickListener {
-            listener.chooseImage(this)
-        }
-        ic_delete.setOnClickListener {
-            _IMAGE_PATH = null
-            image.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_add_photo_alternate_black_24dp))
-            ic_delete.visibility = View.GONE
+            _listener.onSubmit(this, _categoryList)
         }
     }
 
-    private fun formIsValid() :Boolean{
-        if(App.getString(edt_name).isNullOrEmpty()){
-            edt_name.setError(context.resources.getString(R.string.not_valid))
-            return false
+    private fun addItemCategoryListManager(item: Category){
+        for (i in 0 until _categoryList.size){
+            if (_categoryList[i].id == item.id) return
         }
-        return true
+        _categoryList.add(item)
     }
 
-    private fun setValue(category: Category, position: Int){
-        _POS = position
-        if (category.id != null) _ID = category.id!!
-        if (!category.name.isNullOrEmpty()) edt_name.setText(category.name)
-        if (!category.content.isNullOrEmpty()) edt_content.setText(category.content)
-        checkbox.isChecked = category.status != null && category.status == 1
-        if (!category.image.isNullOrEmpty()) {
-            Glide.with(context).load(category.image).into(image)
-            _IMAGE_PATH = category.image
-            ic_delete.visibility = View.VISIBLE
+    private fun removeItemCategoryListManager(item: Category){
+        for (i in 0 until _categoryList.size){
+            if (_categoryList[i].id == item.id){
+                _categoryList.removeAt(i)
+                return
+            }
         }
-    }
-
-    private fun getValue(): Category{
-        val category = Category()
-        if (_ID != -1) category.id = _ID
-        category.id_mother = _id_mother
-        category.name = App.getString(edt_name)
-        category.content = App.getString(edt_content)
-        category.image = _IMAGE_PATH
-        category.branch = Session.getInstance().branch
-        category.status = if(checkbox.isChecked) 1 else 0
-        return category
     }
 }

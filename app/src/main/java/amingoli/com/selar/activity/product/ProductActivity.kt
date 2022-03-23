@@ -4,13 +4,11 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.BarcodeScannerActivity
 import amingoli.com.selar.adapter.AutoCompleteAdapter
 import amingoli.com.selar.adapter.TagAdapter
+import amingoli.com.selar.dialog.SelectCategoryDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Product
-import amingoli.com.selar.model.Spinner
-import amingoli.com.selar.model.TagList
-import amingoli.com.selar.model.UnitModel
+import amingoli.com.selar.model.*
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -18,6 +16,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +36,7 @@ import kotlinx.android.synthetic.main.activity_product.submit
 import kotlinx.android.synthetic.main.dialog_insert_category.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ProductActivity : AppCompatActivity()  {
@@ -46,6 +46,7 @@ class ProductActivity : AppCompatActivity()  {
     private var _DISCOUNT = 0.0
     private var _IMAGE_DEFULT_PATH = ""
     private var _DATE_EXPIRED: Date? = null
+    private var _CATEGORY: ArrayList<Category> = ArrayList()
 
     private val resultGetBarcodeCamera =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -63,6 +64,24 @@ class ProductActivity : AppCompatActivity()  {
         initTextWatcherPrice()
         initDateExpire()
         initAutoCompleteUnitsList()
+
+
+        tv_add_category.setOnClickListener {
+            val list_a : ArrayList<Category> = ArrayList(App.database.getAppDao().selectUnderCategory(0))
+            SelectCategoryDialog(this, list_a, _CATEGORY,object : SelectCategoryDialog.Listener{
+                override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
+                    for (i in 0 until _CATEGORY.size){
+                        Log.e("qqqamin", "onSubmit: ${_CATEGORY[i].name}" )
+                    }
+                    dialog.dismiss()
+                }
+
+                override fun onUnderCategory(dialog: SelectCategoryDialog, item: Category) {
+                    dialog.dismiss()
+                }
+
+            }).show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

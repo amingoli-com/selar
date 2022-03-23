@@ -29,4 +29,7 @@
     <string name="product_info">مشخصات محصول</string>
     <string name="initial_balance">موجودی اولیه</string>
     <string name="max_in_check_out">حداکثر مجاز در سبد خرید</string>
+    <string name="balance">انبار</string>
+    <string name="finance">مالی</string>
+    <string name="text_item_one_line">نام آیتم مورد نظر</string>
 </resources>

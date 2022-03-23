@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/text_title"
     tools:text="همه محصولات"
+    android:drawableStart="@drawable/ic_baseline_close_24"
+    android:drawableTint="@color/red"
+    android:drawablePadding="@dimen/_5sdp"
     android:layout_margin="@dimen/_2sdp"
     android:paddingStart="@dimen/_10sdp"
     android:paddingEnd="@dimen/_10sdp"
     android:background="@drawable/background_radius_biger"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-</TextView>
+    android:layout_height="wrap_content"/>
