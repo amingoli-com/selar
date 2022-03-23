@@ -49,8 +49,12 @@ class SelecCategoryAdapter(
             listener.onItemCheckBox(position,model,isChecked)
         }
 
-        item.setOnClickListener {
-//            listener.onItemClicked(position,model)
+        item.box.setOnClickListener {
+            listener.onItemClicked(position,model)
+        }
+
+        item.icon.setOnClickListener {
+            listener.onItemClicked(position,model)
         }
     }
 

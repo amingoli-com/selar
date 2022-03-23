@@ -2,6 +2,7 @@ package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.SelecCategoryAdapter
+import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.dialog_insert_category.submit
 import kotlinx.android.synthetic.main.dialog_select_category.*
 
 
-class SelectCategoryDialog(val _context: Context, val _categoryListDatabase: ArrayList<Category>,
+class SelectCategoryDialog(val _context: Context, val id_mother_category: Int,
                            val _categoryList: ArrayList<Category>,
                            val _listener: Listener) : AlertDialog(_context) {
 
@@ -24,6 +25,8 @@ class SelectCategoryDialog(val _context: Context, val _categoryListDatabase: Arr
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_select_category)
         this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+
+        val _categoryListDatabase : ArrayList<Category> = ArrayList(App.database.getAppDao().selectUnderCategory(id_mother_category))
 
         recyclerView.adapter = SelecCategoryAdapter(_context,_categoryListDatabase,_categoryList,
             object : SelecCategoryAdapter.Listener{

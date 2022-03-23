@@ -64,24 +64,6 @@ class ProductActivity : AppCompatActivity()  {
         initTextWatcherPrice()
         initDateExpire()
         initAutoCompleteUnitsList()
-
-
-        tv_add_category.setOnClickListener {
-            val list_a : ArrayList<Category> = ArrayList(App.database.getAppDao().selectUnderCategory(0))
-            SelectCategoryDialog(this, list_a, _CATEGORY,object : SelectCategoryDialog.Listener{
-                override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
-                    for (i in 0 until _CATEGORY.size){
-                        Log.e("qqqamin", "onSubmit: ${_CATEGORY[i].name}" )
-                    }
-                    dialog.dismiss()
-                }
-
-                override fun onUnderCategory(dialog: SelectCategoryDialog, item: Category) {
-                    dialog.dismiss()
-                }
-
-            }).show()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -125,6 +107,10 @@ class ProductActivity : AppCompatActivity()  {
             _IMAGE_DEFULT_PATH = ""
             image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_add_photo_alternate_black_24dp))
             ic_delete.visibility = View.GONE
+        }
+
+        tv_add_category.setOnClickListener {
+            dialog_select_category(0)
         }
 
         tv_add_date_expire.setOnClickListener {
@@ -246,6 +232,23 @@ class ProductActivity : AppCompatActivity()  {
             if (hasFocus) atc_unit.showDropDown()
         }
         atc_unit.setOnClickListener { atc_unit.showDropDown() }
+    }
+
+    private fun dialog_select_category(id:Int){
+        SelectCategoryDialog(this, id, _CATEGORY,object : SelectCategoryDialog.Listener{
+            override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
+                for (i in 0 until _CATEGORY.size){
+                    Log.e("qqqamin", "onSubmit: ${_CATEGORY[i].name}" )
+                }
+                dialog.dismiss()
+            }
+
+            override fun onUnderCategory(dialog: SelectCategoryDialog, item: Category) {
+                dialog.dismiss()
+                dialog_select_category(item.id!!)
+            }
+
+        }).show()
     }
 
 
