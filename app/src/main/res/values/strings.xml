@@ -32,4 +32,6 @@
     <string name="balance">انبار</string>
     <string name="finance">مالی</string>
     <string name="text_item_one_line">نام آیتم مورد نظر</string>
+    <string name="add_category">افزودن دسته بندی</string>
+    <string name="choose_your_category">دسته‌بندی مورد نظر را انتخاب نمایید</string>
 </resources>

@@ -1,52 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center"
-    android:padding="@dimen/_5sdp"
-    android:orientation="vertical">
+    android:padding="@dimen/_5sdp">
 
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:padding="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:textColor="@color/primaryVariant"
-        android:textStyle="bold"
+    <RelativeLayout
+        android:id="@+id/box_top"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="دسته‌بندی مورد نظر را انتخاب نمایید" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/btn_back_selector"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:visibility="gone"
+            app:tint="@color/primary"
+            tools:visibility="visible" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_toEndOf="@+id/ic_back"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/primaryVariant"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_your_category" />
 
-    <View style="@style/Line"/>
+        <View android:layout_below="@+id/tv_title"
+            android:layout_marginTop="@dimen/_5sdp"
+            style="@style/Line"/>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_select_category_list"
+        android:layout_above="@+id/box_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/box_top"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_select_category_list" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:visibility="gone"
+    <RelativeLayout
+        android:id="@+id/box_category"
+        android:layout_above="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
-            android:id="@+id/edt_content"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:id="@+id/edt_category_name"
             style="@style/Edittext.product"
-            android:drawableStart="@drawable/ic_baseline_description_24"
-            android:hint="@string/description" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
+            android:imeOptions="actionDone|actionSend|actionGo"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/ic_add_category"
+            android:drawableStart="@drawable/ic_baseline_category_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="@string/add_category"
+            android:padding="@dimen/_5sdp" />
+        <ImageView
+            android:id="@+id/ic_add_category"
+            android:padding="@dimen/_5sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_add_circle_24"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:tint="@color/blue" />
+    </RelativeLayout>
 
     <amingoli.com.selar.widget.loader_button.LoaderButton
         android:id="@+id/submit"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:layout_margin="@dimen/_5sdp"
@@ -58,4 +95,4 @@
         app:loaderIndicator="BallPulseIndicator"
         app:loaderIndicatorColor="@color/white" />
 
-</LinearLayout>
+</RelativeLayout>
