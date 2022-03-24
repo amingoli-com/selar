@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">selar</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="app_name">فروشنده</string>
     <string name="title">عنوان</string>
     <string name="name">نام</string>
     <string name="barcode">بارکد</string>
@@ -34,4 +34,7 @@
     <string name="text_item_one_line">نام آیتم مورد نظر</string>
     <string name="add_category">افزودن دسته بندی</string>
     <string name="choose_your_category">دسته‌بندی مورد نظر را انتخاب نمایید</string>
+    <string name="submit_category">افزودن دسته‌بندی</string>
+    <string name="category">دسته بندی</string>
+    <string name="this_product_has_n_category">افزودن دسته‌بندی<b> <font color="#333">(%1$d)</font></b></string>
 </resources>
