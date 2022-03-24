@@ -45,7 +45,6 @@ class SelectCategoryDialog(val _context: Context, var id_mother_category: Int,
 
     interface Listener {
         fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?)
-        fun onUnderCategory(dialog: SelectCategoryDialog, item: Category)
     }
 
     private fun initOnClick(){
@@ -123,7 +122,6 @@ class SelectCategoryDialog(val _context: Context, var id_mother_category: Int,
      * Listener
      * */
     override fun onItemClicked(position: Int, item: Category) {
-//        _listener.onUnderCategory(this@SelectCategoryDialog, item)
         initTitle(item.name)
         showNewList(item.id!!)    }
 

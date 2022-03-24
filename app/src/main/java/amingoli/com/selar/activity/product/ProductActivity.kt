@@ -39,7 +39,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class ProductActivity : AppCompatActivity()  {
+class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private var _PRODUCT_OBJECT : Product? = null
     private var _ID_PRODUCT : Int? = null
@@ -62,6 +62,7 @@ class ProductActivity : AppCompatActivity()  {
         initToolbar()
         initActionOnClick()
         initTextWatcherPrice()
+        initCategoryList()
         initDateExpire()
         initAutoCompleteUnitsList()
     }
@@ -110,7 +111,7 @@ class ProductActivity : AppCompatActivity()  {
         }
 
         tv_add_category.setOnClickListener {
-            dialog_select_category(0)
+            SelectCategoryDialog(this, 0, _CATEGORY,this).show()
         }
 
         tv_add_date_expire.setOnClickListener {
@@ -121,8 +122,9 @@ class ProductActivity : AppCompatActivity()  {
         submit.btn.setOnClickListener {
             if (formIsValid()){
                 submit.showLoader()
+                val idProduct = App.database.getAppDao().insertProduct(getValue()).toInt()
                 insertUnitList()
-                App.database.getAppDao().insertProduct(getValue())
+                insertCategoryProductList(idProduct)
                 Handler().postDelayed({finish()},500)
             }
         }
@@ -165,6 +167,22 @@ class ProductActivity : AppCompatActivity()  {
                 if (tv_profit.visibility != View.GONE) tv_profit.visibility = View.GONE
             }
         }
+    }
+
+    private fun initCategoryList(){
+        if (_ID_PRODUCT != null){
+            val cat : ArrayList<CategoryProduct> = ArrayList(App.database.getAppDao().selectCategoryProduct(_ID_PRODUCT!!))
+
+        }
+
+        tv_add_category.setText(resources.getString(R.string.this_product_has_n_category,_CATEGORY.size))
+        box_category_list.visibility = View.VISIBLE
+        val array_tag = ArrayList<TagList>()
+        for (i in 0 until _CATEGORY.size){
+            array_tag.add(i,TagList(_CATEGORY[i].name,_CATEGORY[i].id.toString()))
+        }
+        val adapterCategory = TagAdapter(this@ProductActivity, array_tag,null)
+        recyclerView_category.adapter = adapterCategory
     }
 
     private fun initDateExpire(){
@@ -234,24 +252,6 @@ class ProductActivity : AppCompatActivity()  {
         atc_unit.setOnClickListener { atc_unit.showDropDown() }
     }
 
-    private fun dialog_select_category(id:Int){
-        SelectCategoryDialog(this, id, _CATEGORY,object : SelectCategoryDialog.Listener{
-            override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
-                for (i in 0 until _CATEGORY.size){
-                    Log.e("qqqamin", "onSubmit: ${_CATEGORY[i].name}" )
-                }
-                dialog.dismiss()
-            }
-
-            override fun onUnderCategory(dialog: SelectCategoryDialog, item: Category) {
-                dialog.dismiss()
-                dialog_select_category(item.id!!)
-            }
-
-        }).show()
-    }
-
-
     /**
      * Act
      * */
@@ -260,6 +260,16 @@ class ProductActivity : AppCompatActivity()  {
         if (App.database.getAppDao().selectUnit(App.getString(atc_unit)) == null){
             App.database.getAppDao().insertUnit(UnitModel(App.getString(atc_unit)))
         }
+    }
+
+    private fun insertCategoryProductList(idProduct: Int){
+        App.database.getAppDao().deleteCategoryProduct(idProduct)
+
+        val categoryProductList : ArrayList<CategoryProduct> = ArrayList()
+        for (i in 0 until _CATEGORY.size){
+            categoryProductList.add(CategoryProduct(idProduct, _CATEGORY[i].id))
+        }
+        App.database.getAppDao().insertCategoryProduct(categoryProductList)
     }
 
     private fun formIsValid() : Boolean{
@@ -336,5 +346,27 @@ class ProductActivity : AppCompatActivity()  {
 
     private fun setValue(){
 
+    }
+
+    /**
+     * Listener
+     * */
+
+//    Select Category Dialog
+    override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
+        if (!_CATEGORY.isNullOrEmpty()){
+            tv_add_category.setText(resources.getString(R.string.this_product_has_n_category,_CATEGORY.size))
+            box_category_list.visibility = View.VISIBLE
+            val array_tag = ArrayList<TagList>()
+            for (i in 0 until _CATEGORY.size){
+                array_tag.add(i,TagList(_CATEGORY[i].name,_CATEGORY[i].id.toString()))
+            }
+            val adapterCategory = TagAdapter(this@ProductActivity, array_tag,null)
+            recyclerView_category.adapter = adapterCategory
+        }else {
+            tv_add_category.setText(resources.getString(R.string.submit_category))
+            box_category_list.visibility = View.GONE
+        }
+        dialog.dismiss()
     }
 }

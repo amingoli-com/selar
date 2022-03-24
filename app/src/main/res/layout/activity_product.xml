@@ -155,7 +155,7 @@
                             android:drawableStart="@drawable/ic_baseline_category_24"
                             android:drawablePadding="@dimen/_5sdp"
                             android:drawableTint="@color/blue"
-                            android:text="ثبت دسته‌بندی"
+                            android:text="@string/submit_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -190,6 +190,7 @@
                         android:layout_height="wrap_content">
                         <EditText
                             android:id="@+id/edt_desc"
+                            android:visibility="gone"
                             android:layout_marginBottom="@dimen/_5sdp"
                             style="@style/Edittext.product"
                             android:inputType="textLongMessage"
