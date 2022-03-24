@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_tag_info.view.*
 
 class TagAdapter(val context: Context,
                  val list: ArrayList<TagList>,
-                 val listener: Listener
+                 val listener: Listener?
 ) : RecyclerView.Adapter<TagAdapter.ListViewHolder>() {
 
     private var position_selected = -1
@@ -36,20 +36,22 @@ class TagAdapter(val context: Context,
     }
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = holder.itemView
         val model = list[position]
 
-        setItemSelected(position_selected != -1 && position_selected == position,item.text_title)
-
         item.text_title.text = model.title
 
-        item.setOnClickListener {
-            val back_position_selected = position_selected
-            position_selected = position
-            listener.onItemClicked(position,model)
-            notifyItemChanged(position_selected, model)
-            notifyItemChanged(back_position_selected, model)
+        if (listener != null){
+            setItemSelected(position_selected != -1 && position_selected == position,item.text_title)
+
+            item.setOnClickListener {
+                val back_position_selected = position_selected
+                position_selected = position
+                listener.onItemClicked(position,model)
+                notifyItemChanged(position_selected, model)
+                notifyItemChanged(back_position_selected, model)
+            }
         }
     }
 
