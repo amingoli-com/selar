@@ -7,8 +7,8 @@ import androidx.room.*
 interface AppDao {
 
 //    Product
-    @Insert
-    fun insertProduct(product: Product)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProduct(product: Product) : Long
 
     @Query("select * from product")
     fun selectProduct(): List<Product>
@@ -34,6 +34,16 @@ interface AppDao {
 
     @Query("select * from category where id_mother = :id_mother")
     fun selectUnderCategory(id_mother: Int): List<Category>
+
+//    Category Product
+    @Query("DELETE FROM categoryproduct WHERE id_product = :id_product;")
+    fun deleteCategoryProduct(id_product:Int)
+
+    @Insert
+    fun insertCategoryProduct(categoryProductList: ArrayList<CategoryProduct>)
+
+    @Query("select * from categoryproduct where id_product = :id_product")
+    fun selectCategoryProduct(id_product: Int): List<CategoryProduct>
 
 //    Branch
     @Query("select * from branch")
