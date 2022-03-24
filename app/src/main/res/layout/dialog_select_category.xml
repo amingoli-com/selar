@@ -15,7 +15,6 @@
         <ImageView
             android:id="@+id/ic_back"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:background="@drawable/btn_back_selector"
@@ -24,17 +23,16 @@
             android:visibility="gone"
             app:tint="@color/primary"
             tools:visibility="visible" />
+
         <TextView
             android:id="@+id/tv_title"
-            android:layout_toEndOf="@+id/ic_back"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:textColor="@color/primaryVariant"
-            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/choose_your_category" />
+            android:layout_toEndOf="@+id/ic_back"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/choose_your_category"
+            android:textColor="@color/primaryVariant"
+            android:textStyle="bold" />
 
         <View android:layout_below="@+id/tv_title"
             android:layout_marginTop="@dimen/_5sdp"
