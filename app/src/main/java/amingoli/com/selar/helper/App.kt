@@ -51,6 +51,12 @@ class App : MultiDexApplication() {
             return decimalFormat.format(double)
         }
 
+        fun stockFormat(double: Double):String{
+            val decimalFormat = DecimalFormat("###.##")
+            return decimalFormat.format(double)
+        }
+
+
         fun priceFormat(double: Double, showMoneyType: Boolean):String{
             return if (showMoneyType) "${priceFormat(double)} $MONEY"
             else priceFormat(double)
