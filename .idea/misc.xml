@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/widget_message_box.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/font/my_font.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/layout-v23/widget_message_box.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/activity_add_order_camera.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/activity_barcode_scanner.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_branch.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.2552083333333333" />
@@ -53,6 +54,7 @@
         <entry key="app/src/main/res/layout/item_list.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_main_market.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/item_product_result_camera.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_select_category_list.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_spinner.xml" value="0.23505434782608695" />
         <entry key="app/src/main/res/layout/item_tag.xml" value="0.2753623188405797" />
