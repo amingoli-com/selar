@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_spinner.view.*
+import kotlinx.android.synthetic.main.item_product_result_camera.view.*
 
 
-class SingalItemAdapter(
+class AddOrderCameraAdapter(
     val context: Context,
     val list: ArrayList<String>,
     val listener: Listener
-): RecyclerView.Adapter<SingalItemAdapter.ListViewHolder>() {
+): RecyclerView.Adapter<AddOrderCameraAdapter.ListViewHolder>() {
 
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -24,7 +24,7 @@ class SingalItemAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_product_result_camera, parent, false)
         return ListViewHolder(view)
     }
 
@@ -36,8 +36,8 @@ class SingalItemAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        item.textView.setText(model)
-        item.textView.setOnClickListener { listener.onItemClicked(position, model) }
+        item.tv_title.setText(model)
+        item.tv_title.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
     @SuppressLint("NotifyDataSetChanged")

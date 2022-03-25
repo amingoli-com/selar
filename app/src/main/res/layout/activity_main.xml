@@ -64,5 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <amingoli.com.selar.widget.CardBoxMain
+            android:id="@+id/cardBoxFeature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

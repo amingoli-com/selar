@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderCameraActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
@@ -36,6 +37,29 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
+
+        cardBoxFeature.build("",
+            App.getDrawable(this,R.drawable.ic_baseline_extension_24),
+            null,
+        "ثبت سفارش با دوربین",
+        "",
+        "",
+        object : CardBoxMain.Listener{
+            override fun onAddClicked() {
+
+            }
+
+            override fun onActOneClicked() {
+                startActivity(Intent(this@MainActivity, AddOrderCameraActivity::class.java))
+            }
+
+            override fun onActTwoClicked() {
+            }
+
+            override fun onActTreeClicked() {
+            }
+
+        })
 
         messageBox.setValue("هشدار\nاشتراک شما منقضی شده","لطفا هرچه سریعنر نسبت به تمدید سرویس فروشنده اقدام نمایید","تمدید اشتراک",false,
             object : MessageBox.Listener{
