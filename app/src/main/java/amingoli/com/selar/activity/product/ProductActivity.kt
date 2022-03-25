@@ -42,7 +42,7 @@ import kotlin.collections.ArrayList
 class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private var _PRODUCT_OBJECT : Product? = null
-    private var _ID_PRODUCT : Int? = null
+//    private var _ID_PRODUCT : Int? = null
     private var _DISCOUNT = 0.0
     private var _IMAGE_DEFULT_PATH = ""
     private var _DATE_EXPIRED: Date? = null
@@ -59,10 +59,10 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
         initObject()
+        setValue()
         initToolbar()
         initActionOnClick()
         initTextWatcherPrice()
-        initCategoryList()
         initDateExpire()
         initAutoCompleteUnitsList()
     }
@@ -84,13 +84,13 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private fun initObject(){
         _PRODUCT_OBJECT = if (intent != null && intent?.extras != null){
-            val extra = intent!!.extras!!.getString("product")
-            Gson().fromJson(extra,Product::class.java)
+            val extra = intent!!.extras!!.getInt("id_product", -1)
+            App.database.getAppDao().selectProduct(extra)
         }else Product()
     }
 
     private fun initToolbar(){
-        toolbar.title.text = "ثبت محصول جدید"
+        toolbar.title.text = if (_PRODUCT_OBJECT?.id != null) "ویرایش ${_PRODUCT_OBJECT?.name}" else "ثبت محصول جدید"
         toolbar.ic_back.visibility = View.VISIBLE
         toolbar.ic_back.setOnClickListener { onBackPressed() }
     }
@@ -169,20 +169,30 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         }
     }
 
-    private fun initCategoryList(){
-        if (_ID_PRODUCT != null){
-            val cat : ArrayList<CategoryProduct> = ArrayList(App.database.getAppDao().selectCategoryProduct(_ID_PRODUCT!!))
-
+    private fun initCategoryProductList(){
+        if (_PRODUCT_OBJECT?.id != null){
+            val cat : ArrayList<CategoryProduct> = ArrayList(App.database.getAppDao().selectCategoryProduct(_PRODUCT_OBJECT!!.id!!))
+            for (i in 0 until cat.size){
+                _CATEGORY.add(App.database.getAppDao().selectCategory(cat[i].id_category!!))
+            }
+            initCategory()
         }
+    }
 
-        tv_add_category.setText(resources.getString(R.string.this_product_has_n_category,_CATEGORY.size))
-        box_category_list.visibility = View.VISIBLE
-        val array_tag = ArrayList<TagList>()
-        for (i in 0 until _CATEGORY.size){
-            array_tag.add(i,TagList(_CATEGORY[i].name,_CATEGORY[i].id.toString()))
+    private fun initCategory(){
+        if (!_CATEGORY.isNullOrEmpty()){
+            tv_add_category.setText(resources.getString(R.string.this_product_has_n_category,_CATEGORY.size))
+            box_category_list.visibility = View.VISIBLE
+            val array_tag = ArrayList<TagList>()
+            for (i in 0 until _CATEGORY.size){
+                array_tag.add(i,TagList(_CATEGORY[i].name,_CATEGORY[i].id.toString()))
+            }
+            val adapterCategory = TagAdapter(this@ProductActivity, array_tag,null)
+            recyclerView_category.adapter = adapterCategory
+        }else {
+            tv_add_category.setText(resources.getString(R.string.submit_category))
+            box_category_list.visibility = View.GONE
         }
-        val adapterCategory = TagAdapter(this@ProductActivity, array_tag,null)
-        recyclerView_category.adapter = adapterCategory
     }
 
     private fun initDateExpire(){
@@ -317,8 +327,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     }
 
     private fun getValue(): Product{
-
-        _PRODUCT_OBJECT?.id = _ID_PRODUCT
+        _PRODUCT_OBJECT?.id = if (_PRODUCT_OBJECT?.id != null) _PRODUCT_OBJECT?.id!! else null
         _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
         _PRODUCT_OBJECT?.date_expired = App.getString(edt_date)
         _PRODUCT_OBJECT?.price_discount = _DISCOUNT
@@ -345,7 +354,26 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     }
 
     private fun setValue(){
-
+        if (_PRODUCT_OBJECT?.id != null){
+            if (!_PRODUCT_OBJECT?.image_defult.isNullOrEmpty()) {
+                Glide.with(this).load(_PRODUCT_OBJECT!!.image_defult!!).into(image)
+                _IMAGE_DEFULT_PATH = _PRODUCT_OBJECT!!.image_defult!!
+                ic_delete.visibility = View.VISIBLE
+            }
+            edt_barcode.setText(_PRODUCT_OBJECT?.qrcode)
+            atc_unit.setText(_PRODUCT_OBJECT?.increase)
+            edt_name.setText(_PRODUCT_OBJECT?.name)
+            edt_max_selection.setText(_PRODUCT_OBJECT!!.max_selection!!.toInt().toString())
+            initCategoryProductList()
+            edt_price_buy.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_buy!!))
+            edt_price_sela_on_product.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale_on_product!!))
+            edt_price_sela.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale!!))
+            edt_stock.setText(App.stockFormat(_PRODUCT_OBJECT!!.stock!!))
+            if (!_PRODUCT_OBJECT?.date_expired.isNullOrEmpty()){
+                edt_date.setText(_PRODUCT_OBJECT?.date_expired)
+                box_date_expire.visibility = View.VISIBLE
+            }
+        }
     }
 
     /**
@@ -354,19 +382,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
 //    Select Category Dialog
     override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
-        if (!_CATEGORY.isNullOrEmpty()){
-            tv_add_category.setText(resources.getString(R.string.this_product_has_n_category,_CATEGORY.size))
-            box_category_list.visibility = View.VISIBLE
-            val array_tag = ArrayList<TagList>()
-            for (i in 0 until _CATEGORY.size){
-                array_tag.add(i,TagList(_CATEGORY[i].name,_CATEGORY[i].id.toString()))
-            }
-            val adapterCategory = TagAdapter(this@ProductActivity, array_tag,null)
-            recyclerView_category.adapter = adapterCategory
-        }else {
-            tv_add_category.setText(resources.getString(R.string.submit_category))
-            box_category_list.visibility = View.GONE
-        }
+        initCategory()
         dialog.dismiss()
     }
 }
