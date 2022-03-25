@@ -60,7 +60,7 @@ interface AppDao {
     fun selectUnit(): List<UnitModel>
 
     @Query("select * from unitmodel where title = :unit_title")
-    fun selectUnit(unit_title: String): UnitModel
+    fun selectUnit(unit_title: String): UnitModel?
 
     @Insert
     fun insertUnit(unit: UnitModel)
