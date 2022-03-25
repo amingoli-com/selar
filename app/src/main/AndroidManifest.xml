@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.add_order.AddOrderCameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.category.UnderCategoryActivity"
             android:exported="false" />
         <activity
