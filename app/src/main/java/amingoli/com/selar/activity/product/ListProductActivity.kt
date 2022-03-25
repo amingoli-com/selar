@@ -63,7 +63,9 @@ class ListProductActivity : AppCompatActivity() {
         val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct())
         recyclerView.adapter = ProductListManagerAdapter(this,listProducts,object : ProductListManagerAdapter.Listener{
             override fun onItemClicked(position: Int, product: Product) {
-
+                val i = Intent(this@ListProductActivity, ProductActivity::class.java)
+                i.putExtra("id_product", product.id)
+                startActivity(i)
             }
 
         })
