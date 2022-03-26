@@ -37,4 +37,7 @@
     <string name="submit_category">افزودن دسته‌بندی</string>
     <string name="category">دسته بندی</string>
     <string name="this_product_has_n_category">افزودن دسته‌بندی<b> <font color="#333">(%1$d)</font></b></string>
+    <string name="expired_at">در تاریخ<b> <font color="#333">%1$s</font></b> منقضی خواهد شد</string>
+    <string name="add_date_expire">ثبت تاریخ انقضا</string>
+    <string name="product_name_by_stock"><b><font color="#333">%1$s</font></b>%2$s</string>
 </resources>

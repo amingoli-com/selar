@@ -4,24 +4,24 @@ import amingoli.com.selar.R
 import amingoli.com.selar.adapter.AddOrderCameraAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
+import amingoli.com.selar.model.OrderDetail
 import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
 import kotlinx.android.synthetic.main.activity_add_order_camera.*
+import kotlinx.android.synthetic.main.activity_product.*
 
 
 class AddOrderCameraActivity : AppCompatActivity() {
@@ -30,12 +30,13 @@ class AddOrderCameraActivity : AppCompatActivity() {
     private var codeScanner: CodeScanner? = null
     private var TYPE_SCAN = Config.SCAN_BARCODE_SINGLE
     private var sound_scaner: MediaPlayer? = null
+    private var cameraIsOn = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order_camera)
-        sound_scaner = MediaPlayer.create(this,R.raw.scan)
+
         if (intent?.extras != null){
             TYPE_SCAN = intent?.extras?.getInt(
                 Config.KEY_EXTRA_TYPE_SCAN,
@@ -43,12 +44,46 @@ class AddOrderCameraActivity : AppCompatActivity() {
             )!!
         }
         if (checkPermission()) initScaner()
+
+        edt.setInputType(InputType.TYPE_NULL)
+        edt.requestFocus()
+        camera_power.setOnClickListener {
+            if (cameraIsOn){
+                cameraIsOn = false
+                camera_power.imageTintList = ContextCompat.getColorStateList(this,R.color.red)
+                codeScanner?.stopPreview()
+                codeScanner?.releaseResources()
+            }else{
+                cameraIsOn = true
+                camera_power.imageTintList = ContextCompat.getColorStateList(this,R.color.green)
+                codeScanner?.startPreview()
+            }
+        }
+
+        edt.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrEmpty()){
+                    resultScan(s.toString())
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
+
+        sound_scaner = MediaPlayer.create(this,R.raw.scan)
         initListOrder()
     }
 
     override fun onResume() {
         super.onResume()
-        codeScanner?.startPreview()
+//        codeScanner?.startPreview()
     }
 
     override fun onPause() {
@@ -73,7 +108,8 @@ class AddOrderCameraActivity : AppCompatActivity() {
         // Callbacks
         codeScanner?.decodeCallback = DecodeCallback {
             runOnUiThread {
-                resultScan(it.text)
+//                resultScan(it.text)
+                edt.setText(it.text)
             }
         }
         codeScanner?.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -89,8 +125,8 @@ class AddOrderCameraActivity : AppCompatActivity() {
 
     private fun initListOrder(){
         adapter = AddOrderCameraAdapter(this, ArrayList(),object : AddOrderCameraAdapter.Listener{
-            override fun onItemClicked(position: Int, string: String) {
-
+            override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
+                App.toast(position.toString())
             }
 
         })
@@ -99,14 +135,26 @@ class AddOrderCameraActivity : AppCompatActivity() {
     }
 
     private fun resultScan(barcode:String){
-        when(TYPE_SCAN){
-            Config.SCAN_BARCODE_SINGLE,
-            Config.SCAN_BARCODE_ARRAY ->{
-                sound_scaner?.start()
-                adapter?.addItem(barcode)
-            }
+//        when(TYPE_SCAN){
+//            Config.SCAN_BARCODE_SINGLE,
+//            Config.SCAN_BARCODE_ARRAY ->{
+//                sound_scaner?.start()
+//                val p = App.database.getAppDao().selectProductByQR(barcode)
+//                if ( p != null){
+//                    adapter?.addItem(p)
+//                }
+//            }
+//        }
+        sound_scaner?.start()
+        val p = App.database.getAppDao().selectProductByQR(barcode)
+        if ( p != null){
+            adapter?.addItem(p)
         }
-        Handler().postDelayed({codeScanner?.startPreview()},500)
+        Handler().postDelayed({
+            edt.requestFocus()
+            edt.text.clear()
+//            codeScanner?.startPreview()
+                              },500)
     }
 
 

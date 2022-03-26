@@ -4,15 +4,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     style="@style/Margin"
+    android:focusable="false"
     app:cardCornerRadius="@dimen/_7sdp"
-    android:layout_width="wrap_content"
+    android:layout_width="@dimen/_90sdp"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/Text.Title"
-        tools:text="product name product name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/image_product_test"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"/>
+            <TextView
+                android:id="@+id/tv_count"
+                style="@style/Text.Title"
+                android:padding="0dp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/background_radius"
+                tools:text="80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Text.Body2"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:minLines="2"
+            android:maxLines="2"
+            tools:text="نام محصول"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            style="@style/Text.Title"
+            android:padding="0dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:text="25,000"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,9 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.helper.App
+import amingoli.com.selar.model.OrderDetail
+import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,7 +15,7 @@ import kotlinx.android.synthetic.main.item_product_result_camera.view.*
 
 class AddOrderCameraAdapter(
     val context: Context,
-    val list: ArrayList<String>,
+    val list: ArrayList<OrderDetail>,
     val listener: Listener
 ): RecyclerView.Adapter<AddOrderCameraAdapter.ListViewHolder>() {
 
@@ -20,7 +23,7 @@ class AddOrderCameraAdapter(
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, string: String)
+        fun onItemClicked(position: Int, orderDetail: OrderDetail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -36,13 +39,28 @@ class AddOrderCameraAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        item.tv_title.setText(model)
-        item.tv_title.setOnClickListener { listener.onItemClicked(position, model) }
+        item.tv_title.setText(model.name)
+        item.tv_count.setText(App.stockFormat(model.stock!!))
+        item.tv_price.setText(App.priceFormat(model.price_sale!!))
+
+        item.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addItem(string: String){
-        list.add(string)
-        notifyDataSetChanged()
+    fun addItem(product: Product){
+        for (i in 0 until list.size){
+            if (list[i].product_id == product.id){
+                list[i].stock = list[i].stock!! + 1.0
+                notifyItemChanged(i)
+                return
+            }
+        }
+        list.add(list.size,convertProductToOrderDetail(product))
+        notifyItemInserted(list.size)
+    }
+
+    private fun convertProductToOrderDetail(p: Product): OrderDetail{
+        return OrderDetail(null,p.qrcode,p.id,p.name,1.0,0,p.increase,
+            p.price_buy,p.price_sale,p.price_discount,0.0,0.0)
     }
 }

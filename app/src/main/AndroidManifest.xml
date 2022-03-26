@@ -21,7 +21,8 @@
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
             android:name=".activity.add_order.AddOrderCameraActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".activity.category.UnderCategoryActivity"
             android:exported="false" />

@@ -16,6 +16,9 @@ interface AppDao {
     @Query("select * from product where id = :id_product")
     fun selectProduct(id_product: Int): Product
 
+    @Query("select * from product where qrcode = :barcode")
+    fun selectProductByQR(barcode: String): Product?
+
     @Query("select count(id) from product")
     fun getAllProductCount(): Int
 

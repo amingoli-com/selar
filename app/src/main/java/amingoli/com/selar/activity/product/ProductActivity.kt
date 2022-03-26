@@ -211,6 +211,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
                     if (item.tag.equals("0")){
+                        tv_add_date_expire.setText(resources.getString(R.string.add_date_expire))
                         edt_date.text.clear()
                         tv_add_date_expire.visibility = View.VISIBLE
                         box_date_expire.visibility = View.GONE
@@ -370,8 +371,8 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             edt_price_sela.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale!!))
             edt_stock.setText(App.stockFormat(_PRODUCT_OBJECT!!.stock!!))
             if (!_PRODUCT_OBJECT?.date_expired.isNullOrEmpty()){
+                tv_add_date_expire.setText(resources.getString(R.string.expired_at,_PRODUCT_OBJECT?.date_expired))
                 edt_date.setText(_PRODUCT_OBJECT?.date_expired)
-                box_date_expire.visibility = View.VISIBLE
             }
         }
     }
