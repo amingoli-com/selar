@@ -20,9 +20,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.add_order.AddOrderActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name=".activity.add_order.AddOrderCameraActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.category.UnderCategoryActivity"
             android:exported="false" />

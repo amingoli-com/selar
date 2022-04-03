@@ -5,11 +5,13 @@
     <color name="black">#333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#EAEAEA</color>
+    <color name="gray_50">#E3E3E3</color>
     <color name="gray_30">#4DEAEAEA</color>
     <color name="orange">#FF9218</color>
     <color name="blue">#4A90E2</color>
     <color name="red">#D0021B</color>
     <color name="green">#417505</color>
+    <color name="green_2">#5A9F00</color>
     <color name="purple">#9013FE</color>
 
     <color name="primary">#ce2b52</color>

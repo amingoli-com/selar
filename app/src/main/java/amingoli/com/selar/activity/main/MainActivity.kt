@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.activity.add_order.AddOrderCameraActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.product.ListProductActivity
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             App.getDrawable(this,R.drawable.ic_baseline_extension_24),
             null,
         "ثبت سفارش با دوربین",
-        "",
+        "ثبت سفارش ویژه",
         "",
         object : CardBoxMain.Listener{
             override fun onAddClicked() {
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onActTwoClicked() {
+                startActivity(Intent(this@MainActivity, AddOrderActivity::class.java))
             }
 
             override fun onActTreeClicked() {
