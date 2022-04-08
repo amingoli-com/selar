@@ -11,6 +11,7 @@ import amingoli.com.selar.helper.Config.SCAN_BARCODE_SINGLE
 import android.Manifest.permission.CAMERA
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,10 +33,12 @@ class BarcodeScannerActivity : AppCompatActivity() {
     private var adapter: SingalItemAdapter? = null
     private var codeScanner: CodeScanner? = null
     private var TYPE_SCAN = SCAN_BARCODE_SINGLE
+    private var sound_scaner: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_barcode_scanner)
+        sound_scaner = MediaPlayer.create(this,R.raw.scan)
         if (intent?.extras != null){
             TYPE_SCAN = intent?.extras?.getInt(KEY_EXTRA_TYPE_SCAN, SCAN_BARCODE_SINGLE)!!
         }
@@ -96,6 +99,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
     }
 
     private fun resultScan(barcode:String){
+        sound_scaner?.start()
         when(TYPE_SCAN){
             SCAN_BARCODE_SINGLE ->{
                 val intent = Intent()

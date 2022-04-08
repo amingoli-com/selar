@@ -22,8 +22,11 @@
     <color name="background_message_box">#FFF9DB</color>
     <color name="whiteWithAlpha">#33ffffff</color>
 
+    <color name="price_orange">#DB8672</color>
 
     <color name="background_activity">@color/gray</color>
     <color name="primaryText">@color/black</color>
+    <color name="basket_adder_ic_add">#549C0C</color>
+    <color name="basket_adder_ic_remove">#AA0404</color>
 
 </resources>
