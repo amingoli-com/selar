@@ -8,6 +8,7 @@
     <string name="price_sela">قیمت نهایی فروش</string>
     <string name="price_discount">مبلغ تخفیف</string>
     <string name="percent_tax">درصد مالیات</string>
+    <string name="tax">مالیات</string>
     <string name="info">مشخصات</string>
     <string name="finance_data">اطلاعات مالی</string>
     <string name="detail">جزئیات</string>
@@ -42,4 +43,7 @@
     <string name="product_name_by_stock"><b><font color="#333">%1$s</font></b>%2$s</string>
     <string name="all_order">جمع‌سفارش<b> <font color="#333">(%1$d)</font></b></string>
     <string name="all_order_one">جمع‌سفارش</string>
+    <string name="shipping_price">هزینه ارسال</string>
+    <string name="total_amount">جمع هزینه‌ها</string>
+    <string name="pay">پرداخت</string>
 </resources>

@@ -146,148 +146,35 @@
                             android:paddingStart="@dimen/_10sdp"
                             android:paddingEnd="@dimen/_10sdp">
 
-                            <RelativeLayout
+                            <amingoli.com.selar.widget.ItemAmount
+                                android:id="@+id/view_orders"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"/>
 
-                                <TextView
-                                    android:id="@+id/tv_all_order"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/tv_all_order_amount"
-                                    style="@style/Text.Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="start"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="@string/all_order" />
-
-                                <TextView
-                                    android:id="@+id/tv_all_order_amount"
-                                    style="@style/Text.Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="end"
-                                    android:padding="@dimen/_5sdp"
-                                    tools:text="1,980,000 تومان" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
+                            <amingoli.com.selar.widget.ItemAmount
+                                android:id="@+id/view_tax"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"/>
 
-                                <TextView
-                                    style="@style/Text.Body2"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/tv_tax"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="start"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="مالیات" />
-
-                                <TextView
-                                    android:id="@+id/tv_tax"
-                                    style="@style/Text.Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="end"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="180,000 تومان" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
+                            <amingoli.com.selar.widget.ItemAmount
+                                android:id="@+id/view_shipping"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"/>
 
-                                <TextView
-                                    style="@style/Text.Body2"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/tv_sipping"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="start"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="هزینه‌ارسال" />
-
-                                <TextView
-                                    android:id="@+id/tv_sipping"
-                                    style="@style/Text.Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="end"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="رایگان!" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
+                            <amingoli.com.selar.widget.ItemAmount
+                                android:id="@+id/view_discount"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    style="@style/Text.Body2"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/tv_discount"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="start"
-                                    android:padding="@dimen/_5sdp"
-                                    android:textColor="@color/green_2"
-                                    android:textStyle="bold"
-                                    android:text="تخفیف" />
-
-                                <TextView
-                                    android:id="@+id/tv_discount"
-                                    style="@style/Text.Body2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="end"
-                                    android:padding="@dimen/_5sdp"
-                                    android:textColor="@color/green_2"
-                                    android:text="19,000 تومان" />
-                            </RelativeLayout>
+                                android:layout_height="wrap_content"/>
 
                             <View
                                 style="@style/Line"
                                 android:layout_margin="0dp" />
 
-                            <RelativeLayout
+                            <amingoli.com.selar.widget.ItemAmount
+                                android:id="@+id/view_total_price"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"/>
 
-                                <TextView
-                                    style="@style/Text.Body1"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/tv_all_price"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="start"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="قابل‌پرداخت" />
-
-                                <TextView
-                                    android:id="@+id/tv_all_price"
-                                    style="@style/Text.Body1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:fontFamily="@font/iran_sans_black"
-                                    android:gravity="end"
-                                    android:padding="@dimen/_5sdp"
-                                    android:text="2,179,000 تومان" />
-                            </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -295,42 +182,55 @@
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/box_pay"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_35sdp">
         <TextView
+            android:id="@+id/tv_payment_product_size"
+            android:alpha="0.2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/tv_payment_amount"
             style="@style/Text.Title"
             android:fontFamily="@font/iran_sans_black"
             android:padding="@dimen/_5sdp"
             android:gravity="end"
-            android:text="40 قلم"
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
+            tools:text="40 قلم"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <TextView
+            android:id="@+id/tv_payment_amount"
             style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/tv_payment"
             android:fontFamily="@font/iran_sans_black"
-            android:padding="@dimen/_5sdp"
             android:gravity="end"
-            android:text="1,980,000 تومان"
-            android:layout_width="0dp"
-            android:layout_weight="1.5"
-            android:layout_height="wrap_content"/>
+            android:padding="@dimen/_5sdp"
+            tools:text="1,980,000 تومان" />
         <TextView
+            android:id="@+id/tv_payment"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:fontFamily="@font/iran_sans_black"
             android:background="@color/primaryVariant"
             android:textColor="@color/white"
-            android:gravity="center"
-            android:text="پرداخت"
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:text="@string/pay"
             style="@style/Text.Body1"
-            android:padding="@dimen/_5sdp"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_margin="0dp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>

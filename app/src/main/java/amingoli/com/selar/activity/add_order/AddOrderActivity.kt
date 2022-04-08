@@ -6,6 +6,8 @@ import amingoli.com.selar.adapter.AddOrderCameraAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.model.OrderDetail
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -132,16 +134,17 @@ class AddOrderActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun initAmountBox(list:ArrayList<OrderDetail>){
-        var all_price = 0.0
         var all_order = 0.0
         var tax_price = 0.0
         var shipping_price = 15000.0
         var free = 0.0
+        var all_price = 0.0
 
         if (list.isNullOrEmpty()){
             box_price.visibility = View.GONE
-            tv_all_order.setText(resources.getString(R.string.all_order_one))
+            view_orders.setText(resources.getString(R.string.all_order_one))
         }else{
             box_price.visibility = View.VISIBLE
             for (i in 0 until list.size){
@@ -150,13 +153,22 @@ class AddOrderActivity : AppCompatActivity() {
             }
             tax_price = (all_order/100) * 9
             all_price = all_order + tax_price + shipping_price
-            tv_all_order.setText(resources.getString(R.string.all_order,list.size))
+            view_orders.setText(resources.getString(R.string.all_order_one,list.size))
         }
-        tv_all_order_amount.setText(App.priceFormat(all_order))
-        tv_tax.setText(App.priceFormat(tax_price))
-        tv_sipping.setText(App.priceFormat(shipping_price))
-        tv_discount.setText(App.priceFormat(free))
-        tv_all_price.setText(App.priceFormat(all_price))
+        view_orders.setText(all_order)
+        view_tax.setText(resources.getString(R.string.tax),tax_price)
+        view_shipping.setText(resources.getString(R.string.shipping_price),shipping_price)
+        view_discount.setText(resources.getString(R.string.price_discount),free,Color.GREEN)
+        view_total_price.setText(resources.getString(R.string.total_amount),all_price)
+        initPaymentText(list.size,all_price)
+    }
+
+    private fun initPaymentText(size:Int,price_all:Double){
+        if (size > 0){
+            box_pay.visibility = View.VISIBLE
+            tv_payment_product_size.setText(size.toString())
+            tv_payment_amount.setText(App.priceFormat(price_all,true))
+        }else box_pay.visibility = View.GONE
     }
 
     private fun resultScan(barcode:String){
