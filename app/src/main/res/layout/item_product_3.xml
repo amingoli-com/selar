@@ -33,7 +33,6 @@
         <TextView
             android:id="@+id/title"
             style="@style/Text.Body2"
-            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             android:maxLines="3"
             android:minLines="2"
@@ -45,8 +44,9 @@
 
         <TextView
             android:id="@+id/total_price"
+            android:layout_marginTop="@dimen/_5sdp"
             style="@style/Text.Body1"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/price_orange"
@@ -56,8 +56,9 @@
             android:layout_height="wrap_content"/>
 
         <RelativeLayout
-            android:paddingStart="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -88,7 +89,6 @@
         </RelativeLayout>
 
         <amingoli.com.selar.widget.BasketAdder
-            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

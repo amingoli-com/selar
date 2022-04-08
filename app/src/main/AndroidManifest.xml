@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.add_order.AddOrderBasketActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.add_order.AddOrderActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden" />
