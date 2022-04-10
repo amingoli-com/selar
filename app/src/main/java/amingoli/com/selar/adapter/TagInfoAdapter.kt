@@ -44,7 +44,11 @@ class TagInfoAdapter(val context: Context,
             item.image_icon,item.text_title)
 
         item.text_title.text = model.title
-        item.image_icon.setImageDrawable(ContextCompat.getDrawable(context,model.icon!!))
+        if (model.icon != null) {
+            item.image_icon.visibility = View.VISIBLE
+            item.image_icon.setImageDrawable(ContextCompat.getDrawable(context,model.icon!!))
+        }
+        else item.image_icon.visibility = View.GONE
 
         item.setOnClickListener {
             val back_position_selected = position_selected

@@ -2,6 +2,7 @@ package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.add_order.AddOrderActivity
+import amingoli.com.selar.activity.add_order.AddOrderBasketActivity
 import amingoli.com.selar.activity.add_order.AddOrderCameraActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.product.ListProductActivity
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             null,
         "ثبت سفارش با دوربین",
         "ثبت سفارش ویژه",
-        "",
+        "ثبت سفارش از لیست",
         object : CardBoxMain.Listener{
             override fun onAddClicked() {
 
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onActTreeClicked() {
+                startActivity(Intent(this@MainActivity, AddOrderBasketActivity::class.java))
             }
 
         })

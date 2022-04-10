@@ -1,7 +1,7 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
-import amingoli.com.selar.model.TagList
+import amingoli.com.selar.model.Category
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -12,23 +12,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_tag_info.view.*
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.item_category_2.view.*
 
-class TagInfoAdapter(val context: Context,
-                     val list: ArrayList<TagList>,
-                     val listener: Listener
-) : RecyclerView.Adapter<TagInfoAdapter.ListViewHolder>() {
+class CategoryListAdapter(val context: Context,
+                          val list: ArrayList<Category>,
+                          val listener: Listener
+) : RecyclerView.Adapter<CategoryListAdapter.ListViewHolder>() {
 
     var position_selected = 0
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: TagList)
+        fun onItemClicked(position: Int, item: Category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tag_info, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_category_2, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -40,15 +41,12 @@ class TagInfoAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        setItemSelected(position_selected != -1 && position_selected == position,
-            item.image_icon,item.text_title)
-
-        item.text_title.text = model.title
-        if (model.icon != null) {
-            item.image_icon.visibility = View.VISIBLE
-            item.image_icon.setImageDrawable(ContextCompat.getDrawable(context,model.icon!!))
+        item.title.text = model.name
+        if (model.image != null) {
+            item.image.visibility = View.VISIBLE
+            Glide.with(context).load(model.image!!).into(item.image)
         }
-        else item.image_icon.visibility = View.GONE
+        else item.image.visibility = View.GONE
 
         item.setOnClickListener {
             val back_position_selected = position_selected
@@ -59,12 +57,12 @@ class TagInfoAdapter(val context: Context,
         }
     }
 
-    fun addItem(item: TagList){
+    fun addItem(item: Category){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: TagList, position: Int){
+    fun addItem(item: Category, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )

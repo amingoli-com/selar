@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
-import kotlinx.android.synthetic.main.widget_card_box_main.view.*
+import kotlinx.android.synthetic.main.widget_basket_adder.view.*
 
 class BasketAdder (context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
 
@@ -14,6 +14,10 @@ class BasketAdder (context: Context?, attrs: AttributeSet?) : RelativeLayout(con
 
     init {
         View.inflate(context, R.layout.widget_basket_adder, this)
+    }
+
+    fun setText(text:String){
+        tv.setText(text)
     }
 
     interface Listener{

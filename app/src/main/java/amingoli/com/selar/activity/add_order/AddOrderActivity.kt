@@ -174,6 +174,7 @@ class AddOrderActivity : AppCompatActivity() {
     private fun resultScan(barcode:String){
         sound_scaner?.start()
         val p = App.database.getAppDao().selectProductByQR(barcode)
+
         if ( p != null){
             adapter?.addItem(p)
         }

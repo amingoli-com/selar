@@ -17,17 +17,18 @@
         app:tint="@color/basket_adder_ic_add" />
 
     <TextView
-        tools:text="28 عدد"
-        android:textStyle="bold"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:layout_toEndOf="@+id/ic_add"
-        android:layout_toStartOf="@+id/ic_remove"
-        android:layout_centerVertical="true"
+        android:id="@+id/tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/ic_remove"
+        android:layout_toEndOf="@+id/ic_add"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
+        tools:text="28 عدد" />
 
     <ImageView
         android:id="@+id/ic_remove"
