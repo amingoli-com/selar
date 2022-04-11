@@ -69,6 +69,7 @@
         <entry key="app/src/main/res/layout/item_product.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/item_product_2.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/item_product_3.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/item_product_4.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/item_product_result_camera.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_select_category_list.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_spinner.xml" value="0.23505434782608695" />
@@ -79,6 +80,7 @@
         <entry key="app/src/main/res/layout/widget_basket_adder.xml" value="0.75" />
         <entry key="app/src/main/res/layout/widget_card_box_main.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/widget_message_box.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/widget_select_product.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/widget_singel_item_card.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/menu/menu_main_buttom_nav.xml" value="0.25277777777777777" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.2552083333333333" />

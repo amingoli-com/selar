@@ -5,7 +5,10 @@ import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.adapter.AddOrderCameraAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
+import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.OrderDetail
+import amingoli.com.selar.model.Product
+import amingoli.com.selar.widget.select_product.SelectProduct
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.media.MediaPlayer
@@ -27,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_add_order_camera.*
 import kotlinx.android.synthetic.main.activity_add_order_camera.edt
 import kotlinx.android.synthetic.main.activity_add_order_camera.recyclerView
 
-class AddOrderActivity : AppCompatActivity() {
+class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
 
     private var adapter: AddOrderAdapter? = null
     private var codeScanner: CodeScanner? = null
@@ -48,6 +51,8 @@ class AddOrderActivity : AppCompatActivity() {
         initListOrder()
         initScaner()
 
+        selectProduct.setListener(this)
+
         ic_qr_code.setOnClickListener {
             if (box_camera.visibility == View.GONE){
                 codeScanner?.startPreview()
@@ -58,6 +63,15 @@ class AddOrderActivity : AppCompatActivity() {
                 codeScanner?.stopPreview()
                 ic_qr_code.imageTintList = ContextCompat.getColorStateList(this,R.color.blue)
                 box_camera.visibility = View.GONE
+            }
+        }
+        ic_select_product.setOnClickListener {
+            if (selectProduct.visibility == View.GONE){
+                selectProduct.visibility = View.VISIBLE
+                ic_select_product.imageTintList = ContextCompat.getColorStateList(this,R.color.red)
+            }else{
+                ic_select_product.imageTintList = ContextCompat.getColorStateList(this,R.color.blue)
+                selectProduct.visibility = View.GONE
             }
         }
 
@@ -183,5 +197,30 @@ class AddOrderActivity : AppCompatActivity() {
             edt.text.clear()
 //            codeScanner?.startPreview()
         },500)
+    }
+
+    private fun resultScan(product: Product?){
+        sound_scaner?.start()
+
+        if ( product != null){
+            adapter?.addItem(product)
+        }
+        Handler().postDelayed({
+            edt.requestFocus()
+            edt.text.clear()
+//            codeScanner?.startPreview()
+        },500)
+    }
+
+
+    /**
+     * Listener
+     * */
+
+    override fun onCategory(category: Category) {
+    }
+
+    override fun onProduct(product: Product) {
+        resultScan(product)
     }
 }

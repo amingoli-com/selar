@@ -82,6 +82,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
+                                    android:id="@+id/ic_select_product"
                                     android:layout_width="@dimen/_25sdp"
                                     android:layout_height="@dimen/_25sdp"
                                     android:layout_marginEnd="@dimen/_2sdp"
@@ -99,6 +100,13 @@
                                     app:tint="@color/blue" />
                             </LinearLayout>
                         </RelativeLayout>
+                        <!--Select Product-->
+                        <amingoli.com.selar.widget.select_product.SelectProduct
+                            android:id="@+id/selectProduct"
+                            android:visibility="gone"
+                            tools:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
                         <!--Camera Scanner-->
                         <FrameLayout
                             android:id="@+id/box_camera"
