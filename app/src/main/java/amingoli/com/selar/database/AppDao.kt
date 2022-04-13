@@ -19,6 +19,11 @@ interface AppDao {
     @Query("select * from product where qrcode = :barcode")
     fun selectProductByQR(barcode: String): Product?
 
+    @Query("SELECT * FROM product " +
+            "INNER JOIN categoryproduct on product.id = categoryproduct.id_product " +
+            "WHERE categoryproduct.id_category = :id_category ")
+    fun selectProductByCategory(id_category: Int): List<Product>
+
     @Query("select count(id) from product")
     fun getAllProductCount(): Int
 
