@@ -2,6 +2,7 @@ package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
 import amingoli.com.selar.model.Category
+import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -69,6 +70,25 @@ class CategoryListAdapter(val context: Context,
             list[position] = item
             notifyItemChanged(position,item)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Category>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Category>, idMother: Int){
+        this.list.clear()
+        addBackItem(idMother)
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    private fun addBackItem(idMother : Int){
+        this.list.add(0, Category(idMother,idMother,"بازگشت","","",-1,1))
     }
 
     private fun setItemSelected(is_selected:Boolean, imageView:ImageView, textView : TextView){

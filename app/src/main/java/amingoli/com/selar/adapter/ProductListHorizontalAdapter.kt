@@ -57,4 +57,12 @@ class ProductListHorizontalAdapter(
             listener.onItemClicked(position,model)
         }
     }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Product>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
 }
