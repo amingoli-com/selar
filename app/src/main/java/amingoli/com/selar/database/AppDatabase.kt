@@ -7,11 +7,13 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 @Database(entities = [Product::class,Branch::class,Category::class,Status::class,Increase::class,
         Descriptions::class,CategoryProduct::class,Users::class,Customers::class,Images::class,
@@ -97,6 +99,22 @@ abstract class AppDatabase : RoomDatabase() {
                 // Populate your database here...
             }
 
+        }
+    }
+
+    /**
+     * Alert Table
+     * */
+    private var MIGRATION_1_2s: Migration? = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE 'orderdetail' ADD COLUMN 'image_defult' STRING DEFAULT ''")
+            Log.d("VROM", "Migration")
+        }
+    }
+
+    val MIGRATION_1_2 = object : Migration(1, 2){
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `User` (`id` INTEGER, PRIMARY KEY(`id`))")
         }
     }
 }
