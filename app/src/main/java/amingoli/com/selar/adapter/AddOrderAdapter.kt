@@ -6,16 +6,13 @@ import amingoli.com.selar.model.OrderDetail
 import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_product_2.view.*
-import kotlinx.android.synthetic.main.item_product_3.view.*
-import kotlinx.android.synthetic.main.item_product_result_camera.view.*
-import kotlinx.android.synthetic.main.item_product_result_camera.view.tv_price
-import kotlinx.android.synthetic.main.item_product_result_camera.view.tv_title
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -52,16 +49,19 @@ class AddOrderAdapter(
         item.tv_content.setText("${App.stockFormat(model.stock!!)} ${model.increase_name} ✖️ ${App.priceFormat(model.price_sale!!)}")
         item.tv_price.setText(App.priceFormat(model.price_sale!!*model.stock!!))
 
-        /*if (!model.image_defult.isNullOrEmpty()){
+        if (!model.product_image.isNullOrEmpty()){
             item.image.visibility = View.VISIBLE
-            Glide.with(context).load(File(model.image_defult)).into(item.image)
-        }*/
+            Glide.with(context).load(File(model.product_image)).into(item.image)
+        }
 
         item.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun addItem(product: Product){
+
+        Log.e("aminqqqq", "addItem: ${product.id}" )
+
         for (i in 0 until list.size){
             if (list[i].product_id == product.id){
                 list[i].stock = list[i].stock!! + 1.0
@@ -86,7 +86,7 @@ class AddOrderAdapter(
     }
 
     private fun convertProductToOrderDetail(p: Product): OrderDetail{
-        return OrderDetail(null,p.qrcode,p.id,p.name,1.0,0,p.increase,
+        return OrderDetail(null,p.qrcode,p.id,p.image_defult,p.name,1.0,0,p.increase,
             p.price_buy,p.price_sale,p.price_discount,0.0,0.0)
     }
 }

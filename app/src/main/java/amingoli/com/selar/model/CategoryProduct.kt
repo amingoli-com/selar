@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 class CategoryProduct {
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    var id :Int? = null
+    var id_table :Int? = null
     var id_product :Int? = null
     var id_category :Int? = null
 

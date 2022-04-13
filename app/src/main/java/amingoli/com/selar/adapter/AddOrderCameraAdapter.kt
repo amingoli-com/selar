@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_product_result_camera.view.*
+import java.io.File
 
 
 class AddOrderCameraAdapter(
@@ -43,6 +45,11 @@ class AddOrderCameraAdapter(
         item.tv_count.setText(App.stockFormat(model.stock!!))
         item.tv_price.setText(App.priceFormat(model.price_sale!!))
 
+        if (!model.product_image.isNullOrEmpty()){
+            item.image.visibility = View.VISIBLE
+            Glide.with(context).load(File(model.product_image)).into(item.image)
+        }
+
         item.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
@@ -60,7 +67,7 @@ class AddOrderCameraAdapter(
     }
 
     private fun convertProductToOrderDetail(p: Product): OrderDetail{
-        return OrderDetail(null,p.qrcode,p.id,p.name,1.0,0,p.increase,
+        return OrderDetail(null,p.qrcode,p.id,p.image_defult,p.name,1.0,0,p.increase,
             p.price_buy,p.price_sale,p.price_discount,0.0,0.0)
     }
 }

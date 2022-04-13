@@ -13,8 +13,7 @@
         <RelativeLayout
             android:id="@+id/box_image"
             android:layout_width="@dimen/_40sdp"
-            android:layout_height="match_parent"
-            android:background="#D1E3FA">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/image"

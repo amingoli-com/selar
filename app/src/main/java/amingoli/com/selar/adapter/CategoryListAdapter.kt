@@ -43,11 +43,10 @@ class CategoryListAdapter(val context: Context,
         val model = list[position]
 
         item.title.text = model.name
-        if (model.image != null) {
+        if (model.image.isNullOrEmpty()) {
             item.image.visibility = View.VISIBLE
             Glide.with(context).load(model.image!!).into(item.image)
-        }
-        else item.image.visibility = View.GONE
+        }else item.image.visibility = View.GONE
 
         item.setOnClickListener {
             val back_position_selected = position_selected

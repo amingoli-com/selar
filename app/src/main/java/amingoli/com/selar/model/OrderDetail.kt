@@ -12,6 +12,7 @@ class OrderDetail {
     var id :Int? = null
     var order_code :String? = null
     var product_id :Int? = null
+    var product_image :String? = null
     var name :String? = null
     var stock :Double? = null
     var increase_id :Int? = null
@@ -30,6 +31,7 @@ class OrderDetail {
         id: Int?,
         order_code: String?,
         product_id: Int?,
+        product_image: String?,
         name: String?,
         stock: Double?,
         increase_id: Int?,
@@ -43,6 +45,7 @@ class OrderDetail {
         this.id = id
         this.order_code = order_code
         this.product_id = product_id
+        this.product_image = product_image
         this.name = name
         this.stock = stock
         this.increase_id = increase_id

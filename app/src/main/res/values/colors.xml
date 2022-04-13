@@ -23,6 +23,7 @@
     <color name="whiteWithAlpha">#33ffffff</color>
 
     <color name="price_orange">#DB8672</color>
+    <color name="blue_30">#D1E3FA</color>
 
     <color name="background_activity">@color/gray</color>
     <color name="primaryText">@color/black</color>
