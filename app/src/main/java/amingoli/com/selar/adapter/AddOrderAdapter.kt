@@ -10,10 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_product_2.view.*
+import kotlinx.android.synthetic.main.item_product_3.view.*
 import kotlinx.android.synthetic.main.item_product_result_camera.view.*
 import kotlinx.android.synthetic.main.item_product_result_camera.view.tv_price
 import kotlinx.android.synthetic.main.item_product_result_camera.view.tv_title
+import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddOrderAdapter(
@@ -47,6 +52,11 @@ class AddOrderAdapter(
         item.tv_content.setText("${App.stockFormat(model.stock!!)} ${model.increase_name} ✖️ ${App.priceFormat(model.price_sale!!)}")
         item.tv_price.setText(App.priceFormat(model.price_sale!!*model.stock!!))
 
+        /*if (!model.image_defult.isNullOrEmpty()){
+            item.image.visibility = View.VISIBLE
+            Glide.with(context).load(File(model.image_defult)).into(item.image)
+        }*/
+
         item.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
@@ -55,7 +65,7 @@ class AddOrderAdapter(
         for (i in 0 until list.size){
             if (list[i].product_id == product.id){
                 list[i].stock = list[i].stock!! + 1.0
-                notifyItemChanged(i)
+                notifyItemChangedBySwap(position_old = i, position_new = list.size-1)
                 listener.onChangeListener(i,list)
                 return
             }
@@ -63,6 +73,16 @@ class AddOrderAdapter(
         list.add(list.size,convertProductToOrderDetail(product))
         notifyItemInserted(list.size)
         listener.onChangeListener(list.size,list)
+    }
+
+    private fun notifyItemChangedBySwap(position_old: Int, position_new: Int){
+        if (position_old != position_new){
+            Collections.swap(list, position_old, position_new)
+            notifyItemMoved(position_old, position_new)
+            notifyItemChanged(position_new)
+        }else{
+            notifyItemChanged(position_old)
+        }
     }
 
     private fun convertProductToOrderDetail(p: Product): OrderDetail{
