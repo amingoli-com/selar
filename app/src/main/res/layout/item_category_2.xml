@@ -18,8 +18,8 @@
             android:id="@+id/image"
             android:src="@drawable/category_test"
             android:scaleType="fitCenter"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"/>
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"/>
 
         <TextView
             android:id="@+id/title"

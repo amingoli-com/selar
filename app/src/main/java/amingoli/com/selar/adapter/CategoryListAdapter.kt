@@ -79,18 +79,6 @@ class CategoryListAdapter(val context: Context,
         notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list : List<Category>, idMother: Int){
-        this.list.clear()
-        addBackItem(idMother)
-        this.list.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    private fun addBackItem(idMother : Int){
-        this.list.add(0, Category(idMother,idMother,"بازگشت","","",-1,1))
-    }
-
     private fun setItemSelected(is_selected:Boolean, imageView:ImageView, textView : TextView){
         if (is_selected){
             imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
