@@ -52,6 +52,7 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_50sdp"
                     app:cardCornerRadius="@dimen/_15sdp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -103,17 +104,18 @@
                         <!--Select Product-->
                         <amingoli.com.selar.widget.select_product.SelectProduct
                             android:id="@+id/selectProduct"
-                            android:visibility="gone"
-                            tools:visibility="visible"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
                         <!--Camera Scanner-->
                         <FrameLayout
                             android:id="@+id/box_camera"
-                            android:visibility="gone"
-                            tools:visibility="visible"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_250sdp">
+                            android:layout_height="@dimen/_250sdp"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
                             <com.budiyev.android.codescanner.CodeScannerView
                                 android:id="@+id/camera_scanner"
                                 android:layout_width="match_parent"
@@ -134,45 +136,45 @@
                         <!--RecyclerView-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView"
-                            app:reverseLayout="true"
-                            android:overScrollMode="never"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:overScrollMode="never"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:reverseLayout="true"
                             tools:itemCount="5"
                             tools:listitem="@layout/item_product_2" />
                         <!--BoxAmount-->
                         <LinearLayout
                             android:id="@+id/box_price"
-                            android:visibility="gone"
-                            tools:visibility="visible"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#05000000"
                             android:orientation="vertical"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_10sdp">
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:visibility="gone"
+                            tools:visibility="visible">
 
                             <amingoli.com.selar.widget.ItemAmount
                                 android:id="@+id/view_orders"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                             <amingoli.com.selar.widget.ItemAmount
                                 android:id="@+id/view_tax"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                             <amingoli.com.selar.widget.ItemAmount
                                 android:id="@+id/view_shipping"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                             <amingoli.com.selar.widget.ItemAmount
                                 android:id="@+id/view_discount"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                             <View
                                 style="@style/Line"
@@ -181,7 +183,7 @@
                             <amingoli.com.selar.widget.ItemAmount
                                 android:id="@+id/view_total_price"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -204,10 +206,10 @@
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/tv_payment_amount"
             style="@style/Text.Title"
+            android:textAlignment="center"
             android:fontFamily="@font/iran_sans_black"
             android:padding="@dimen/_5sdp"
-            android:gravity="end"
-            tools:text="40 قلم"
+            tools:text="@string/stock_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -234,8 +236,8 @@
             android:layout_margin="0dp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:paddingStart="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_15sdp"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
     </RelativeLayout>

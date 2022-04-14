@@ -46,4 +46,9 @@
     <string name="shipping_price">هزینه ارسال</string>
     <string name="total_amount">جمع هزینه‌ها</string>
     <string name="pay">پرداخت</string>
+    <string name="no_data_to_display">اطلاعاتی برای نمایش وجود ندارد!</string>
+    <string name="stock_count"><b> <font color="#333">%1$s</font></b> قلم</string>
+    <string name="cancel">انصراف</string>
+    <string name="close">لغو</string>
+    <string name="exit">خروج</string>
 </resources>

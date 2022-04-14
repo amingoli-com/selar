@@ -3,6 +3,7 @@ package amingoli.com.selar.activity.add_order
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.adapter.AddOrderCameraAdapter
+import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.model.Category
@@ -74,6 +75,12 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
                 selectProduct.visibility = View.GONE
             }
         }
+
+        tv_payment.setOnClickListener {
+            SetPaymentDialog(this).show()
+        }
+
+
 
 
         edt.addTextChangedListener(object : TextWatcher {
@@ -180,7 +187,7 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
     private fun initPaymentText(size:Int,price_all:Double){
         if (size > 0){
             box_pay.visibility = View.VISIBLE
-            tv_payment_product_size.setText(size.toString())
+            tv_payment_product_size.setText(resources.getString(R.string.stock_count, size.toString()))
             tv_payment_amount.setText(App.priceFormat(price_all,true))
         }else box_pay.visibility = View.GONE
     }

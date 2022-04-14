@@ -11,13 +11,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_list_product.recyclerView
-import kotlinx.android.synthetic.main.activity_list_product.recyclerView_tag
-import kotlinx.android.synthetic.main.activity_list_product.toolbar
+import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.item_product.view.title
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class ListProductActivity : AppCompatActivity() {
+
+    val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_product)
@@ -25,6 +26,8 @@ class ListProductActivity : AppCompatActivity() {
         initToolbar()
         initAdapterTagList()
         initAdapterListProducts()
+
+        if (listProducts.isNullOrEmpty()) statuser.onEmpty()
     }
 
     private fun initToolbar(){
@@ -60,7 +63,6 @@ class ListProductActivity : AppCompatActivity() {
     }
 
     private fun initAdapterListProducts(){
-        val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct())
         recyclerView.adapter = ProductListManagerAdapter(this,listProducts,object : ProductListManagerAdapter.Listener{
             override fun onItemClicked(position: Int, product: Product) {
                 val i = Intent(this@ListProductActivity, ProductActivity::class.java)
