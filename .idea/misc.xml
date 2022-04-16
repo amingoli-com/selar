@@ -37,9 +37,11 @@
         <entry key="app/src/main/res/drawable/ic_name_image_black_24dp.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/ic_stock_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/ic_svgviewer_output__1_.xml" value="0.164" />
+        <entry key="app/src/main/res/drawable/ic_text_foroshandeh.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_unit_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/ic_unit_symbols_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/include_item_card_view.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/drawable/item_splash.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/widget_message_box.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/font/my_font.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/layout-v23/widget_message_box.xml" value="0.2552083333333333" />
@@ -54,7 +56,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26022304832713755" />
         <entry key="app/src/main/res/layout/activity_main_2.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_insert_category.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/dialog_pike_image.xml" value="0.2552083333333333" />
