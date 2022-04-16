@@ -51,4 +51,10 @@
     <string name="cancel">انصراف</string>
     <string name="close">لغو</string>
     <string name="exit">خروج</string>
+    <string name="new_order">سفارش جدید</string>
+    <string name="take_for_choose_customer">برای انتخاب مشتری لمس کنید</string>
+    <string name="pay_and_submit_order">پرداخت و تایید سفارش</string>
+    <string name="save_order_status_waiting">ثبت به عنوان سفارش در انتظار</string>
+    <string name="cancel_order">لغو سفارش</string>
+    <string name="draft_print">پیش‌فاکتور</string>
 </resources>

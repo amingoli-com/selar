@@ -76,7 +76,7 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
             }
         }
 
-        tv_payment.setOnClickListener {
+        submit_order.setOnClickListener {
             SetPaymentDialog(this).show()
         }
 

@@ -28,29 +28,62 @@
                 android:background="@color/primaryVariant"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp">
+
                 <TextView
-                    android:text="سفارش جدید"
+                    android:id="@+id/titre"
                     style="@style/Text.Title"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/new_order"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/Text.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titre"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_baseline_emoji_emotions_24"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="@color/white"
+                    android:text="امین گلی ۰۹۱۹۵۱۹۱۳۷۸"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/Text.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:drawableTop="@drawable/ic_baseline_print_24"
+                    android:drawableTint="@color/white"
+                    android:padding="0dp"
+                    android:text="@string/draft_print"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
             </RelativeLayout>
             <!--OrderListProduct-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_80sdp"
                 android:orientation="vertical">
                 <!--Order List Product-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_15sdp">
 
                     <LinearLayout
@@ -188,6 +221,50 @@
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/submit_order"
+                    style="@style/Text.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/background_complementary"
+                    android:backgroundTint="@color/green_2"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/pay_and_submit_order"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    style="@style/Text.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/background_complementary"
+                    android:backgroundTint="@color/blue"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/save_order_status_waiting"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    style="@style/Text.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/background_complementary"
+                    android:backgroundTint="@color/red"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/cancel_order"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
@@ -198,48 +275,34 @@
         tools:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp">
+        android:layout_height="@dimen/_30sdp">
+
         <TextView
             android:id="@+id/tv_payment_product_size"
-            android:alpha="0.2"
+            style="@style/Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/tv_payment_amount"
-            style="@style/Text.Title"
-            android:textAlignment="center"
+            android:alpha="0.2"
             android:fontFamily="@font/iran_sans_black"
             android:padding="@dimen/_5sdp"
-            tools:text="@string/stock_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textAlignment="center"
+            tools:text="@string/stock_count" />
 
         <TextView
             android:id="@+id/tv_payment_amount"
-            style="@style/Text.Title"
+            style="@style/Text.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/tv_payment"
             android:fontFamily="@font/iran_sans_black"
             android:gravity="end"
+            android:textStyle="bold"
+            android:alpha="0.5"
             android:padding="@dimen/_5sdp"
             tools:text="1,980,000 تومان" />
-        <TextView
-            android:id="@+id/tv_payment"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/iran_sans_black"
-            android:background="@color/primaryVariant"
-            android:textColor="@color/white"
-            android:text="@string/pay"
-            style="@style/Text.Body1"
-            android:layout_margin="0dp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingStart="@dimen/_25sdp"
-            android:paddingEnd="@dimen/_25sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
     </RelativeLayout>
 
 
