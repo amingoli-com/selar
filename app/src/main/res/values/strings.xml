@@ -63,4 +63,6 @@
     <string name="business_name">نام کسب‌وکار شما</string>
     <string name="restore_backup">بازیابی اطلاعات فایل پشتیان</string>
     <string name="crate_new_business">ساخت کسب‌وکار جدید</string>
+    <string name="description_1">اگر مایل هستید با انتخاب یکی از کسب و کار های زیر اطلاعات آن (شامل دسته‌بندی، محصولات و..) را به صورت پیش فرض دریافت کنید.</string>
+    <string name="connect_to_support">ارتباط با پشتیبانی</string>
 </resources>

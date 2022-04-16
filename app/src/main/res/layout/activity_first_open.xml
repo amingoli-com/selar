@@ -54,7 +54,7 @@
             android:padding="@dimen/_5sdp"
             style="@style/Text.Body2"
             android:textStyle="bold"
-            android:text="اگر مایل هستید با انتخاب یکی از کسب و کار های زیر اطلاعات آن (شامل دسته‌بندی، محصولات و..) را به صورت پیش فرض دریافت کنید."
+            android:text="@string/description_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -104,7 +104,7 @@
             android:drawableStart="@drawable/ic_baseline_help_24"
             android:drawableTint="@color/white"
             android:drawablePadding="@dimen/_10sdp"
-            android:text="ارتباط با پشتیبانی"
+            android:text="@string/connect_to_support"
             android:textColor="@color/white"
             android:padding="@dimen/_5sdp"
             style="@style/Text.Body1"
