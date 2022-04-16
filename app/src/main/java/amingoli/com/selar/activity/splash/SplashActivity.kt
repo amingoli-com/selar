@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.splash
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.first_open.FirstOpenActivity
 import amingoli.com.selar.activity.main.MainActivity
 import amingoli.com.selar.helper.Config
 import android.Manifest
@@ -25,7 +26,8 @@ class SplashActivity : AppCompatActivity() {
     private fun start(){
         if(checkPermission()){
             Handler().postDelayed({
-                startActivity(Intent(this,MainActivity::class.java))
+//                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this,FirstOpenActivity::class.java))
                 finish()
             },3500)
         }

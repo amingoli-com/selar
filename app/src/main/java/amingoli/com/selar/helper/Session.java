@@ -83,10 +83,12 @@ public class Session {
         extraEditor.apply();
     }
 
-    public void setUser(int type) {
-        extraEditor.putInt(Config.USER, type);
+    public void setBusiness(String name, String businessName) {
+        extraEditor.putString(Config.BUSINESS_OWNER_NAME, name);
+        extraEditor.putString(Config.BUSINESS_NAME, businessName);
         extraEditor.commit();
     }
+
     public int getUser() {
         return ExtrasPref.getInt(Config.USER, -1);
     }

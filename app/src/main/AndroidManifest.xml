@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.first_open.FirstOpenActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.add_order.AddOrderBasketActivity"
             android:exported="false" />
         <activity
@@ -35,8 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.splash.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

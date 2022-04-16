@@ -57,4 +57,10 @@
     <string name="save_order_status_waiting">ثبت به عنوان سفارش در انتظار</string>
     <string name="cancel_order">لغو سفارش</string>
     <string name="draft_print">پیش‌فاکتور</string>
+    <string name="next">بعدی</string>
+    <string name="start">شروع</string>
+    <string name="name_business_owner">نام صاحب کسب‌وکار</string>
+    <string name="business_name">نام کسب‌وکار شما</string>
+    <string name="restore_backup">بازیابی اطلاعات فایل پشتیان</string>
+    <string name="crate_new_business">ساخت کسب‌وکار جدید</string>
 </resources>

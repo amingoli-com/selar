@@ -24,5 +24,7 @@ object Config {
 
     const val USER = "user"
     const val BRANCH = "branch"
+    const val BUSINESS_OWNER_NAME = "BUSINESS_OWNER_NAME"
+    const val BUSINESS_NAME = "BUSINESS_NAME"
 
 }

@@ -8,16 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_tag_info.view.*
+import kotlinx.android.synthetic.main.item_business.view.*
 
-class TagAdapter(val context: Context,
-                 val list: ArrayList<TagList>,
-                 val listener: Listener?
-) : RecyclerView.Adapter<TagAdapter.ListViewHolder>() {
+class BusinessAdapter(val context: Context,
+                      val list: ArrayList<TagList>,
+                      val listener: Listener?
+) : RecyclerView.Adapter<BusinessAdapter.ListViewHolder>() {
 
     private var position_selected = -1
 
@@ -28,7 +26,7 @@ class TagAdapter(val context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tag, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_business, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -40,10 +38,11 @@ class TagAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.text_title.text = model.title
+        item.title.text = model.title
+        item.content.setText(model.tag)
 
         if (listener != null){
-            setItemSelected(position_selected != -1 && position_selected == position,item.text_title)
+            setItemSelected(position_selected != -1 && position_selected == position,item.parent_item)
 
             item.setOnClickListener {
                 val back_position_selected = position_selected
@@ -55,14 +54,11 @@ class TagAdapter(val context: Context,
         }
     }
 
-    private fun setItemSelected(is_selected:Boolean, textView : TextView){
+    private fun setItemSelected(is_selected:Boolean, view : View){
         if (is_selected){
-            textView.setTextColor(ContextCompat.getColor(context,R.color.white))
-            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.blue)
-
+            view.backgroundTintList = ContextCompat.getColorStateList(context, R.color.blue_30)
         }else{
-            textView.setTextColor(ContextCompat.getColor(context,R.color.black))
-            textView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.gray)
+            view.backgroundTintList = ContextCompat.getColorStateList(context, R.color.white)
         }
     }
 
