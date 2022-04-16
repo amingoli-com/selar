@@ -3,8 +3,5 @@
     <item
         android:drawable="@color/background_app"/>
     <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_text_foroshandeh"/>
     </item>
 </layer-list>

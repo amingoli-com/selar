@@ -56,7 +56,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26022304832713755" />
         <entry key="app/src/main/res/layout/activity_main_2.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_insert_category.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/dialog_pike_image.xml" value="0.2552083333333333" />
@@ -90,6 +90,7 @@
         <entry key="app/src/main/res/layout/widget_singel_item_card.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/widget_statuser.xml" value="0.42481884057971014" />
         <entry key="app/src/main/res/menu/menu_main_buttom_nav.xml" value="0.25277777777777777" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.212" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/xml/picker_provider_paths.xml" value="0.2552083333333333" />
       </map>
