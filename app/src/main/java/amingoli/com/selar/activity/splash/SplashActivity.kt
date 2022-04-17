@@ -4,7 +4,9 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.first_open.FirstOpenActivity
 import amingoli.com.selar.activity.main.MainActivity
 import amingoli.com.selar.helper.Config
+import amingoli.com.selar.helper.Session
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +29,12 @@ class SplashActivity : AppCompatActivity() {
     private fun start(){
         if(checkPermission()){
             Handler().postDelayed({
-//                startActivity(Intent(this,MainActivity::class.java))
-                startActivity(Intent(this,FirstOpenActivity::class.java))
+                val i = if (Session.getInstance().sessionKey.isNullOrEmpty()){
+                    Intent(this,FirstOpenActivity::class.java)
+                } else Intent(this,MainActivity::class.java)
+                startActivity(i)
                 finish()
-            },3500)
+            },1500)
         }
     }
 

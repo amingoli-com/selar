@@ -15,8 +15,8 @@
     <string name="stock">موجودی</string>
     <string name="increase_product">واحد کالا</string>
     <string name="description">توضیحات</string>
-    <string name="permission_required" />
-    <string name="permission_message" />
+    <string name="permission_required">دسترسی الزامی</string>
+    <string name="permission_message">ما برای ارائه خدمات خود به دسترسی های ضروری درخواست شده نیاز داریم</string>
     <string name="positive_button">باشه</string>
     <string name="negative_button">بیحیال</string>
 
@@ -24,6 +24,7 @@
     <string name="choose_from_gallery">انتخاب از گالری</string>
     <string name="submit">ثبت</string>
     <string name="not_valid">مقدار وارد شده صحیح نیست</string>
+    <string name="required">الزامی</string>
     <string name="image_not_valid">عکسی برای این محصول انتخاب کنید</string>
     <string name="category_is_enable">دسته‌بندی فعال باشد</string>
     <string name="date_expire">تاریخ انقضا</string>
@@ -65,4 +66,5 @@
     <string name="crate_new_business">ساخت کسب‌وکار جدید</string>
     <string name="description_1">اگر مایل هستید با انتخاب یکی از کسب و کار های زیر اطلاعات آن (شامل دسته‌بندی، محصولات و..) را به صورت پیش فرض دریافت کنید.</string>
     <string name="connect_to_support">ارتباط با پشتیبانی</string>
+    <string name="privacy_policy"><font color="#333"><b><a href="https://google.com">قوانین، شرایط استفاده و حریم‌خصوصی</a></b></font> را مطالعه کرده و می‌پذیرم.</string>
 </resources>

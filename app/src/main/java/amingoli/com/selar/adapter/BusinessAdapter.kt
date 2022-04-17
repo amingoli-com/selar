@@ -17,7 +17,7 @@ class BusinessAdapter(val context: Context,
                       val listener: Listener?
 ) : RecyclerView.Adapter<BusinessAdapter.ListViewHolder>() {
 
-    private var position_selected = -1
+    private var position_selected = 0
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

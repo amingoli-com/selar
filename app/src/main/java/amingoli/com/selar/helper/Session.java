@@ -89,6 +89,15 @@ public class Session {
         extraEditor.commit();
     }
 
+    public void setSessionKey(String key) {
+        extraEditor.putString(Config.SESSION_KEY, key);
+        extraEditor.commit();
+    }
+
+    public String getSessionKey() {
+        return ExtrasPref.getString(Config.SESSION_KEY, null);
+    }
+
     public int getUser() {
         return ExtrasPref.getInt(Config.USER, -1);
     }

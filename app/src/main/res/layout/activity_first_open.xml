@@ -71,6 +71,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:autoLink="all"
+            android:linksClickable="true"
+            style="@style/Text.Body2"
+            android:text="@string/privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <amingoli.com.selar.widget.loader_button.LoaderButton
             android:id="@+id/submit"
             android:layout_width="match_parent"

@@ -10,6 +10,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.method.LinkMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.activity_first_open.*
 
@@ -29,6 +30,9 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
     }
 
     private fun initOnClick(){
+        checkbox.setMovementMethod(LinkMovementMethod.getInstance())
+
+
         submit.btn.setOnClickListener {
             submit.showLoader()
             if (formIsValid()){
@@ -43,6 +47,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
 
     private fun initRecyclerView(){
         val arrayList = ArrayList<TagList>()
+        arrayList.add(0,TagList("کسب‌وکار شخصی شما","ایجاد کسب‌وکار جدید با اطلاعات دلخواه شما"))
         arrayList.add(TagList("سوپر مارکت","شامل ۱,۸۰۰ محصول و ۲۹۰ دسته بندی"))
         arrayList.add(TagList("نانوایی","شامل ۱۹ نان با ۸ دسته بندی"))
         arrayList.add(TagList("کافی‌شاپ","شامل ۹۲ سرو با ۱۴ دسته‌بندی"))
@@ -59,6 +64,10 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
         }
         if (App.getString(edt_business_name).isNullOrEmpty()){
             edt_business_name.setError(resources.getString(R.string.not_valid))
+            return false
+        }
+        if (!checkbox.isChecked){
+            checkbox.setError(resources.getString(R.string.not_valid))
             return false
         }
         return true
