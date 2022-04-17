@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.main.MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"/>
+
+        <amingoli.com.selar.widget.MessageBox
+            android:id="@+id/messageBox"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <amingoli.com.selar.widget.SingelItemCard
+                android:id="@+id/branchBox"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <amingoli.com.selar.widget.SingelItemCard
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <amingoli.com.selar.widget.SingelItemCard
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart_bar"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp" />
+
+
+        <amingoli.com.selar.widget.CardBoxMain
+            android:id="@+id/cardBoxProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <amingoli.com.selar.widget.CardBoxMain
+            android:id="@+id/cardBoxCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <amingoli.com.selar.widget.CardBoxMain
+            android:id="@+id/cardBoxFeature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
