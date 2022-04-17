@@ -1,5 +1,6 @@
-package ir.trano.keeper.dialog
+package amingoli.com.selar.dialog
 
+import amingoli.com.selar.R
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import ir.trano.keeper.R
-import kotlinx.android.synthetic.main.dialog_menu_floor_store.*
 
-class DialogMenuFloorStore : DialogFragment {
+class BusinessMenuDialog : DialogFragment {
 
     private var activity: AppCompatActivity? = null
     private var listener: Listener? = null
@@ -25,11 +24,17 @@ class DialogMenuFloorStore : DialogFragment {
         this.listener = listener
     }
 
+    constructor(
+        activity: AppCompatActivity
+    ) {
+        this.activity = activity
+    }
+
     constructor()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_menu_floor_store, container, false)
+        return inflater.inflate(R.layout.dialog_menu_business, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,13 +42,6 @@ class DialogMenuFloorStore : DialogFragment {
         // bind
         this.isCancelable = true
 
-        tv_add_order.setOnClickListener {
-            listener?.onAddOrder(this)
-        }
-
-        tv_request_car.setOnClickListener {
-            listener?.onRequestCar(this)
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,7 +51,7 @@ class DialogMenuFloorStore : DialogFragment {
     }
 
     interface Listener{
-        fun onAddOrder(dialog: DialogMenuFloorStore)
-        fun onRequestCar(dialog: DialogMenuFloorStore)
+        fun onAddOrder(dialog: BusinessMenuDialog)
+        fun onRequestCar(dialog: BusinessMenuDialog)
     }
 }

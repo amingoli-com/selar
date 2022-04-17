@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/btn_back_selected.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/btn_back_selector.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/drawable/dialog_menu_background_inset.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_aaaaaaa.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/ic_add_photo_alternate_black_24dp.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/ic_attach_money_black_24dp.xml" value="0.1485" />
@@ -62,6 +63,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_insert_category.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/dialog_menu_business.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/dialog_pike_image.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/dialog_select_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_set_payment.xml" value="0.25" />

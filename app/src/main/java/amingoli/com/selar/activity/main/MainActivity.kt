@@ -3,6 +3,7 @@ package amingoli.com.selar.activity.main
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
+import amingoli.com.selar.dialog.BusinessMenuDialog
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.TagList
 import android.os.Bundle
@@ -33,9 +34,17 @@ class MainActivity : AppCompatActivity() {
     private fun initToolbar(){
         toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
         toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
+        toolbar.content.setOnClickListener {
+            showPopMenu()
+        }
     }
 
 //    test
+    private fun showPopMenu(){
+        val popMenu = BusinessMenuDialog(this)
+        popMenu.show(supportFragmentManager, "")
+    }
+
     private fun initRecyclerViewOrderWaiting(){
         val arrayList = ArrayList<TagList>()
         arrayList.add(TagList("محمدحسین آقایی","290,000 تومان"))
@@ -65,10 +74,6 @@ class MainActivity : AppCompatActivity() {
     private var labelNames: ArrayList<String> = ArrayList()
 
     private fun barChartAdapter() {
-        barEntryArrayList = ArrayList()
-        labelNames = ArrayList()
-        barEntryArrayList.clear()
-        labelNames.clear()
         for (i in 0 until 10) {
             val month: String = "فروردین"
             val sales: Int = i+10000*i
@@ -78,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         val barDataSet = BarDataSet(barEntryArrayList, "فروش ماهانه")
         barDataSet.color = resources.getColor(R.color.primary)
         val description = Description()
-        description.setText("MONTH")
+        description.setText("فروش ۱۵ روز اخیر")
         barChart?.setDescription(description)
         val barData = BarData(barDataSet)
         barChart?.setData(barData)
