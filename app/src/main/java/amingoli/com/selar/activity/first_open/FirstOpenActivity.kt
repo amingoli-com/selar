@@ -23,6 +23,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_open)
 
+        initShowOnlyFirst()
         initOnClick()
         parent_view.animate().alpha(1f).duration = 500
         initRecyclerView()
@@ -31,7 +32,6 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
 
     private fun initOnClick(){
         checkbox.setMovementMethod(LinkMovementMethod.getInstance())
-
 
         submit.btn.setOnClickListener {
             submit.showLoader()
@@ -44,6 +44,13 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                 },2500)
             }else submit.hideLoader()
         }
+
+        exit.setOnClickListener { onBackPressed() }
+    }
+
+    private fun initShowOnlyFirst(){
+        box_only_first.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.VISIBLE else View.GONE
+        exit.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun initRecyclerView(){
