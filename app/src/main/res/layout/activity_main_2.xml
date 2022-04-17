@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:paddingVertical="@dimen/_10sdp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +15,9 @@
             layout="@layout/include_main_toolbar"/>
 
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chart_bar"
+            android:id="@+id/barChart"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             style="@style/Margin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp" />
@@ -25,7 +28,7 @@
             android:singleLine="true"
             style="@style/Text.Body2"
             android:textStyle="bold"
-            tools:text="سفارشات درانتظار"
+            android:text="@string/order_waiting"
             android:drawableTint="@color/primaryVariant"
             android:textColor="@color/primaryVariant"
             android:drawableStart="@drawable/ic_baseline_storefront_24"

@@ -8,14 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_order_waiting.view.*
+import kotlinx.android.synthetic.main.item_main.view.*
 
 
-class OrderWaitingAdapter(
+class ItemMainAdapter(
     val context: Context,
     val list: ArrayList<TagList>,
     val listener: Listener?
-): RecyclerView.Adapter<OrderWaitingAdapter.ListViewHolder>() {
+): RecyclerView.Adapter<ItemMainAdapter.ListViewHolder>() {
 
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -25,7 +25,7 @@ class OrderWaitingAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_order_waiting, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_main, parent, false)
         return ListViewHolder(view)
     }
 
@@ -37,8 +37,11 @@ class OrderWaitingAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText(model.title)
-        item.desc.setText(model.tag)
+        val s = model.title!!.split("-")
+
+        item.title.setText(s[0].replace("-",""))
+        if (s.size > 1) item.desc.setText(s[1].replace("-",""))
+        item.content.setText(model.tag)
 
         if (listener != null) item.setOnClickListener { listener.onItemClicked(position, model) }
     }

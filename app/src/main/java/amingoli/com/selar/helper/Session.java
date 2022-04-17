@@ -89,6 +89,14 @@ public class Session {
         extraEditor.commit();
     }
 
+    public String getBusinessOwnerName() {
+        return ExtrasPref.getString(Config.BUSINESS_OWNER_NAME, null);
+    }
+
+    public String getBusinessName() {
+        return ExtrasPref.getString(Config.BUSINESS_NAME, null);
+    }
+
     public void setSessionKey(String key) {
         extraEditor.putString(Config.SESSION_KEY, key);
         extraEditor.commit();

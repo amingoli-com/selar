@@ -37,6 +37,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
             submit.showLoader()
             if (formIsValid()){
                 Session.getInstance().setBusiness(App.getString(edt_name),App.getString(edt_business_name))
+                Session.getInstance().sessionKey = "YOUR_SESSION_KEY"
                 Handler().postDelayed({
                 startActivity(Intent(this, MainActivity::class.java))
                     finish()

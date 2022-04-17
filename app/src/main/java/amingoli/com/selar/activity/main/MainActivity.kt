@@ -1,158 +1,98 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.add_order.AddOrderActivity
-import amingoli.com.selar.activity.add_order.AddOrderBasketActivity
-import amingoli.com.selar.activity.add_order.AddOrderCameraActivity
-import amingoli.com.selar.activity.category.CategoryActivity
-import amingoli.com.selar.activity.product.ListProductActivity
-import amingoli.com.selar.activity.product.ProductActivity
-import amingoli.com.selar.helper.App
-import amingoli.com.selar.model.Branch
-import amingoli.com.selar.widget.CardBoxMain
-import amingoli.com.selar.widget.MessageBox
-import amingoli.com.selar.widget.SingelItemCard
-import android.content.Intent
+import amingoli.com.selar.adapter.ItemMainAdapter
+import amingoli.com.selar.adapter.OrderWaitingAdapter
+import amingoli.com.selar.helper.Session
+import amingoli.com.selar.model.TagList
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.widget_message_box.view.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import kotlinx.android.synthetic.main.activity_main_2.*
+import kotlinx.android.synthetic.main.item_main.view.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        toolbar.title.text = "پیشخان فروشنده"
+        setContentView(R.layout.activity_main_2)
 
-        branchBox.build("شعبه قم",
-            resources.getDrawable(R.drawable.ic_baseline_extension_24),
-            "",
-            object : SingelItemCard.Listener{
-                override fun onItemClicked() {
+        initToolbar()
 
-                }
-            })
-
-        cardBoxFeature.build("",
-            App.getDrawable(this,R.drawable.ic_baseline_extension_24),
-            null,
-        "ثبت سفارش با دوربین",
-        "ثبت سفارش ویژه",
-        "ثبت سفارش از لیست",
-        object : CardBoxMain.Listener{
-            override fun onAddClicked() {
-
-            }
-
-            override fun onActOneClicked() {
-                startActivity(Intent(this@MainActivity, AddOrderCameraActivity::class.java))
-            }
-
-            override fun onActTwoClicked() {
-                startActivity(Intent(this@MainActivity, AddOrderActivity::class.java))
-            }
-
-            override fun onActTreeClicked() {
-                startActivity(Intent(this@MainActivity, AddOrderBasketActivity::class.java))
-            }
-
-        })
-
-        messageBox.setValue("هشدار\nاشتراک شما منقضی شده","لطفا هرچه سریعنر نسبت به تمدید سرویس فروشنده اقدام نمایید","تمدید اشتراک",false,
-            object : MessageBox.Listener{
-                override fun onButtonClicked() {
-                    messageBox.visibility = View.GONE
-                }
-
-                override fun onCloseClicked() {
-                    messageBox.visibility = View.GONE
-                }
-
-            })
-
-        cardBoxProduct.build("محصولات",
-            App.getDrawable(this,R.drawable.ic_baseline_extension_24),
-            null,
-            "${App.database.getAppDao().getAllProductCount()}\nثبت شده",
-            "190\nپرفروش",
-            "${App.database.getAppDao().getOutOfStockProductCount()}\nتمام شده",
-            object : CardBoxMain.Listener{
-                override fun onAddClicked() {
-                    startActivity(Intent(this@MainActivity,ProductActivity::class.java))
-                }
-
-                override fun onActOneClicked() {
-                    startActivity(Intent(this@MainActivity,ListProductActivity::class.java))
-                }
-
-                override fun onActTwoClicked() {
-                }
-
-                override fun onActTreeClicked() {
-                }
-
-            })
-
-        cardBoxCategory.build("دسته‌بندی‌ها",
-            App.getDrawable(this, R.drawable.ic_baseline_category_24),
-            "",
-            "${App.database.getAppDao().selectCategory().size}\nهمه","${App.database.getAppDao().selectCategoryByStatus(1).size}\nفعال",null,
-            object : CardBoxMain.Listener{
-                override fun onAddClicked() {
-                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
-                    i.putExtra("add",true)
-                    startActivity(i)
-                }
-
-                override fun onActOneClicked() {
-                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
-//                    i.putExtra("status",true)
-                    startActivity(i)                }
-
-                override fun onActTwoClicked() {
-                    val i = Intent(this@MainActivity,CategoryActivity::class.java)
-                    i.putExtra("status",1)
-                    startActivity(i)
-                }
-
-                override fun onActTreeClicked() {
-                }
-
-            })
-
-        val p = Branch()
-        p.name = "صفائییه"
-        p.type = "شیرینی فروشی"
-
-        App.database.getAppDao().insertBranch(p)
-
-        var i = App.database.getAppDao().selectProduct().size
-        Log.e("qqqq", "onCreate: $i" )
-
-        create_chart()
+//        test
+        initRecyclerViewOrderWaiting()
+        initRecyclerViewItemMain()
+        barChartAdapter()
     }
 
-    fun create_chart() {
-        val bar_chart = findViewById<BarChart>(R.id.chart_bar)
-        val visitor: ArrayList<BarEntry> = ArrayList()
+    private fun initToolbar(){
+        toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
+        toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
+    }
 
-        for (i in 0..10) {
-            visitor.add(BarEntry(i.toFloat(),Math.random().toFloat()))
+//    test
+    private fun initRecyclerViewOrderWaiting(){
+        val arrayList = ArrayList<TagList>()
+        arrayList.add(TagList("محمدحسین آقایی","290,000 تومان"))
+        arrayList.add(TagList("مشتری متفرقه","900,000 تومان"))
+        arrayList.add(TagList("اصغر فرهادی","870,000 تومان"))
+        arrayList.add(TagList("علیرضا اسماعیلی","20,000 تومان"))
+        arrayList.add(TagList("میز ۲","170,000 تومان"))
+        arrayList.add(TagList("میز ۸","6,200,900 تومان"))
+        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,arrayList,null)
+    }
+
+    private fun initRecyclerViewItemMain(){
+        val arrayList = ArrayList<TagList>()
+        arrayList.add(TagList("محصولات-همه محصولات ثبت شده","290,000 محصول"))
+        arrayList.add(TagList("سفارشات-همه سفارشات انجام شده","13,290 سفارش"))
+        arrayList.add(TagList("دسته‌بندی-دسته‌بندی‌های فعال","290 دسته‌بندی"))
+        arrayList.add(TagList("مشتریان-همه خریداران شما","1,290 مشتری"))
+        arrayList.add(TagList("گزارشات انبار-کالاهای موجود","18,290 کالا"))
+        arrayList.add(TagList("گزارشات مالی-سرمایه موجود","180,920,290 تومان"))
+        arrayList.add(TagList("تنظیمات-",""))
+        arrayList.add(TagList("پشتیبانی-",""))
+        recyclerView.adapter = ItemMainAdapter(this,arrayList,null)
+    }
+
+
+    private var barEntryArrayList: ArrayList<BarEntry> = ArrayList()
+    private var labelNames: ArrayList<String> = ArrayList()
+
+    private fun barChartAdapter() {
+        barEntryArrayList = ArrayList()
+        labelNames = ArrayList()
+        barEntryArrayList.clear()
+        labelNames.clear()
+        for (i in 0 until 10) {
+            val month: String = "فروردین"
+            val sales: Int = i+10000*i
+            barEntryArrayList.add(BarEntry(i.toFloat(), sales.toFloat()))
+            labelNames.add(month)
         }
-        val barDataSet = BarDataSet(visitor, "")
-        barDataSet.setColors(Color.rgb(241, 92, 65))
-        barDataSet.valueTextSize = 0f
+        val barDataSet = BarDataSet(barEntryArrayList, "فروش ماهانه")
+        barDataSet.color = resources.getColor(R.color.primary)
+        val description = Description()
+        description.setText("MONTH")
+        barChart?.setDescription(description)
         val barData = BarData(barDataSet)
-        bar_chart.setFitBars(true)
-        bar_chart.data = barData
-        bar_chart.description.text = ""
-        bar_chart.animateY(1000)
+        barChart?.setData(barData)
+        val xAxis: XAxis = barChart?.xAxis!!
+        xAxis.valueFormatter = IndexAxisValueFormatter(labelNames)
+        xAxis.position = XAxis.XAxisPosition.TOP
+        xAxis.setDrawGridLines(false)
+        xAxis.setDrawAxisLine(false)
+        xAxis.granularity = 1f
+        xAxis.labelCount = labelNames.size
+        xAxis.labelRotationAngle = 270f
+        barChart.animateY(2000)
+        barChart.invalidate()
     }
 }
