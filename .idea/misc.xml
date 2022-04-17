@@ -67,6 +67,7 @@
         <entry key="app/src/main/res/layout/include_item_amount.xml" value="0.44114583333333335" />
         <entry key="app/src/main/res/layout/include_item_box.xml" value="0.42481884057971014" />
         <entry key="app/src/main/res/layout/include_item_dialog_set_payment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/include_main_toolbar.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/include_toolbar.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/layout/item_business.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.2552083333333333" />
@@ -75,7 +76,9 @@
         <entry key="app/src/main/res/layout/item_custome_spinner.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_list_jop.xml" value="0.24711415134672937" />
+        <entry key="app/src/main/res/layout/item_main.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_main_market.xml" value="0.2753623188405797" />
+        <entry key="app/src/main/res/layout/item_order_waitting.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/item_product_2.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/item_product_3.xml" value="0.24322916666666666" />

@@ -2,6 +2,7 @@
 <resources>
     <color name="black_fill">#FF000000</color>
     <color name="black_box">#2E373E</color>
+    <color name="black_content">#80333333</color>
     <color name="black">#333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#EAEAEA</color>
