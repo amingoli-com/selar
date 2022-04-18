@@ -111,7 +111,10 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         val m = ArrayList<Category>()
         for (i in l.listIterator()){
             val sizeOfUnderCategory = App.database.getAppDao().sizeCategory(i.id!!)
-            val content = getString(R.string.under_category_by_value, sizeOfUnderCategory.toString())
+            val content = getString(R.string.under_category_by_value,
+                if (sizeOfUnderCategory == 0) getString(R.string.dont_have)
+                else sizeOfUnderCategory.toString()
+            )
             m.add(Category(i.id,i.id_mother,i.name, content, i.image,i.branch,i.status))
         }
         return m

@@ -87,5 +87,6 @@
     <string name="back">بازگشت</string>
     <string name="categorys">دسته بندی ها</string>
     <string name="under_category_by_value"><b><font color="#333">%1$s</font></b> زیر گروه</string>
+    <string name="dont_have">بدون</string>
 
 </resources>
