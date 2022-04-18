@@ -23,6 +23,7 @@ class BusinessListAdapter(val context: Context,
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
+        fun onEmpty(size:Int)
         fun onItemClicked(position: Int, item: Business)
     }
 
@@ -31,6 +32,7 @@ class BusinessListAdapter(val context: Context,
     }
 
     override fun getItemCount(): Int {
+        listener?.onEmpty(list.size)
         return list.size
     }
 

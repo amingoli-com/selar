@@ -24,6 +24,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         start()
+
+        Log.e("qqqq", "onCreate: ${Session.getInstance().sessionKey}" )
     }
 
     private fun start(){

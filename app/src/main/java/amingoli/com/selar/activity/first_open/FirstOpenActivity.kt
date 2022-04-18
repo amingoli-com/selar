@@ -54,10 +54,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                     App.getString(edt_business_name),
                     id_business.toInt()
                 )
-                Session.getInstance().sessionKey = "YOUR_SESSION_KEY"
-                Handler().postDelayed({
-                next()
-                },2500)
+                Handler().postDelayed({ next() },2500)
             }else submit.hideLoader()
         }
 
@@ -71,6 +68,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
 
     private fun next(){
         if (Session.getInstance().sessionKey.isNullOrEmpty()){
+            Session.getInstance().sessionKey = Date().toString()
             startActivity(Intent(this, MainActivity::class.java))
         }else{
             App.toast(resources.getString(R.string.add_business_successfully))

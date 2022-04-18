@@ -92,7 +92,11 @@ class BusinessMenuDialog(val _context: Context, val listener: Listener?) : Dialo
 
     private fun initRecyclerView(){
         val arrayList = ArrayList<Business>(App.database.getAppDao().selectBusinessExcept(Session.getInstance().businessID))
-        recyclerView.adapter = BusinessListAdapter(_context,arrayList,object : BusinessListAdapter.Listener{
+        box_main.recyclerView.adapter = BusinessListAdapter(_context,arrayList,object : BusinessListAdapter.Listener{
+            override fun onEmpty(size: Int) {
+                box_main.box_business.visibility = if (size == 0)  View.GONE else View.VISIBLE
+            }
+
             override fun onItemClicked(position: Int, item: Business) {
                 Session.getInstance().setBusiness(
                     item.owner_name,

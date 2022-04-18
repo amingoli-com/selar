@@ -31,26 +31,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <View
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginBottom="0dp"
-        style="@style/Line"/>
-
-    <TextView
-        android:layout_marginTop="@dimen/_5sdp"
-        android:paddingHorizontal="@dimen/_8sdp"
-        style="@style/Text.Body2"
-        android:textStyle="bold"
-        android:text="@string/business_list_crated"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    <LinearLayout
+        android:id="@+id/box_business"
         android:orientation="vertical"
-        tools:listitem="@layout/item_single_business"
-        tools:itemCount="5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <View
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="0dp"
+            style="@style/Line"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_8sdp"
+            style="@style/Text.Body2"
+            android:textStyle="bold"
+            android:text="@string/business_list_crated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_single_business"
+            tools:itemCount="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
