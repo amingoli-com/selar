@@ -5,6 +5,7 @@ import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
 import amingoli.com.selar.helper.Session
+import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.TagList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -32,17 +33,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar(){
-        toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
-        toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
         toolbar.content.setOnClickListener {
             showPopMenu()
         }
+        initData()
     }
 
 //    test
     private fun showPopMenu(){
-        val popMenu = BusinessMenuDialog(this,null)
+        val popMenu = BusinessMenuDialog(this,object : BusinessMenuDialog.Listener{
+            override fun onBusinessList(dialog: BusinessMenuDialog, business: Business) {
+                initData()
+            }
+
+        })
         popMenu.show(supportFragmentManager, "")
+    }
+
+    private fun initData(){
+        toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
+        toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
     }
 
     private fun initRecyclerViewOrderWaiting(){

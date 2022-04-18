@@ -1,6 +1,7 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_single_business.view.*
 
 class BusinessListAdapter(val context: Context,
-                          val list: ArrayList<TagList>,
+                          val list: ArrayList<Business>,
                           val listener: Listener?
 ) : RecyclerView.Adapter<BusinessListAdapter.ListViewHolder>() {
 
@@ -22,7 +23,7 @@ class BusinessListAdapter(val context: Context,
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: TagList)
+        fun onItemClicked(position: Int, item: Business)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -38,7 +39,7 @@ class BusinessListAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.text.text = model.title
+        item.text.text = model.business_name
         if (listener != null){
             item.setOnClickListener {
                 listener.onItemClicked(position,model)
@@ -46,12 +47,12 @@ class BusinessListAdapter(val context: Context,
         }
     }
 
-    fun addItem(item: TagList){
+    fun addItem(item: Business){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: TagList, position: Int){
+    fun addItem(item: Business, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )

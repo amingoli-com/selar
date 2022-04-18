@@ -52,7 +52,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                 Session.getInstance().setBusiness(
                     App.getString(edt_name),
                     App.getString(edt_business_name),
-                    id_business
+                    id_business.toInt()
                 )
                 Session.getInstance().sessionKey = "YOUR_SESSION_KEY"
                 Handler().postDelayed({

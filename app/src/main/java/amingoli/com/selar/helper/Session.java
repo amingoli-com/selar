@@ -83,10 +83,10 @@ public class Session {
         extraEditor.apply();
     }
 
-    public void setBusiness(String name, String businessName, Long businessID) {
+    public void setBusiness(String name, String businessName, int businessID) {
         extraEditor.putString(Config.BUSINESS_OWNER_NAME, name);
         extraEditor.putString(Config.BUSINESS_NAME, businessName);
-        extraEditor.putLong(Config.BUSINESS_ID, businessID);
+        extraEditor.putInt(Config.BUSINESS_ID, businessID);
         extraEditor.commit();
     }
 
@@ -98,8 +98,8 @@ public class Session {
         return ExtrasPref.getString(Config.BUSINESS_NAME, null);
     }
 
-    public Long getBusinessID() {
-        return ExtrasPref.getLong(Config.BUSINESS_ID, -1);
+    public int getBusinessID() {
+        return ExtrasPref.getInt(Config.BUSINESS_ID, -1);
     }
 
     public void setSessionKey(String key) {

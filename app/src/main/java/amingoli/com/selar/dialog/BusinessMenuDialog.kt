@@ -4,6 +4,9 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.first_open.FirstOpenActivity
 import amingoli.com.selar.adapter.BusinessAdapter
 import amingoli.com.selar.adapter.BusinessListAdapter
+import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Session
+import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.TagList
 import android.content.Context
 import android.content.Intent
@@ -20,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_first_open.*
 import kotlinx.android.synthetic.main.dialog_menu_business.*
 import kotlinx.android.synthetic.main.dialog_menu_business.recyclerView
 
-class BusinessMenuDialog(val _context: Context, listener: Listener?) : DialogFragment() {
+class BusinessMenuDialog(val _context: Context, val listener: Listener?) : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,16 +52,23 @@ class BusinessMenuDialog(val _context: Context, listener: Listener?) : DialogFra
     }
 
     interface Listener{
-        fun onAddOrder(dialog: BusinessMenuDialog)
-        fun onRequestCar(dialog: BusinessMenuDialog)
+        fun onBusinessList(dialog: BusinessMenuDialog, business: Business)
     }
 
 
     private fun initRecyclerView(){
-        val arrayList = ArrayList<TagList>()
-        arrayList.add(TagList("سوپر مارکت امین",null))
-        arrayList.add( TagList("رستوران سنتی پارسا شعبه یک",null))
-        arrayList.add( TagList("فست فود امین",null))
-        recyclerView.adapter = BusinessListAdapter(_context,arrayList,null)
+        val arrayList = ArrayList<Business>(App.database.getAppDao().selectBusinessExcept(Session.getInstance().businessID))
+        recyclerView.adapter = BusinessListAdapter(_context,arrayList,object : BusinessListAdapter.Listener{
+            override fun onItemClicked(position: Int, item: Business) {
+                Session.getInstance().setBusiness(
+                    item.owner_name,
+                    item.business_name,
+                    item.id!!
+                )
+                Session.getInstance().sessionKey = item.session_key
+                listener?.onBusinessList(this@BusinessMenuDialog,item)
+                dismiss()
+            }
+        })
     }
 }
