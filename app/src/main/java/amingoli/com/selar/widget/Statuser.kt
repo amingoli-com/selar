@@ -17,4 +17,8 @@ class Statuser (context: Context?, attrs: AttributeSet?) : RelativeLayout(contex
         box_empty.visibility = View.VISIBLE
     }
 
+    fun onFinish(){
+        box_empty.visibility = View.GONE
+    }
+
 }

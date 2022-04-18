@@ -23,6 +23,7 @@
 
         <TextView
             android:id="@+id/title"
+            android:paddingHorizontal="@dimen/_5sdp"
             style="@style/Text.Body2"
             android:textStyle="bold"
             android:maxLines="2"

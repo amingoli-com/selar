@@ -43,7 +43,7 @@ class CategoryListAdapter(val context: Context,
         val model = list[position]
 
         item.title.text = model.name
-        if (model.image.isNullOrEmpty()) {
+        if (!model.image.isNullOrEmpty()) {
             item.image.visibility = View.VISIBLE
             Glide.with(context).load(model.image!!).into(item.image)
         }else item.image.visibility = View.GONE
@@ -73,20 +73,12 @@ class CategoryListAdapter(val context: Context,
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(list : List<Category>){
+        for (i in list.indices){
+            Log.e("qqqq", "updateList category: "+list[i].id )
+        }
+
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
-    }
-
-    private fun setItemSelected(is_selected:Boolean, imageView:ImageView, textView : TextView){
-        if (is_selected){
-            imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))
-            imageView.setColorFilter(ContextCompat.getColor(context, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-            textView.setTextColor(ContextCompat.getColor(context,R.color.blue))
-        }else{
-            imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
-            imageView.setColorFilter(ContextCompat.getColor(context, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
-            textView.setTextColor(ContextCompat.getColor(context,R.color.black))
-        }
     }
 }

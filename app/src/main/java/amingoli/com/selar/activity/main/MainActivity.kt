@@ -1,6 +1,8 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderActivity
+import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
@@ -122,8 +124,10 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
      * Listener
      * */
     override fun onItemClicked(position: Int, item: TagList) {
-        if (position == 0){
-            startActivity(Intent(this, ListProductActivity::class.java))
+        when(position){
+            0 -> startActivity(Intent(this, ListProductActivity::class.java))
+            1 -> startActivity(Intent(this, AddOrderActivity::class.java))
+            2 -> startActivity(Intent(this, CategoryActivity::class.java))
         }
     }
 }

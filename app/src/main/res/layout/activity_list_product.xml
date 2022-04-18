@@ -11,24 +11,53 @@
         android:id="@+id/toolbar"
         layout="@layout/include_toolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_tag"
-        android:layout_below="@+id/toolbar"
+    <RelativeLayout
+        android:id="@+id/box_category"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_tag_info"
-        tools:itemCount="3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <View style="@style/Line"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tv_back_category"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_category_2" />
+
+        <TextView
+            android:id="@+id/tv_back_category"
+            style="@style/Text.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="0dp"
+            android:drawableStart="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:drawableTint="@color/primaryVariant"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:textAlignment="center"
+            android:textColor="@color/primaryVariant"
+            android:visibility="gone"
+            app:tint="@color/primaryVariant"
+            tools:ignore="UnusedAttribute,UseCompatTextViewDrawableXml"
+            tools:text="نام دسته‌بندی"
+            tools:visibility="visible" />
+    </RelativeLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_below="@+id/recyclerView_tag"
+        android:id="@+id/recyclerView_product"
+        android:layout_below="@+id/box_category"
         android:paddingTop="@dimen/_5sdp"
         android:paddingStart="@dimen/_5sdp"
         android:paddingEnd="@dimen/_5sdp"
@@ -40,8 +69,7 @@
 
     <amingoli.com.selar.widget.Statuser
         android:id="@+id/statuser"
-        android:layout_below="@+id/recyclerView_tag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

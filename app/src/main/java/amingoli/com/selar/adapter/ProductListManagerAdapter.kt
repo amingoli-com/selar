@@ -5,6 +5,7 @@ import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +20,10 @@ class ProductListManagerAdapter(
     val listener: Listener
 ) : RecyclerView.Adapter<ProductListManagerAdapter.ListViewHolder>() {
 
-    private var packId = -1
-
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
+        fun onEmpty(size : Int)
         fun onItemClicked(position: Int, product: Product)
     }
 
@@ -32,6 +32,7 @@ class ProductListManagerAdapter(
     }
 
     override fun getItemCount(): Int {
+        listener.onEmpty(list.size)
         return list.size
     }
 
@@ -51,5 +52,12 @@ class ProductListManagerAdapter(
         item.setOnClickListener {
             listener.onItemClicked(position,model)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Product>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 }

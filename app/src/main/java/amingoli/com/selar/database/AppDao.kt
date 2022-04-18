@@ -16,6 +16,14 @@ interface AppDao {
     @Query("select id,image_defult,name,price_sale from product")
     fun selectSmallSizeProduct(): List<Product>
 
+    @Query("select id,image_defult,name,price_sale from product where id = :id")
+    fun selectSmallSizeProduct(id: Int): List<Product>
+
+    @Query("SELECT id,image_defult,name,price_sale FROM product " +
+            "INNER JOIN categoryproduct on product.id = categoryproduct.id_product " +
+            "WHERE categoryproduct.id_category = :id_category ")
+    fun selectSmallSizeProductByCategory(id_category: Int): List<Product>
+
     @Query("select * from product where id = :id_product")
     fun selectProduct(id_product: Int): Product
 

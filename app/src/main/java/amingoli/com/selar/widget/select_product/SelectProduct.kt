@@ -82,8 +82,6 @@ class SelectProduct (context: Context?, attrs: AttributeSet?) : LinearLayout(con
     }
 
     private fun initRecyclerCategory() {
-
-
         recyclerView_category.adapter = adapterTagList
     }
 
