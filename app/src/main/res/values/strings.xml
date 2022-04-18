@@ -85,5 +85,6 @@
     <string name="search_product_name">نام محصول..</string>
     <string name="back_to_all_product">بازگشت به همه محصولات</string>
     <string name="back">بازگشت</string>
+    <string name="categorys">دسته بندی ها</string>
 
 </resources>
