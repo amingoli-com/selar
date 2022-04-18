@@ -181,7 +181,7 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
         view_orders.setText(all_order)
         view_tax.setText(resources.getString(R.string.tax),tax_price)
         view_shipping.setText(resources.getString(R.string.shipping_price),shipping_price)
-        view_discount.setText(resources.getString(R.string.price_discount),free,Color.GREEN)
+        view_discount.setText(resources.getString(R.string.price_discount),free,ContextCompat.getColor(this,R.color.green))
         view_total_price.setText(resources.getString(R.string.total_amount),all_price)
         initPaymentText(all_stock.toInt(),all_price)
     }
