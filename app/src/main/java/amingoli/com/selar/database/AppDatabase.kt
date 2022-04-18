@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 @Database(entities = [Product::class,Branch::class,Category::class,Status::class,Increase::class,
         Descriptions::class,CategoryProduct::class,Users::class,Customers::class,Images::class,
         CheckOut::class,CheckOutDetail::class,Orders::class,OrderDetail::class,Permissions::class,
-        Setting::class, UnitModel::class], version = AppDatabase.VERSION)
+        Setting::class, UnitModel::class, Business::class], version = AppDatabase.VERSION)
 abstract class AppDatabase : RoomDatabase() {
 
     /**

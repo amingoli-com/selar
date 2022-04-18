@@ -74,5 +74,13 @@ interface AppDao {
     fun insertUnit(unit: UnitModel)
 
 
+//    Business
+    @Query("select * from business")
+    fun selectBusiness(): List<Business>
 
+    @Query("select * from business where id = :id")
+    fun selectBusiness(id: String): Business?
+
+    @Insert
+    fun insertBusiness(business: Business) : Long
 }
