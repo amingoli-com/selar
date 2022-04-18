@@ -71,8 +71,11 @@
 
     <string name="welcome_owner"><b><font color="#333">%1$s</font></b> عزیز</string>
     <string name="welcome_to_business">به <b><font color="#333">%1$s</font></b> خوش‌آمدید</string>
+    <string name="add_business_successfully">کسب‌وکار با موفقیت اضافه شد</string>
+    <string name="add_successfully">با موفقیت اضافه شد</string>
     <string name="new_business">افزودن کسب‌وکار جدید</string>
     <string name="edit_business">ویرایش کسب‌وکار</string>
     <string name="business_list_crated">لیست کسب‌وکار ثبت شده</string>
     <string name="test_business_name">نام کسب‌وکار ایجاد</string>
+    <string name="edit">ویرایش</string>
 </resources>

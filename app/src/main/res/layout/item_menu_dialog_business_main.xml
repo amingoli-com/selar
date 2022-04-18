@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/tv_add_business"
+        style="@style/Text.Body1"
+        android:padding="@dimen/_5sdp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableStart="@drawable/ic_baseline_add_circle_24"
+        android:text="@string/new_business"
+        android:drawableTint="@color/primaryVariant"
+        android:textColor="@color/primaryVariant"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_edit_business"
+        android:padding="@dimen/_5sdp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableStart="@drawable/ic_baseline_create_24"
+        style="@style/Text.Body1"
+        android:drawableTint="@color/blue"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:text="@string/edit_business"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="0dp"
+        style="@style/Line"/>
+
+    <TextView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        style="@style/Text.Body2"
+        android:textStyle="bold"
+        android:text="@string/business_list_crated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        tools:listitem="@layout/item_single_business"
+        tools:itemCount="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

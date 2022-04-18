@@ -56,8 +56,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                 )
                 Session.getInstance().sessionKey = "YOUR_SESSION_KEY"
                 Handler().postDelayed({
-                startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                next()
                 },2500)
             }else submit.hideLoader()
         }
@@ -68,6 +67,15 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
     private fun initShowOnlyFirst(){
         box_only_first.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.VISIBLE else View.GONE
         exit.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.GONE else View.VISIBLE
+    }
+
+    private fun next(){
+        if (Session.getInstance().sessionKey.isNullOrEmpty()){
+            startActivity(Intent(this, MainActivity::class.java))
+        }else{
+            App.toast(resources.getString(R.string.add_business_successfully))
+        }
+        finish()
     }
 
     private fun initRecyclerView(){

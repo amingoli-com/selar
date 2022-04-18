@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import java.util.Map;
 import java.util.Set;
 
+import amingoli.com.selar.model.Business;
+
 public class Session {
 
     private SharedPreferences ExtrasPref;
@@ -81,6 +83,13 @@ public class Session {
     public void remove(String key) {
         extraEditor.remove(key);
         extraEditor.apply();
+    }
+
+    public void setBusiness(Business business) {
+        extraEditor.putString(Config.BUSINESS_OWNER_NAME, business.getOwner_name());
+        extraEditor.putString(Config.BUSINESS_NAME, business.getBusiness_name());
+        extraEditor.putInt(Config.BUSINESS_ID, business.getId());
+        extraEditor.commit();
     }
 
     public void setBusiness(String name, String businessName, int businessID) {

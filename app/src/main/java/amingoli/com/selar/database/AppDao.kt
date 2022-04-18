@@ -82,8 +82,8 @@ interface AppDao {
     fun selectBusinessExcept(id: Int): List<Business>
 
     @Query("select * from business where id = :id")
-    fun selectBusiness(id: String): Business?
+    fun selectBusiness(id: Int): Business?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBusiness(business: Business) : Long
 }

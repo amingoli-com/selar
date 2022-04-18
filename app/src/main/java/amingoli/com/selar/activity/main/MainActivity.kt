@@ -7,7 +7,9 @@ import amingoli.com.selar.dialog.BusinessMenuDialog
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.TagList
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
@@ -42,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 //    test
     private fun showPopMenu(){
         val popMenu = BusinessMenuDialog(this,object : BusinessMenuDialog.Listener{
+            override fun onEditBusiness(dialog: BusinessMenuDialog, business: Business?) {
+                initDataSetText()
+            }
+
             override fun onBusinessList(dialog: BusinessMenuDialog, business: Business) {
                 initData()
             }
@@ -51,6 +57,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData(){
+        initDataSetText()
+    }
+
+    private fun initDataSetText(){
         toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
         toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
     }
