@@ -149,6 +149,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             tv_discount.setText("این کالا شامل " + App.priceFormat(_discount_price,true) + " تخفیف است")
             _DISCOUNT = _discount_price
         }else{
+            _DISCOUNT = 0.0
             if (tv_discount.visibility != View.GONE) tv_discount.visibility = View.GONE
         }
 
