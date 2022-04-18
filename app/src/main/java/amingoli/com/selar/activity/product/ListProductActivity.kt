@@ -103,7 +103,6 @@ class ListProductActivity : AppCompatActivity() {
             object : CategoryListAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: Category) {
-//                Test
                     listCategoryForBack.add(listCategoryForBack.size, TagList(item.name,item.id_mother.toString()))
                     initVisibilityIcBack()
 

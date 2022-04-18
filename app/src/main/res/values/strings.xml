@@ -86,5 +86,6 @@
     <string name="back_to_all_product">بازگشت به همه محصولات</string>
     <string name="back">بازگشت</string>
     <string name="categorys">دسته بندی ها</string>
+    <string name="under_category_by_value"><b><font color="#333">%1$s</font></b> زیر گروه</string>
 
 </resources>

@@ -35,4 +35,6 @@ class Category {
         this.branch = branch
         this.status = status
     }
+
+
 }

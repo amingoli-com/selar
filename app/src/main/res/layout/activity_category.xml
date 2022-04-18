@@ -11,21 +11,24 @@
         android:id="@+id/toolbar"
         layout="@layout/include_toolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_tag"
+    <TextView
+        android:id="@+id/tv_back_category"
+        style="@style/Text.Body2"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_tag_info"
-        tools:itemCount="3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_margin="0dp"
-        style="@style/Line"/>
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:drawableStart="@drawable/ic_baseline_keyboard_arrow_right_24"
+        android:drawableTint="@color/primaryVariant"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textColor="@color/primaryVariant"
+        android:visibility="gone"
+        app:tint="@color/primaryVariant"
+        tools:ignore="UnusedAttribute,UseCompatTextViewDrawableXml"
+        tools:text="بازگشت به دسته‌بندی مواد شوینده"
+        tools:visibility="visible" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -63,6 +63,9 @@ interface AppDao {
     @Query("select * from category where id_mother = :id_mother")
     fun selectUnderCategory(id_mother: Int): List<Category>
 
+    @Query("select count(id) from category where id_mother = :id_mother")
+    fun sizeCategory(id_mother: Int): Int
+
 //    Category Product
     @Query("DELETE FROM categoryproduct WHERE id_product = :id_product;")
     fun deleteCategoryProduct(id_product:Int)

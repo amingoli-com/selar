@@ -1,7 +1,9 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
+import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
@@ -25,8 +27,8 @@ class CategoryListManagerAdapter(
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, category: Category)
-        fun onLongItemClicked(position: Int, category: Category)
+        fun onItemClicked(position: Int, item: Category)
+        fun onLongItemClicked(position: Int, item: Category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -50,6 +52,7 @@ class CategoryListManagerAdapter(
             item.box_content.visibility = View.VISIBLE
             item.content.text = model.content
         }else item.box_content.visibility = View.GONE
+
 
         if (!model.image.isNullOrEmpty() && File(model.image).exists()){
             Glide.with(context).load(File(model.image)).into(item.image)
@@ -78,5 +81,11 @@ class CategoryListManagerAdapter(
             list[position] = category
             notifyItemChanged(position,category)
         }
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Category>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 }
