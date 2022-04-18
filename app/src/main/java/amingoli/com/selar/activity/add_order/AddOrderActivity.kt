@@ -162,6 +162,7 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
         var shipping_price = 15000.0
         var free = 0.0
         var all_price = 0.0
+        var all_stock = 0.0
 
         if (list.isNullOrEmpty()){
             box_price.visibility = View.GONE
@@ -170,7 +171,8 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
             box_price.visibility = View.VISIBLE
             for (i in 0 until list.size){
                 all_order += list[i].price_sale!! * list[i].stock!!
-                free += list[i].price_discount!!
+                free += list[i].price_discount!! * list[i].stock!!
+                all_stock += list[i].stock!!
             }
             tax_price = (all_order/100) * 9
             all_price = all_order + tax_price + shipping_price
@@ -181,15 +183,19 @@ class AddOrderActivity : AppCompatActivity(), SelectProduct.Listener {
         view_shipping.setText(resources.getString(R.string.shipping_price),shipping_price)
         view_discount.setText(resources.getString(R.string.price_discount),free,Color.GREEN)
         view_total_price.setText(resources.getString(R.string.total_amount),all_price)
-        initPaymentText(list.size,all_price)
+        initPaymentText(all_stock.toInt(),all_price)
     }
 
     private fun initPaymentText(size:Int,price_all:Double){
         if (size > 0){
+            box_button.visibility = View.VISIBLE
             box_pay.visibility = View.VISIBLE
             tv_payment_product_size.setText(resources.getString(R.string.stock_count, size.toString()))
             tv_payment_amount.setText(App.priceFormat(price_all,true))
-        }else box_pay.visibility = View.GONE
+        }else{
+            box_button.visibility = View.GONE
+            box_pay.visibility = View.GONE
+        }
     }
 
     private fun resultScan(barcode:String){
