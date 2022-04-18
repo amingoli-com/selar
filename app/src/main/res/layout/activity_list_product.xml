@@ -69,6 +69,7 @@
 
     <amingoli.com.selar.widget.Statuser
         android:id="@+id/statuser"
+        android:layout_below="@+id/box_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

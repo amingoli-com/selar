@@ -47,6 +47,7 @@
         <entry key="app/src/main/res/drawable/item_splash.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/widget_message_box.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/font/my_font.xml" value="0.2796296296296296" />
+        <entry key="app/src/main/res/layout-v23/include_toolbar.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout-v23/widget_message_box.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_add_order.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_add_order_basket.xml" value="0.24322916666666666" />

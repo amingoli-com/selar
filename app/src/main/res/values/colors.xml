@@ -5,6 +5,8 @@
     <color name="black_content">#80333333</color>
     <color name="black">#333</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_30">#B3FFFFFF</color>
     <color name="gray">#EAEAEA</color>
     <color name="gray_50">#E3E3E3</color>
     <color name="gray_30">#4DEAEAEA</color>

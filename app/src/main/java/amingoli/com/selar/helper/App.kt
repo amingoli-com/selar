@@ -5,11 +5,13 @@ import amingoli.com.selar.helper.Config.JPG
 import amingoli.com.selar.helper.Config.MONEY
 import amingoli.com.selar.helper.Config.PATH_IMAGES
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -114,6 +116,14 @@ class App : MultiDexApplication() {
                 e.printStackTrace()
             }
             return ""
+        }
+
+        fun closeKeyboard(activity: Activity){
+            val view = activity.currentFocus
+            if (view != null) {
+                val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
         }
     }
 }
