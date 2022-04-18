@@ -41,24 +41,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initToolbar(){
         toolbar.content.setOnClickListener {
-            showPopMenu()
+            BusinessMenuDialog(this,object : BusinessMenuDialog.Listener{
+                override fun onEditBusiness(dialog: BusinessMenuDialog, business: Business?) {
+                    initDataSetText()
+                }
+                override fun onBusinessList(dialog: BusinessMenuDialog, business: Business) {
+                    initData()
+                }
+            }).show(supportFragmentManager,"menu")
         }
-        initData()
-    }
-
-//    test
-    private fun showPopMenu(){
-        val popMenu = BusinessMenuDialog(this,object : BusinessMenuDialog.Listener{
-            override fun onEditBusiness(dialog: BusinessMenuDialog, business: Business?) {
-                initDataSetText()
-            }
-
-            override fun onBusinessList(dialog: BusinessMenuDialog, business: Business) {
-                initData()
-            }
-
-        })
-        popMenu.show(supportFragmentManager, "")
     }
 
     private fun initData(){
@@ -70,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
     }
 
+//    test
     private fun initRecyclerViewOrderWaiting(){
         val arrayList = ArrayList<TagList>()
         arrayList.add(TagList("محمدحسین آقایی","290,000 تومان"))
