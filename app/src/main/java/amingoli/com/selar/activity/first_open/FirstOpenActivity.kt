@@ -5,6 +5,7 @@ import amingoli.com.selar.activity.main.MainActivity
 import amingoli.com.selar.adapter.BusinessAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
+import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.TagList
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,8 @@ import android.os.Handler
 import android.text.method.LinkMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.activity_first_open.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
 
@@ -36,7 +39,21 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
         submit.btn.setOnClickListener {
             submit.showLoader()
             if (formIsValid()){
-                Session.getInstance().setBusiness(App.getString(edt_name),App.getString(edt_business_name))
+                val id_business : Long = App.database.getAppDao().insertBusiness(
+                    Business(
+                        App.getString(edt_name),
+                        App.getString(edt_business_name),
+                        "",
+                        "1",
+                        Date(),
+                        Date()
+                    )
+                )
+                Session.getInstance().setBusiness(
+                    App.getString(edt_name),
+                    App.getString(edt_business_name),
+                    id_business
+                )
                 Session.getInstance().sessionKey = "YOUR_SESSION_KEY"
                 Handler().postDelayed({
                 startActivity(Intent(this, MainActivity::class.java))

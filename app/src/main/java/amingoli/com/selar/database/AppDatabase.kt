@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -19,6 +20,7 @@ import kotlinx.coroutines.withContext
         Descriptions::class,CategoryProduct::class,Users::class,Customers::class,Images::class,
         CheckOut::class,CheckOutDetail::class,Orders::class,OrderDetail::class,Permissions::class,
         Setting::class, UnitModel::class, Business::class], version = AppDatabase.VERSION)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     /**

@@ -26,6 +26,7 @@ object Config {
     const val BRANCH = "branch"
     const val BUSINESS_OWNER_NAME = "BUSINESS_OWNER_NAME"
     const val BUSINESS_NAME = "BUSINESS_NAME"
+    const val BUSINESS_ID = "BUSINESS_ID"
     const val SESSION_KEY = "SESSION_KEY"
 
 }
