@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 //    test
     private fun showPopMenu(){
-        val popMenu = BusinessMenuDialog(this)
+        val popMenu = BusinessMenuDialog(this,null)
         popMenu.show(supportFragmentManager, "")
     }
 
