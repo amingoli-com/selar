@@ -34,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         barChartAdapter()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
     private fun initToolbar(){
         toolbar.content.setOnClickListener {
             showPopMenu()
