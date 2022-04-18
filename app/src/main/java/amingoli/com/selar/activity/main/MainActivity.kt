@@ -1,6 +1,8 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.product.ListProductActivity
+import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_main_toolbar.view.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -83,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         arrayList.add(TagList("گزارشات مالی-سرمایه موجود","180,920,290 تومان"))
         arrayList.add(TagList("تنظیمات-",""))
         arrayList.add(TagList("پشتیبانی-",""))
-        recyclerView.adapter = ItemMainAdapter(this,arrayList,null)
+        recyclerView.adapter = ItemMainAdapter(this,arrayList,this)
     }
 
 
@@ -114,5 +116,14 @@ class MainActivity : AppCompatActivity() {
         xAxis.labelRotationAngle = 270f
         barChart.animateY(2000)
         barChart.invalidate()
+    }
+
+    /**
+     * Listener
+     * */
+    override fun onItemClicked(position: Int, item: TagList) {
+        if (position == 0){
+            startActivity(Intent(this, ListProductActivity::class.java))
+        }
     }
 }

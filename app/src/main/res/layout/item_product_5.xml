@@ -6,43 +6,33 @@
     style="@style/Margin"
     app:cardCornerRadius="@dimen/_7sdp"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
         android:padding="@dimen/_5sdp">
 
-        <RelativeLayout
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/background_radius_not_padding">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:visibility="gone"
-                tools:src="@drawable/ic_gallery"
-                tools:visibility="visible" />
-        </RelativeLayout>
-
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            tools:src="@drawable/ic_gallery"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/title"
             style="@style/Text.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/image"
             android:gravity="center"
-            android:maxLines="3"
-            android:minLines="2"
+            android:maxLines="4"
+            android:minLines="3"
             android:textAlignment="center"
             android:textStyle="bold"
-            tools:text="دستمال کاغذی حوله ای 3 لا 2 رول سافتلن" />
+            tools:text="@string/test_product_name" />
 
         <TextView
             android:id="@+id/total_price"
@@ -58,44 +48,26 @@
             android:visibility="gone"
             tools:text="319,000 تومان" />
 
-        <RelativeLayout
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_below="@+id/title"
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp">
-
             <TextView
                 android:id="@+id/price_sela"
                 style="@style/Text.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="#333"
+                android:textColor="@color/green_2"
+                android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
-                tools:text="x29,000" />
+                tools:text="29,000 تومان" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/price_on_product"
-                style="@style/Text.Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                tools:text="29,000" />
-
-        </RelativeLayout>
-
-        <amingoli.com.selar.widget.BasketAdder
-            android:id="@+id/basketAdder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

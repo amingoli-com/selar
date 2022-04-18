@@ -29,7 +29,7 @@ import kotlin.collections.ArrayList
 
 class BusinessMenuDialog(val _context: Context, val listener: Listener?) : DialogFragment() {
 
-    private var business: Business?= null
+    private var business = App.database.getAppDao().selectBusiness(Session.getInstance().businessID)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -57,7 +57,6 @@ class BusinessMenuDialog(val _context: Context, val listener: Listener?) : Dialo
     }
 
     private fun initBusinessData(){
-        business = App.database.getAppDao().selectBusiness(Session.getInstance().businessID)
         box_edit.edt_owner.setText(business?.owner_name)
         box_edit.edt_business_name.setText(business?.business_name)
     }

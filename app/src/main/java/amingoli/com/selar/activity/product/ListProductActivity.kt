@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_toolbar.view.*
 
 class ListProductActivity : AppCompatActivity() {
 
-    val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct())
+    val listProducts = ArrayList<Product>(App.database.getAppDao().selectSmallSizeProduct())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

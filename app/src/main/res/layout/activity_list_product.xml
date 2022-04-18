@@ -32,9 +32,9 @@
         android:paddingTop="@dimen/_5sdp"
         android:paddingStart="@dimen/_5sdp"
         android:paddingEnd="@dimen/_5sdp"
-        tools:listitem="@layout/item_product"
+        tools:listitem="@layout/item_product_5"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+        app:spanCount="3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

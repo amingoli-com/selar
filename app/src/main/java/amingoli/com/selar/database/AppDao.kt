@@ -13,6 +13,9 @@ interface AppDao {
     @Query("select * from product")
     fun selectProduct(): List<Product>
 
+    @Query("select id,image_defult,name,price_sale from product")
+    fun selectSmallSizeProduct(): List<Product>
+
     @Query("select * from product where id = :id_product")
     fun selectProduct(id_product: Int): Product
 
