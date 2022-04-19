@@ -3,13 +3,16 @@ package amingoli.com.selar.activity.main
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.activity.category.CategoryActivity
+import amingoli.com.selar.activity.customer.CustomerActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
+import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
+import amingoli.com.selar.model.Customers
 import amingoli.com.selar.model.TagList
 import android.content.Intent
 import android.os.Bundle
@@ -23,6 +26,9 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_main_toolbar.view.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
@@ -36,6 +42,18 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
         initRecyclerViewOrderWaiting()
         initRecyclerViewItemMain()
         barChartAdapter()
+
+
+//        test add data
+        for (i in 1 .. 10){
+            /*App.database.getAppDao().insertCustomer(Customers(
+                "علی $i","گلی $i",
+                "0919519137$i",
+                null, 1,
+                Session.getInstance().branch,
+                Date(),Date())
+            )*/
+        }
     }
 
     override fun onResume() {
@@ -128,6 +146,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
             0 -> startActivity(Intent(this, ListProductActivity::class.java))
             1 -> startActivity(Intent(this, AddOrderActivity::class.java))
             2 -> startActivity(Intent(this, CategoryActivity::class.java))
+            3 -> startActivity(Intent(this, CustomerActivity::class.java))
         }
     }
 }

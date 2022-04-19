@@ -73,6 +73,12 @@ class TagInfoAdapter(val context: Context,
         }
     }
 
+    fun removeSelection(){
+        val p = position_selected
+        position_selected = -1
+        notifyItemChanged(p)
+    }
+
     private fun setItemSelected(is_selected:Boolean, imageView:ImageView, textView : TextView){
         if (is_selected){
             imageView.setBackgroundColor(ContextCompat.getColor(context,R.color.blue))

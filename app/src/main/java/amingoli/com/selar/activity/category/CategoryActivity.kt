@@ -54,7 +54,6 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         }
     }
 
-
     private fun initToolbar(title: String) {
         toolbar.title.text = title
         toolbar.ic_back.visibility = View.VISIBLE

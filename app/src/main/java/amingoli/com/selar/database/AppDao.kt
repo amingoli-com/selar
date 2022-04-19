@@ -106,4 +106,25 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBusiness(business: Business) : Long
+
+//    customer
+    @Query("select * from customers")
+    fun selectCustomer(): List<Customers>
+
+    @Query("select * from customers " +
+            "where name LIKE '%' || :search || '%' " +
+            "or phone LIKE '%' || :search || '%' ")
+    fun searchCustomer(search: String): List<Customers>
+
+    @Query("select * from customers where status = :status")
+    fun selectCustomerByStatus(status: Int): List<Customers>
+
+    @Query("select * from customers where status = :id ")
+    fun selectCustomerByOrderCount(id: Int): List<Customers>
+
+    @Query("select * from customers where id = :id")
+    fun selectCustomer(id: Int): Customers?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCustomer(customer: Customers) : Long
 }

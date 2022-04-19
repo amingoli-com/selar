@@ -1,36 +1,31 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
-import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.Customers
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_category_2.view.*
+import kotlinx.android.synthetic.main.item_customer.view.*
 
-class CategoryListAdapter(val context: Context,
-                          val list: ArrayList<Category>,
+class CustomerListAdapter(val context: Context,
+                          val list: ArrayList<Customers>,
                           val listener: Listener
-) : RecyclerView.Adapter<CategoryListAdapter.ListViewHolder>() {
-
-    var position_selected = 0
+) : RecyclerView.Adapter<CustomerListAdapter.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: Category)
+        fun onItemClicked(position: Int, item: Customers, action: String?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_category_2, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -42,27 +37,35 @@ class CategoryListAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.title.text = model.name
-        if (!model.image.isNullOrEmpty()) {
-            item.image.visibility = View.VISIBLE
-            Glide.with(context).load(model.image!!).into(item.image)
-        }else item.image.visibility = View.GONE
+        item.title.setText("${model.name}")
+        item.content.text = model.phone
+
+        item.background_card.backgroundTintList = if (model.status == 1){
+            ContextCompat.getColorStateList(context, R.color.white)
+        }else ContextCompat.getColorStateList(context, R.color.red_70)
+
+        item.box_action.alpha = if (model.phone.isNullOrEmpty()) 0.24f else 1f
+
+        if (!model.phone.isNullOrEmpty()){
+            item.action_sms.setOnClickListener {
+                listener.onItemClicked(position,model,"sms")
+            }
+            item.action_call.setOnClickListener {
+                listener.onItemClicked(position,model,"tel")
+            }
+        }
 
         item.setOnClickListener {
-            val back_position_selected = position_selected
-            position_selected = position
-            listener.onItemClicked(position,model)
-            notifyItemChanged(position_selected, model)
-            notifyItemChanged(back_position_selected, model)
+            listener.onItemClicked(position,model,null)
         }
     }
 
-    fun addItem(item: Category){
+    fun addItem(item: Customers){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: Category, position: Int){
+    fun addItem(item: Customers, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )
@@ -72,11 +75,7 @@ class CategoryListAdapter(val context: Context,
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list : List<Category>){
-        for (i in list.indices){
-            Log.e("qqqq", "updateList category: "+list[i].id )
-        }
-
+    fun updateList(list : List<Customers>){
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

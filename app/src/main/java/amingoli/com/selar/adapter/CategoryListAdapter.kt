@@ -73,10 +73,6 @@ class CategoryListAdapter(val context: Context,
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(list : List<Category>){
-        for (i in list.indices){
-            Log.e("qqqq", "updateList category: "+list[i].id )
-        }
-
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

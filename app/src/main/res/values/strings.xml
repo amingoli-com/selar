@@ -81,12 +81,17 @@
     <string name="test_product_name">دستمال کاغذی حوله ای 3 لا 2 رول سافتلن طلایی پنج سایز سه</string>
     <string name="sood_zarar"><font color="#43A047">28%</font> - <font color="#FFF4511E">5% </font></string>
     <string name="toolbar_title_product">محصولات</string>
-    <string name="search">جستجو</string>
+    <string name="search">جستجو..</string>
     <string name="search_product_name">نام محصول..</string>
     <string name="back_to_all_product">بازگشت به همه محصولات</string>
     <string name="back">بازگشت</string>
     <string name="categorys">دسته بندی ها</string>
     <string name="under_category_by_value"><b><font color="#333">%1$s</font></b> زیر گروه</string>
     <string name="dont_have">بدون</string>
+    <string name="customers">مشتریان</string>
+    <string name="family">نام‌خانوادگی</string>
+    <string name="number_phone">شماره تلفن</string>
+    <string name="customer_name">نام مشتری</string>
+    <string name="customer_status_save_on">وضعیت مشتری فعال باشد</string>
 
 </resources>
