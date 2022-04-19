@@ -60,7 +60,7 @@ class App : MultiDexApplication() {
 
 
         fun priceFormat(double: Double, showMoneyType: Boolean):String{
-            return if (showMoneyType) "${priceFormat(double)} $MONEY"
+            return if (showMoneyType) "${priceFormat(double)} ${Session.getInstance().}"
             else priceFormat(double)
         }
 

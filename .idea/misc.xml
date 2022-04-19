@@ -64,6 +64,7 @@
         <entry key="app/src/main/res/layout/activity_list_product.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26022304832713755" />
         <entry key="app/src/main/res/layout/activity_main_2.xml" value="0.2753623188405797" />
+        <entry key="app/src/main/res/layout/activity_order.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
@@ -90,6 +91,7 @@
         <entry key="app/src/main/res/layout/item_main.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_main_market.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/item_menu_dialog_business_main.xml" value="0.36212056434373663" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_order_waiting.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_order_waitting.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.2552083333333333" />

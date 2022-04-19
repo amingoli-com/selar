@@ -93,5 +93,6 @@
     <string name="number_phone">شماره تلفن</string>
     <string name="customer_name">نام مشتری</string>
     <string name="customer_status_save_on">وضعیت مشتری فعال باشد</string>
+    <string name="orders">سفارشات</string>
 
 </resources>

@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.order.OrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.customer.CustomerActivity"
             android:exported="false" />
         <activity

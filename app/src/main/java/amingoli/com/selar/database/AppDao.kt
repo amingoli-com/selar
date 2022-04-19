@@ -127,4 +127,11 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCustomer(customer: Customers) : Long
+
+//    order
+    @Query("select * from orders")
+    fun selectOrders(): List<Orders>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertOrder(orders: Orders) : Long
 }

@@ -4,6 +4,7 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.customer.CustomerActivity
+import amingoli.com.selar.activity.order.OrderActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
@@ -13,6 +14,7 @@ import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.Customers
+import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.content.Intent
 import android.os.Bundle
@@ -45,14 +47,19 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
 
 
 //        test add data
-        for (i in 1 .. 10){
-            /*App.database.getAppDao().insertCustomer(Customers(
-                "علی $i","گلی $i",
-                "0919519137$i",
-                null, 1,
+        for (i in 11 .. 20){
+            App.database.getAppDao().insertOrder(Orders(
+                1,
                 Session.getInstance().branch,
-                Date(),Date())
-            )*/
+                129098200.0,
+                2000.0,
+                "احمد $i",
+                i*1000.0,
+                i*10000.0,
+                0.0,"saman bank",
+                0.0,
+                29000.0,
+                Date()))
         }
     }
 
@@ -144,7 +151,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
     override fun onItemClicked(position: Int, item: TagList) {
         when(position){
             0 -> startActivity(Intent(this, ListProductActivity::class.java))
-            1 -> startActivity(Intent(this, AddOrderActivity::class.java))
+            1 -> startActivity(Intent(this, OrderActivity::class.java))
             2 -> startActivity(Intent(this, CategoryActivity::class.java))
             3 -> startActivity(Intent(this, CustomerActivity::class.java))
         }

@@ -10,7 +10,6 @@ import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_DIAL
-import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -18,11 +17,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_customer.*
-import kotlinx.android.synthetic.main.activity_customer.toolbar
-import kotlinx.android.synthetic.main.activity_list_product.*
-import kotlinx.android.synthetic.main.item_product.view.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
-import kotlinx.android.synthetic.main.item_toolbar.view.title
 
 class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
 

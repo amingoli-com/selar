@@ -1,7 +1,9 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Customers
+import amingoli.com.selar.model.Orders
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -10,22 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_customer.view.*
+import kotlinx.android.synthetic.main.item_order.view.*
 
-class CustomerListAdapter(val context: Context,
-                          val list: ArrayList<Customers>,
-                          val listener: Listener
-) : RecyclerView.Adapter<CustomerListAdapter.ListViewHolder>() {
+class OrdersListAdapter(val context: Context,
+                        val list: ArrayList<Orders>,
+                        val listener: Listener
+) : RecyclerView.Adapter<OrdersListAdapter.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: Customers, action: String?)
+        fun onItemClicked(position: Int, item: Orders)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_order, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -37,35 +38,25 @@ class CustomerListAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText("${model.name}")
-        item.content.text = model.phone
+        item.title.setText("${model.customer_name}")
+        item.content.text = App.getFormattedDate(model.create_at?.time)
+        item.amount.text = App.priceFormat(model.total_price_order!!,true)
 
         item.background_card.backgroundTintList = if (model.status == 1){
             ContextCompat.getColorStateList(context, R.color.white)
         }else ContextCompat.getColorStateList(context, R.color.red_70)
 
-        item.box_action.alpha = if (model.phone.isNullOrEmpty()) 0.24f else 1f
-
-        if (!model.phone.isNullOrEmpty()){
-            item.action_sms.setOnClickListener {
-                listener.onItemClicked(position,model,"sms")
-            }
-            item.action_call.setOnClickListener {
-                listener.onItemClicked(position,model,"tel")
-            }
-        }
-
         item.setOnClickListener {
-            listener.onItemClicked(position,model,null)
+            listener.onItemClicked(position,model)
         }
     }
 
-    fun addItem(item: Customers){
+    fun addItem(item: Orders){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: Customers, position: Int){
+    fun addItem(item: Orders, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )
@@ -75,7 +66,7 @@ class CustomerListAdapter(val context: Context,
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list : List<Customers>){
+    fun updateList(list : List<Orders>){
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
