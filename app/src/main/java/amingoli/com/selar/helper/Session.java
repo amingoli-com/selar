@@ -125,11 +125,11 @@ public class Session {
     }
 
     public void setBranch(int branch) {
-        extraEditor.putInt(Config.BRANCH, branch);
+        extraEditor.putInt(Config.BUSINESS_ID, branch);
         extraEditor.commit();
     }
     public int getBranch() {
-        return ExtrasPref.getInt(Config.BRANCH, -1);
+        return ExtrasPref.getInt(Config.BUSINESS_ID, -1);
     }
 
 }
