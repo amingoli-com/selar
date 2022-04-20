@@ -2,7 +2,6 @@ package amingoli.com.selar.helper
 
 import amingoli.com.selar.database.AppDatabase
 import amingoli.com.selar.helper.Config.JPG
-import amingoli.com.selar.helper.Config.MONEY
 import amingoli.com.selar.helper.Config.PATH_IMAGES
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -60,7 +59,7 @@ class App : MultiDexApplication() {
 
 
         fun priceFormat(double: Double, showMoneyType: Boolean):String{
-            return if (showMoneyType) "${priceFormat(double)} ${Session.getInstance().}"
+            return if (showMoneyType) "${priceFormat(double)} ${Session.getInstance().moneyType}"
             else priceFormat(double)
         }
 

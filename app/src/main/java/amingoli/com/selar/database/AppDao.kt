@@ -132,6 +132,13 @@ interface AppDao {
     @Query("select * from orders")
     fun selectOrders(): List<Orders>
 
+    @Query("select * from orders " +
+            "where customer_name LIKE '%' || :search || '%' " +
+            "or customer_phone LIKE '%' || :search || '%' "+
+            "or total_price_order LIKE '%' || :search || '%' "+
+            "or create_at LIKE '%' || :search || '%' ")
+    fun searchOrders(search: String): List<Orders>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrder(orders: Orders) : Long
 }

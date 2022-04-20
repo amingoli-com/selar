@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.order
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.adapter.CustomerListAdapter
 import amingoli.com.selar.adapter.OrdersListAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
@@ -41,7 +42,7 @@ class OrderActivity : AppCompatActivity() {
 
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
-
+            startActivity(Intent(this, AddOrderActivity::class.java))
         }
 
 
@@ -69,7 +70,7 @@ class OrderActivity : AppCompatActivity() {
                 EditorInfo.IME_ACTION_DONE,
                 EditorInfo.IME_ACTION_GO,
                 EditorInfo.IME_ACTION_SEARCH->{
-//                    adapter?.updateList(App.database.getAppDao().searchCustomer(App.getString(toolbar.edt_search)))
+                    adapter?.updateList(App.database.getAppDao().searchOrders(App.getString(toolbar.edt_search)))
                     adapterTag?.removeSelection()
                     App.closeKeyboard(this)
                 }
@@ -97,7 +98,7 @@ class OrderActivity : AppCompatActivity() {
             object : TagInfoAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
-//                    adapter?.updateList(selectCustomer(item.tag!!))
+                    adapter?.updateList(selectOrder(item.tag!!))
                 }
             })
 

@@ -47,19 +47,19 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
 
 
 //        test add data
-        for (i in 11 .. 20){
-            App.database.getAppDao().insertOrder(Orders(
-                1,
-                Session.getInstance().branch,
-                129098200.0,
-                2000.0,
-                "احمد $i",
-                i*1000.0,
-                i*10000.0,
-                0.0,"saman bank",
-                0.0,
-                29000.0,
-                Date()))
+        for (i in 1 .. 50){
+//            App.database.getAppDao().insertOrder(Orders(
+//                1,
+//                Session.getInstance().branch,
+//                129098200.0,
+//                2000.0,
+//                "احمد $i",
+//                "0919519137$i",
+//                i*1000.0,
+//                i*10000.0,
+//                0.0,"saman bank",
+//                29000.0,
+//                Date()))
         }
     }
 

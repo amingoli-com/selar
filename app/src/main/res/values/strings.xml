@@ -94,5 +94,7 @@
     <string name="customer_name">نام مشتری</string>
     <string name="customer_status_save_on">وضعیت مشتری فعال باشد</string>
     <string name="orders">سفارشات</string>
+    <string name="order">سفارش</string>
+    <string name="order_customer_name">سفارش <b><font color="#333">%1$s</font></b></string>
 
 </resources>

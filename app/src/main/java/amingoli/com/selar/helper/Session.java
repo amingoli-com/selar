@@ -1,5 +1,7 @@
 package amingoli.com.selar.helper;
 
+import static amingoli.com.selar.helper.Config.MONEY_TYPE_DEFAULT;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -130,6 +132,14 @@ public class Session {
     }
     public int getBranch() {
         return ExtrasPref.getInt(Config.BUSINESS_ID, -1);
+    }
+
+    public void setMoneyType(String moneyType) {
+        extraEditor.putString(Config.MONEY_TYPE, moneyType);
+        extraEditor.commit();
+    }
+    public String getMoneyType() {
+        return ExtrasPref.getString(Config.MONEY_TYPE, MONEY_TYPE_DEFAULT);
     }
 
 }

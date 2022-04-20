@@ -20,6 +20,7 @@ class Orders {
     var branch :Int? = null
     var customer :Int? = null
     var customer_name :String? = null
+    var customer_phone :String? = null
     var total_price_order :Double? = null
     var total_price_profit :Double? = null
     var pay_discount :Double? = null
@@ -44,6 +45,7 @@ class Orders {
         total_price_order: Double?,
         total_price_profit: Double?,
         customer_name: String?,
+        customer_phone: String?,
         pay_discount: Double?,
         pay_cash: Double?,
         pay_card: Double?,
@@ -56,6 +58,7 @@ class Orders {
         this.total_price_order = total_price_order
         this.total_price_profit = total_price_profit
         this.customer_name = customer_name
+        this.customer_phone = customer_phone
         this.pay_discount = pay_discount
         this.pay_cash = pay_cash
         this.pay_card = pay_card

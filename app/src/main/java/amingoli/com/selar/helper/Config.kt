@@ -20,7 +20,8 @@ object Config {
     const val PATH = "/Sealer"
     const val PATH_IMAGES = "$PATH/image"
 
-    const val MONEY = "تومان"
+    const val MONEY_TYPE_DEFAULT = "تومان"
+    const val MONEY_TYPE = "MONEY_TYPE"
 
     const val USER = "user"
     const val BRANCH = "branch"
