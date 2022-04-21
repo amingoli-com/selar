@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.2235" />
         <entry key="app/src/main/res/drawable/ic_local_sela_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/ic_name_image_black_24dp.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/drawable/ic_percent_black_24dp.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_stock_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/ic_svgviewer_output__1_.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/ic_swipe.xml" value="0.212" />
@@ -77,6 +78,7 @@
         <entry key="app/src/main/res/layout/dialog_set_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/include_item_amount.xml" value="0.44114583333333335" />
         <entry key="app/src/main/res/layout/include_item_box.xml" value="0.42481884057971014" />
+        <entry key="app/src/main/res/layout/include_item_dialog_multi_payment.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/include_item_dialog_set_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/include_main_toolbar.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/include_toolbar.xml" value="0.29030797101449274" />

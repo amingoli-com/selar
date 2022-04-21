@@ -62,12 +62,13 @@ class AddOrderCameraAdapter(
                 return
             }
         }
-        list.add(list.size,convertProductToOrderDetail(product))
+        list.add(list.size,convertProductToOrderDetail(product)!!)
         notifyItemInserted(list.size)
     }
 
-    private fun convertProductToOrderDetail(p: Product): OrderDetail{
-        return OrderDetail(null,p.qrcode,p.id,p.image_defult,p.name,1.0,0,p.increase,
-            p.price_buy,p.price_sale,p.price_discount,0.0,0.0)
+    private fun convertProductToOrderDetail(p: Product): OrderDetail?{
+        return null
+//        return OrderDetail(null,p.qrcode,p.id,p.image_defult,p.name,1.0,0,p.increase,
+//            p.price_buy,p.price_sale,p.price_discount,0.0,0.0,0)
     }
 }

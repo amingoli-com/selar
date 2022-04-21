@@ -18,16 +18,20 @@ class Orders {
     var status :Int? = null
     var discount_code :String? = null
     var branch :Int? = null
+    var orders_count :Double = 0.0            // تعداد اقلام سفارش داده شده
+    var total_price_order :Double = 0.0       // مبلغ کل کالاهای سفارش داده شده
+    var total_price_profit :Double = 0.0      // مبلغ سود این سفارش
+    var total_tax :Double = 0.0               // مبلغ مالیات
+    var totla_shipping :Double = 0.0          // هزینه ارسال
+    var totla_all :Double = 0.0               // جمع کل سفارش با احتساب هزینه ارسال و مالیات و کسر تخفیف
     var customer :Int? = null
     var customer_name :String? = null
     var customer_phone :String? = null
-    var total_price_order :Double? = null
-    var total_price_profit :Double? = null
-    var pay_discount :Double? = null
-    var pay_cash :Double? = null
-    var pay_card :Double? = null
-    var pay_card_info :String? = null
-    var pay_tax :Double? = null
+    var customer_debtor :Double = 0.0         // مبلغ بدهی یا مانده مشتری از این سفارش
+    var amount_discount :Double = 0.0         // مبلغ کل تخفیف
+    var amount_cash :Double = 0.0             // مبلغ نقدی پرداخت شده
+    var amount_card :Double = 0.0             // مبلغ پرداخت شده با کارتخوان
+    var card_info :String? = null               // اطلاعات کارت پرداخت شده
     var address :String? = null
     var location :String? = null
     var create_at : Date? = null
@@ -35,37 +39,6 @@ class Orders {
     var delivery_at :Date? = null
     var description_public :String? = null
     var description_private :String? = null
-
-
-
-    @Ignore
-    constructor(
-        status: Int?,
-        branch: Int?,
-        total_price_order: Double?,
-        total_price_profit: Double?,
-        customer_name: String?,
-        customer_phone: String?,
-        pay_discount: Double?,
-        pay_cash: Double?,
-        pay_card: Double?,
-        pay_card_info: String?,
-        pay_tax: Double?,
-        create_at: Date?
-    ) {
-        this.status = status
-        this.branch = branch
-        this.total_price_order = total_price_order
-        this.total_price_profit = total_price_profit
-        this.customer_name = customer_name
-        this.customer_phone = customer_phone
-        this.pay_discount = pay_discount
-        this.pay_cash = pay_cash
-        this.pay_card = pay_card
-        this.pay_card_info = pay_card_info
-        this.pay_tax = pay_tax
-        this.create_at = create_at
-    }
 
     constructor()
 }

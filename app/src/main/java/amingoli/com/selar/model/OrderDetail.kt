@@ -21,7 +21,7 @@ class OrderDetail {
     var price_sale :Double? = null
     var price_discount :Double? = null
     var price_profit :Double? = null
-    var price_tax :Double? = null
+    var tax_percent :Int? = null
 
 
     constructor()
@@ -40,7 +40,7 @@ class OrderDetail {
         price_sale: Double?,
         price_discount: Double?,
         price_profit: Double?,
-        price_tax: Double?
+        tax_percent: Int?
     ) {
         this.id = id
         this.order_code = order_code
@@ -54,6 +54,6 @@ class OrderDetail {
         this.price_sale = price_sale
         this.price_discount = price_discount
         this.price_profit = price_profit
-        this.price_tax = price_tax
+        this.tax_percent = tax_percent
     }
 }

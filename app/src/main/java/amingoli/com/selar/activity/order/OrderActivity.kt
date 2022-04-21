@@ -43,6 +43,7 @@ class OrderActivity : AppCompatActivity() {
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
             startActivity(Intent(this, AddOrderActivity::class.java))
+            finish()
         }
 
 

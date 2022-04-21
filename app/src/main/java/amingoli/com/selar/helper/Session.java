@@ -142,4 +142,20 @@ public class Session {
         return ExtrasPref.getString(Config.MONEY_TYPE, MONEY_TYPE_DEFAULT);
     }
 
+    public void setShippingPrice(Double shippingPrice) {
+        extraEditor.putString(Config.SHIPPING_PRICE, String.valueOf(shippingPrice));
+        extraEditor.commit();
+    }
+    public Double getShippingPrice() {
+        return Double.parseDouble(ExtrasPref.getString(Config.SHIPPING_PRICE, "0.0"));
+    }
+
+    public void setTaxPercent(int taxPercent) {
+        extraEditor.putInt(Config.TAX_PERCENT, taxPercent);
+        extraEditor.commit();
+    }
+    public int getTaxPercent() {
+        return ExtrasPref.getInt(Config.TAX_PERCENT, 0);
+    }
+
 }

@@ -43,7 +43,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private var _PRODUCT_OBJECT : Product? = null
 //    private var _ID_PRODUCT : Int? = null
-    private var _DISCOUNT = 0.0
     private var _IMAGE_DEFULT_PATH = ""
     private var _DATE_EXPIRED: Date? = null
     private var _CATEGORY: ArrayList<Category> = ArrayList()
@@ -131,42 +130,62 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     }
 
     private fun initTextWatcherPrice(){
-        edt_price_buy.addTextChangedListener(PriceTextWatcher(edt_price_buy) {initDiscount()})
-        edt_price_sela_on_product?.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {initDiscount()})
-        edt_price_sela.addTextChangedListener(PriceTextWatcher(edt_price_sela) {initDiscount()})
+        edt_price_buy.addTextChangedListener(PriceTextWatcher(edt_price_buy) {initTextProfitAndDiscount()})
+        edt_price_sela_on_product?.addTextChangedListener(PriceTextWatcher(edt_price_sela_on_product) {initTextProfitAndDiscount()})
+        edt_price_sela.addTextChangedListener(PriceTextWatcher(edt_price_sela) {initTextProfitAndDiscount()})
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initDiscount(){
-        val _buy = App.convertToDouble(edt_price_buy)
-        val _sale_on_product = App.convertToDouble(edt_price_sela_on_product)
-        val _sale = App.convertToDouble(edt_price_sela)
-        val _discount_price = _sale_on_product - _sale
-        val _profit = _sale - _buy
-
-        if (_discount_price > 0 && _sale > 0){
+    private fun initTextProfitAndDiscount(){
+        if (calculateDiscount() > 0){
             if (tv_discount.visibility != View.VISIBLE) tv_discount.visibility = View.VISIBLE
-            tv_discount.setText("این کالا شامل " + App.priceFormat(_discount_price,true) + " تخفیف است")
-            _DISCOUNT = _discount_price
+            tv_discount.setText(getString(R.string.this_product_has_free, App.priceFormat(calculateDiscount(),true)))
         }else{
-            _DISCOUNT = 0.0
             if (tv_discount.visibility != View.GONE) tv_discount.visibility = View.GONE
         }
 
         when {
-            _profit > 0 && _buy > 0 && _sale > 0 -> {
+            calculateProfit() > 0 -> {
                 if (tv_profit.visibility != View.VISIBLE) tv_profit.visibility = View.VISIBLE
-                tv_profit.setText("سود شما از این کالا " + App.priceFormat(_profit, true))
+                tv_profit.setText(getString(R.string.this_product_has_profit, App.priceFormat(calculateProfit(), true)))
                 tv_profit.setTextColor(resources.getColor(R.color.complementary))
             }
-            _profit < 0 && _buy > 0 && _sale > 0 -> {
+            calculateProfit() < 0 -> {
                 if (tv_profit.visibility != View.VISIBLE) tv_profit.visibility = View.VISIBLE
-                tv_profit.setText("ضرر شما از این کالا " + App.priceFormat(_profit, true))
+                tv_profit.setText(getString(R.string.this_product_hast_free, App.priceFormat(calculateProfit(), true)))
                 tv_profit.setTextColor(resources.getColor(R.color.red))
             }
             else -> {
                 if (tv_profit.visibility != View.GONE) tv_profit.visibility = View.GONE
             }
+        }
+    }
+
+    private fun calculateProfit() : Double{
+        val _buy = App.convertToDouble(edt_price_buy)
+        val _sale_on_product = App.convertToDouble(edt_price_sela_on_product)
+        val _sale = App.convertToDouble(edt_price_sela)
+
+        return when {
+            _sale > 0.0 -> {
+                _sale - _buy
+            }
+            _sale_on_product > 0.0 -> {
+                _sale_on_product - _buy
+            }
+            else -> 0.0
+        }
+    }
+
+    private fun calculateDiscount() : Double{
+        val _sale_on_product = App.convertToDouble(edt_price_sela_on_product)
+        val _sale = App.convertToDouble(edt_price_sela)
+
+        return when {
+            _sale_on_product > _sale -> {
+                _sale_on_product - _sale
+            }
+            else -> 0.0
         }
     }
 
@@ -292,6 +311,10 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             edt_name.setError(resources.getString(R.string.not_valid))
             value_is_true = "false"
         }
+        if (_PRODUCT_OBJECT?.tax_percent == null){
+            edt_tax_percent.setError(resources.getString(R.string.not_valid))
+            value_is_true = "false"
+        }
 
         if (_PRODUCT_OBJECT?.increase.isNullOrEmpty()){
             atc_unit.setError(resources.getString(R.string.not_valid))
@@ -315,7 +338,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         if (_PRODUCT_OBJECT?.user == null){
         }
 
-        if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
+        /*if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
             edt_price_buy.setError(resources.getString(R.string.not_valid))
             value_is_true = "false"
         }else if (_PRODUCT_OBJECT?.price_buy!! > 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
@@ -325,6 +348,14 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             _PRODUCT_OBJECT?.price_buy = _PRODUCT_OBJECT?.price_sale
             edt_price_buy.setText(_PRODUCT_OBJECT?.price_buy.toString())
         }
+
+
+        if (_PRODUCT_OBJECT?.price_buy!! < _PRODUCT_OBJECT?.price_sale_on_product!!){
+
+        }*/
+
+
+
         return value_is_true == "true"
     }
 
@@ -332,7 +363,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         _PRODUCT_OBJECT?.id = if (_PRODUCT_OBJECT?.id != null) _PRODUCT_OBJECT?.id!! else null
         _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
         _PRODUCT_OBJECT?.date_expired = App.getString(edt_date)
-        _PRODUCT_OBJECT?.price_discount = _DISCOUNT
         _PRODUCT_OBJECT?.branch = Session.getInstance().branch
         _PRODUCT_OBJECT?.user = Session.getInstance().user
         _PRODUCT_OBJECT?.qrcode = App.getString(edt_barcode)
@@ -342,16 +372,23 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         _PRODUCT_OBJECT?.stock = App.convertToDouble(edt_stock)
         _PRODUCT_OBJECT?.price_buy = App.convertToDouble(edt_price_buy)
         _PRODUCT_OBJECT?.price_sale_on_product = App.convertToDouble(edt_price_sela_on_product)
-        _PRODUCT_OBJECT?.price_sale = App.convertToDouble(edt_price_sela)
+        _PRODUCT_OBJECT?.price_sale =
+            if (App.convertToDouble(edt_price_sela) == 0.0) _PRODUCT_OBJECT?.price_sale_on_product!!
+            else App.convertToDouble(edt_price_sela)
+        _PRODUCT_OBJECT?.price_discount = calculateDiscount()
+        _PRODUCT_OBJECT?.price_profit = calculateProfit()
         _PRODUCT_OBJECT?.max_selection = App.convertToDouble(edt_max_selection)
         _PRODUCT_OBJECT?.min_selection = 1.0
-        _PRODUCT_OBJECT?.tax_percent = 0
+        _PRODUCT_OBJECT?.tax_percent = App.convertToInt(edt_tax_percent)
         _PRODUCT_OBJECT?.status = 1
 
+        if (_PRODUCT_OBJECT?.id != null){
+            _PRODUCT_OBJECT?.updated_at = Date()
+        } else {
+            _PRODUCT_OBJECT?.created_at = Date()
+            _PRODUCT_OBJECT?.updated_at = Date()
+        }
 //        _PRODUCT_OBJECT?.image_code = ""
-//        _PRODUCT_OBJECT?.created_at = ""
-//        _PRODUCT_OBJECT?.update_at = ""
-
         return _PRODUCT_OBJECT!!
     }
 
@@ -362,6 +399,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 _IMAGE_DEFULT_PATH = _PRODUCT_OBJECT!!.image_defult!!
                 ic_delete.visibility = View.VISIBLE
             }
+            if (_PRODUCT_OBJECT?.tax_percent != null) edt_tax_percent.setText(_PRODUCT_OBJECT?.tax_percent!!.toString())
             edt_barcode.setText(_PRODUCT_OBJECT?.qrcode)
             atc_unit.setText(_PRODUCT_OBJECT?.increase)
             edt_name.setText(_PRODUCT_OBJECT?.name)
@@ -375,6 +413,9 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 tv_add_date_expire.setText(resources.getString(R.string.expired_at,_PRODUCT_OBJECT?.date_expired))
                 edt_date.setText(_PRODUCT_OBJECT?.date_expired)
             }
+            initTextProfitAndDiscount()
+        }else{
+            edt_tax_percent.setText(Session.getInstance().taxPercent)
         }
     }
 

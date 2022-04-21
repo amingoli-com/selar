@@ -16,6 +16,9 @@ object Config {
     const val CAMERA = "camera"
     const val GALLERY = "gallery"
 
+    const val ORDER_STATUS_WAITING = 0
+    const val ORDER_STATUS_SUCCESS = 1
+
     const val JPG = ".jpg"
     const val PATH = "/Sealer"
     const val PATH_IMAGES = "$PATH/image"
@@ -29,5 +32,7 @@ object Config {
     const val BUSINESS_NAME = "BUSINESS_NAME"
     const val BUSINESS_ID = "BUSINESS_ID"
     const val SESSION_KEY = "SESSION_KEY"
+    const val SHIPPING_PRICE = "SHIPPING_PRICE"
+    const val TAX_PERCENT = "TAX_PERCENT"
 
 }

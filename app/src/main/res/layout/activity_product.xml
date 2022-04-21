@@ -134,6 +134,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
+                            android:id="@+id/edt_tax_percent"
+                            style="@style/Edittext.product.Decimal"
+                            android:inputType="numberDecimal"
+                            android:maxLength="3"
+                            android:maxLines="1"
+                            android:digits="0123456789"
+                            android:drawableStart="@drawable/ic_percent_black_24dp"
+                            android:hint="@string/percent_tax" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
                             android:id="@+id/edt_max_selection"
                             style="@style/Edittext.product.Decimal"
                             android:inputType="numberDecimal"
@@ -257,8 +271,11 @@
                         android:id="@+id/tv_discount"
                         android:visibility="gone"
                         tools:visibility="visible"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:drawablePadding="@dimen/_5sdp"
                         android:drawableStart="@drawable/ic_discount_black_24dp"
+                        android:drawableTint="@color/blue"
+                        android:textColor="@color/blue"
                         tools:text="این کالا شامل ۸,۰۰۰ تومان تخفیف معادل ۲ درصد می‌باشد"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -267,9 +284,10 @@
                         android:id="@+id/tv_profit"
                         android:visibility="gone"
                         tools:visibility="visible"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:drawableStart="@drawable/ic_attach_money_black_24dp"
-                        android:drawableTint="@color/complementary"
+                        android:drawableStart="@drawable/ic_baseline_monetization_on_24"
+                        android:drawableTint="@color/blue"
                         android:textColor="@color/complementary"
                         android:textStyle="bold"
                         tools:text="سود خالص این کالا ۲۷,۰۰۰ تومان"

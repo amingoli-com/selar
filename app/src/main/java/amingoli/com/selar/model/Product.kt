@@ -24,6 +24,7 @@ class Product {
     var price_sale_on_product :Double? =  0.0
     var price_sale :Double? =  0.0
     var price_discount :Double? =  0.0
+    var price_profit :Double? =  0.0
     var min_selection :Double? = null
     var max_selection :Double? = null
     var increase :String? = null

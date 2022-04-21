@@ -46,6 +46,7 @@
     <string name="all_order_one">جمع‌سفارش</string>
     <string name="shipping_price">هزینه ارسال</string>
     <string name="total_amount">جمع هزینه‌ها</string>
+    <string name="amount_pay">قابل پرداخت</string>
     <string name="pay">پرداخت</string>
     <string name="no_data_to_display">اطلاعاتی برای نمایش وجود ندارد!</string>
     <string name="stock_count"><b> <font color="#333">%1$s</font></b> قلم</string>
@@ -96,5 +97,13 @@
     <string name="orders">سفارشات</string>
     <string name="order">سفارش</string>
     <string name="order_customer_name">سفارش <b><font color="#333">%1$s</font></b></string>
+    <string name="multi_pay">ترکیبی</string>
+    <string name="card_pay">کارتخوان</string>
+    <string name="cash_money_pay">پول‌نقد</string>
+    <string name="test_pay_000_by">پرداخت 120,390,000 تومان به صورت:</string>
+    <string name="debit">نسیه</string>
+    <string name="this_product_has_free">این کالا شامل <b><font color="#333">%1$s</font></b> تخفیف است</string>
+    <string name="this_product_has_profit">سود شما از این کالا <b><font color="#333">%1$s</font></b></string>
+    <string name="this_product_hast_free">ضرر شما از این کالا <b><font color="#333">%1$s</font></b></string>
 
 </resources>

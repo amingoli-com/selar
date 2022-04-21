@@ -38,6 +38,10 @@ class ListProductActivity : AppCompatActivity() {
         initRecyclerProduct()
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun initToolbar(){
         toolbar.title.text = resources.getString(R.string.toolbar_title_product)
         toolbar.ic_back.visibility = View.VISIBLE

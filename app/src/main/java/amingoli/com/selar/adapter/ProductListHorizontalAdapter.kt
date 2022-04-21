@@ -42,8 +42,12 @@ class ProductListHorizontalAdapter(
 
         try {
             item.title.text = model.name
-            item.price_sela.text = App.priceFormat(model.price_sale!!)
-            item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!)
+
+            val price_sale = if (model.price_sale!! > 0 ) model.price_sale else model.price_sale_on_product
+            item.price_sela.text = App.priceFormat(price_sale!!)
+            if (model.price_sale_on_product!! > model.price_sale!! && model.price_sale!! > 0) {
+                item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!)
+            }
 
         }catch (e : Exception){
         }
