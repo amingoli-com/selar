@@ -5,6 +5,7 @@ import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.dialog.CustomerDialog
 import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.*
 import amingoli.com.selar.widget.select_product.SelectProduct
@@ -26,8 +27,12 @@ import com.budiyev.android.codescanner.ScanMode
 import kotlinx.android.synthetic.main.activity_add_order.*
 import kotlinx.android.synthetic.main.activity_add_order_camera.edt
 import kotlinx.android.synthetic.main.activity_add_order_camera.recyclerView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener {
+
+    private val ORDER_CODE = System.currentTimeMillis().toString()
 
     private var this_order = Orders()
     private var adapter: AddOrderAdapter? = null
@@ -116,7 +121,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     }
 
     private fun initOrderList(){
-        adapter = AddOrderAdapter(this, ArrayList(),object : AddOrderAdapter.Listener{
+        adapter = AddOrderAdapter(this,ORDER_CODE, ArrayList(),object : AddOrderAdapter.Listener{
             override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
             }
             override fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>) {
@@ -194,13 +199,22 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         submit_order.setOnClickListener {
             SetPaymentDialog(this,getOrder(),this).show()
         }
+        submit_order_waiting.setOnClickListener {
+            this_order.status = ORDER_STATUS_WAITING
+            this_order.customer_debtor = totla_all
+            getOrder()
+            insertOrder()
+        }
+        exit.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     /**
      * get
      * */
-
     private fun getOrder(): Orders{
+        this_order.order_code = ORDER_CODE
         this_order.orders_count = totla_count_orders
         this_order.total_price_order = totla_price_orders_sale
         this_order.total_price_profit = total_price_profit
@@ -208,14 +222,24 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         this_order.totla_shipping = totla_shipping
         this_order.amount_discount = totla_discount
         this_order.totla_all = totla_all
+        this_order.create_at = Date()
+        this_order.update_at = Date()
 
         return this_order
     }
 
     /**
+     * Insert Database
+    * */
+    private fun insertOrder(){
+        App.database.getAppDao().insertOrderDetail(adapter?.listOrderDetail()!!)
+        App.database.getAppDao().insertOrder(this_order)
+        finish()
+    }
+
+    /**
      * Listener
      * */
-
     private fun resultScan(barcode:String, device:String){
         sound_scaner?.start()
         val p = App.database.getAppDao().selectProductByQR(barcode)
@@ -268,5 +292,6 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 "card: ${this_order.pay_card} \n" +
                 "card info: ${this_order.pay_card_info} \n" +
                 "debit customer: ${this_order.customer_debtor} \n" )
+        insertOrder()
     }
 }

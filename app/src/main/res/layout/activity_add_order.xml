@@ -244,6 +244,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
+                        android:id="@+id/submit_order_waiting"
                         style="@style/Text.Body2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -258,6 +259,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
+                        android:id="@+id/exit"
                         style="@style/Text.Body2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

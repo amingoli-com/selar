@@ -132,8 +132,40 @@ interface AppDao {
     fun insertCustomer(customer: Customers) : Long
 
 //    order
-    @Query("select * from orders")
+    @Query("select * from orders ORDER BY ID DESC")
     fun selectOrders(): List<Orders>
+
+    @Query("select * from orders where status = :status")
+    fun selectOrders(status: Int): List<Orders>
+
+    @Query("select * from orders ORDER BY total_price_profit DESC")
+    fun selectOrdersByMostProfit(): List<Orders>
+
+    @Query("select * from orders ORDER BY total_price_profit ASC")
+    fun selectOrdersByLeastProfit(): List<Orders>
+
+    @Query("select * from orders where customer_debtor <= 0 ")
+    fun selectOrdersByPied(): List<Orders>
+
+    @Query("select * from orders where customer_debtor >= 1 ")
+    fun selectOrdersByUnPied(): List<Orders>
+
+    @Query("select * from orders where pay_card <=0 and pay_cash >= 1 ")
+    fun selectOrdersByMoney(): List<Orders>
+
+    @Query("select * from orders where pay_card >=1 and pay_cash <= 0 ")
+    fun selectOrdersByCard(): List<Orders>
+
+    @Query("select * from orders where pay_card >=1 and pay_cash >=1")
+    fun selectOrdersMultiPay(): List<Orders>
+
+    @Query("select * from orders ORDER BY orders_count DESC  ")
+    fun selectOrdersMostCount(): List<Orders>
+
+    @Query("select * from orders ORDER BY orders_count ASC  ")
+    fun selectOrdersLeastCount(): List<Orders>
+
+
 
     @Query("select * from orders " +
             "where customer_name LIKE '%' || :search || '%' " +
@@ -144,4 +176,8 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrder(orders: Orders) : Long
+
+//    order detail
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertOrderDetail(orderDetail: ArrayList<OrderDetail>) : List<Long>
 }

@@ -38,7 +38,11 @@ class OrdersListAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText(context.getString(R.string.order_customer_name,model.customer_name))
+        item.title.setText(context.getString(R.string.order_customer_name,
+            if (model.customer_name.isNullOrEmpty()){
+                "#${model.id}"
+            } else model.customer_name
+        ))
         item.content.text = App.getFormattedDate(model.create_at?.time)
         item.amount.text = App.priceFormat(model.total_price_order!!,true)
 

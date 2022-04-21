@@ -7,6 +7,7 @@ import amingoli.com.selar.adapter.OrdersListAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.dialog.InsertCustomerDialog
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.model.Customers
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
@@ -82,7 +83,7 @@ class OrderActivity : AppCompatActivity() {
 
     private fun initAdapterTagList(){
         val array_tag = ArrayList<TagList>()
-        array_tag.add(TagList("همه", R.drawable.ic_baseline_storefront_24,"all"))
+        array_tag.add(TagList("آخرین‌سفارشات", R.drawable.ic_baseline_storefront_24,"all"))
         array_tag.add(TagList("در انتظار", R.drawable.ic_baseline_browse_gallery_24,"waiting"))
         array_tag.add(TagList("بیشترین سود", R.drawable.ic_baseline_add_circle_24,"most_gain"))
         array_tag.add(TagList("کمترین سود", R.drawable.ic_baseline_remove_circle_24,"least_gain"))
@@ -118,7 +119,18 @@ class OrderActivity : AppCompatActivity() {
 
     private fun selectOrder(query: String) : List<Orders>{
         return when(query){
-            else -> App.database.getAppDao().selectOrders()
+            "all"->         App.database.getAppDao().selectOrders()
+            "waiting"->     App.database.getAppDao().selectOrders(ORDER_STATUS_WAITING)
+            "most_gain"->   App.database.getAppDao().selectOrdersByMostProfit()
+            "least_gain"->  App.database.getAppDao().selectOrdersByLeastProfit()
+            "paid"->        App.database.getAppDao().selectOrdersByPied()
+            "unpaid"->      App.database.getAppDao().selectOrdersByUnPied()
+            "money"->       App.database.getAppDao().selectOrdersByMoney()
+            "card"->        App.database.getAppDao().selectOrdersByCard()
+            "multi_pay"->   App.database.getAppDao().selectOrdersMultiPay()
+            "most_count"->  App.database.getAppDao().selectOrdersMostCount()
+            "least_count"-> App.database.getAppDao().selectOrdersLeastCount()
+            else ->         App.database.getAppDao().selectOrders()
         }
     }
 

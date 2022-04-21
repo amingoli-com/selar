@@ -26,6 +26,7 @@ class ListProductActivity : AppCompatActivity() {
     private var adapterProduct : ProductListManagerAdapter? = null
     private var adapterTagList : CategoryListAdapter? = null
     private var last_search : String? = null
+    private var _product_position = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

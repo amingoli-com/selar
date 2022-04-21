@@ -20,6 +20,7 @@ import kotlin.collections.ArrayList
 
 class AddOrderAdapter(
     val context: Context,
+    val ORDER_CODE: String,
     val list: ArrayList<OrderDetail>,
     val listener: Listener
 ): RecyclerView.Adapter<AddOrderAdapter.ListViewHolder>() {
@@ -75,6 +76,10 @@ class AddOrderAdapter(
         listener.onChangeListener(list.size,list)
     }
 
+    fun listOrderDetail() : ArrayList<OrderDetail>{
+        return list
+    }
+
     private fun notifyItemChangedBySwap(position_old: Int, position_new: Int){
         if (position_old != position_new){
             Collections.swap(list, position_old, position_new)
@@ -87,7 +92,7 @@ class AddOrderAdapter(
 
     private fun convertProductToOrderDetail(p: Product): OrderDetail{
         val price_sale = if (p.price_sale!! > 0 ) p.price_sale else p.price_sale_on_product
-        return OrderDetail(null,p.qrcode,p.id,p.image_defult,p.name,1.0,0,p.increase,
+        return OrderDetail(null,ORDER_CODE,p.id,p.qrcode,p.image_defult,p.name,1.0,0,p.increase,
             p.price_buy,
             price_sale,
             p.price_discount,p.price_profit,p.tax_percent)
