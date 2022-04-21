@@ -1,5 +1,6 @@
 package amingoli.com.selar.database
 
+import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.model.*
 import androidx.room.*
 

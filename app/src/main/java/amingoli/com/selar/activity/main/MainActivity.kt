@@ -11,6 +11,7 @@ import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.Customers
@@ -18,6 +19,7 @@ import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.components.Description
@@ -34,6 +36,9 @@ import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
+
+    private var ordersWaiting = ArrayList<Orders>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -83,6 +88,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
 
     private fun initData(){
         initDataSetText()
+        initVisibilityOrderWaiting()
     }
 
     private fun initDataSetText(){
@@ -90,16 +96,16 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
         toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
     }
 
+    private fun initVisibilityOrderWaiting(){
+        if (!ordersWaiting.isNullOrEmpty()){
+            box_order_waiting.visibility = View.VISIBLE
+        }else if (box_order_waiting.visibility != View.GONE) box_order_waiting.visibility = View.GONE
+    }
+
 //    test
     private fun initRecyclerViewOrderWaiting(){
-        val arrayList = ArrayList<TagList>()
-        arrayList.add(TagList("محمدحسین آقایی","290,000 تومان"))
-        arrayList.add(TagList("مشتری متفرقه","900,000 تومان"))
-        arrayList.add(TagList("اصغر فرهادی","870,000 تومان"))
-        arrayList.add(TagList("علیرضا اسماعیلی","20,000 تومان"))
-        arrayList.add(TagList("میز ۲","170,000 تومان"))
-        arrayList.add(TagList("میز ۸","6,200,900 تومان"))
-        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,arrayList,null)
+        ordersWaiting = ArrayList(App.database.getAppDao().selectOrders(ORDER_STATUS_WAITING))
+        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,ordersWaiting,null)
     }
 
     private fun initRecyclerViewItemMain(){
@@ -115,10 +121,9 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
         recyclerView.adapter = ItemMainAdapter(this,arrayList,this)
     }
 
-
+//    Test
     private var barEntryArrayList: ArrayList<BarEntry> = ArrayList()
     private var labelNames: ArrayList<String> = ArrayList()
-
     private fun barChartAdapter() {
         for (i in 0 until 10) {
             val month: String = "فروردین"

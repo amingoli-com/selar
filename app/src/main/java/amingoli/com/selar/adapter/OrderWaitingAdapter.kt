@@ -1,6 +1,8 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.helper.App
+import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +15,7 @@ import kotlinx.android.synthetic.main.item_order_waiting.view.*
 
 class OrderWaitingAdapter(
     val context: Context,
-    val list: ArrayList<TagList>,
+    val list: ArrayList<Orders>,
     val listener: Listener?
 ): RecyclerView.Adapter<OrderWaitingAdapter.ListViewHolder>() {
 
@@ -21,7 +23,7 @@ class OrderWaitingAdapter(
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: TagList)
+        fun onItemClicked(position: Int, item: Orders)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -37,14 +39,14 @@ class OrderWaitingAdapter(
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText(model.title)
-        item.desc.setText(model.tag)
+        item.title.setText(if (model.customer_name.isNullOrEmpty()) "سفارش #${model.id}" else model.customer_name)
+        item.desc.setText(App.priceFormat(model.totla_all))
 
         if (listener != null) item.setOnClickListener { listener.onItemClicked(position, model) }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addItem(item: TagList){
+    fun addItem(item: Orders){
         list.add(item)
         notifyDataSetChanged()
     }
