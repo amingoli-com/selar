@@ -11,86 +11,64 @@
     tools:ignore="UnusedAttribute,UseCompatTextViewDrawableXml">
 
 
-    <TextView
-        android:id="@+id/tv_amount"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:paddingHorizontal="@dimen/_15sdp"
-        style="@style/Text.Body1"
-        android:drawablePadding="@dimen/_5sdp"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/complementary"
-        android:drawableTint="@color/complementary"
-        android:drawableStart="@drawable/ic_baseline_monetization_on_24"
-        tools:text="@string/amount_pay_vlaue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
-        android:layout_margin="@dimen/_5sdp"
-        android:padding="@dimen/_10sdp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:paddingHorizontal="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_money"
-            style="@style/Text.Body1"
-            android:textStyle="bold"
-            android:textColor="@color/green_2"
-            android:drawableTint="@color/green_2"
-            android:drawableTop="@drawable/ic_local_sela_black_24dp"
-            android:text="@string/cash_money_pay"
-            android:textAlignment="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/box_edt_pay_cash_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_pay_cash_money"
+                style="@style/Edittext.product.Decimal"
+                android:drawableStart="@drawable/ic_local_sela_black_24dp"
+                android:hint="@string/cash_money_pay" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_card"
-            style="@style/Text.Body1"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
-            android:drawableTint="@color/blue"
-            android:drawableTop="@drawable/ic_baseline_credit_card_24"
-            android:text="@string/card_pay"
-            android:textAlignment="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/box_edt_pay_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_pay_card"
+                style="@style/Edittext.product.Decimal"
+                android:drawableStart="@drawable/ic_baseline_credit_card_24"
+                android:hint="@string/card_pay" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_multi_pay"
-            style="@style/Text.Body1"
-            android:textStyle="bold"
-            android:textColor="@color/orange"
-            android:drawableTint="@color/orange"
-            android:drawableTop="@drawable/ic_unit_symbols_black_24dp"
-            android:text="@string/multi_pay"
-            android:textAlignment="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/tv_debit"
-            style="@style/Text.Body1"
-            android:textStyle="bold"
-            android:textColor="@color/primaryVariant"
-            android:drawableTint="@color/primaryVariant"
-            android:drawableTop="@drawable/ic_baseline_browse_gallery_24"
-            android:text="@string/debit"
-            android:textAlignment="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/box_edt_pay_debit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_pay_debit"
+                style="@style/Edittext.product.Decimal"
+                android:drawableStart="@drawable/ic_baseline_browse_gallery_24"
+                android:hint="@string/debit" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
+    <amingoli.com.selar.widget.loader_button.LoaderButton
+        android:id="@+id/submit"
+        android:alpha="0.3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:background="@drawable/background_complementary"
+        android:backgroundTint="@color/complementary"
+        android:clickable="true"
+        android:focusable="true"
+        app:btnText="@string/pay"
+        app:btnTextSize="@dimen/_14ssp"
+        app:loaderIndicator="BallPulseIndicator"
+        app:loaderIndicatorColor="@color/white" />
+
     <TextView
-        android:id="@+id/tv_submit"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:alpha="0"
-        tools:alpha="1"
+        android:id="@+id/back"
         style="@style/Text.Title"
         android:textAlignment="center"
         android:gravity="center"
@@ -99,8 +77,9 @@
         android:layout_marginBottom="@dimen/_5sdp"
         android:textColor="@color/white"
         android:background="@drawable/background_radius"
-        android:backgroundTint="@color/complementary"
-        android:text="@string/submit"
+        android:padding="@dimen/_2sdp"
+        android:backgroundTint="@color/red"
+        android:text="@string/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

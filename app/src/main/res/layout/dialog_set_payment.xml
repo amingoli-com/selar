@@ -9,8 +9,28 @@
     android:padding="@dimen/_5sdp"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_15sdp"
+        style="@style/Text.Body1"
+        android:drawablePadding="@dimen/_5sdp"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/complementary"
+        android:drawableTint="@color/complementary"
+        android:drawableStart="@drawable/ic_baseline_monetization_on_24"
+        tools:text="@string/amount_pay_vlaue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <include
         android:id="@+id/pay"
         layout="@layout/include_item_dialog_set_payment"/>
+
+    <include
+        android:id="@+id/box_multi"
+        android:visibility="gone"
+        tools:visibility="visible"
+        layout="@layout/include_item_dialog_set_multi_pay"/>
 
 </LinearLayout>

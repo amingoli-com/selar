@@ -14,6 +14,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -237,19 +238,35 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         adapter?.addItem(product)
     }
 
-    override fun onPayedByMoneyCash(orders: Orders) {
+    override fun onPayedByMoneyCash(dialog: SetPaymentDialog, orders: Orders) {
         this_order = orders
+        dialog.dismiss()
+        loge()
     }
 
-    override fun onPayedByCard(orders: Orders) {
-        TODO("Not yet implemented")
+    override fun onPayedByCard(dialog: SetPaymentDialog, orders: Orders) {
+        this_order = orders
+        dialog.dismiss()
+        loge()
     }
 
-    override fun onPayedByMultiCash(orders: Orders) {
-        TODO("Not yet implemented")
+    override fun onPayedByMultiCash(dialog: SetPaymentDialog, orders: Orders) {
+        this_order = orders
+        dialog.dismiss()
+        loge()
     }
 
-    override fun onPayedByDebit(orders: Orders) {
-        TODO("Not yet implemented")
+    override fun onPayedByDebit(dialog: SetPaymentDialog, orders: Orders) {
+        this_order = orders
+        dialog.dismiss()
+        loge()
+    }
+
+    private fun loge(){
+        Log.e("qqqq",
+            "cahs money: ${this_order.pay_cash} \n" +
+                "card: ${this_order.pay_card} \n" +
+                "card info: ${this_order.pay_card_info} \n" +
+                "debit customer: ${this_order.customer_debtor} \n" )
     }
 }

@@ -415,14 +415,13 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             }
             initTextProfitAndDiscount()
         }else{
-            edt_tax_percent.setText(Session.getInstance().taxPercent)
+            edt_tax_percent.setText(Session.getInstance().taxPercent.toString())
         }
     }
 
     /**
      * Listener
      * */
-
 //    Select Category Dialog
     override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
         initCategory()

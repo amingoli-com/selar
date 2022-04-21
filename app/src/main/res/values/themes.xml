@@ -62,11 +62,13 @@
 
 
     <style name="Edittext.product.Price">
+        <item name="android:inputType">number</item>
         <item name="android:digits">0123456789</item>
     </style>
 
     <style name="Edittext.product.Decimal">
         <item name="android:gravity">start</item>
+        <item name="android:inputType">numberDecimal</item>
         <item name="android:digits">0123456789.</item>
     </style>
 
