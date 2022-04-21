@@ -111,6 +111,9 @@ interface AppDao {
     @Query("select * from customers")
     fun selectCustomer(): List<Customers>
 
+    @Query("select * from customers where status = 1")
+    fun selectCustomerActive(): List<Customers>
+
     @Query("select * from customers " +
             "where name LIKE '%' || :search || '%' " +
             "or phone LIKE '%' || :search || '%' ")

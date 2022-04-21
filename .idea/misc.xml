@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable-v24/background_radius_basket_adder.xml" value="0.176" />
         <entry key="app/src/main/res/drawable-v24/background_radius_biger.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable-v24/background_radius_biger_selected.xml" value="0.1485" />
+        <entry key="app/src/main/res/drawable-v24/dialog_menu_customer.xml" value="0.212" />
         <entry key="app/src/main/res/drawable-v24/ic_gallery_background.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/aaaaaaa.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.25677083333333334" />
@@ -69,6 +70,7 @@
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/dialog_customer.xml" value="0.17225747960108795" />
         <entry key="app/src/main/res/layout/dialog_edit_business.xml" value="0.17225747960108795" />
         <entry key="app/src/main/res/layout/dialog_insert_category.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/dialog_insert_customer.xml" value="0.24711415134672937" />
@@ -92,6 +94,7 @@
         <entry key="app/src/main/res/layout/item_list_jop.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_main.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_main_market.xml" value="0.2753623188405797" />
+        <entry key="app/src/main/res/layout/item_menu_dialog_add_customer.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_menu_dialog_business_main.xml" value="0.36212056434373663" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_order_waiting.xml" value="0.24711415134672937" />

@@ -17,26 +17,24 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edt_owner"
+                android:id="@+id/edt_name"
                 style="@style/Edittext.product"
-                android:background="@color/transparent"
-                android:drawableStart="@drawable/ic_baseline_emoji_emotions_24"
-                android:hint="@string/name_business_owner" />
+                android:drawableStart="@drawable/ic_account_circle_black_24dp"
+                android:hint="@string/customer_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edt_business_name"
-                android:imeOptions="actionDone"
+                android:id="@+id/edt_tel"
                 style="@style/Edittext.product"
-                android:background="@color/transparent"
-                android:drawableStart="@drawable/ic_baseline_storefront_24"
-                android:hint="@string/business_name" />
+                android:drawableStart="@drawable/ic_baseline_call_24"
+                android:hint="@string/number_phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -49,7 +47,7 @@
         android:background="@drawable/background_complementary"
         android:clickable="true"
         android:focusable="true"
-        app:btnText="@string/edit"
+        app:btnText="@string/add"
         app:btnTextSize="@dimen/_14ssp"
         app:loaderIndicator="BallPulseIndicator"
         app:loaderIndicatorColor="@color/white" />

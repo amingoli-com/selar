@@ -2,13 +2,11 @@ package amingoli.com.selar.activity.add_order
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.AddOrderAdapter
+import amingoli.com.selar.dialog.CustomerDialog
 import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.OrderDetail
-import amingoli.com.selar.model.Orders
-import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.*
 import amingoli.com.selar.widget.select_product.SelectProduct
 import amingoli.com.selar.widget.text_watcher.EditTextWatcher
 import android.annotation.SuppressLint
@@ -176,6 +174,21 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 ic_select_product.imageTintList = ContextCompat.getColorStateList(this,R.color.blue)
                 selectProduct.visibility = View.GONE
             }
+        }
+        tv_customer.setOnClickListener {
+            CustomerDialog(this, object : CustomerDialog.Listener{
+                @SuppressLint("SetTextI18n")
+                override fun onCustomerClicked(dialog: CustomerDialog, customers: Customers?) {
+                    this_order.customer = customers?.id
+                    this_order.customer_name = customers?.name
+                    this_order.customer_phone = customers?.phone
+                    tv_customer.setText("${this_order.customer_name} ${
+                                if (this_order.customer_phone.isNullOrEmpty()) "" 
+                                else this_order.customer_phone
+                            }")
+                }
+
+            }).show(supportFragmentManager,"customer")
         }
         submit_order.setOnClickListener {
             SetPaymentDialog(this,getOrder(),this).show()

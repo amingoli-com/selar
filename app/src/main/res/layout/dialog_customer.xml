@@ -8,27 +8,45 @@
     android:paddingBottom="@dimen/_5sdp"
     android:paddingRight="@dimen/_15sdp"
     android:paddingLeft="@dimen/_15sdp"
-    android:backgroundTint="@color/white"
-    android:background="@drawable/dialog_menu_background_inset">
+    android:backgroundTint="@color/background_dialog"
+    android:background="@drawable/dialog_menu_customer">
 
     <LinearLayout
         android:id="@+id/box_one"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_75sdp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/box_main"
-            layout="@layout/item_menu_dialog_business_main"/>
+        <TextView
+            android:id="@+id/tv_add"
+            android:text="@string/add_new_customer"
+            android:textStyle="bold"
+            android:drawableTint="@color/blue"
+            android:drawableStart="@drawable/ic_baseline_add_circle_24"
+            android:drawablePadding="@dimen/_5sdp"
+            style="@style/Text.Body1"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <include
-            android:id="@+id/box_edit"
-            android:alpha="0"
-            tools:alpha="1"
+            android:id="@+id/box_add"
             android:visibility="gone"
             tools:visibility="visible"
-            layout="@layout/item_menu_dialog_business_edit"/>
+            layout="@layout/item_menu_dialog_add_customer"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:overScrollMode="never"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_customer"
+            tools:itemCount="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </RelativeLayout>

@@ -105,5 +105,8 @@
     <string name="this_product_has_free">این کالا شامل <b><font color="#333">%1$s</font></b> تخفیف است</string>
     <string name="this_product_has_profit">سود شما از این کالا <b><font color="#333">%1$s</font></b></string>
     <string name="this_product_hast_free">ضرر شما از این کالا <b><font color="#333">%1$s</font></b></string>
+    <string name="choose_customer">انتخاب مشتری</string>
+    <string name="add">افزودن</string>
+    <string name="add_new_customer">افزودن مشتری جدید</string>
 
 </resources>

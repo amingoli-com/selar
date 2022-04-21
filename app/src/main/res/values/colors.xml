@@ -32,6 +32,7 @@
     <color name="test">#F4511E</color>
 
     <color name="background_activity">@color/background_app</color>
+    <color name="background_dialog">@color/white</color>
     <color name="background_app">#EFEFF5</color>
     <color name="primaryText">@color/black</color>
     <color name="basket_adder_ic_add">#549C0C</color>
