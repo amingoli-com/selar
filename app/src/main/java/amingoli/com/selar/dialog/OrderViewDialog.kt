@@ -4,11 +4,17 @@ import amingoli.com.selar.R
 import amingoli.com.selar.activity.first_open.FirstOpenActivity
 import amingoli.com.selar.adapter.BusinessListAdapter
 import amingoli.com.selar.adapter.OrderDetailAdapter
+import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config
+import amingoli.com.selar.helper.Config.ORDER_STATUS_SUCCESS
+import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.OrderDetail
 import amingoli.com.selar.model.Orders
+import amingoli.com.selar.model.TagList
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -20,7 +26,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.activity_customer.*
 import kotlinx.android.synthetic.main.dialog_order_view.*
+import kotlinx.android.synthetic.main.dialog_order_view.recyclerView
+import kotlinx.android.synthetic.main.dialog_order_view.recyclerView_tag
 import kotlinx.android.synthetic.main.include_item_amount_bold.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -28,6 +37,7 @@ import kotlin.collections.ArrayList
 class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Listener?) : DialogFragment() {
 
     private var this_order = App.database.getAppDao().selectOrdersById(order_id)
+    private var adapterTag : TagInfoAdapter? =null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -40,6 +50,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
 
         initOrderData()
         initOnClick()
+        initAdapterTagList()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,12 +60,19 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
     }
 
     interface Listener{
-        fun onEditBusiness(dialog: OrderViewDialog, order: Orders?)
+        fun onEditOrder(dialog: OrderViewDialog, order: Orders?)
     }
 
     private fun initOrderData(){
-        tv_order_status.setText("در انتظار")
-//        tv_order_status.setCompoundDrawables(null,null,null,null)
+        tv_order_status.setText(when{
+            this_order.status == ORDER_STATUS_WAITING -> _context.getString(R.string.order_waiting)
+            this_order.status == ORDER_STATUS_SUCCESS ->{
+                if (this_order.customer_debtor <= 0){
+                    "پرداخت شده"
+                }else "تسویه نشده"
+            }
+            else -> ""
+        })
 
         tv_business_name.setText(Session.getInstance().businessName)
 
@@ -70,16 +88,31 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
         total_shipping.setText(_context.getString(R.string.shipping_price), this_order.totla_shipping)
         total_discount_free.setText(_context.getString(R.string.price_discount), this_order.amount_discount)
         total_pay.setText(_context.getString(R.string.amount_pay), this_order.totla_all)
+
+        tv_date.setText("ثبت شده‌در ${App.getFormattedDate(this_order.create_at?.time)}")
     }
 
     private fun initOnClick(){
-//        tv_edit.setOnClickListener {
-//            listener?.onEditBusiness(this, this_order)
-//            dismiss()
-//        }
         ic_close.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun initAdapterTagList(){
+        val array_tag = ArrayList<TagList>()
+        array_tag.add(TagList("ویرایش", R.drawable.ic_baseline_extension_24,"all"))
+        array_tag.add(TagList("حذف", R.drawable.ic_baseline_delete_24,"all"))
+
+        adapterTag = TagInfoAdapter(_context,
+            array_tag,
+            object : TagInfoAdapter.Listener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onItemClicked(position: Int, item: TagList) {
+
+                }
+            })
+
+        recyclerView_tag.adapter = adapterTag
     }
 
     private fun initRecyclerView(){

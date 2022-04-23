@@ -44,6 +44,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:paddingVertical="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -123,6 +124,55 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tag"
+                android:visibility="gone"
+                android:clipToPadding="false"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                tools:listitem="@layout/item_tag_info"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Text.Body2"
+                    android:drawableTint="@color/complementary"
+                    android:backgroundTint="@color/blue_white"
+                    android:background="@drawable/background_radius"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:drawableTop="@drawable/ic_baseline_extension_24"
+                    android:textAlignment="center"
+                    android:text="@string/edit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    style="@style/Text.Body2"
+                    android:drawableTint="@color/red"
+                    android:backgroundTint="@color/blue_white"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:background="@drawable/background_radius"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:drawableTop="@drawable/ic_baseline_delete_24"
+                    android:textAlignment="center"
+                    android:text="@string/delete"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_3sdp"
@@ -184,6 +234,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/Text.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                tools:text="ثبت شده در تاریخ" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

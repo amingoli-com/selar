@@ -42,9 +42,7 @@ class App : MultiDexApplication() {
         }
 
         fun getFormattedDate(dateTime: Long?): String? {
-            val pdformater: PersianDateFormat
-            pdformater = PersianDateFormat("Y/m/d")
-            return pdformater.format(PersianDate(dateTime))
+            return PersianDateFormat("Y/m/d").format(PersianDate(dateTime))
         }
 
         fun priceFormat(double: Double):String{

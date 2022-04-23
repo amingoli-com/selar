@@ -45,8 +45,11 @@ class OrderDetailAdapter(
         val item = holder.itemView
         val model = list[position]
 
+        val p = if (model.price_discount!= null && model.price_discount!! >= 1)
+            "${App.priceFormat(model.price_discount!!)} تخفیف"
+        else ""
         item.tv_title.setText(model.name)
-        item.tv_content.setText("${App.stockFormat(model.stock!!)} ${model.increase_name} ✖️ ${App.priceFormat(model.price_sale!!)}")
+        item.tv_content.setText("${App.stockFormat(model.stock!!)} ${model.increase_name} ✖️ ${App.priceFormat(model.price_sale!!)}\n${p}")
         item.tv_price.setText(App.priceFormat(model.price_sale!!*model.stock!!))
 
         if (!model.product_image.isNullOrEmpty()){

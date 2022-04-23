@@ -111,5 +111,6 @@
     <string name="add_new_customer">افزودن مشتری جدید</string>
     <string name="no_factor">شماره فاکتور</string>
     <string name="order_detail">جزيیات سفارش</string>
+    <string name="delete">حذف</string>
 
 </resources>
