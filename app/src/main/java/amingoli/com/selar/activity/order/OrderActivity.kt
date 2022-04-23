@@ -6,6 +6,7 @@ import amingoli.com.selar.adapter.CustomerListAdapter
 import amingoli.com.selar.adapter.OrdersListAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.dialog.InsertCustomerDialog
+import amingoli.com.selar.dialog.OrderViewDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.model.Customers
@@ -112,6 +113,8 @@ class OrderActivity : AppCompatActivity() {
             ArrayList(selectOrder("all")),
             object : OrdersListAdapter.Listener {
                 override fun onItemClicked(position: Int, item: Orders) {
+                    OrderViewDialog(this@OrderActivity,item.id!!,null)
+                        .show(supportFragmentManager,"order_view")
                 }
             })
         recyclerView.adapter = adapter

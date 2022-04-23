@@ -136,6 +136,9 @@ interface AppDao {
     @Query("select * from orders ORDER BY ID DESC")
     fun selectOrders(): List<Orders>
 
+    @Query("select * from orders where id = :id LIMIT 1")
+    fun selectOrdersById(id: Int): Orders
+
     @Query("select * from orders where status = :status")
     fun selectOrders(status: Int): List<Orders>
 
@@ -181,4 +184,8 @@ interface AppDao {
 //    order detail
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrderDetail(orderDetail: ArrayList<OrderDetail>) : List<Long>
+
+
+    @Query("select * from orderdetail where order_code = :order_code")
+    fun selectOrdersDetailByOrderCode(order_code: String): List<OrderDetail>
 }

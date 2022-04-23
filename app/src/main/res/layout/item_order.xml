@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:id="@+id/box_text"
-        android:layout_toStartOf="@+id/box_action"
+        android:layout_toStartOf="@+id/box_amount"
         android:layout_toEndOf="@+id/image_start"
         android:layout_centerVertical="true"
         android:orientation="vertical"

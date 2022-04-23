@@ -109,5 +109,7 @@
     <string name="choose_customer">انتخاب مشتری</string>
     <string name="add">افزودن</string>
     <string name="add_new_customer">افزودن مشتری جدید</string>
+    <string name="no_factor">شماره فاکتور</string>
+    <string name="order_detail">جزيیات سفارش</string>
 
 </resources>

@@ -10,6 +10,7 @@ import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
+import amingoli.com.selar.dialog.OrderViewDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
@@ -105,7 +106,13 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
 //    test
     private fun initRecyclerViewOrderWaiting(){
         ordersWaiting = ArrayList(App.database.getAppDao().selectOrders(ORDER_STATUS_WAITING))
-        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,ordersWaiting,null)
+        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,ordersWaiting,object : OrderWaitingAdapter.Listener{
+            override fun onItemClicked(position: Int, item: Orders) {
+                OrderViewDialog(this@MainActivity,item.id!!,null)
+                    .show(supportFragmentManager,"order_view")
+            }
+
+        })
     }
 
     private fun initRecyclerViewItemMain(){

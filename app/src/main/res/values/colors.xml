@@ -29,6 +29,7 @@
 
     <color name="price_orange">#DB8672</color>
     <color name="blue_30">#D1E3FA</color>
+    <color name="blue_white">#4DE5F0FF</color>
     <color name="test">#F4511E</color>
 
     <color name="background_activity">@color/background_app</color>

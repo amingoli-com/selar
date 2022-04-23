@@ -12,18 +12,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_product_2.view.*
+import kotlinx.android.synthetic.main.item_product_7.view.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AddOrderAdapter(
+class OrderDetailAdapter(
     val context: Context,
-    val ORDER_CODE: String,
     val list: ArrayList<OrderDetail>,
     val listener: Listener
-): RecyclerView.Adapter<AddOrderAdapter.ListViewHolder>() {
+): RecyclerView.Adapter<OrderDetailAdapter.ListViewHolder>() {
 
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -34,7 +33,7 @@ class AddOrderAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_product_2, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_product_7, parent, false)
         return ListViewHolder(view)
     }
 
@@ -59,25 +58,19 @@ class AddOrderAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addItem(product: Product){
-
-        Log.e("aminqqqq", "addItem: ${product.id}" )
+    fun addItem(orderDetail: OrderDetail){
 
         for (i in 0 until list.size){
-            if (list[i].product_id == product.id){
+            if (list[i].product_id == orderDetail.id){
                 list[i].stock = list[i].stock!! + 1.0
                 notifyItemChangedBySwap(position_old = i, position_new = list.size-1)
                 listener.onChangeListener(i,list)
                 return
             }
         }
-        list.add(list.size,convertProductToOrderDetail(product))
+        list.add(list.size,orderDetail)
         notifyItemInserted(list.size)
         listener.onChangeListener(list.size,list)
-    }
-
-    fun listOrderDetail() : ArrayList<OrderDetail>{
-        return list
     }
 
     private fun notifyItemChangedBySwap(position_old: Int, position_new: Int){
@@ -88,13 +81,5 @@ class AddOrderAdapter(
         }else{
             notifyItemChanged(position_old)
         }
-    }
-
-    private fun convertProductToOrderDetail(p: Product): OrderDetail{
-        val price_sale = if (p.price_sale!! > 0 ) p.price_sale else p.price_sale_on_product
-        return OrderDetail(null,ORDER_CODE,p.id,p.qrcode,p.image_defult,p.name,1.0,0,p.increase,
-            p.price_buy,
-            price_sale,
-            p.price_discount,p.price_profit,p.tax_percent)
     }
 }

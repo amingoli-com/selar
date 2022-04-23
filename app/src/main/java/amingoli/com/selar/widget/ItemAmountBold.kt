@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.include_item_amount.view.*
 
-class ItemAmount (context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
+class ItemAmountBold (context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
 
     init {
         View.inflate(context, R.layout.include_item_amount, this)
