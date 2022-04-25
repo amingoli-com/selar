@@ -69,7 +69,7 @@
     <string name="description_1">اگر مایل هستید با انتخاب یکی از کسب و کار های زیر اطلاعات آن (شامل دسته‌بندی، محصولات و..) را به صورت پیش فرض دریافت کنید.</string>
     <string name="connect_to_support">ارتباط با پشتیبانی</string>
     <string name="privacy_policy"><font color="#333"><b><a href="https://google.com">قوانین، شرایط استفاده و حریم‌خصوصی</a></b></font> را مطالعه کرده و می‌پذیرم.</string>
-    <string name="order_waiting">سفارشات درانتظار</string>
+    <string name="orders_waiting">سفارشات درانتظار</string>
 
     <string name="welcome_owner"><b><font color="#333">%1$s</font></b> عزیز</string>
     <string name="welcome_to_business">به <b><font color="#333">%1$s</font></b> خوش‌آمدید</string>
@@ -112,5 +112,8 @@
     <string name="no_factor">شماره فاکتور</string>
     <string name="order_detail">جزيیات سفارش</string>
     <string name="delete">حذف</string>
+    <string name="profit">سود</string>
+    <string name="profit_order">سود این سفارش</string>
+    <string name="order_status_waiting">در انتظار</string>
 
 </resources>

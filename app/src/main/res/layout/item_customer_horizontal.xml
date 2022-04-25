@@ -11,7 +11,7 @@
 
     <ImageView
         android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_baseline_shopping_cart_24"
+        android:src="@drawable/ic_account_circle_black_24dp"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"/>
 
@@ -26,7 +26,7 @@
             android:singleLine="true"
             style="@style/Text.Body2"
             android:textStyle="bold"
-            tools:text="سفارش حسن صالحی"
+            tools:text="حسن صالحی"
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -39,7 +39,7 @@
             style="@style/Text.Body2"
             android:textStyle="bold"
             android:textColor="@color/black_content"
-            tools:text="190,280,000 تومان"
+            tools:text="280 عدد"
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

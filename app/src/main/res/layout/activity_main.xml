@@ -14,6 +14,14 @@
             android:id="@+id/toolbar"
             layout="@layout/include_main_toolbar"/>
 
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            style="@style/Margin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp" />
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
             android:layout_marginTop="@dimen/_20sdp"
@@ -35,7 +43,7 @@
                 android:singleLine="true"
                 style="@style/Text.Body2"
                 android:textStyle="bold"
-                android:text="@string/order_waiting"
+                android:text="@string/orders_waiting"
                 android:drawableTint="@color/primaryVariant"
                 android:textColor="@color/primaryVariant"
                 android:drawableStart="@drawable/ic_baseline_browse_gallery_24"

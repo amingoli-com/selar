@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_view_product.*
 
-class ProductViewDialog(val _context: Context, val product_id:Int, val listener: Listener?) : DialogFragment() {
+class CustomerViewDialog(val _context: Context, val product_id:Int, val listener: Listener?) : DialogFragment() {
 
 //    private var this_order = App.database.getAppDao().selectOrdersById(order_id)
     private var adapterTag : TagInfoAdapter? =null
@@ -41,7 +41,7 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val listener:
     }
 
     interface Listener{
-        fun onEditOrder(dialog: ProductViewDialog, order: Orders?)
+        fun onEditOrder(dialog: CustomerViewDialog, order: Orders?)
     }
 
     private fun initOrderData(){

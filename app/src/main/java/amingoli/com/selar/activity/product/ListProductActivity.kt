@@ -2,6 +2,7 @@ package amingoli.com.selar.activity.product
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.*
+import amingoli.com.selar.dialog.ProductViewDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.Product
@@ -125,9 +126,11 @@ class ListProductActivity : AppCompatActivity() {
                 }
 
                 override fun onItemClicked(position: Int, product: Product) {
-                    val i = Intent(this@ListProductActivity, ProductActivity::class.java)
+                    ProductViewDialog(this@ListProductActivity,product.id!!,null)
+                        .show(supportFragmentManager, "product")
+                    /*val i = Intent(this@ListProductActivity, ProductActivity::class.java)
                     i.putExtra("id_product", product.id)
-                    startActivity(i)
+                    startActivity(i)*/
                 }
 
             })

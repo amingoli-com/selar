@@ -16,17 +16,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_status"
+            android:id="@+id/tv_id_customer"
             style="@style/Text.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:drawableStart="@drawable/ic_baseline_storefront_24"
+            android:drawableStart="@drawable/ic_account_circle_black_24dp"
             android:drawablePadding="@dimen/_5sdp"
             android:textAlignment="center"
             android:textStyle="bold"
-            tools:text="موجود" />
+            tools:text="#1239" />
 
         <ImageView
             android:id="@+id/ic_close"
@@ -51,18 +51,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:scaleType="fitCenter"
-                android:visibility="gone"
-                tools:src="@drawable/ic_gallery"
-                tools:visibility="visible" />
-
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tv_customer_name"
                 style="@style/Text.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +61,7 @@
                 android:minLines="2"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                tools:text="دستمال کاغذی حوله ای 3 لا 2 رول سافتلن" />
+                tools:text="امین گلی" />
 
             <View
                 android:alpha="0.10"
@@ -97,98 +88,92 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_order_count"
                     style="@style/Text.Body2"
-                    android:drawableTint="@color/complementary"
+                    android:drawableTint="@color/blue"
                     android:backgroundTint="@color/blue_white"
                     android:background="@drawable/background_radius"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_5sdp"
-                    android:drawableTop="@drawable/ic_baseline_extension_24"
+                    android:drawableTop="@drawable/ic_baseline_shopping_cart_24"
                     android:textAlignment="center"
-                    android:text="@string/edit"
+                    android:text="700 سفارش"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/tv_amount_all_order"
                     style="@style/Text.Body2"
-                    android:drawableTint="@color/red"
+                    android:drawableTint="@color/basket_adder_ic_add"
                     android:backgroundTint="@color/blue_white"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:background="@drawable/background_radius"
                     android:paddingVertical="@dimen/_5sdp"
                     android:drawableTop="@drawable/ic_baseline_monetization_on_24"
                     android:textAlignment="center"
-                    android:text="تغییر قیمت"
+                    android:text="280,000 تومان"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/tv_order_last_date"
                     style="@style/Text.Body2"
-                    android:drawableTint="@color/red"
+                    android:drawableTint="@color/blue"
                     android:backgroundTint="@color/blue_white"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:background="@drawable/background_radius"
                     android:paddingVertical="@dimen/_5sdp"
-                    android:drawableTop="@drawable/ic_baseline_category_24"
+                    android:drawableTop="@drawable/ic_baseline_browse_gallery_24"
                     android:textAlignment="center"
-                    android:text="انبار"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    style="@style/Text.Body2"
-                    android:drawableTint="@color/red"
-                    android:backgroundTint="@color/blue_white"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:background="@drawable/background_radius"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:drawableTop="@drawable/ic_baseline_delete_24"
-                    android:textAlignment="center"
-                    android:text="@string/delete"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="@dimen/_7sdp"
-                android:layout_marginHorizontal="@dimen/_5sdp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    style="@style/Text.Body2"
-                    android:backgroundTint="@color/blue_white"
-                    android:background="@drawable/background_radius"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:textAlignment="center"
-                    android:text="شامل 180,000 تومان سود"
+                    android:text="1401/01/31"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <amingoli.com.selar.widget.chart.ChartPrice
-                android:id="@+id/chart_bar_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
+            <TextView
+                style="@style/Text.Body2"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                tools:text="آخرین سفارشات" />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_tag"
-                android:overScrollMode="never"
-                android:paddingHorizontal="@dimen/_10sdp"
+                android:id="@+id/recyclerView_order"
                 android:clipToPadding="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                tools:listitem="@layout/item_tag"
+                android:paddingHorizontal="@dimen/_10sdp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_order_horizontal" />
+
+
+            <TextView
+                style="@style/Text.Body2"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                tools:text="محصولات موردعلاقه" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_product"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_product_horizontal" />
 
             <TextView
                 android:id="@+id/tv_date"
@@ -197,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                tools:text="ثبت شده در تاریخ" />
+                tools:text="ایجاد شده در تاریخ" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

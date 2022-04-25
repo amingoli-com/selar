@@ -1,12 +1,10 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.customer.CustomerActivity
 import amingoli.com.selar.activity.order.OrderActivity
 import amingoli.com.selar.activity.product.ListProductActivity
-import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
@@ -15,28 +13,34 @@ import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
-import amingoli.com.selar.model.Customers
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import androidx.core.content.ContextCompat
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.*
+import com.github.mikephil.charting.components.Legend.LegendForm
+import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.MPPointF
+import com.github.mikephil.charting.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_main_toolbar.view.*
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 
-class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
+class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValueSelectedListener {
 
     private var ordersWaiting = ArrayList<Orders>()
 
@@ -50,7 +54,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
         initRecyclerViewOrderWaiting()
         initRecyclerViewItemMain()
         barChartAdapter()
-
+        pieChartAdapter()
 
 //        test add data
         for (i in 1 .. 50){
@@ -157,6 +161,111 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
         barChart.invalidate()
     }
 
+
+    private fun pieChartAdapter(){
+        chart.setUsePercentValues(true)
+        chart.getDescription().setEnabled(false)
+        chart.setExtraOffsets(5f, 10f, 5f, 5f)
+
+        chart.setDragDecelerationFrictionCoef(0.95f)
+
+//        chart.setCenterTextTypeface(tfLight)
+//        chart.setCenterText(generateCenterSpannableText())
+
+        chart.setDrawHoleEnabled(true)
+        chart.setHoleColor(Color.WHITE)
+
+        chart.setTransparentCircleColor(Color.WHITE)
+        chart.setTransparentCircleAlpha(110)
+
+        chart.setHoleRadius(58f)
+        chart.setTransparentCircleRadius(61f)
+
+        chart.setDrawCenterText(true)
+
+        chart.setRotationAngle(0f)
+        // enable rotation of the chart by touch
+        // enable rotation of the chart by touch
+        chart.setRotationEnabled(true)
+        chart.setHighlightPerTapEnabled(true)
+
+        // chart.setUnit(" €");
+        // chart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+
+        // chart.setUnit(" €");
+        // chart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+        chart.setOnChartValueSelectedListener(this)
+
+        chart.animateY(1400, Easing.EaseInOutQuad)
+        // chart.spin(2000, 0, 360);
+
+        // chart.spin(2000, 0, 360);
+        val l: Legend = chart.getLegend()
+        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.orientation = Legend.LegendOrientation.VERTICAL
+        l.setDrawInside(false)
+        l.xEntrySpace = 7f
+        l.yEntrySpace = 0f
+        l.yOffset = 0f
+
+        // entry label styling
+
+        // entry label styling
+        chart.setEntryLabelColor(Color.WHITE)
+//        chart.setEntryLabelTypeface(tfRegular)
+        chart.setEntryLabelTextSize(12f)
+
+        setData(3,520f)
+    }
+
+    private fun setData(count: Int, range: Float) {
+        val entries: ArrayList<PieEntry> = ArrayList()
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        for (i in 0 until count) {
+            entries.add(
+                PieEntry(
+                    (Math.random() * range + range / 5).toFloat(),
+//                    parties.get(i % parties.length),
+                    resources.getDrawable(R.drawable.ic_baseline_close_24)
+                )
+            )
+        }
+        val dataSet = PieDataSet(entries, "Election Results")
+        dataSet.setDrawIcons(false)
+        dataSet.sliceSpace = 3f
+        dataSet.iconsOffset = MPPointF(0f, 40f)
+        dataSet.selectionShift = 5f
+
+        // add a lot of colors
+        val colors: ArrayList<Int> = ArrayList()
+        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
+        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+        colors.add(ColorTemplate.getHoloBlue())
+        dataSet.colors = colors
+        //dataSet.setSelectionShift(0f);
+        val data = PieData(dataSet)
+        data.setValueFormatter(PercentFormatter())
+        data.setValueTextSize(11f)
+        data.setValueTextColor(Color.WHITE)
+//        data.setValueTypeface(tfLight)
+        chart.data = data
+
+        // undo all highlights
+        chart.highlightValues(null)
+        chart.invalidate()
+    }
+
+
     /**
      * Listener
      * */
@@ -167,5 +276,12 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener {
             2 -> startActivity(Intent(this, CategoryActivity::class.java))
             3 -> startActivity(Intent(this, CustomerActivity::class.java))
         }
+    }
+
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+
+    }
+
+    override fun onNothingSelected() {
     }
 }

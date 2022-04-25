@@ -221,6 +221,15 @@
                     android:alpha="0.12" />
 
                 <amingoli.com.selar.widget.ItemAmountBold
+                    android:id="@+id/total_profit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    style="@style/Line"
+                    android:alpha="0.12" />
+
+                <amingoli.com.selar.widget.ItemAmountBold
                     android:id="@+id/total_discount_free"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

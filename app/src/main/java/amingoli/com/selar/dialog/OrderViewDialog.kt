@@ -1,37 +1,28 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.first_open.FirstOpenActivity
-import amingoli.com.selar.adapter.BusinessListAdapter
 import amingoli.com.selar.adapter.OrderDetailAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Config.ORDER_STATUS_SUCCESS
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.OrderDetail
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.activity_customer.*
 import kotlinx.android.synthetic.main.dialog_order_view.*
 import kotlinx.android.synthetic.main.dialog_order_view.recyclerView
 import kotlinx.android.synthetic.main.dialog_order_view.recyclerView_tag
-import kotlinx.android.synthetic.main.include_item_amount_bold.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Listener?) : DialogFragment() {
@@ -64,15 +55,15 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
     }
 
     private fun initOrderData(){
-        tv_order_status.setText(when{
-            this_order.status == ORDER_STATUS_WAITING -> _context.getString(R.string.order_waiting)
+        tv_order_status.text = when{
+            this_order.status == ORDER_STATUS_WAITING -> _context.getString(R.string.order_status_waiting)
             this_order.status == ORDER_STATUS_SUCCESS ->{
                 if (this_order.customer_debtor <= 0){
                     "پرداخت شده"
                 }else "تسویه نشده"
             }
             else -> ""
-        })
+        }
 
         tv_business_name.setText(Session.getInstance().businessName)
 
@@ -86,6 +77,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
         total_order.setText(_context.getString(R.string.all_order_one), this_order.total_price_order)
         total_tax.setText(_context.getString(R.string.tax), this_order.total_tax)
         total_shipping.setText(_context.getString(R.string.shipping_price), this_order.totla_shipping)
+        total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
         total_discount_free.setText(_context.getString(R.string.price_discount), this_order.amount_discount)
         total_pay.setText(_context.getString(R.string.amount_pay), this_order.totla_all)
 
