@@ -3,8 +3,11 @@ package amingoli.com.selar.activity.main
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.customer.CustomerActivity
+import amingoli.com.selar.activity.finance.FinanceActivity
 import amingoli.com.selar.activity.order.OrderActivity
 import amingoli.com.selar.activity.product.ListProductActivity
+import amingoli.com.selar.activity.setting.SettingActivity
+import amingoli.com.selar.activity.stock.StockActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         initRecyclerViewOrderWaiting()
         initRecyclerViewItemMain()
         barChartAdapter()
-//        pieChartAdapter()
+
     }
 
     override fun onResume() {
@@ -145,113 +148,6 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         barChart.invalidate()
     }
 
-
-/*
-    private fun pieChartAdapter(){
-        chart.setUsePercentValues(true)
-        chart.getDescription().setEnabled(false)
-        chart.setExtraOffsets(5f, 10f, 5f, 5f)
-
-        chart.setDragDecelerationFrictionCoef(0.95f)
-
-//        chart.setCenterTextTypeface(tfLight)
-//        chart.setCenterText(generateCenterSpannableText())
-
-        chart.setDrawHoleEnabled(true)
-        chart.setHoleColor(Color.WHITE)
-
-        chart.setTransparentCircleColor(Color.WHITE)
-        chart.setTransparentCircleAlpha(110)
-
-        chart.setHoleRadius(58f)
-        chart.setTransparentCircleRadius(61f)
-
-        chart.setDrawCenterText(true)
-
-        chart.setRotationAngle(0f)
-        // enable rotation of the chart by touch
-        // enable rotation of the chart by touch
-        chart.setRotationEnabled(true)
-        chart.setHighlightPerTapEnabled(true)
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-        chart.setOnChartValueSelectedListener(this)
-
-        chart.animateY(1400, Easing.EaseInOutQuad)
-        // chart.spin(2000, 0, 360);
-
-        // chart.spin(2000, 0, 360);
-        val l: Legend = chart.getLegend()
-        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-        l.orientation = Legend.LegendOrientation.VERTICAL
-        l.setDrawInside(false)
-        l.xEntrySpace = 7f
-        l.yEntrySpace = 0f
-        l.yOffset = 0f
-
-        // entry label styling
-
-        // entry label styling
-        chart.setEntryLabelColor(Color.WHITE)
-//        chart.setEntryLabelTypeface(tfRegular)
-        chart.setEntryLabelTextSize(12f)
-
-        setData(3,520f)
-    }
-
-    private fun setData(count: Int, range: Float) {
-        val entries: ArrayList<PieEntry> = ArrayList()
-
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
-        for (i in 0 until count) {
-            entries.add(
-                PieEntry(
-                    (Math.random() * range + range / 5).toFloat(),
-//                    parties.get(i % parties.length),
-                    resources.getDrawable(R.drawable.ic_baseline_close_24)
-                )
-            )
-        }
-        val dataSet = PieDataSet(entries, "Election Results")
-        dataSet.setDrawIcons(false)
-        dataSet.sliceSpace = 3f
-        dataSet.iconsOffset = MPPointF(0f, 40f)
-        dataSet.selectionShift = 5f
-
-        // add a lot of colors
-        val colors: ArrayList<Int> = ArrayList()
-        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-        colors.add(ColorTemplate.getHoloBlue())
-        dataSet.colors = colors
-        //dataSet.setSelectionShift(0f);
-        val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(11f)
-        data.setValueTextColor(Color.WHITE)
-//        data.setValueTypeface(tfLight)
-        chart.data = data
-
-        // undo all highlights
-        chart.highlightValues(null)
-        chart.invalidate()
-    }
-*/
-
-
     /**
      * Listener
      * */
@@ -261,6 +157,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
             1 -> startActivity(Intent(this, OrderActivity::class.java))
             2 -> startActivity(Intent(this, CategoryActivity::class.java))
             3 -> startActivity(Intent(this, CustomerActivity::class.java))
+            4 -> startActivity(Intent(this, StockActivity::class.java))
+            5 -> startActivity(Intent(this, FinanceActivity::class.java))
         }
     }
 
