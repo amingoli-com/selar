@@ -124,8 +124,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
     private var labelNames: ArrayList<String> = ArrayList()
     private fun barChartAdapter() {
         for (i in 0 until 10) {
-            val month: String = "فروردین"
-            val sales: Int = i+10000*i
+            val month: String = "$i فروردین"
+            val sales: Int = i+10*i
             barEntryArrayList.add(BarEntry(i.toFloat(), sales.toFloat()))
             labelNames.add(month)
         }
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         xAxis.granularity = 1f
         xAxis.labelCount = labelNames.size
         xAxis.labelRotationAngle = 270f
-        barChart.animateY(2000)
+        barChart.animateY(1000)
         barChart.invalidate()
     }
 

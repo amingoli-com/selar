@@ -1,6 +1,7 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.adapter.OrderDetailAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
@@ -12,6 +13,7 @@ import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -87,6 +89,10 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
     private fun initOnClick(){
         ic_edit.setOnClickListener {
             listener?.onEditOrder(this,this_order)
+            val i = Intent(_context, AddOrderActivity::class.java)
+            i.putExtra("order_id", this_order.id)
+            startActivity(i)
+            dismiss()
         }
         ic_close.setOnClickListener {
             dismiss()

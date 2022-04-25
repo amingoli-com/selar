@@ -13,6 +13,7 @@
     <string name="finance_data">اطلاعات مالی</string>
     <string name="detail">جزئیات</string>
     <string name="stock">موجودی</string>
+    <string name="stock_toolbar">گزارش انبار</string>
     <string name="increase_product">واحد کالا</string>
     <string name="description">توضیحات</string>
     <string name="permission_required">دسترسی الزامی</string>

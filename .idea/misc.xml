@@ -117,7 +117,9 @@
         <entry key="app/src/main/res/layout/item_product_6.xml" value="0.1996579734929457" />
         <entry key="app/src/main/res/layout/item_product_7.xml" value="0.1996579734929457" />
         <entry key="app/src/main/res/layout/item_product_horizontal.xml" value="0.1996579734929457" />
+        <entry key="app/src/main/res/layout/item_product_horizontal_white.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_product_result_camera.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/item_product_white.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_select_category_list.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/item_single_business.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/item_spinner.xml" value="0.23505434782608695" />
