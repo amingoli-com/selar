@@ -14,17 +14,17 @@
             android:id="@+id/toolbar"
             layout="@layout/include_main_toolbar"/>
 
-        <com.github.mikephil.charting.charts.PieChart
+<!--        <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             style="@style/Margin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp" />
+            android:layout_height="@dimen/_200sdp" />-->
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             style="@style/Margin"
             android:layout_width="match_parent"
