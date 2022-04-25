@@ -20,6 +20,15 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity
+            android:name=".activity.stock.StockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.finance.FinanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.setting.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.order.OrderActivity"
             android:exported="false" />
         <activity

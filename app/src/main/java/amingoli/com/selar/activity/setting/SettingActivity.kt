@@ -1,5 +1,6 @@
 package amingoli.com.selar.activity.setting
 
+import amingoli.com.selar.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
