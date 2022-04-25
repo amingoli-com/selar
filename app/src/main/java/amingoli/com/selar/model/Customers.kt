@@ -38,5 +38,14 @@ class Customers {
         this.updated_at = updated_at
     }
 
+    @Ignore
+    constructor(
+        name: String?,
+        phone: String?
+    ) {
+        this.name = name
+        this.phone = phone
+    }
+
     constructor()
 }

@@ -113,8 +113,14 @@ class OrderActivity : AppCompatActivity() {
             ArrayList(selectOrder("all")),
             object : OrdersListAdapter.Listener {
                 override fun onItemClicked(position: Int, item: Orders) {
-                    OrderViewDialog(this@OrderActivity,item.id!!,null)
-                        .show(supportFragmentManager,"order_view")
+                    OrderViewDialog(this@OrderActivity,item.id!!,object : OrderViewDialog.Listener{
+                        override fun onEditOrder(dialog: OrderViewDialog, order: Orders?) {
+                            val i = Intent(this@OrderActivity, AddOrderActivity::class.java)
+                            i.putExtra("order_id", order?.id)
+                            startActivity(i)
+                            dialog.dismiss()
+                        }
+                    }).show(supportFragmentManager,"order_view")
                 }
             })
         recyclerView.adapter = adapter

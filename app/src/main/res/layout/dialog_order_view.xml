@@ -143,6 +143,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/ic_edit"
                     style="@style/Text.Body2"
                     android:drawableTint="@color/complementary"
                     android:backgroundTint="@color/blue_white"

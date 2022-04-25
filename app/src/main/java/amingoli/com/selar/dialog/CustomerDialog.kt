@@ -22,8 +22,6 @@ import kotlinx.android.synthetic.main.item_menu_dialog_add_customer.view.*
 
 class CustomerDialog(val _context: Context, val listener: Listener?) : DialogFragment() {
 
-    private var business = App.database.getAppDao().selectBusiness(Session.getInstance().businessID)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_customer, container, false)
@@ -63,8 +61,10 @@ class CustomerDialog(val _context: Context, val listener: Listener?) : DialogFra
     }
 
     private fun initRecyclerView(){
-        val arrayList = ArrayList<Customers>(App.database.getAppDao().selectCustomerActive())
-        recyclerView.adapter = CustomerListAdapter(_context, arrayList,object : CustomerListAdapter.Listener{
+        val arrayList = ArrayList<Customers>()
+        arrayList.add(0,Customers("مشتری متفرقه",null))
+        arrayList.addAll(App.database.getAppDao().selectCustomerActive())
+        recyclerView.adapter = CustomerListAdapter(_context, arrayList,false,object : CustomerListAdapter.Listener{
             override fun onItemClicked(position: Int, item: Customers, action: String?) {
                 listener?.onCustomerClicked(this@CustomerDialog,item)
                 dismiss()

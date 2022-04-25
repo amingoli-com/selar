@@ -12,6 +12,7 @@ class OrderDetail {
     var id :Int? = null
     var order_code :String? = null
     var product_id :Int? = null
+    var customer_id :Int? = null
     var product_code :String? = null
     var product_image :String? = null
     var name :String? = null

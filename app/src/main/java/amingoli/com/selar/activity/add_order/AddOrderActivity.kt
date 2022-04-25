@@ -32,9 +32,11 @@ import kotlin.collections.ArrayList
 
 class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener {
 
-    private val ORDER_CODE = System.currentTimeMillis().toString()
+    private var ORDER_CODE = System.currentTimeMillis().toString()
+    private var EDIT = false
 
     private var this_order = Orders()
+    private var order_detail = ArrayList<OrderDetail>()
     private var adapter: AddOrderAdapter? = null
     private var codeScanner: CodeScanner? = null
     private var sound_scaner: MediaPlayer? = null
@@ -47,15 +49,28 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private var totla_discount = 0.0
     private var totla_all = 0.0
 
+    override fun onStart() {
+        super.onStart()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
+
+        if (intent?.extras?.getInt("order_id",-1) != null){
+            EDIT = true
+            val order_id = intent?.extras?.getInt("order_id",-1)
+            this_order = App.database.getAppDao().selectOrdersById(order_id!!.toInt())
+            ORDER_CODE = this_order.order_code!!
+            order_detail = ArrayList(App.database.getAppDao().selectOrdersDetailByOrderCode(ORDER_CODE))
+            initCustomerView()
+        }
 
         initOtherView()
         initOnClick()
         initOrderList()
         initCameraScanner()
-
     }
 
     override fun onPause() {
@@ -121,15 +136,20 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     }
 
     private fun initOrderList(){
-        adapter = AddOrderAdapter(this,ORDER_CODE, ArrayList(),object : AddOrderAdapter.Listener{
+        adapter = AddOrderAdapter(this,ORDER_CODE, order_detail,object : AddOrderAdapter.Listener{
             override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
             }
             override fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>) {
                 calculator(listOrderDetail)
             }
 
+            override fun onReadyOrderDetailForDatabase(newListOrderDetail: ArrayList<OrderDetail>) {
+                insertOrder(newListOrderDetail)
+            }
+
         })
         recyclerView.adapter = adapter
+        if (!order_detail.isNullOrEmpty()) calculator(order_detail)
     }
 
     private fun initCameraScanner(){
@@ -188,12 +208,8 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                     this_order.customer = customers?.id
                     this_order.customer_name = customers?.name
                     this_order.customer_phone = customers?.phone
-                    tv_customer.setText("${this_order.customer_name} ${
-                                if (this_order.customer_phone.isNullOrEmpty()) "" 
-                                else this_order.customer_phone
-                            }")
+                    initCustomerView()
                 }
-
             }).show(supportFragmentManager,"customer")
         }
         submit_order.setOnClickListener {
@@ -203,11 +219,18 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
             this_order.status = ORDER_STATUS_WAITING
             this_order.customer_debtor = totla_all
             getOrder()
-            insertOrder()
+            adapter?.populateOrderDetailToDatabase(this_order.customer)
         }
         exit.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initCustomerView(){
+        tv_customer.text = if (this_order.customer != null && this_order.customer_name != null){
+            "${this_order.customer_name} ${if (this_order.customer_phone.isNullOrEmpty()) "" else this_order.customer_phone}"
+        }else getString(R.string.choose_customer)
     }
 
     /**
@@ -231,8 +254,9 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     /**
      * Insert Database
     * */
-    private fun insertOrder(){
-        App.database.getAppDao().insertOrderDetail(adapter?.listOrderDetail()!!)
+    private fun insertOrder(new_order_detail: ArrayList<OrderDetail>){
+        if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(ORDER_CODE)
+        App.database.getAppDao().insertOrderDetail(new_order_detail)
         App.database.getAppDao().insertOrder(this_order)
         finish()
     }
@@ -288,10 +312,11 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
 
     private fun loge(){
         Log.e("qqqq",
-            "cahs money: ${this_order.pay_cash} \n" +
+            "customer id: ${this_order.customer} - ${this_order.customer_name} \n" +
+                "cahs money: ${this_order.pay_cash} \n" +
                 "card: ${this_order.pay_card} \n" +
                 "card info: ${this_order.pay_card_info} \n" +
                 "debit customer: ${this_order.customer_debtor} \n" )
-        insertOrder()
+        adapter?.populateOrderDetailToDatabase(this_order.customer)
     }
 }

@@ -85,6 +85,9 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
     }
 
     private fun initOnClick(){
+        ic_edit.setOnClickListener {
+            listener?.onEditOrder(this,this_order)
+        }
         ic_close.setOnClickListener {
             dismiss()
         }

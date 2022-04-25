@@ -53,6 +53,8 @@
 
     <LinearLayout
         android:id="@+id/box_action"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"

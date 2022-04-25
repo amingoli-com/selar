@@ -68,7 +68,7 @@ interface AppDao {
     fun sizeCategory(id_mother: Int): Int
 
 //    Category Product
-    @Query("DELETE FROM categoryproduct WHERE id_product = :id_product;")
+    @Query("DELETE FROM categoryproduct WHERE id_product = :id_product")
     fun deleteCategoryProduct(id_product:Int)
 
     @Insert
@@ -185,7 +185,9 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrderDetail(orderDetail: ArrayList<OrderDetail>) : List<Long>
 
-
     @Query("select * from orderdetail where order_code = :order_code")
     fun selectOrdersDetailByOrderCode(order_code: String): List<OrderDetail>
+
+    @Query("DELETE FROM orderdetail WHERE order_code = :order_code")
+    fun deleteOrdersDetailByOrderCode(order_code: String)
 }

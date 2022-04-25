@@ -31,6 +31,7 @@ class AddOrderAdapter(
     interface Listener{
         fun onItemClicked(position: Int, orderDetail: OrderDetail)
         fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>)
+        fun onReadyOrderDetailForDatabase(newListOrderDetail: ArrayList<OrderDetail>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -76,8 +77,11 @@ class AddOrderAdapter(
         listener.onChangeListener(list.size,list)
     }
 
-    fun listOrderDetail() : ArrayList<OrderDetail>{
-        return list
+    fun populateOrderDetailToDatabase(customer_id :Int?){
+        for (i in 0 until list.size){
+            list[i].customer_id = customer_id ?: 0
+        }
+        listener.onReadyOrderDetailForDatabase(list)
     }
 
     private fun notifyItemChangedBySwap(position_old: Int, position_new: Int){

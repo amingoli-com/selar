@@ -103,6 +103,7 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
     private fun initAdapterCustomer(){
         adapter = CustomerListAdapter(this,
             ArrayList(selectCustomer("all")),
+            true,
             object : CustomerListAdapter.Listener {
                 override fun onItemClicked(position: Int, item: Customers, action: String?) {
                     when(action){

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.item_customer.view.*
 
 class CustomerListAdapter(val context: Context,
                           val list: ArrayList<Customers>,
+                          val boxAction: Boolean,
                           val listener: Listener
 ) : RecyclerView.Adapter<CustomerListAdapter.ListViewHolder>() {
 
@@ -40,21 +41,24 @@ class CustomerListAdapter(val context: Context,
         item.title.setText("${model.name}")
         item.content.text = model.phone
 
-        item.background_card.backgroundTintList = if (model.status == 1){
-            ContextCompat.getColorStateList(context, R.color.white)
-        }else ContextCompat.getColorStateList(context, R.color.red_70)
+        item.background_card.backgroundTintList = if (model.status == 0){
+            ContextCompat.getColorStateList(context, R.color.red_70)
+        }else ContextCompat.getColorStateList(context, R.color.white)
 
-        item.box_action.alpha = if (model.phone.isNullOrEmpty()) 0.24f else 1f
-
-        if (!model.phone.isNullOrEmpty()){
-            item.action_sms.setOnClickListener {
-                listener.onItemClicked(position,model,"sms")
+        if (boxAction){
+            item.box_action.visibility = View.VISIBLE
+            item.box_action.alpha = if (model.phone.isNullOrEmpty()) 0.24f else 1f
+            if (!model.phone.isNullOrEmpty()){
+                item.action_sms.setOnClickListener {
+                    listener.onItemClicked(position,model,"sms")
+                }
+                item.action_call.setOnClickListener {
+                    listener.onItemClicked(position,model,"tel")
+                }
             }
-            item.action_call.setOnClickListener {
-                listener.onItemClicked(position,model,"tel")
-            }
+        }else{
+            item.box_action.visibility = View.GONE
         }
-
         item.setOnClickListener {
             listener.onItemClicked(position,model,null)
         }
