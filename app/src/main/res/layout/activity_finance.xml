@@ -14,6 +14,87 @@
             android:id="@+id/toolbar"
             layout="@layout/include_toolbar" />
 
-        
+        <TextView
+            android:id="@+id/content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            style="@style/Text.Body2"
+            android:textStyle="bold"
+            tools:text="نمایش گزارش ۳۰ روز گذشته"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompatTextViewDrawableXml" />
+
+        <LinearLayout
+            style="@style/MarginLarge"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/background_radius_not_padding"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/Text.Body2"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                tools:text="نمودار " />
+            <amingoli.com.selar.widget.chart.ChartPrice
+                android:id="@+id/chart_bar_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tag"
+                android:overScrollMode="never"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            style="@style/Text.Body2"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_14sdp"
+            tools:text="محصولات پر سود" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_product_horizontal_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            style="@style/Text.Body2"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_14sdp"
+            tools:text="سفارشات پر سود" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_order_waiting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
