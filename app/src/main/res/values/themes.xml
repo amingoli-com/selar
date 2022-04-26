@@ -39,6 +39,13 @@
         <item name="android:layout_marginBottom">@dimen/_5sdp</item>
     </style>
 
+    <style name="MarginLarge">
+        <item name="android:layout_marginTop">@dimen/_5sdp</item>
+        <item name="android:layout_marginStart">@dimen/_10sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_10sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_5sdp</item>
+    </style>
+
     <style name="Margin.Big">
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
         <item name="android:layout_marginStart">@dimen/_10sdp</item>

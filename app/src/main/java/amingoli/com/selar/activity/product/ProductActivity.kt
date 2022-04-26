@@ -367,7 +367,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         _PRODUCT_OBJECT?.user = Session.getInstance().user
         _PRODUCT_OBJECT?.qrcode = App.getString(edt_barcode)
         _PRODUCT_OBJECT?.name = App.getString(edt_name)
-        _PRODUCT_OBJECT?.descrption = App.getString(edt_desc)
+        _PRODUCT_OBJECT?.descrption = null
         _PRODUCT_OBJECT?.increase = App.getString(atc_unit)
         _PRODUCT_OBJECT?.stock = App.convertToDouble(edt_stock)
         _PRODUCT_OBJECT?.price_buy = App.convertToDouble(edt_price_buy)

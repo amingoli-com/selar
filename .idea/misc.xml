@@ -64,9 +64,10 @@
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_choose_camera.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_customer.xml" value="0.24711415134672937" />
+        <entry key="app/src/main/res/layout/activity_finance.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_first_open.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_list_product.xml" value="0.2552083333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26022304832713755" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main_2.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
@@ -147,5 +148,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

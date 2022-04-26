@@ -9,6 +9,8 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/image"
+        android:layout_gravity="center"
         android:padding="@dimen/_5sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_gallery"
@@ -24,7 +26,7 @@
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:singleLine="true"
-            style="@style/Text.Body2"
+            style="@style/Text.Body1"
             android:textStyle="bold"
             tools:text="نام محصول"
             android:textAlignment="center"
@@ -32,7 +34,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/desc"
+            android:id="@+id/content"
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:singleLine="true"
