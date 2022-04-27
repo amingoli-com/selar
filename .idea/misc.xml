@@ -72,9 +72,11 @@
         <entry key="app/src/main/res/layout/activity_main_last.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_stock.xml" value="0.1996579734929457" />
         <entry key="app/src/main/res/layout/activity_stock_2.xml" value="0.24711415134672937" />
+        <entry key="app/src/main/res/layout/activity_support.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_customer.xml" value="0.17225747960108795" />
         <entry key="app/src/main/res/layout/dialog_edit_business.xml" value="0.17225747960108795" />

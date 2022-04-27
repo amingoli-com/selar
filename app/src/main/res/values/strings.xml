@@ -117,5 +117,6 @@
     <string name="profit_order">سود این سفارش</string>
     <string name="order_status_waiting">در انتظار</string>
     <string name="chart">نمودار</string>
+    <string name="setting">تنظیمات</string>
 
 </resources>

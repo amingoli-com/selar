@@ -8,6 +8,7 @@ import amingoli.com.selar.activity.order.OrderActivity
 import amingoli.com.selar.activity.product.ListProductActivity
 import amingoli.com.selar.activity.setting.SettingActivity
 import amingoli.com.selar.activity.stock.StockActivity
+import amingoli.com.selar.activity.support.SupportActivity
 import amingoli.com.selar.adapter.ItemMainAdapter
 import amingoli.com.selar.adapter.OrderWaitingAdapter
 import amingoli.com.selar.dialog.BusinessMenuDialog
@@ -159,6 +160,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
             3 -> startActivity(Intent(this, CustomerActivity::class.java))
             4 -> startActivity(Intent(this, StockActivity::class.java))
             5 -> startActivity(Intent(this, FinanceActivity::class.java))
+            6 -> startActivity(Intent(this, SettingActivity::class.java))
+            7 -> startActivity(Intent(this, SupportActivity::class.java))
         }
     }
 
