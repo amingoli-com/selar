@@ -10,14 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_product_4.view.*
+import kotlinx.android.synthetic.main.item_product_horizontal_white.view.*
 import java.io.File
 
-class ProductListHorizontalAdapter(
+class ProductListHorizontalAdapter_2(
     val context: Context,
     val list: ArrayList<Product>,
     val listener: Listener
-) : RecyclerView.Adapter<ProductListHorizontalAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<ProductListHorizontalAdapter_2.ListViewHolder>() {
 
     private var packId = -1
 
@@ -28,7 +28,7 @@ class ProductListHorizontalAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product_4, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product_horizontal_white, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -44,10 +44,7 @@ class ProductListHorizontalAdapter(
             item.title.text = model.name
 
             val price_sale = if (model.price_sale!! > 0 ) model.price_sale else model.price_sale_on_product
-            item.price_sela.text = App.priceFormat(price_sale!!)
-            if (model.price_sale_on_product!! > model.price_sale!! && model.price_sale!! > 0) {
-                item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!)
-            }
+            item.content.text = App.priceFormat(price_sale!!)
 
         }catch (e : Exception){
         }

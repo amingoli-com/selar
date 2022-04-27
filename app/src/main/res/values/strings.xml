@@ -20,7 +20,6 @@
     <string name="permission_message">ما برای ارائه خدمات خود به دسترسی های ضروری درخواست شده نیاز داریم</string>
     <string name="positive_button">باشه</string>
     <string name="negative_button">بیحیال</string>
-
     <string name="choose_from_camera">انتخاب از دوربین</string>
     <string name="choose_from_gallery">انتخاب از گالری</string>
     <string name="submit">ثبت</string>
@@ -34,6 +33,7 @@
     <string name="max_in_check_out">حداکثر مجاز در سبد خرید</string>
     <string name="balance">انبار</string>
     <string name="finance">مالی</string>
+    <string name="finance_toolbar">گزارش مالی</string>
     <string name="text_item_one_line">نام آیتم مورد نظر</string>
     <string name="add_category">افزودن دسته بندی</string>
     <string name="choose_your_category">دسته‌بندی مورد نظر را انتخاب نمایید</string>
@@ -116,5 +116,6 @@
     <string name="profit">سود</string>
     <string name="profit_order">سود این سفارش</string>
     <string name="order_status_waiting">در انتظار</string>
+    <string name="chart">نمودار</string>
 
 </resources>

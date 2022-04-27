@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.finance.FinanceActivity">
     <LinearLayout
+        android:paddingBottom="@dimen/_50sdp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,7 +24,7 @@
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
             style="@style/Text.Body2"
             android:textStyle="bold"
-            tools:text="نمایش گزارش ۳۰ روز گذشته"
+            android:text="نمایش گزارش ۳۰ روز گذشته"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="UseCompatTextViewDrawableXml" />
@@ -42,14 +43,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="نمودار " />
+                android:text="@string/chart"/>
             <amingoli.com.selar.widget.chart.ChartPrice
                 android:id="@+id/chart_bar_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_tag"
+                android:id="@+id/recyclerView_tag_info"
                 android:overScrollMode="never"
                 android:paddingVertical="@dimen/_5sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
@@ -67,9 +68,10 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/_14sdp"
-            tools:text="محصولات پر سود" />
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:text="محصولات پر سود" />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_product"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/_10sdp"
             android:clipToPadding="false"
@@ -85,9 +87,10 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/_14sdp"
-            tools:text="سفارشات پر سود" />
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:text="سفارشات پر سود" />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_order"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/_10sdp"
             android:clipToPadding="false"

@@ -2,10 +2,7 @@ package amingoli.com.selar.activity.stock
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.add_order.AddOrderActivity
-import amingoli.com.selar.adapter.OrdersListAdapter
-import amingoli.com.selar.adapter.ProductListAdapter
-import amingoli.com.selar.adapter.ProductListAdapter_2
-import amingoli.com.selar.adapter.TagInfoAdapter
+import amingoli.com.selar.adapter.*
 import amingoli.com.selar.dialog.OrderViewDialog
 import amingoli.com.selar.dialog.ProductViewDialog
 import amingoli.com.selar.helper.App
@@ -38,6 +35,7 @@ class StockActivity : AppCompatActivity() {
 
         initToolbar(getString(R.string.stock_toolbar))
         initAdapterTagList()
+        initTagInfo()
         initAdapterOrders()
         barChartAdapter()
 
@@ -49,6 +47,14 @@ class StockActivity : AppCompatActivity() {
         toolbar.title.text = title
         toolbar.ic_back.visibility = View.VISIBLE
         toolbar.ic_back.setOnClickListener { onBackPressed() }
+    }
+
+    private fun initTagInfo(){
+        val array_tag_info = ArrayList<TagList>()
+        array_tag_info.add(TagList("۳۰۰ قلم کالا"))
+        array_tag_info.add(TagList("۱۲۰ محصول فعال"))
+        array_tag_info.add(TagList("۲۹۰,۰۰۰,۰۰۰ تومان سرمایه انبار"))
+        recyclerView_info.adapter = TagAdapter(this,array_tag_info,null)
     }
 
     val array_tag = ArrayList<TagList>()

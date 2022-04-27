@@ -16,4 +16,8 @@ class TagList {
         this.title = title
         this.tag = tag
     }
+
+    constructor(title: String?) {
+        this.title = title
+    }
 }
