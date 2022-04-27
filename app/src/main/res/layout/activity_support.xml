@@ -28,8 +28,9 @@
                 android:id="@+id/lottie"
                 android:layout_gravity="center"
                 app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/setting"
+                app:lottie_loop="false"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/support"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_150sdp"/>

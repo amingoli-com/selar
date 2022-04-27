@@ -39,11 +39,12 @@
             <TextView
                 style="@style/Text.Body2"
                 android:textStyle="bold"
+                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                android:text="@string/chart"/>
+                android:text="نمودار درآمد پیک"/>
             <amingoli.com.selar.widget.chart.ChartPrice
                 android:id="@+id/chart_bar_price"
                 android:layout_width="match_parent"

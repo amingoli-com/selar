@@ -37,9 +37,11 @@ class FinanceActivity : AppCompatActivity() {
 
     private fun initTagInfo(){
         val array_tag_info = ArrayList<TagList>()
-        array_tag_info.add(TagList("۳۰۰ قلم کالا"))
-        array_tag_info.add(TagList("۱۲۰ محصول فعال"))
-        array_tag_info.add(TagList("۲۹۰,۰۰۰,۰۰۰ تومان سرمایه انبار"))
+        array_tag_info.add(TagList("درآمد نقدی ۲۹۰,۰۰۰ تومان"))
+        array_tag_info.add(TagList("درآمد کارتخوان ۲۹۰,۰۰۰ تومان"))
+        array_tag_info.add(TagList("نسیه ۲۹۰,۰۰۰ تومان"))
+        array_tag_info.add(TagList("تخفیف ۲۹۰,۰۰۰ تومان"))
+        array_tag_info.add(TagList("هزینه ارسال ۲۹۰,۰۰۰ تومان"))
         recyclerView_tag_info.adapter = TagAdapter(this,array_tag_info,null)
     }
 
