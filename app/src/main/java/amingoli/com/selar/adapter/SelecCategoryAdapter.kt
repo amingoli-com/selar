@@ -83,6 +83,11 @@ class SelecCategoryAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
+    fun notifyAllData(){
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(list : List<Category>){
         this.list.clear()
         this.list.addAll(list)

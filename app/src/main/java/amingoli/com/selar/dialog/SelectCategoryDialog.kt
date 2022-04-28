@@ -86,12 +86,11 @@ class SelectCategoryDialog(val _context: Context,
     }
 
     private fun showNewList(id_category: Int){
-//        recyclerView.removeAllViews()
-//        _categoryListDatabase.clear()
-//        _categoryListDatabase.addAll()
-//        adapter?.notifyDataSetChanged()
         id_mother_category = id_category
-        adapter?.updateList(ArrayList(App.database.getAppDao().selectUnderCategory(id_category)))
+        recyclerView.removeAllViews()
+        _categoryListDatabase.clear()
+        _categoryListDatabase.addAll(ArrayList(App.database.getAppDao().selectUnderCategory(id_category)))
+        adapter?.notifyAllData()
     }
 
     private fun addItemCategoryListManager(item: Category){
