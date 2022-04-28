@@ -32,7 +32,7 @@ class ChartPrice (context: Context?, attrs: AttributeSet?) : RelativeLayout(cont
     private var barEntryArrayList: ArrayList<BarEntry> = ArrayList()
     private var labelNames: ArrayList<String> = ArrayList()
     fun barChartAdapter() {
-        for (i in 0 until 10) {
+        for (i in 0 until 500) {
             val month: String = "فروردین"
             val sales: Int = i+10000*i
             barEntryArrayList.add(BarEntry(i.toFloat(), sales.toFloat()))

@@ -120,5 +120,7 @@
     <string name="chart">نمودار</string>
     <string name="setting">تنظیمات</string>
     <string name="text_check_box_tax">شامل مالیات باشد</string>
+    <string name="chart_sale_3_month">نمودار فروش ۳ ماهه اخیر</string>
+    <string name="customer_this_product">مشتریان این محصول</string>
 
 </resources>

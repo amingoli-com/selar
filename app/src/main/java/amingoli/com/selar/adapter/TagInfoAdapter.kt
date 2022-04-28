@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_tag_info.view.*
 
 class TagInfoAdapter(val context: Context,
                      val list: ArrayList<TagList>,
-                     val listener: Listener
+                     val listener: Listener?
 ) : RecyclerView.Adapter<TagInfoAdapter.ListViewHolder>() {
 
     var position_selected = 0
@@ -53,7 +53,7 @@ class TagInfoAdapter(val context: Context,
         item.setOnClickListener {
             val back_position_selected = position_selected
             position_selected = position
-            listener.onItemClicked(position,model)
+            listener?.onItemClicked(position,model)
             notifyItemChanged(position_selected, model)
             notifyItemChanged(back_position_selected, model)
         }

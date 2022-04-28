@@ -1,32 +1,29 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
-import amingoli.com.selar.model.Customers
+import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_customer.view.*
+import kotlinx.android.synthetic.main.item_customer_horizontal.view.*
 
-class CustomerListAdapter(val context: Context,
-                          val list: ArrayList<Customers>,
-                          val boxAction: Boolean,
-                          val listener: Listener
-) : RecyclerView.Adapter<CustomerListAdapter.ListViewHolder>() {
+class CustomerListHorizontalAdapter(val context: Context,
+                                    val list: ArrayList<TagList>,
+                                    val listener: Listener
+) : RecyclerView.Adapter<CustomerListHorizontalAdapter.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: Customers, action: String?)
+        fun onItemClicked(position: Int, item: TagList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer_horizontal, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -38,38 +35,20 @@ class CustomerListAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.title.setText("${model.name}")
-        item.content.text = model.phone
+        item.title.setText("${model.title}")
+        item.content.text = model.tag
 
-        item.background_card.backgroundTintList = if (model.status == 0){
-            ContextCompat.getColorStateList(context, R.color.red_70)
-        }else ContextCompat.getColorStateList(context, R.color.white)
-
-        if (boxAction){
-            item.box_action.visibility = View.VISIBLE
-            item.box_action.alpha = if (model.phone.isNullOrEmpty()) 0.24f else 1f
-            if (!model.phone.isNullOrEmpty()){
-                item.action_sms.setOnClickListener {
-                    listener.onItemClicked(position,model,"sms")
-                }
-                item.action_call.setOnClickListener {
-                    listener.onItemClicked(position,model,"tel")
-                }
-            }
-        }else{
-            item.box_action.visibility = View.GONE
-        }
         item.setOnClickListener {
-            listener.onItemClicked(position,model,null)
+            listener?.onItemClicked(position,model)
         }
     }
 
-    fun addItem(item: Customers){
+    fun addItem(item: TagList){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: Customers, position: Int){
+    fun addItem(item: TagList, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )
@@ -79,7 +58,7 @@ class CustomerListAdapter(val context: Context,
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list : List<Customers>){
+    fun updateList(list : List<TagList>){
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

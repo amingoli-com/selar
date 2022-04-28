@@ -1,10 +1,14 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
+import amingoli.com.selar.adapter.CustomerListHorizontalAdapter
+import amingoli.com.selar.adapter.TagAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.model.Customers
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.Product
+import amingoli.com.selar.model.TagList
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,12 +18,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.dialog_view_product.*
 
 class ProductViewDialog(val _context: Context, val product_id:Int, val position: Int, val listener: Listener?) : DialogFragment() {
 
     private var this_product = App.database.getAppDao().selectProduct(product_id)
-    private var adapterTag : TagInfoAdapter? =null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,9 +34,10 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val position:
         super.onViewCreated(view, savedInstanceState)
         this.isCancelable = true
 
-        initOrderData()
+        initData()
         initOnClick()
         initAdapterTagList()
+        initRecyclerView()
         chart_bar_price.barChartAdapter()
     }
 
@@ -46,8 +51,17 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val position:
         fun onEditProduct(dialog: ProductViewDialog, product: Product?, position: Int)
     }
 
-    private fun initOrderData(){
+    private fun initData(){
+        tv_id.setText("#${this_product.id}")
 
+        if (!this_product.image_defult.isNullOrEmpty()){
+            image.visibility = View.VISIBLE
+            Glide.with(_context).load(this_product.image_defult).into(image)
+        }
+
+        tv_product_name.setText(this_product.name)
+
+        tv_date.setText("در تاریخ ${App.getFormattedDate(this_product.updated_at)}ویرایش شده \n در تاریخ${App.getFormattedDate(this_product.created_at)} ثبت شده")
     }
 
     private fun initOnClick(){
@@ -61,33 +75,31 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val position:
     }
 
     private fun initAdapterTagList(){
-//        val array_tag = ArrayList<TagList>()
-//        array_tag.add(TagList("ویرایش", R.drawable.ic_baseline_extension_24,"all"))
-//        array_tag.add(TagList("حذف", R.drawable.ic_baseline_delete_24,"all"))
-//
-//        adapterTag = TagInfoAdapter(_context,
-//            array_tag,
-//            object : TagInfoAdapter.Listener {
-//                @SuppressLint("NotifyDataSetChanged")
-//                override fun onItemClicked(position: Int, item: TagList) {
-//
-//                }
-//            })
-//
-//        recyclerView_tag.adapter = adapterTag
+        val array_tag = ArrayList<TagList>()
+        array_tag.add(TagList("۲۹۰ عدد موجودی"))
+        array_tag.add(TagList("۹۲۰,۰۰۰ تومان سرمایه"))
+        array_tag.add(TagList("۲۰۰ تومان سود"))
+        array_tag.add(TagList("۵۰۰ تومان ارزانتر"))
+        array_tag.add(TagList("۹۲ مرتبه سفارش داده شده"))
+        array_tag.add(TagList("۹۸۰ عدد فروش رفته"))
+        array_tag.add(TagList("#3881492193493"))
+        array_tag.add(TagList("آخرین بار در ۱۴۰۱/۰۲/۰۶ فروخته شده"))
+
+        recyclerView_tag.adapter = TagAdapter(_context, array_tag, null)
     }
 
     private fun initRecyclerView(){
-//        val arrayList = ArrayList<OrderDetail>(App.database.getAppDao().selectOrdersDetailByOrderCode(this_order.order_code!!))
-//        recyclerView.adapter = OrderDetailAdapter(_context,arrayList,object : OrderDetailAdapter.Listener{
-//            override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
-//
-//            }
-//
-//            override fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>) {
-//
-//            }
-//
-//        })
+        val arrayList = ArrayList<TagList>()
+        arrayList.add(TagList("امین گلی","۲۸۰ عدد"))
+        arrayList.add(TagList("حسین یوسفی","۱۸۲ عدد"))
+        arrayList.add(TagList("اصغر حاجیان","۱۱۰ عدد"))
+        arrayList.add(TagList("سارا عبدالکریمی","۹۸ عدد"))
+        arrayList.add(TagList("حسن حاجی پور","۸۰ عدد"))
+        recyclerView_customer.adapter = CustomerListHorizontalAdapter(_context,arrayList,
+            object : CustomerListHorizontalAdapter.Listener{
+                override fun onItemClicked(position: Int, item: TagList) {
+                }
+
+            })
     }
 }

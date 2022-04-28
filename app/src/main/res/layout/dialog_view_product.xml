@@ -16,17 +16,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_id_order"
+            android:id="@+id/tv_id"
             style="@style/Text.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:drawableStart="@drawable/ic_baseline_storefront_24"
+            android:drawableStart="@drawable/ic_baseline_extension_24"
             android:drawablePadding="@dimen/_5sdp"
             android:textAlignment="center"
             android:textStyle="bold"
-            tools:text="#18359-" />
+            tools:text="#آیدی محصول" />
 
         <ImageView
             android:id="@+id/ic_close"
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="نمودار تغییر قیمت" />
+                android:text="@string/chart_sale_3_month" />
             <amingoli.com.selar.widget.chart.ChartPrice
                 android:id="@+id/chart_bar_price"
                 android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="مشتریان این محصول" />
+                android:text="@string/customer_this_product" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_customer"
                 android:overScrollMode="never"
@@ -157,19 +157,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_customer_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                style="@style/Text.Body2"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="نمودار فروش شش‌ماه گذشته" />
-            <amingoli.com.selar.widget.chart.ChartPrice
-                android:id="@+id/chart_bar_sale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
