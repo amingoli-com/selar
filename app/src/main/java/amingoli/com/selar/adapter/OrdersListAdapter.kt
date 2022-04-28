@@ -2,7 +2,6 @@ package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.model.Customers
 import amingoli.com.selar.model.Orders
 import android.annotation.SuppressLint
 import android.content.Context

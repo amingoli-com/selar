@@ -240,6 +240,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: TagList) {
                     if (item.tag.equals("0")){
+                        _DATE_EXPIRED = null
                         tv_add_date_expire.setText(resources.getString(R.string.add_date_expire))
                         edt_date.text.clear()
                         tv_add_date_expire.visibility = View.VISIBLE
@@ -248,7 +249,8 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                         val calendar = Calendar.getInstance()
                         calendar.time = Date()
                         calendar.add(Calendar.DAY_OF_YEAR, +item.tag!!.toInt())
-                        edt_date.setText(App.getFormattedDate(calendar.timeInMillis))
+                        _DATE_EXPIRED = calendar.time
+                        edt_date.setText(App.getFormattedDate(_DATE_EXPIRED!!))
                     }
                 }
             })
@@ -353,7 +355,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     private fun getValue(): Product{
         _PRODUCT_OBJECT?.id = if (_PRODUCT_OBJECT?.id != null) _PRODUCT_OBJECT?.id!! else null
         _PRODUCT_OBJECT?.image_defult = _IMAGE_DEFULT_PATH
-        _PRODUCT_OBJECT?.date_expired = App.getString(edt_date)
+        _PRODUCT_OBJECT?.date_expired = _DATE_EXPIRED
         _PRODUCT_OBJECT?.branch = Session.getInstance().branch
         _PRODUCT_OBJECT?.user = Session.getInstance().user
         _PRODUCT_OBJECT?.qrcode = App.getString(edt_barcode)
@@ -413,9 +415,9 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             edt_price_sela_on_product.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale_on_product!!))
             edt_price_sela.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale!!))
             edt_stock.setText(App.stockFormat(_PRODUCT_OBJECT!!.stock!!))
-            if (!_PRODUCT_OBJECT?.date_expired.isNullOrEmpty()){
-                tv_add_date_expire.setText(resources.getString(R.string.expired_at,_PRODUCT_OBJECT?.date_expired))
-                edt_date.setText(_PRODUCT_OBJECT?.date_expired)
+            if (_PRODUCT_OBJECT?.date_expired != null){
+                tv_add_date_expire.setText(resources.getString(R.string.expired_at,App.getFormattedDate(_PRODUCT_OBJECT?.date_expired)))
+                edt_date.setText(App.getFormattedDate(_PRODUCT_OBJECT?.date_expired))
             }
             initTextProfitAndDiscount()
         }else{

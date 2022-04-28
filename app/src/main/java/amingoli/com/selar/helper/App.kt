@@ -45,6 +45,10 @@ class App : MultiDexApplication() {
             return PersianDateFormat("Y/m/d").format(PersianDate(dateTime))
         }
 
+        fun getFormattedDate(date: Date?): String? {
+            return PersianDateFormat("Y/m/d").format(PersianDate(date))
+        }
+
         fun priceFormat(double: Double):String{
             val decimalFormat = DecimalFormat("###,###,###")
             return decimalFormat.format(double)
