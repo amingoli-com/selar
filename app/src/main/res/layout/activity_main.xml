@@ -17,6 +17,8 @@
         <LinearLayout
             style="@style/MarginLarge"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:backgroundTint="@color/white"
             android:background="@drawable/background_radius_not_padding"
             android:orientation="vertical"
@@ -29,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="نمودار " />
+                android:text="نمودار فروش این ماه" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"

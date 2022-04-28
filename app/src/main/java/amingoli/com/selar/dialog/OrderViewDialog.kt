@@ -79,9 +79,19 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
         total_order.setText(_context.getString(R.string.all_order_one), this_order.total_price_order)
         total_tax.setText(_context.getString(R.string.tax), this_order.total_tax)
         total_shipping.setText(_context.getString(R.string.shipping_price), this_order.totla_shipping)
-        total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
-        total_discount_free.setText(_context.getString(R.string.price_discount), this_order.amount_discount)
+        total_discount_free.setText(_context.getString(R.string.price_discount), this_order.amount_discount + this_order.pay_discount_code)
         total_pay.setText(_context.getString(R.string.amount_pay), this_order.totla_all)
+
+        cash_money.setText(_context.getString(R.string.cash_money_pay), this_order.pay_cash)
+        cash_card.setText(_context.getString(R.string.card_pay), this_order.pay_card)
+        if (!this_order.pay_card_info.isNullOrEmpty()) {
+            cash_card_info.setText(this_order.pay_card_info)
+            cash_card_info.visibility = View.VISIBLE
+        }
+        cash_debit.setText(_context.getString(R.string.debit), this_order.customer_debtor)
+        cash_discount.setText(_context.getString(R.string.price_discount_order), this_order.pay_discount_code)
+
+        total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
 
         tv_date.setText("ثبت شده‌در ${App.getFormattedDate(this_order.create_at?.time)}")
     }

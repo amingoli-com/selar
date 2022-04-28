@@ -7,6 +7,7 @@
     <string name="price_sela_on_product">قیمت روی کالا (مصرف کننده)</string>
     <string name="price_sela">قیمت نهایی فروش</string>
     <string name="price_discount">مبلغ تخفیف</string>
+    <string name="price_discount_order">تخفیف بر روی سفارش</string>
     <string name="percent_tax">درصد مالیات</string>
     <string name="tax">مالیات</string>
     <string name="info">مشخصات</string>
