@@ -87,7 +87,7 @@ class StockActivity : AppCompatActivity() {
             ArrayList(selectOrder("all")),
             object : ProductListAdapter_2.Listener {
                 override fun onItemClicked(position: Int, product: Product) {
-                    ProductViewDialog(this@StockActivity,product.id!!,null)
+                    ProductViewDialog(this@StockActivity,product.id!!,position,null)
                         .show(supportFragmentManager,"order_view")
                 }
             })

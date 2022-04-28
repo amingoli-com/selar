@@ -54,6 +54,16 @@ class ProductListManagerAdapter(
         }
     }
 
+    fun add(item : Product){
+        this.list.add(list.size,item)
+        notifyItemInserted(list.size)
+    }
+
+    fun update(position: Int, item : Product){
+        this.list[position] = item
+        notifyItemChanged(position,item)
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(list : List<Product>){
         this.list.clear()

@@ -43,6 +43,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     private var _IMAGE_DEFULT_PATH = ""
     private var _DATE_EXPIRED: Date? = null
     private var _CATEGORY: ArrayList<Category> = ArrayList()
+    private var _POSITION: Int? = null
 
     private val resultGetBarcodeCamera =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -80,9 +81,13 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private fun initObject(){
         _PRODUCT_OBJECT = if (intent != null && intent?.extras != null){
-            val extra = intent!!.extras!!.getInt("id_product", -1)
+            val extra = intent!!.extras!!.getInt("product_id", -1)
             App.database.getAppDao().selectProduct(extra)
         }else Product()
+
+        _POSITION = if (intent != null && intent?.extras != null){
+            intent!!.extras!!.getInt("product_position", -1)
+        }else null
     }
 
     private fun initToolbar(){
@@ -133,7 +138,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 val idProduct = App.database.getAppDao().insertProduct(getValue()).toInt()
                 insertUnitList()
                 insertCategoryProductList(idProduct)
-                Handler().postDelayed({finish()},500)
+                Handler().postDelayed({submitted(idProduct)},500)
             }
         }
     }
@@ -432,5 +437,16 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     override fun onSubmit(dialog: SelectCategoryDialog, list: ArrayList<Category>?) {
         initCategory()
         dialog.dismiss()
+    }
+
+    /**
+     * Submit
+     * */
+    private fun submitted(idProduct: Int){
+        val i = Intent()
+        i.putExtra("product_id",idProduct)
+        if (_POSITION != null) i.putExtra("product_position",_POSITION)
+        setResult(RESULT_OK, i)
+        finish()
     }
 }

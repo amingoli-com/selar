@@ -2,7 +2,9 @@ package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.TagInfoAdapter
+import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Orders
+import amingoli.com.selar.model.Product
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,9 +16,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_view_product.*
 
-class ProductViewDialog(val _context: Context, val product_id:Int, val listener: Listener?) : DialogFragment() {
+class ProductViewDialog(val _context: Context, val product_id:Int, val position: Int, val listener: Listener?) : DialogFragment() {
 
-//    private var this_order = App.database.getAppDao().selectOrdersById(order_id)
+    private var this_product = App.database.getAppDao().selectProduct(product_id)
     private var adapterTag : TagInfoAdapter? =null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,7 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val listener:
     }
 
     interface Listener{
-        fun onEditOrder(dialog: ProductViewDialog, order: Orders?)
+        fun onEditProduct(dialog: ProductViewDialog, product: Product?, position: Int)
     }
 
     private fun initOrderData(){
@@ -51,6 +53,10 @@ class ProductViewDialog(val _context: Context, val product_id:Int, val listener:
     private fun initOnClick(){
         ic_close.setOnClickListener {
             dismiss()
+        }
+
+        tv_edit.setOnClickListener {
+            listener?.onEditProduct(this,this_product, position)
         }
     }
 

@@ -50,7 +50,7 @@ class FinanceActivity : AppCompatActivity() {
             ArrayList(App.database.getAppDao().selectProduct()),
             object : ProductListHorizontalAdapter_2.Listener {
                 override fun onItemClicked(position: Int, product: Product) {
-                    ProductViewDialog(this@FinanceActivity,product.id!!,null)
+                    ProductViewDialog(this@FinanceActivity,product.id!!,position,null)
                         .show(supportFragmentManager,"order_view")
                 }
             })

@@ -4,10 +4,13 @@ import amingoli.com.selar.R
 import amingoli.com.selar.adapter.*
 import amingoli.com.selar.dialog.ProductViewDialog
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config
 import amingoli.com.selar.model.Category
+import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,20 +18,48 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.result.contract.ActivityResultContracts
 import kotlinx.android.synthetic.main.activity_list_product.*
+import kotlinx.android.synthetic.main.activity_list_product.recyclerView_category
+import kotlinx.android.synthetic.main.activity_list_product.toolbar
+import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.item_product.view.title
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 import kotlinx.android.synthetic.main.item_toolbar.view.ic_back
 import kotlinx.android.synthetic.main.widget_select_product.view.*
 
-class ListProductActivity : AppCompatActivity() {
+class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
 
     private var listCategoryForBack = ArrayList<TagList>()
     private var adapterProduct : ProductListManagerAdapter? = null
     private var adapterTagList : CategoryListAdapter? = null
     private var last_search : String? = null
-    private var _product_position = -1
 
+    private val resultAddProduct =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                if (result.data!= null){
+                    if (result.data!!.extras!= null){
+                        val product_id:Int = result.data!!.getIntExtra("product_id",-1)
+                        adapterProduct?.add(App.database.getAppDao().selectProduct(product_id))
+                    }
+                }
+            }
+        }
+
+    private val resultUpdateProduct =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                if (result.data!= null){
+                    if (result.data!!.extras!= null){
+                        val product_id:Int = result.data!!.getIntExtra("product_id",-1)
+                        val product_position:Int = result.data!!.getIntExtra("product_position",-1)
+                        Log.e("qqqq", "id: ${product_id} - pos: ${product_position}")
+                        adapterProduct?.update(product_position, App.database.getAppDao().selectProduct(product_id))
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +71,13 @@ class ListProductActivity : AppCompatActivity() {
         initRecyclerProduct()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun initToolbar(){
         toolbar.title.text = resources.getString(R.string.toolbar_title_product)
         toolbar.ic_back.visibility = View.VISIBLE
         toolbar.ic_back.setOnClickListener { onBackPressed() }
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
-            startActivity(Intent(this,ProductActivity::class.java))
+            resultAddProduct.launch(Intent(this,ProductActivity::class.java))
         }
 
         toolbar.ic_search.visibility = View.VISIBLE
@@ -124,13 +151,9 @@ class ListProductActivity : AppCompatActivity() {
                     if (size == 0) statuser.onEmpty()
                     else statuser.onFinish()
                 }
-
                 override fun onItemClicked(position: Int, product: Product) {
-                    ProductViewDialog(this@ListProductActivity,product.id!!,null)
-                        .show(supportFragmentManager, "product")
-                    /*val i = Intent(this@ListProductActivity, ProductActivity::class.java)
-                    i.putExtra("id_product", product.id)
-                    startActivity(i)*/
+                    ProductViewDialog(this@ListProductActivity,product.id!!,position,
+                        this@ListProductActivity).show(supportFragmentManager, "product")
                 }
 
             })
@@ -154,5 +177,16 @@ class ListProductActivity : AppCompatActivity() {
 
     private fun initRecyclerProduct(){
         recyclerView_product.adapter = adapterProduct
+    }
+
+    /**
+     * Listener
+     * */
+    override fun onEditProduct(dialog: ProductViewDialog, product: Product?, position: Int) {
+        val i = Intent(this@ListProductActivity,ProductActivity::class.java)
+        i.putExtra("product_id", product!!.id)
+        i.putExtra("product_position", position)
+        resultUpdateProduct.launch(i)
+        dialog.dismiss()
     }
 }
