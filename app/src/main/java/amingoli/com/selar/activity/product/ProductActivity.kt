@@ -16,13 +16,11 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
@@ -33,7 +31,6 @@ import kotlinx.android.synthetic.main.activity_product.edt_name
 import kotlinx.android.synthetic.main.activity_product.ic_delete
 import kotlinx.android.synthetic.main.activity_product.image
 import kotlinx.android.synthetic.main.activity_product.submit
-import kotlinx.android.synthetic.main.dialog_insert_category.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -122,7 +119,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         }
 
         tv_add_category.setOnClickListener {
-            SelectCategoryDialog(this, 0, _CATEGORY,this).show()
+            SelectCategoryDialog(this, _CATEGORY,this).show(supportFragmentManager,"category")
         }
 
         tv_add_date_expire.setOnClickListener {

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_select_category_list.view.*
 
 class SelecCategoryAdapter(
     val context: Context,
-    val list_database: ArrayList<Category>,
+    val list: ArrayList<Category>,
     val category_is_chose: ArrayList<Category>,
     val listener: Listener
 ) : RecyclerView.Adapter<SelecCategoryAdapter.ListViewHolder>() {
@@ -33,13 +33,13 @@ class SelecCategoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list_database.size
+        return list.size
     }
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ListViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = holder.itemView
-        val model = list_database[position]
+        val model = list[position]
 
         setItemSelected(model.id,item.checkbox)
 
@@ -69,16 +69,23 @@ class SelecCategoryAdapter(
     }
 
     fun addItem(item: Category){
-        list_database.add(list_database.size,item)
-        notifyItemInserted(list_database.size)
+        list.add(list.size,item)
+        notifyItemInserted(list.size)
     }
 
     fun addItem(item: Category, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )
-            list_database[position] = item
+            list[position] = item
             notifyItemChanged(position,item)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list : List<Category>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 }

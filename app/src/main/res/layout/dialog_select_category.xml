@@ -3,94 +3,99 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="@dimen/_5sdp">
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    android:padding="@dimen/_10sdp"
+    android:background="@drawable/background_radius_not_padding">
 
     <RelativeLayout
         android:id="@+id/box_top"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/ic_back"
-            android:layout_alignParentStart="true"
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/Text.Body2"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
-            android:background="@drawable/btn_back_selector"
-            android:padding="@dimen/_8sdp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:drawableTint="@color/primaryVariant"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:textAlignment="center"
+            android:textColor="@color/primaryVariant"
             android:visibility="gone"
-            app:tint="@color/primary"
+            tools:ignore="UnusedAttribute,UseCompatTextViewDrawableXml"
+            tools:text="مواد شوینده"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_submit"
+            style="@style/Text.Body2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ic_back"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/choose_your_category"
-            android:textColor="@color/primaryVariant"
-            android:textStyle="bold" />
-
-        <View android:layout_below="@+id/tv_title"
-            android:layout_marginTop="@dimen/_5sdp"
-            style="@style/Line"/>
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_above="@+id/box_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/box_top"
-        android:orientation="vertical"
-        android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_select_category_list" />
-
-    <RelativeLayout
-        android:id="@+id/box_category"
-        android:layout_above="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edt_category_name"
-            style="@style/Edittext.product"
-            android:imeOptions="actionDone|actionSend|actionGo"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/ic_add_category"
-            android:drawableStart="@drawable/ic_baseline_category_24"
-            android:drawablePadding="@dimen/_10sdp"
-            android:hint="@string/add_category"
-            android:padding="@dimen/_5sdp" />
-        <ImageView
-            android:id="@+id/ic_add_category"
-            android:padding="@dimen/_5sdp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_add_circle_24"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            app:tint="@color/blue" />
+            android:background="@drawable/background_radius"
+            android:backgroundTint="@color/complementary"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="@string/submit"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
-    <amingoli.com.selar.widget.loader_button.LoaderButton
-        android:id="@+id/submit"
-        android:layout_alignParentBottom="true"
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/box_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/background_complementary"
-        android:clickable="true"
-        android:focusable="true"
-        app:btnText="@string/submit"
-        app:btnTextSize="@dimen/_14ssp"
-        app:loaderIndicator="BallPulseIndicator"
-        app:loaderIndicatorColor="@color/white" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ic_add"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:tint="@color/blue" />
+
+                <EditText
+                    android:id="@+id/edt_category_name"
+                    style="@style/Edittext.product"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/ic_add"
+                    android:drawableStart="@drawable/ic_baseline_category_24"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/add_category"
+                    android:imeOptions="actionDone|actionSend|actionGo"
+                    android:padding="@dimen/_5sdp" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_select_category_list" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
