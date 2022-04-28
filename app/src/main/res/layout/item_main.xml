@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/image"
+        android:tint="@color/primary"
         android:layout_marginTop="@dimen/_5sdp"
         android:src="@drawable/ic_gallery"
         android:layout_width="match_parent"

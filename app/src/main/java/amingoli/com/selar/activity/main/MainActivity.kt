@@ -17,6 +17,7 @@ import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
+import amingoli.com.selar.model.MainModel
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.TagList
 import android.content.Intent
@@ -108,15 +109,15 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
     }
 
     private fun initRecyclerViewItemMain(){
-        val arrayList = ArrayList<TagList>()
-        arrayList.add(TagList("محصولات-همه محصولات ثبت شده","290,000 محصول"))
-        arrayList.add(TagList("سفارشات-همه سفارشات انجام شده","13,290 سفارش"))
-        arrayList.add(TagList("دسته‌بندی-دسته‌بندی‌های فعال","290 دسته‌بندی"))
-        arrayList.add(TagList("مشتریان-همه خریداران شما","1,290 مشتری"))
-        arrayList.add(TagList("گزارشات انبار-کالاهای موجود","18,290 کالا"))
-        arrayList.add(TagList("گزارشات مالی-سرمایه موجود","180,920,290 تومان"))
-        arrayList.add(TagList("تنظیمات-",""))
-        arrayList.add(TagList("پشتیبانی-",""))
+        val arrayList = ArrayList<MainModel>()
+        arrayList.add(MainModel(R.drawable.ic_baseline_extension_24,"محصولات","محصولات ثبت شده","290,000 محصول", ListProductActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_shopping_cart_24,"سفارشات","سفارشات انجام شده","290 سفارش", OrderActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_category_24,"دسته‌بندی","دسته‌بندی های ثبت شده","290,000 محصول", CategoryActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_account_circle_black_24dp,"مشتریان","خریداران شما","290,000 محصول", CustomerActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_storefront_24,"گزارش انبار","کالاهای موجود","290,000 محصول", StockActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_monetization_on_24,"گزارش مالی","سرمایه موجود","290,000 محصول", FinanceActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_settings_24,"تنظیمات","","", SettingActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_import_contacts_24,"آموزش و پشتیبانی","سوالات متداول و ثبت تیکت","سیمین سرمایه پارس", SupportActivity::class.java))
         recyclerView.adapter = ItemMainAdapter(this,arrayList,this)
     }
 
@@ -152,17 +153,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
     /**
      * Listener
      * */
-    override fun onItemClicked(position: Int, item: TagList) {
-        when(position){
-            0 -> startActivity(Intent(this, ListProductActivity::class.java))
-            1 -> startActivity(Intent(this, OrderActivity::class.java))
-            2 -> startActivity(Intent(this, CategoryActivity::class.java))
-            3 -> startActivity(Intent(this, CustomerActivity::class.java))
-            4 -> startActivity(Intent(this, StockActivity::class.java))
-            5 -> startActivity(Intent(this, FinanceActivity::class.java))
-            6 -> startActivity(Intent(this, SettingActivity::class.java))
-            7 -> startActivity(Intent(this, SupportActivity::class.java))
-        }
+    override fun onItemClicked(position: Int, item: MainModel) {
+        startActivity(Intent(this, item.action))
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
