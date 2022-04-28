@@ -109,6 +109,18 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             ic_delete.visibility = View.GONE
         }
 
+        checkbox_tax.setOnCheckedChangeListener { buttonView, isChecked ->
+            run {
+                if (isChecked) {
+                    edt_tax_percent.isEnabled = true
+                    edt_tax_percent.setText(Session.getInstance().taxPercent.toString())
+                } else {
+                    edt_tax_percent.isEnabled = false
+                    edt_tax_percent.setText("0")
+                }
+            }
+        }
+
         tv_add_category.setOnClickListener {
             SelectCategoryDialog(this, 0, _CATEGORY,this).show()
         }
@@ -338,24 +350,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         if (_PRODUCT_OBJECT?.user == null){
         }
 
-        /*if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
-            edt_price_buy.setError(resources.getString(R.string.not_valid))
-            value_is_true = "false"
-        }else if (_PRODUCT_OBJECT?.price_buy!! > 0 && _PRODUCT_OBJECT?.price_sale!! <= 0){
-            _PRODUCT_OBJECT?.price_sale = _PRODUCT_OBJECT?.price_buy
-            edt_price_sela.setText(_PRODUCT_OBJECT?.price_sale.toString())
-        }else if (_PRODUCT_OBJECT?.price_buy!! <= 0 && _PRODUCT_OBJECT?.price_sale!! > 0){
-            _PRODUCT_OBJECT?.price_buy = _PRODUCT_OBJECT?.price_sale
-            edt_price_buy.setText(_PRODUCT_OBJECT?.price_buy.toString())
-        }
-
-
-        if (_PRODUCT_OBJECT?.price_buy!! < _PRODUCT_OBJECT?.price_sale_on_product!!){
-
-        }*/
-
-
-
         return value_is_true == "true"
     }
 
@@ -379,9 +373,12 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         _PRODUCT_OBJECT?.price_profit = calculateProfit()
         _PRODUCT_OBJECT?.max_selection = App.convertToDouble(edt_max_selection)
         _PRODUCT_OBJECT?.min_selection = 1.0
-        _PRODUCT_OBJECT?.tax_percent = App.convertToInt(edt_tax_percent)
-        _PRODUCT_OBJECT?.status = 1
 
+        _PRODUCT_OBJECT?.tax_percent =
+            if (App.convertToInt(edt_tax_percent) == Session.getInstance().taxPercent && checkbox_tax.isChecked){ null }
+            else App.convertToInt(edt_tax_percent)
+
+        _PRODUCT_OBJECT?.status = 1
         if (_PRODUCT_OBJECT?.id != null){
             _PRODUCT_OBJECT?.updated_at = Date()
         } else {
@@ -399,7 +396,17 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 _IMAGE_DEFULT_PATH = _PRODUCT_OBJECT!!.image_defult!!
                 ic_delete.visibility = View.VISIBLE
             }
-            if (_PRODUCT_OBJECT?.tax_percent != null) edt_tax_percent.setText(_PRODUCT_OBJECT?.tax_percent!!.toString())
+
+            edt_tax_percent.setText(
+                if (_PRODUCT_OBJECT?.tax_percent == null) "${Session.getInstance().taxPercent}"
+                else "${_PRODUCT_OBJECT?.tax_percent!!}"
+            )
+
+            if (_PRODUCT_OBJECT?.tax_percent == 0){
+                checkbox_tax.isChecked = false
+                edt_tax_percent.isEnabled = false
+            }
+
             edt_barcode.setText(_PRODUCT_OBJECT?.qrcode)
             atc_unit.setText(_PRODUCT_OBJECT?.increase)
             edt_name.setText(_PRODUCT_OBJECT?.name)

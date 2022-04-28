@@ -147,6 +147,15 @@
                             android:hint="@string/percent_tax" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <CheckBox
+                        android:id="@+id/checkbox_tax"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:checked="true"
+                        android:text="@string/text_check_box_tax"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

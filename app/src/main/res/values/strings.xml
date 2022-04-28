@@ -119,5 +119,6 @@
     <string name="order_status_waiting">در انتظار</string>
     <string name="chart">نمودار</string>
     <string name="setting">تنظیمات</string>
+    <string name="text_check_box_tax">شامل مالیات باشد</string>
 
 </resources>
