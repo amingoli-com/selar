@@ -124,18 +124,6 @@
                     tools:text="#۱۶۲۴۳۴۵۲۲۳" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_tag"
-                android:visibility="gone"
-                android:clipToPadding="false"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_10sdp"
-                tools:listitem="@layout/item_tag_info"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
             <LinearLayout
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"

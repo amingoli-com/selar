@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/drawable/ic_unit_symbols_black_24dp.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/include_item_card_view.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/item_splash.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/strike_text.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/widget_message_box.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/font/my_font.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/layout-v23/include_toolbar.xml" value="0.30104166666666665" />

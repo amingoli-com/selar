@@ -23,8 +23,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_order_view.*
-import kotlinx.android.synthetic.main.dialog_order_view.recyclerView
-import kotlinx.android.synthetic.main.dialog_order_view.recyclerView_tag
 import kotlin.collections.ArrayList
 
 class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int?, val listener: Listener?) : DialogFragment() {
@@ -43,7 +41,6 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
 
         initOrderData()
         initOnClick()
-        initAdapterTagList()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -93,7 +90,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
 
         total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
 
-        tv_date.setText("ثبت شده‌در ${App.getFormattedDate(this_order.create_at?.time)}")
+        tv_date.setText("در تاریخ ${App.getFormattedDate(this_order.update_at)} ویرایش شده \n در تاریخ ${App.getFormattedDate(this_order.create_at)} ثبت شده")
     }
 
     private fun initOnClick(){
@@ -110,34 +107,8 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
         }
     }
 
-    private fun initAdapterTagList(){
-        val array_tag = ArrayList<TagList>()
-        array_tag.add(TagList("ویرایش", R.drawable.ic_baseline_extension_24,"all"))
-        array_tag.add(TagList("حذف", R.drawable.ic_baseline_delete_24,"all"))
-
-        adapterTag = TagInfoAdapter(_context,
-            array_tag,
-            object : TagInfoAdapter.Listener {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onItemClicked(position: Int, item: TagList) {
-
-                }
-            })
-
-        recyclerView_tag.adapter = adapterTag
-    }
-
     private fun initRecyclerView(){
         val arrayList = ArrayList<OrderDetail>(App.database.getAppDao().selectOrdersDetailByOrderCode(this_order.order_code!!))
-        recyclerView.adapter = OrderDetailAdapter(_context,arrayList,object : OrderDetailAdapter.Listener{
-            override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
-
-            }
-
-            override fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>) {
-
-            }
-
-        })
+        recyclerView.adapter = OrderDetailAdapter(_context,arrayList,null)
     }
 }
