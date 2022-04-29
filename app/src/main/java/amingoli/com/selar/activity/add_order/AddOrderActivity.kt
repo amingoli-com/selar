@@ -252,16 +252,6 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     }
 
     /**
-     * Insert Database
-    * */
-    private fun insertOrder(new_order_detail: ArrayList<OrderDetail>){
-        if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(ORDER_CODE)
-        App.database.getAppDao().insertOrderDetail(new_order_detail)
-        App.database.getAppDao().insertOrder(this_order)
-        finish()
-    }
-
-    /**
      * Listener
      * */
     private fun resultScan(barcode:String, device:String){
@@ -289,28 +279,28 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     override fun onPayedByMoneyCash(dialog: SetPaymentDialog, orders: Orders) {
         this_order = orders
         dialog.dismiss()
-        loge()
+        readyToAddOrder()
     }
 
     override fun onPayedByCard(dialog: SetPaymentDialog, orders: Orders) {
         this_order = orders
         dialog.dismiss()
-        loge()
+        readyToAddOrder()
     }
 
     override fun onPayedByMultiCash(dialog: SetPaymentDialog, orders: Orders) {
         this_order = orders
         dialog.dismiss()
-        loge()
+        readyToAddOrder()
     }
 
     override fun onPayedByDebit(dialog: SetPaymentDialog, orders: Orders) {
         this_order = orders
         dialog.dismiss()
-        loge()
+        readyToAddOrder()
     }
 
-    private fun loge(){
+    private fun readyToAddOrder(){
         Log.e("qqqq",
             "customer id: ${this_order.customer} - ${this_order.customer_name} \n" +
                 "cahs money: ${this_order.pay_cash} \n" +
@@ -318,5 +308,15 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 "card info: ${this_order.pay_card_info} \n" +
                 "debit customer: ${this_order.customer_debtor} \n" )
         adapter?.populateOrderDetailToDatabase(this_order.customer)
+    }
+
+    /**
+     * Insert Database
+     * */
+    private fun insertOrder(new_order_detail: ArrayList<OrderDetail>){
+        if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(ORDER_CODE)
+        App.database.getAppDao().insertOrderDetail(new_order_detail)
+        App.database.getAppDao().insertOrder(this_order)
+        finish()
     }
 }
