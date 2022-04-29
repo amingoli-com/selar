@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_id_customer"
+            android:id="@+id/tv_id"
             style="@style/Text.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:minLines="2"
                 android:textAlignment="center"
+                android:textSize="@dimen/_20ssp"
                 android:textStyle="bold"
                 tools:text="امین گلی" />
 
@@ -88,6 +88,45 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_edit"
+                    style="@style/Text.Body2"
+                    android:drawableTint="@color/green"
+                    android:backgroundTint="@color/blue_white"
+                    android:background="@drawable/background_radius"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:drawableTop="@drawable/ic_baseline_extension_24"
+                    android:textAlignment="center"
+                    android:text="@string/edit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_delete"
+                    style="@style/Text.Body2"
+                    android:drawableTint="@color/red"
+                    android:backgroundTint="@color/blue_white"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:background="@drawable/background_radius"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:drawableTop="@drawable/ic_baseline_delete_24"
+                    android:textAlignment="center"
+                    android:text="@string/delete"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
                     android:id="@+id/tv_order_count"
                     style="@style/Text.Body2"
                     android:drawableTint="@color/blue"
@@ -99,7 +138,7 @@
                     android:textAlignment="center"
                     android:text="700 سفارش"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_height="wrap_content"/>
 
                 <TextView
@@ -129,10 +168,9 @@
                     android:textAlignment="center"
                     android:text="1401/01/31"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-
 
             <TextView
                 style="@style/Text.Body2"
@@ -141,7 +179,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="آخرین سفارشات" />
+                android:text="@string/chart_order_3_month" />
+            <amingoli.com.selar.widget.chart.ChartPrice
+                android:id="@+id/chart_bar_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/Text.Body2"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:text="@string/last_order" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_order"
                 android:clipToPadding="false"
@@ -162,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_14sdp"
-                tools:text="محصولات موردعلاقه" />
+                android:text="@string/product_beloved" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_product"
                 android:clipToPadding="false"

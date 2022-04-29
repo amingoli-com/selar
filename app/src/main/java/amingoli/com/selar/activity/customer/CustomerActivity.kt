@@ -3,6 +3,7 @@ package amingoli.com.selar.activity.customer
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.CustomerListAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
+import amingoli.com.selar.dialog.CustomerViewDialog
 import amingoli.com.selar.dialog.InsertCustomerDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.model.Customers
@@ -10,16 +11,17 @@ import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_DIAL
+import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_customer.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
+import java.lang.Exception
 
-class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
+class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener, CustomerViewDialog.Listener {
 
     private var adapter : CustomerListAdapter? =null
     private var adapterTag : TagInfoAdapter? =null
@@ -40,8 +42,8 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
 
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
-            InsertCustomerDialog(this,
-                null,-1,this).show()
+            InsertCustomerDialog(this, null,-1,this)
+                .show(supportFragmentManager,"customer")
         }
 
 
@@ -108,12 +110,17 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
                 override fun onItemClicked(position: Int, item: Customers, action: String?) {
                     when(action){
                         "tel", "sms" -> {
-                            val i = Intent(ACTION_DIAL)
-                            i.setData(Uri.parse("${action}:${item.phone}"))
-                            startActivity(i)
+                            try {
+                                val i = Intent(ACTION_VIEW)
+                                i.setData(Uri.parse("${action}:${item.phone}"))
+                                startActivity(i)
+                            }catch (e:Exception) {
+                                App.toast(getString(R.string.your_device_hasnt_this_feathure))
+                            }
                         }
                         else -> {
-                            InsertCustomerDialog(this@CustomerActivity, item,position,this@CustomerActivity).show()
+                            CustomerViewDialog(this@CustomerActivity,item.id!!,position,this@CustomerActivity)
+                                .show(supportFragmentManager, "customer")
                         }
                     }
                 }
@@ -136,9 +143,15 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener {
      * Listener
      * */
 
-    override fun insert(dialog: AlertDialog, customer: Customers, position: Int) {
+    override fun insert(dialog: InsertCustomerDialog, customer: Customers, position: Int) {
         customer.id = App.database.getAppDao().insertCustomer(customer).toInt()
         adapter?.addItem(customer, position)
+        dialog.dismiss()
+    }
+
+    override fun onEditCustomer(dialog: CustomerViewDialog, customer: Customers?, position: Int?) {
+        InsertCustomerDialog(this@CustomerActivity, customer,position!!, this@CustomerActivity)
+            .show(supportFragmentManager,"customer")
         dialog.dismiss()
     }
 

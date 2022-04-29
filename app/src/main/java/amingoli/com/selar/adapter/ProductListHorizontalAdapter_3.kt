@@ -10,14 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_product_horizontal_white.view.*
+import kotlinx.android.synthetic.main.item_product_horizontal_blue_white.view.*
 import java.io.File
 
-class ProductListHorizontalAdapter_2(
+class ProductListHorizontalAdapter_3(
     val context: Context,
     val list: ArrayList<Product>,
     val listener: Listener
-) : RecyclerView.Adapter<ProductListHorizontalAdapter_2.ListViewHolder>() {
+) : RecyclerView.Adapter<ProductListHorizontalAdapter_3.ListViewHolder>() {
 
     private var packId = -1
 
@@ -28,7 +28,7 @@ class ProductListHorizontalAdapter_2(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product_horizontal_white, parent, false))
+        return ListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product_horizontal_blue_white, parent, false))
     }
 
     override fun getItemCount(): Int {

@@ -123,5 +123,9 @@
     <string name="chart_sale_3_month">نمودار فروش ۳ ماهه اخیر</string>
     <string name="customer_this_product">مشتریان این محصول</string>
     <string name="strike_text_line"><strike>%1$s</strike></string>
+    <string name="your_device_hasnt_this_feathure">این قابلیت برای دستگاه فراهم نمی‌باشد</string>
+    <string name="chart_order_3_month">نمودار سفارشات ۳ ماهه اخیر</string>
+    <string name="last_order">آخرین سفارشات</string>
+    <string name="product_beloved">محصولات موردعلاقه</string>
 
 </resources>

@@ -79,6 +79,12 @@
         <item name="android:digits">0123456789.</item>
     </style>
 
+    <style name="Edittext.product.Number">
+        <item name="android:gravity">start</item>
+        <item name="android:inputType">number</item>
+        <item name="android:digits">0123456789</item>
+    </style>
+
     <style name="Line">
         <item name="android:alpha">0.24</item>
         <item name="android:layout_marginStart">@dimen/_3sdp</item>

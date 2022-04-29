@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/background_radius_not_padding"
+    android:backgroundTint="@color/white"
     android:gravity="center"
     android:paddingHorizontal="@dimen/_15sdp"
     android:orientation="vertical">
@@ -25,7 +26,8 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/edt_tel"
-            style="@style/Edittext.product"
+            style="@style/Edittext.product.Number"
+            android:imeOptions="actionDone|actionGo"
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:hint="@string/number_phone" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,7 +44,8 @@
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/background_complementary"
         android:clickable="true"
         android:focusable="true"

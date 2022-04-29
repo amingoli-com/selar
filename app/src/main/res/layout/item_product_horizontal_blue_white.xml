@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:background="@drawable/background_radius"
-    android:backgroundTint="@color/white"
+    android:backgroundTint="@color/blue_white"
     style="@style/Margin"
     android:gravity="center"
     android:layout_width="wrap_content"
