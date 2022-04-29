@@ -54,13 +54,13 @@ class OrdersListAdapter(val context: Context,
         }
     }
 
-    fun addItem(item: Orders){
+    fun add(item: Orders){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: Orders, position: Int){
-        if (position == -1) addItem(item)
+    fun add(item: Orders, position: Int){
+        if (position == -1) add(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )
             list[position] = item

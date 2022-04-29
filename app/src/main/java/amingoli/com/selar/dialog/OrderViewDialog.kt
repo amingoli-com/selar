@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.dialog_order_view.recyclerView
 import kotlinx.android.synthetic.main.dialog_order_view.recyclerView_tag
 import kotlin.collections.ArrayList
 
-class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Listener?) : DialogFragment() {
+class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int?, val listener: Listener?) : DialogFragment() {
 
     private var this_order = App.database.getAppDao().selectOrdersById(order_id)
     private var adapterTag : TagInfoAdapter? =null
@@ -53,7 +53,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
     }
 
     interface Listener{
-        fun onEditOrder(dialog: OrderViewDialog, order: Orders?)
+        fun onEditOrder(dialog: OrderViewDialog, order: Orders?, position: Int)
     }
 
     private fun initOrderData(){
@@ -98,11 +98,12 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val listener: Lis
 
     private fun initOnClick(){
         ic_edit.setOnClickListener {
-            listener?.onEditOrder(this,this_order)
-            val i = Intent(_context, AddOrderActivity::class.java)
-            i.putExtra("order_id", this_order.id)
-            startActivity(i)
-            dismiss()
+            if (listener == null){
+                val i = Intent(_context, AddOrderActivity::class.java)
+                i.putExtra("order_id", this_order.id)
+                startActivity(i)
+                dismiss()
+            }else listener.onEditOrder(this,this_order, position!!)
         }
         ic_close.setOnClickListener {
             dismiss()

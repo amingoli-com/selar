@@ -2,6 +2,7 @@ package amingoli.com.selar.activity.order
 
 import amingoli.com.selar.R
 import amingoli.com.selar.activity.add_order.AddOrderActivity
+import amingoli.com.selar.activity.product.ProductActivity
 import amingoli.com.selar.adapter.CustomerListAdapter
 import amingoli.com.selar.adapter.OrdersListAdapter
 import amingoli.com.selar.adapter.TagInfoAdapter
@@ -17,16 +18,44 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_customer.*
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity(), OrderViewDialog.Listener {
 
     private var adapter : OrdersListAdapter? =null
     private var adapterTag : TagInfoAdapter? =null
+
+    private val resultAdd =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                if (result.data!= null){
+                    if (result.data!!.extras!= null){
+                        val order_id:Int = result.data!!.getIntExtra("order_id",-1)
+                        adapter?.add(App.database.getAppDao().selectOrdersById(order_id))
+                    }
+                }
+            }
+        }
+
+    private val resultUpdate =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                if (result.data!= null){
+                    if (result.data!!.extras!= null){
+                        val order_id:Int = result.data!!.getIntExtra("order_id",-1)
+                        val order_position:Int = result.data!!.getIntExtra("order_position",-1)
+                        Log.e("qqqq", "id: ${order_id} - pos: ${order_position}")
+                        adapter?.add(App.database.getAppDao().selectOrdersById(order_id),order_position)
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +73,7 @@ class OrderActivity : AppCompatActivity() {
 
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
-            startActivity(Intent(this, AddOrderActivity::class.java))
-            finish()
+            resultAdd.launch(Intent(this, AddOrderActivity::class.java))
         }
 
 
@@ -113,7 +141,8 @@ class OrderActivity : AppCompatActivity() {
             ArrayList(selectOrder("all")),
             object : OrdersListAdapter.Listener {
                 override fun onItemClicked(position: Int, item: Orders) {
-                    OrderViewDialog(this@OrderActivity,item.id!!,null).show(supportFragmentManager,"order_view")
+                    OrderViewDialog(this@OrderActivity,item.id!!,position,
+                        this@OrderActivity).show(supportFragmentManager,"order_view")
                 }
             })
         recyclerView.adapter = adapter
@@ -134,6 +163,14 @@ class OrderActivity : AppCompatActivity() {
             "least_count"-> App.database.getAppDao().selectOrdersLeastCount()
             else ->         App.database.getAppDao().selectOrders()
         }
+    }
+
+    override fun onEditOrder(dialog: OrderViewDialog, order: Orders?, position: Int) {
+        val i = Intent(this, AddOrderActivity::class.java)
+        i.putExtra("order_id", order?.id)
+        i.putExtra("order_position", position)
+        resultUpdate.launch(i)
+        dialog.dismiss()
     }
 
     /**

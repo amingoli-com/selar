@@ -55,7 +55,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
-        initObject()
+        initExteraDataIntent()
         setValue()
         initToolbar()
         initActionOnClick()
@@ -79,7 +79,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         }
     }
 
-    private fun initObject(){
+    private fun initExteraDataIntent(){
         _PRODUCT_OBJECT = if (intent != null && intent?.extras != null){
             val extra = intent!!.extras!!.getInt("product_id", -1)
             App.database.getAppDao().selectProduct(extra)

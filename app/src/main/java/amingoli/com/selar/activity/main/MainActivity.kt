@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         ordersWaiting = ArrayList(App.database.getAppDao().selectOrders(ORDER_STATUS_WAITING))
         recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,ordersWaiting,object : OrderWaitingAdapter.Listener{
             override fun onItemClicked(position: Int, item: Orders) {
-                OrderViewDialog(this@MainActivity,item.id!!,null)
+                OrderViewDialog(this@MainActivity,item.id!!,null, null)
                     .show(supportFragmentManager,"order_view")
             }
 

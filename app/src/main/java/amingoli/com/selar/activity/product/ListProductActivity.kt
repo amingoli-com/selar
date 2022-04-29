@@ -4,17 +4,13 @@ import amingoli.com.selar.R
 import amingoli.com.selar.adapter.*
 import amingoli.com.selar.dialog.ProductViewDialog
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Config
 import amingoli.com.selar.model.Category
-import amingoli.com.selar.model.Orders
 import amingoli.com.selar.model.Product
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -22,11 +18,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import kotlinx.android.synthetic.main.activity_list_product.*
 import kotlinx.android.synthetic.main.activity_list_product.recyclerView_category
 import kotlinx.android.synthetic.main.activity_list_product.toolbar
-import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.item_product.view.title
 import kotlinx.android.synthetic.main.item_toolbar.view.*
 import kotlinx.android.synthetic.main.item_toolbar.view.ic_back
-import kotlinx.android.synthetic.main.widget_select_product.view.*
 
 class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
 
@@ -35,7 +29,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
     private var adapterTagList : CategoryListAdapter? = null
     private var last_search : String? = null
 
-    private val resultAddProduct =
+    private val resultAdd =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 if (result.data!= null){
@@ -47,7 +41,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
             }
         }
 
-    private val resultUpdateProduct =
+    private val resultUpdate =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 if (result.data!= null){
@@ -77,7 +71,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
         toolbar.ic_back.setOnClickListener { onBackPressed() }
         toolbar.ic_add.visibility = View.VISIBLE
         toolbar.ic_add.setOnClickListener {
-            resultAddProduct.launch(Intent(this,ProductActivity::class.java))
+            resultAdd.launch(Intent(this,ProductActivity::class.java))
         }
 
         toolbar.ic_search.visibility = View.VISIBLE
@@ -186,7 +180,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
         val i = Intent(this@ListProductActivity,ProductActivity::class.java)
         i.putExtra("product_id", product!!.id)
         i.putExtra("product_position", position)
-        resultUpdateProduct.launch(i)
+        resultUpdate.launch(i)
         dialog.dismiss()
     }
 }

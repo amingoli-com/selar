@@ -5,12 +5,14 @@ import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.dialog.CustomerDialog
 import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.*
 import amingoli.com.selar.widget.select_product.SelectProduct
 import amingoli.com.selar.widget.text_watcher.EditTextWatcher
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +36,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
 
     private var ORDER_CODE = System.currentTimeMillis().toString()
     private var EDIT = false
+    private var _POSITION: Int? = null
 
     private var this_order = Orders()
     private var order_detail = ArrayList<OrderDetail>()
@@ -49,24 +52,11 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private var totla_discount = 0.0
     private var totla_all = 0.0
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
 
-        if (intent?.extras?.getInt("order_id",-1) != null){
-            EDIT = true
-            val order_id = intent?.extras?.getInt("order_id",-1)
-            this_order = App.database.getAppDao().selectOrdersById(order_id!!.toInt())
-            ORDER_CODE = this_order.order_code!!
-            order_detail = ArrayList(App.database.getAppDao().selectOrdersDetailByOrderCode(ORDER_CODE))
-            initCustomerView()
-        }
-
+        initExtrasDataIntent()
         initOtherView()
         initOnClick()
         initOrderList()
@@ -76,6 +66,26 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     override fun onPause() {
         codeScanner?.releaseResources()
         super.onPause()
+    }
+
+    private fun initExtrasDataIntent(){
+        if (intent?.extras?.getInt("order_id",-1) != null){
+            EDIT = true
+            val order_id = intent?.extras?.getInt("order_id",-1)
+            this_order = App.database.getAppDao().selectOrdersById(order_id!!.toInt())
+            ORDER_CODE = this_order.order_code!!
+            order_detail = ArrayList(App.database.getAppDao().selectOrdersDetailByOrderCode(ORDER_CODE))
+            initCustomerView()
+        }
+
+        this_order = if (intent != null && intent?.extras != null){
+            val extra = intent!!.extras!!.getInt("order_id", -1)
+            App.database.getAppDao().selectOrdersById(extra)
+        }else Orders()
+
+        _POSITION = if (intent != null && intent?.extras != null){
+            intent!!.extras!!.getInt("order_position", -1)
+        }else null
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -218,6 +228,9 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         submit_order_waiting.setOnClickListener {
             this_order.status = ORDER_STATUS_WAITING
             this_order.customer_debtor = totla_all
+            this_order.pay_cash = 0.0
+            this_order.pay_card = 0.0
+            this_order.pay_card_info = null
             getOrder()
             adapter?.populateOrderDetailToDatabase(this_order.customer)
         }
@@ -316,7 +329,15 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private fun insertOrder(new_order_detail: ArrayList<OrderDetail>){
         if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(ORDER_CODE)
         App.database.getAppDao().insertOrderDetail(new_order_detail)
-        App.database.getAppDao().insertOrder(this_order)
+        val order_id = App.database.getAppDao().insertOrder(this_order).toInt()
+        submitted(order_id)
+    }
+
+    private fun submitted(idOrder: Int){
+        val i = Intent()
+        i.putExtra("order_id",idOrder)
+        if (_POSITION != null) i.putExtra("order_position",_POSITION)
+        setResult(RESULT_OK, i)
         finish()
     }
 }

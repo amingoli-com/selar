@@ -146,6 +146,7 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
     private fun setOrderPiedByCashMoney(){
         orders.pay_cash = total_all_order()
         orders.pay_card = 0.0
+        orders.pay_card_info = null
         orders.customer_debtor = 0.0
         orders.status = ORDER_STATUS_SUCCESS
     }
