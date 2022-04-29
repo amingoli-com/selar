@@ -64,7 +64,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
                     "پرداخت شده"
                 }else "تسویه نشده"
             }
-            else -> ""
+            else -> "سفارش #${this_order.id}"
         }
 
         tv_business_name.setText(Session.getInstance().businessName)
