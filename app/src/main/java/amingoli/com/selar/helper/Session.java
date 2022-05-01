@@ -158,4 +158,34 @@ public class Session {
         return ExtrasPref.getInt(Config.TAX_PERCENT, 0);
     }
 
+    public void setCheckBox(boolean money, boolean card, boolean debit){
+        extraEditor.putBoolean(Config.CHECK_BOX_MONEY,money);
+        extraEditor.putBoolean(Config.CHECK_BOX_CARD,card);
+        extraEditor.putBoolean(Config.CHECK_BOX_DEBIT,debit);
+        extraEditor.commit();
+    }
+
+    public void setCheckBoxMoney(boolean checkBox) {
+        extraEditor.putBoolean(Config.CHECK_BOX_MONEY,checkBox);
+        extraEditor.commit();
+    }
+    public boolean getCheckBoxMoney() {
+        return ExtrasPref.getBoolean(Config.CHECK_BOX_MONEY, true);
+    }
+
+    public void setCheckBoxCard(boolean checkBox) {
+        extraEditor.putBoolean(Config.CHECK_BOX_CARD,checkBox);
+        extraEditor.commit();
+    }
+    public boolean getCheckBoxCard() {
+        return ExtrasPref.getBoolean(Config.CHECK_BOX_CARD, true);
+    }
+
+    public void setCheckBoxDebit(boolean checkBox) {
+        extraEditor.putBoolean(Config.CHECK_BOX_DEBIT,checkBox);
+        extraEditor.commit();
+    }
+    public boolean getCheckBoxDebit() {
+        return ExtrasPref.getBoolean(Config.CHECK_BOX_DEBIT, true);
+    }
 }

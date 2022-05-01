@@ -327,10 +327,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             edt_name.setError(resources.getString(R.string.not_valid))
             value_is_true = "false"
         }
-        if (_PRODUCT_OBJECT?.tax_percent == null){
-            edt_tax_percent.setError(resources.getString(R.string.not_valid))
-            value_is_true = "false"
-        }
 
         if (_PRODUCT_OBJECT?.increase.isNullOrEmpty()){
             atc_unit.setError(resources.getString(R.string.not_valid))

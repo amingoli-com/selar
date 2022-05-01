@@ -34,5 +34,8 @@ object Config {
     const val SESSION_KEY = "SESSION_KEY"
     const val SHIPPING_PRICE = "SHIPPING_PRICE"
     const val TAX_PERCENT = "TAX_PERCENT"
+    const val CHECK_BOX_MONEY = "CHECK_BOX_MONEY"
+    const val CHECK_BOX_CARD = "CHECK_BOX_CARD"
+    const val CHECK_BOX_DEBIT = "CHECK_BOX_DEBIT"
 
 }

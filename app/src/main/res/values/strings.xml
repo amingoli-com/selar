@@ -127,5 +127,15 @@
     <string name="chart_order_3_month">نمودار سفارشات ۳ ماهه اخیر</string>
     <string name="last_order">آخرین سفارشات</string>
     <string name="product_beloved">محصولات موردعلاقه</string>
+    <string name="conenct_us">راه های ارتباطی</string>
+    <string name="address">قم . بلوار پانزده خرداد کوچه ۳۹ ساختمان مدیران شرکت سیمین سرمایه پارس</string>
+    <string name="tel">02539876543(98)</string>
+    <string name="time">شنبه - چهارشنبه\n۹صبح - ۴عصر</string>
+    <string name="cash_by_money">پرداخت با پول نقد</string>
+    <string name="cash_by_card">پرداخت از طریق کارت اعتباری</string>
+    <string name="cash_by_debit">پرداخت به صورت نسیه</string>
+    <string name="tel_action">09123456789</string>
+    <string name="money_type">واحد پول</string>
+    <string name="price_shipping">هزینه ارسال</string>
 
 </resources>
