@@ -6,6 +6,7 @@ import amingoli.com.selar.adapter.BusinessAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
+import amingoli.com.selar.model.Setting
 import amingoli.com.selar.model.TagList
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +50,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                         Date()
                     )
                 )
+                App.database.getAppDao().insertSetting(Setting(id_business.toInt()))
                 Session.getInstance().setBusiness(
                     App.getString(edt_name),
                     App.getString(edt_business_name),

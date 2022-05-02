@@ -150,6 +150,22 @@ public class Session {
         return Double.parseDouble(ExtrasPref.getString(Config.SHIPPING_PRICE, "0.0"));
     }
 
+    public void setFreeShippingPrice(Double price) {
+        extraEditor.putString(Config.SHIPPING_FREE_PRICE, String.valueOf(price));
+        extraEditor.commit();
+    }
+    public Double getFreeShippingPrice() {
+        return Double.parseDouble(ExtrasPref.getString(Config.SHIPPING_FREE_PRICE, "0.0"));
+    }
+
+    public void setMinOrder(Double price) {
+        extraEditor.putString(Config.MIN_ORDER, String.valueOf(price));
+        extraEditor.commit();
+    }
+    public Double getMinOrder() {
+        return Double.parseDouble(ExtrasPref.getString(Config.MIN_ORDER, "0.0"));
+    }
+
     public void setTaxPercent(int taxPercent) {
         extraEditor.putInt(Config.TAX_PERCENT, taxPercent);
         extraEditor.commit();
@@ -158,10 +174,11 @@ public class Session {
         return ExtrasPref.getInt(Config.TAX_PERCENT, 0);
     }
 
-    public void setCheckBox(boolean money, boolean card, boolean debit){
+    public void setCheckBox(boolean money, boolean card, boolean debit, boolean discount){
         extraEditor.putBoolean(Config.CHECK_BOX_MONEY,money);
         extraEditor.putBoolean(Config.CHECK_BOX_CARD,card);
         extraEditor.putBoolean(Config.CHECK_BOX_DEBIT,debit);
+        extraEditor.putBoolean(Config.CHECK_BOX_DISCOUNT,discount);
         extraEditor.commit();
     }
 
@@ -187,5 +204,13 @@ public class Session {
     }
     public boolean getCheckBoxDebit() {
         return ExtrasPref.getBoolean(Config.CHECK_BOX_DEBIT, true);
+    }
+
+    public void setCheckBoxDiscount(boolean checkBox) {
+        extraEditor.putBoolean(Config.CHECK_BOX_DISCOUNT,checkBox);
+        extraEditor.commit();
+    }
+    public boolean getCheckBoxDiscount() {
+        return ExtrasPref.getBoolean(Config.CHECK_BOX_DISCOUNT, true);
     }
 }

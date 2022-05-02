@@ -116,8 +116,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         arrayList.add(MainModel(R.drawable.ic_account_circle_black_24dp,"مشتریان","خریداران شما","290,000 محصول", CustomerActivity::class.java))
         arrayList.add(MainModel(R.drawable.ic_baseline_storefront_24,"گزارش انبار","کالاهای موجود","290,000 محصول", StockActivity::class.java))
         arrayList.add(MainModel(R.drawable.ic_baseline_monetization_on_24,"گزارش مالی","سرمایه موجود","290,000 محصول", FinanceActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_settings_24,"تنظیمات","","", SettingActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_import_contacts_24,"آموزش و پشتیبانی","سوالات متداول و ثبت تیکت","سیمین سرمایه پارس", SupportActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_settings_24,"تنظیمات","مالیات، واحدپول و..","", SettingActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_import_contacts_24,"پشتیبانی","راه های ارتباطی","", SupportActivity::class.java))
         recyclerView.adapter = ItemMainAdapter(this,arrayList,this)
     }
 

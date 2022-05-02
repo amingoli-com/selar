@@ -137,5 +137,13 @@
     <string name="tel_action">09123456789</string>
     <string name="money_type">واحد پول</string>
     <string name="price_shipping">هزینه ارسال</string>
+    <string name="free_shipping_in_order">ارسال رایگان در سفارشات بالای</string>
+    <string name="min_order_for_submit">حداقل سفارش برای ثبت</string>
+    <string name="helper_text_free_shipping">در صورتی که مقدار صفر (۰) وارد کنید این قابلیت غیرفعال خواهد شد</string>
+    <string name="helper_text_min_order">در صورتی که مقدار صفر (۰) وارد کنید سفارشات بدون محدودیت مبلغ ثبت خواهند شد</string>
+    <string name="helper_text_tax">درصد مالیات بر روی تمامی محصولاتی که شامل مالیات باشند و مالیات اختصاصی برای آنها ثبت نشده محاسبه خواهد شد</string>
+    <string name="helper_text_money_type">نوع ارز خود را مشخص کنید مثلا تومان، ریال و..</string>
+    <string name="helper_text_shipping">توجه داشته باشید که شما میتوانید هزینه ارسال سفارشات را در صفحه ثبت سفارش ویرایش نمایید</string>
+    <string name="cash_discount">تخفیف اضافه تر بر روی سفارش</string>
 
 </resources>

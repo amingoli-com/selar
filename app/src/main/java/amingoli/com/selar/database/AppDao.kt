@@ -1,13 +1,15 @@
 package amingoli.com.selar.database
 
-import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.model.*
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface AppDao {
 
-//    Product
+    //    Product
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(product: Product) : Long
 
@@ -107,6 +109,16 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBusiness(business: Business) : Long
+
+//    Setting
+    @Query("select * from setting")
+    fun selectSetting(): List<Setting>
+
+    @Query("select * from setting where branch=:branch limit 1")
+    fun selectSetting(branch: Int): Setting
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSetting(setting: Setting) : Long
 
 //    customer
     @Query("select * from customers")
