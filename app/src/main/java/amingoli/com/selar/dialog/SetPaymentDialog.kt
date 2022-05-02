@@ -2,7 +2,9 @@ package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.DISCOUNT_CODE_LOCAL
 import amingoli.com.selar.helper.Config.ORDER_STATUS_SUCCESS
+import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Orders
 import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.content.Context
@@ -40,7 +42,12 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
 
         tv_amount.setText(context.getString(R.string.amount_pay_vlaue, App.priceFormat(orders.totla_all,true)))
+        initOnClick()
+        initTextWatcher()
+        initVisibility()
+    }
 
+    private fun initOnClick(){
         pay.tv_money.setOnClickListener {
             setOrderPiedByCashMoney()
             paid("money")
@@ -88,6 +95,7 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
             box_multi.edt_pay_cash_money.text.clear()
             box_multi.edt_pay_card.text.clear()
             box_multi.edt_pay_debit.text.clear()
+            box_multi.edt_pay_discount.text.clear()
             paid("show")
         }
 
@@ -98,11 +106,38 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
                 listener?.onPayedByMultiCash(this, orders)
             }
         }
+    }
 
-
+    private fun initTextWatcher(){
         box_multi.edt_pay_cash_money.addTextChangedListener(PriceTextWatcher(box_multi.edt_pay_cash_money) { calculate("cash_money") })
         box_multi.edt_pay_card.addTextChangedListener(PriceTextWatcher(box_multi.edt_pay_card) { calculate("card") })
         box_multi.edt_pay_debit.addTextChangedListener(PriceTextWatcher(box_multi.edt_pay_debit) { calculate("debit") })
+        box_multi.edt_pay_discount.addTextChangedListener(PriceTextWatcher(box_multi.edt_pay_discount) { calculate("discount") })
+    }
+
+    private fun initVisibility(){
+        val visibility_cash_money = if (Session.getInstance().checkBoxMoney) View.VISIBLE else View.INVISIBLE
+        val visibility_cash_card = if (Session.getInstance().checkBoxCard) View.VISIBLE else View.INVISIBLE
+        val visibility_cash_debit = if (Session.getInstance().checkBoxDebit) View.VISIBLE else View.INVISIBLE
+        val visibility_cash_discount = if (Session.getInstance().checkBoxDiscount) View.VISIBLE else View.INVISIBLE
+
+        var i = 0
+        if (Session.getInstance().checkBoxMoney) i++
+        if (Session.getInstance().checkBoxCard) i++
+        if (Session.getInstance().checkBoxDebit) i++
+        if (Session.getInstance().checkBoxDiscount) i++
+
+        val visibility_cash_multi = if (i >= 2) View.VISIBLE else View.INVISIBLE
+
+        pay.tv_money.visibility = visibility_cash_money
+        pay.tv_card.visibility = visibility_cash_card
+        pay.tv_multi_pay.visibility = visibility_cash_multi
+        pay.tv_debit.visibility = visibility_cash_debit
+
+        box_multi.edt_pay_cash_money.isEnabled = Session.getInstance().checkBoxMoney
+        box_multi.edt_pay_card.isEnabled = Session.getInstance().checkBoxCard
+        box_multi.edt_pay_discount.isEnabled = Session.getInstance().checkBoxDiscount
+        box_multi.edt_pay_debit.isEnabled = Session.getInstance().checkBoxDebit
     }
 
     private fun paid(type:String){
@@ -117,6 +152,7 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         pay.tv_multi_pay.visibility = if (type == "multi_pay" || type == "show") View.VISIBLE else View.INVISIBLE
         pay.tv_debit.visibility = if (type == "debit" || type == "show") View.VISIBLE else View.INVISIBLE
 
+        if (type == "show") initVisibility()
     }
 
     private fun backToMainPay(){
@@ -149,6 +185,8 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         orders.pay_card_info = null
         orders.customer_debtor = 0.0
         orders.status = ORDER_STATUS_SUCCESS
+        orders.discount_code = null
+        orders.pay_discount_code = 0.0
     }
 
     private fun setOrderPiedByCard(){
@@ -157,6 +195,8 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         orders.pay_card_info = "TEST_INFO_CARD"
         orders.customer_debtor = 0.0
         orders.status = ORDER_STATUS_SUCCESS
+        orders.discount_code = null
+        orders.pay_discount_code = 0.0
     }
 
     private fun setOrderPiedByMultiPay(){
@@ -165,6 +205,8 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         orders.pay_card_info = "TEST_INFO_CARD"
         orders.customer_debtor = App.convertToDouble(box_multi.edt_pay_debit)
         orders.status = ORDER_STATUS_SUCCESS
+        orders.pay_discount_code = App.convertToDouble(box_multi.edt_pay_discount)
+        orders.discount_code = if(orders.pay_discount_code > 0) DISCOUNT_CODE_LOCAL else null
     }
 
     private fun setOrderPiedByDebit(){
@@ -173,6 +215,8 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         orders.pay_card_info = null
         orders.customer_debtor = total_all_order()
         orders.status = ORDER_STATUS_SUCCESS
+        orders.discount_code = null
+        orders.pay_discount_code = 0.0
     }
 
     private fun calculate(type: String){
@@ -186,9 +230,30 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
             }
             "card"-> {
                 if (totla_paied() >= total_all_order()){
+                    box_multi.box_edt_pay_card.helperText = null
+                    box_multi.box_edt_pay_debit.helperText = null
+                    box_multi.box_edt_pay_discount.helperText = null
+                } else{
+                    box_multi.box_edt_pay_debit.helperText = "نسیه " + "(${App.priceFormat(amount_for_pay(), true)})"
+                    box_multi.box_edt_pay_discount.helperText = "تخفیف " + "(${App.priceFormat(amount_for_pay(), true)})"
+                }
+            }
+            "discount"-> {
+                if (totla_paied() >= total_all_order()){
+                    box_multi.box_edt_pay_card.helperText = null
+                    box_multi.box_edt_pay_discount.helperText = null
                     box_multi.box_edt_pay_debit.helperText = null
                 } else{
                     box_multi.box_edt_pay_debit.helperText = "نسیه " + "(${App.priceFormat(amount_for_pay(), true)})"
+                }
+            }
+            "debit"-> {
+                if (totla_paied() >= total_all_order()){
+                    box_multi.box_edt_pay_card.helperText = null
+                    box_multi.box_edt_pay_debit.helperText = null
+                    box_multi.box_edt_pay_discount.helperText = null
+                } else{
+                    box_multi.box_edt_pay_discount.helperText = "تخفیف " + "(${App.priceFormat(amount_for_pay(), true)})"
                 }
             }
         }
@@ -217,7 +282,8 @@ class SetPaymentDialog(context: Context, var orders: Orders, val listener: Liste
         val cash_money = App.convertToDouble(box_multi.edt_pay_cash_money)
         val card = App.convertToDouble(box_multi.edt_pay_card)
         val debit = App.convertToDouble(box_multi.edt_pay_debit)
-        return cash_money + card + debit
+        val discount = App.convertToDouble(box_multi.edt_pay_discount)
+        return cash_money + card + debit + discount
     }
 
     private fun amount_for_pay(): Double{

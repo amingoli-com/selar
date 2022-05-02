@@ -18,6 +18,7 @@ object Config {
 
     const val ORDER_STATUS_WAITING = 0
     const val ORDER_STATUS_SUCCESS = 1
+    const val DISCOUNT_CODE_LOCAL = "تخفیف اضافه‌تر مدیر"
 
     const val JPG = ".jpg"
     const val PATH = "/Sealer"

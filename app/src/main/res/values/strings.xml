@@ -145,5 +145,7 @@
     <string name="helper_text_money_type">نوع ارز خود را مشخص کنید مثلا تومان، ریال و..</string>
     <string name="helper_text_shipping">میتوانید هزینه ارسال سفارش را در صفحه ثبت سفارش ویرایش نمایید</string>
     <string name="cash_discount">تخفیف اضافه تر بر روی سفارش</string>
+    <string name="discount">تخفیف</string>
+    <string name="price_discount_on_product">جمع تخفیف محصولات</string>
 
 </resources>

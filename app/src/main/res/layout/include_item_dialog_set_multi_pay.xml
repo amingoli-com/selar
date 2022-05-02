@@ -40,6 +40,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/box_edt_pay_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_pay_discount"
+                style="@style/Edittext.product.Decimal"
+                android:drawableStart="@drawable/ic_baseline_emoji_emotions_24"
+                android:hint="@string/discount" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/box_edt_pay_debit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

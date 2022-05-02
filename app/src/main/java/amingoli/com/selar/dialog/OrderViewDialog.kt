@@ -77,7 +77,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
         total_order.setText(_context.getString(R.string.all_order_one), this_order.total_price_order)
         total_tax.setText(_context.getString(R.string.tax), this_order.total_tax)
         total_shipping.setText(_context.getString(R.string.shipping_price), this_order.totla_shipping)
-        total_discount_free.setText(_context.getString(R.string.price_discount), this_order.amount_discount + this_order.pay_discount_code)
+        total_discount_free.setText(_context.getString(R.string.price_discount_on_product), this_order.amount_discount)
         total_pay.setText(_context.getString(R.string.amount_pay), this_order.totla_all)
 
         cash_money.setText(_context.getString(R.string.cash_money_pay), this_order.pay_cash)
@@ -88,6 +88,10 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
         }
         cash_debit.setText(_context.getString(R.string.debit), this_order.customer_debtor)
         cash_discount.setText(_context.getString(R.string.price_discount_order), this_order.pay_discount_code)
+        if (!this_order.discount_code.isNullOrEmpty()) {
+            cash_discount_info.setText(this_order.discount_code)
+            cash_discount_info.visibility = View.VISIBLE
+        }
 
         total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
 
