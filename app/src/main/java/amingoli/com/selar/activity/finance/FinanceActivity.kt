@@ -47,7 +47,7 @@ class FinanceActivity : AppCompatActivity() {
 
     private fun initAdapterProduct(){
         recyclerView_product.adapter = ProductListHorizontalAdapter_2(this,
-            ArrayList(App.database.getAppDao().selectProduct()),
+            ArrayList(App.database.getAppDao().selectProduct(App.branch())),
             object : ProductListHorizontalAdapter_2.Listener {
                 override fun onItemClicked(position: Int, product: Product) {
                     ProductViewDialog(this@FinanceActivity,product.id!!,position,null)
@@ -57,7 +57,7 @@ class FinanceActivity : AppCompatActivity() {
     }
 
     private fun initAdapterOrders(){
-        recyclerView_order.adapter = OrderWaitingAdapter(this, ArrayList(App.database.getAppDao().selectOrders()),
+        recyclerView_order.adapter = OrderWaitingAdapter(this, ArrayList(App.database.getAppDao().selectOrders(App.branch())),
             object : OrderWaitingAdapter.Listener{
                 override fun onItemClicked(position: Int, item: Orders) {
 

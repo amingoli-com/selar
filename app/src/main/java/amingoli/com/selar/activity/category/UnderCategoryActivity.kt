@@ -51,9 +51,9 @@ class UnderCategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener
     private fun initStart(){
         if (intent?.extras?.getInt("id" , -1) != null){
             _ID_MOTHRE = intent!!.extras!!.getInt("id")
-            _CATEGORY = App.database.getAppDao().selectCategory(_ID_MOTHRE)
+            _CATEGORY = App.database.getAppDao().selectCategory(App.branch(), _ID_MOTHRE)
         }
-        array = ArrayList(App.database.getAppDao().selectUnderCategory(_ID_MOTHRE))
+        array = ArrayList(App.database.getAppDao().selectUnderCategory(App.branch(),_ID_MOTHRE))
     }
 
     private fun initToolbar(title: String) {

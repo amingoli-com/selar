@@ -82,7 +82,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
     private fun initExteraDataIntent(){
         _PRODUCT_OBJECT = if (intent != null && intent?.extras != null){
             val extra = intent!!.extras!!.getInt("product_id", -1)
-            App.database.getAppDao().selectProduct(extra)
+            App.database.getAppDao().selectProduct(App.branch(), extra)
         }else Product()
 
         _POSITION = if (intent != null && intent?.extras != null){
@@ -207,7 +207,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         if (_PRODUCT_OBJECT?.id != null){
             val cat : ArrayList<CategoryProduct> = ArrayList(App.database.getAppDao().selectCategoryProduct(_PRODUCT_OBJECT!!.id!!))
             for (i in 0 until cat.size){
-                _CATEGORY.add(App.database.getAppDao().selectCategory(cat[i].id_category!!))
+                _CATEGORY.add(App.database.getAppDao().selectCategory(App.branch(), cat[i].id_category!!))
             }
             initCategory()
         }
@@ -285,7 +285,7 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
 
     private fun initAutoCompleteUnitsList(){
         val spinner = ArrayList<Spinner>()
-        val list_unit = App.database.getAppDao().selectUnit()
+        val list_unit = App.database.getAppDao().selectUnit(App.branch())
         for (i in list_unit.indices) { spinner.add(Spinner(list_unit[i].id!!, list_unit[i].title )) }
         val adapter = AutoCompleteAdapter(this, spinner, false)
         atc_unit.setAdapter(adapter)
@@ -304,8 +304,8 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
      * */
 
     private fun insertUnitList(){
-        if (App.database.getAppDao().selectUnit(App.getString(atc_unit)) == null){
-            App.database.getAppDao().insertUnit(UnitModel(App.getString(atc_unit)))
+        if (App.database.getAppDao().selectUnit(App.branch(), App.getString(atc_unit)) == null){
+            App.database.getAppDao().insertUnit(UnitModel(App.getString(atc_unit), App.branch()))
         }
     }
 

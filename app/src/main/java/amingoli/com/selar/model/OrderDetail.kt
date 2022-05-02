@@ -10,6 +10,7 @@ class OrderDetail {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     var id :Int? = null
+    var branch :Int? = null
     var order_code :String? = null
     var product_id :Int? = null
     var customer_id :Int? = null
@@ -31,6 +32,7 @@ class OrderDetail {
     @Ignore
     constructor(
         id: Int?,
+        branch: Int?,
         order_code: String?,
         product_id: Int?,
         product_code: String?,
@@ -46,6 +48,7 @@ class OrderDetail {
         tax_percent: Int?
     ) {
         this.id = id
+        this.branch = branch
         this.order_code = order_code
         this.product_id = product_id
         this.product_code = product_code

@@ -23,7 +23,7 @@ import java.util.*
 
 class CustomerViewDialog(val _context: Context, val customer_id:Int, val position: Int?, val listener: Listener?) : DialogFragment() {
 
-    private var this_customer = App.database.getAppDao().selectCustomer(customer_id)
+    private var this_customer = App.database.getAppDao().selectCustomerById(customer_id)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -90,7 +90,7 @@ class CustomerViewDialog(val _context: Context, val customer_id:Int, val positio
     }
 
     private fun initRecyclerViewOrder(){
-        recyclerView_order.adapter = OrderListHorizontalAdapter(_context, ArrayList(App.database.getAppDao().selectOrders()),
+        recyclerView_order.adapter = OrderListHorizontalAdapter(_context, ArrayList(App.database.getAppDao().selectOrders(App.branch())),
             object : OrderListHorizontalAdapter.Listener{
                 override fun onItemClicked(position: Int, item: Orders) {
 
@@ -100,7 +100,7 @@ class CustomerViewDialog(val _context: Context, val customer_id:Int, val positio
 
     private fun initRecyclerViewProduct(){
         recyclerView_product.adapter = ProductListHorizontalAdapter_3(_context,
-            ArrayList(App.database.getAppDao().selectProduct()),
+            ArrayList(App.database.getAppDao().selectProduct(App.branch())),
             object : ProductListHorizontalAdapter_3.Listener {
                 override fun onItemClicked(position: Int, product: Product) {
 

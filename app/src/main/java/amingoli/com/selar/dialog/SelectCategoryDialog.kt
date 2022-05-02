@@ -89,7 +89,7 @@ class SelectCategoryDialog(val _context: Context,
         id_mother_category = id_category
         recyclerView.removeAllViews()
         _categoryListDatabase.clear()
-        _categoryListDatabase.addAll(ArrayList(App.database.getAppDao().selectUnderCategory(id_category)))
+        _categoryListDatabase.addAll(ArrayList(App.database.getAppDao().selectUnderCategory(App.branch(),id_category)))
         adapter?.notifyAllData()
     }
 

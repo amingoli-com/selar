@@ -23,7 +23,7 @@ class AddOrderBasketActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerCategory() {
-        val categoryList = ArrayList<Category>(App.database.getAppDao().selectUnderCategory(0))
+        val categoryList = ArrayList<Category>(App.database.getAppDao().selectUnderCategory(App.branch(),0))
         val adapterTagList = CategoryListAdapter(this,
             categoryList,
             object : CategoryListAdapter.Listener {
@@ -36,7 +36,7 @@ class AddOrderBasketActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerProduct(){
-        val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct())
+        val listProducts = ArrayList<Product>(App.database.getAppDao().selectProduct(App.branch()))
         recyclerView_product.adapter = ProductListAdapter(this,listProducts,object : ProductListAdapter.Listener{
             override fun onItemClicked(position: Int, product: Product) {
             }

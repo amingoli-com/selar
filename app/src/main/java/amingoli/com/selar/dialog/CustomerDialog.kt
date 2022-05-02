@@ -63,7 +63,7 @@ class CustomerDialog(val _context: Context, val listener: Listener?) : DialogFra
     private fun initRecyclerView(){
         val arrayList = ArrayList<Customers>()
         arrayList.add(0,Customers("مشتری متفرقه",null))
-        arrayList.addAll(App.database.getAppDao().selectCustomerActive())
+        arrayList.addAll(App.database.getAppDao().selectCustomerActive(App.branch()))
         recyclerView.adapter = CustomerListAdapter(_context, arrayList,false,object : CustomerListAdapter.Listener{
             override fun onItemClicked(position: Int, item: Customers, action: String?) {
                 listener?.onCustomerClicked(this@CustomerDialog,item)

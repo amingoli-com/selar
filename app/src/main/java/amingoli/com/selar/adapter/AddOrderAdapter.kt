@@ -96,7 +96,7 @@ class AddOrderAdapter(
 
     private fun convertProductToOrderDetail(p: Product): OrderDetail{
         val price_sale = if (p.price_sale!! > 0 ) p.price_sale else p.price_sale_on_product
-        return OrderDetail(null,ORDER_CODE,p.id,p.qrcode,p.image_defult,p.name,1.0,0,p.increase,
+        return OrderDetail(null,App.branch(),ORDER_CODE,p.id,p.qrcode,p.image_defult,p.name,1.0,0,p.increase,
             p.price_buy,
             price_sale,
             p.price_discount,p.price_profit,p.tax_percent)

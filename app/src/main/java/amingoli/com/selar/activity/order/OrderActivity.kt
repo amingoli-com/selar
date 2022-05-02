@@ -30,6 +30,7 @@ class OrderActivity : AppCompatActivity(), OrderViewDialog.Listener {
 
     private var adapter : OrdersListAdapter? =null
     private var adapterTag : TagInfoAdapter? =null
+    private val branch = App.branch()
 
     private val resultAdd =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -101,7 +102,7 @@ class OrderActivity : AppCompatActivity(), OrderViewDialog.Listener {
                 EditorInfo.IME_ACTION_DONE,
                 EditorInfo.IME_ACTION_GO,
                 EditorInfo.IME_ACTION_SEARCH->{
-                    adapter?.updateList(App.database.getAppDao().searchOrders(App.getString(toolbar.edt_search)))
+                    adapter?.updateList(App.database.getAppDao().searchOrders(branch, App.getString(toolbar.edt_search)))
                     adapterTag?.removeSelection()
                     App.closeKeyboard(this)
                 }
@@ -150,18 +151,18 @@ class OrderActivity : AppCompatActivity(), OrderViewDialog.Listener {
 
     private fun selectOrder(query: String) : List<Orders>{
         return when(query){
-            "all"->         App.database.getAppDao().selectOrders()
-            "waiting"->     App.database.getAppDao().selectOrders(ORDER_STATUS_WAITING)
-            "most_gain"->   App.database.getAppDao().selectOrdersByMostProfit()
-            "least_gain"->  App.database.getAppDao().selectOrdersByLeastProfit()
-            "paid"->        App.database.getAppDao().selectOrdersByPied()
-            "unpaid"->      App.database.getAppDao().selectOrdersByUnPied()
-            "money"->       App.database.getAppDao().selectOrdersByMoney()
-            "card"->        App.database.getAppDao().selectOrdersByCard()
-            "multi_pay"->   App.database.getAppDao().selectOrdersMultiPay()
-            "most_count"->  App.database.getAppDao().selectOrdersMostCount()
-            "least_count"-> App.database.getAppDao().selectOrdersLeastCount()
-            else ->         App.database.getAppDao().selectOrders()
+            "all"->         App.database.getAppDao().selectOrders(branch)
+            "waiting"->     App.database.getAppDao().selectOrders(branch, ORDER_STATUS_WAITING)
+            "most_gain"->   App.database.getAppDao().selectOrdersByMostProfit(branch)
+            "least_gain"->  App.database.getAppDao().selectOrdersByLeastProfit(branch)
+            "paid"->        App.database.getAppDao().selectOrdersByPied(branch)
+            "unpaid"->      App.database.getAppDao().selectOrdersByUnPied(branch)
+            "money"->       App.database.getAppDao().selectOrdersByMoney(branch)
+            "card"->        App.database.getAppDao().selectOrdersByCard(branch)
+            "multi_pay"->   App.database.getAppDao().selectOrdersMultiPay(branch)
+            "most_count"->  App.database.getAppDao().selectOrdersMostCount(branch)
+            "least_count"-> App.database.getAppDao().selectOrdersLeastCount(branch)
+            else ->         App.database.getAppDao().selectOrders(branch)
         }
     }
 

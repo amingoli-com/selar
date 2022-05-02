@@ -74,7 +74,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
             val order_id = intent?.extras?.getInt("order_id",-1)
             this_order = App.database.getAppDao().selectOrdersById(order_id!!.toInt())
             ORDER_CODE = this_order.order_code!!
-            order_detail = ArrayList(App.database.getAppDao().selectOrdersDetailByOrderCode(ORDER_CODE))
+            order_detail = ArrayList(App.database.getAppDao().selectOrdersDetailByOrderCode(App.branch(), ORDER_CODE))
             initCustomerView()
         }
 
@@ -250,6 +250,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
      * get
      * */
     private fun getOrder(): Orders{
+        this_order.branch = App.branch()
         this_order.order_code = ORDER_CODE
         this_order.orders_count = totla_count_orders
         this_order.total_price_order = totla_price_orders_sale
@@ -258,9 +259,8 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         this_order.totla_shipping = totla_shipping
         this_order.amount_discount = totla_discount
         this_order.totla_all = totla_all
-        this_order.create_at = Date()
+        this_order.create_at = if (this_order.create_at == null) Date() else this_order.create_at
         this_order.update_at = Date()
-
         return this_order
     }
 
@@ -269,7 +269,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
      * */
     private fun resultScan(barcode:String, device:String){
         sound_scaner?.start()
-        val p = App.database.getAppDao().selectProductByQR(barcode)
+        val p = App.database.getAppDao().selectProductByQR(App.branch(), barcode)
 
         if ( p != null){
             adapter?.addItem(p)
@@ -327,7 +327,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
      * Insert Database
      * */
     private fun insertOrder(new_order_detail: ArrayList<OrderDetail>){
-        if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(ORDER_CODE)
+        if (EDIT) App.database.getAppDao().deleteOrdersDetailByOrderCode(App.branch(), ORDER_CODE)
         App.database.getAppDao().insertOrderDetail(new_order_detail)
         val order_id = App.database.getAppDao().insertOrder(this_order).toInt()
         submitted(order_id)

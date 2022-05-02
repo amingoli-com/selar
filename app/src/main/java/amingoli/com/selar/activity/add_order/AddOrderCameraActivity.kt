@@ -146,7 +146,7 @@ class AddOrderCameraActivity : AppCompatActivity() {
 //            }
 //        }
         sound_scaner?.start()
-        val p = App.database.getAppDao().selectProductByQR(barcode)
+        val p = App.database.getAppDao().selectProductByQR(App.branch(), barcode)
         if ( p != null){
             adapter?.addItem(p)
         }

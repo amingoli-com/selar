@@ -9,13 +9,15 @@ class UnitModel {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
     var title: String? = null
-
-    @Ignore
-    constructor(title: String?) {
-        this.title = title
-    }
+    var branch: Int? = null
 
     constructor()
+
+    @Ignore
+    constructor(title: String?, branch: Int?) {
+        this.title = title
+        this.branch = branch
+    }
 
 
 }

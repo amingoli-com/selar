@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.dialog_view_product.*
 
 class ProductViewDialog(val _context: Context, val product_id:Int, val position: Int, val listener: Listener?) : DialogFragment() {
 
-    private var this_product = App.database.getAppDao().selectProduct(product_id)
+    private var this_product = App.database.getAppDao().selectProduct(App.branch(), product_id)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_order_view.*
+import java.util.*
 import kotlin.collections.ArrayList
 
 class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int?, val listener: Listener?) : DialogFragment() {
@@ -90,7 +91,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
 
         total_profit.setText(_context.getString(R.string.profit_order), this_order.total_price_profit)
 
-        tv_date.setText("در تاریخ ${App.getFormattedDate(this_order.update_at)} ویرایش شده \n در تاریخ ${App.getFormattedDate(this_order.create_at)} ثبت شده")
+        tv_date.setText("در تاریخ ${App.getFormattedDate(this_order.update_at?:Date())} ویرایش شده \n در تاریخ ${App.getFormattedDate(this_order.create_at?: Date())} ثبت شده")
     }
 
     private fun initOnClick(){
@@ -108,7 +109,7 @@ class OrderViewDialog(val _context: Context, val order_id:Int, val position: Int
     }
 
     private fun initRecyclerView(){
-        val arrayList = ArrayList<OrderDetail>(App.database.getAppDao().selectOrdersDetailByOrderCode(this_order.order_code!!))
+        val arrayList = ArrayList<OrderDetail>(App.database.getAppDao().selectOrdersDetailByOrderCode(App.branch(), this_order.order_code!!))
         recyclerView.adapter = OrderDetailAdapter(_context,arrayList,null)
     }
 }

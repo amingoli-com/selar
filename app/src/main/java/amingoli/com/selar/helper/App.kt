@@ -37,6 +37,10 @@ class App : MultiDexApplication() {
         lateinit var context: Context
         lateinit var database: AppDatabase
 
+        fun branch(): Int{
+            return Session.getInstance().branch
+        }
+
         fun toast(message: String){
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }

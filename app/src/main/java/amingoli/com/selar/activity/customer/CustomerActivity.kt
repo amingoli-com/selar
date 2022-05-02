@@ -71,7 +71,7 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener, Cus
                 EditorInfo.IME_ACTION_DONE,
                 EditorInfo.IME_ACTION_GO,
                 EditorInfo.IME_ACTION_SEARCH->{
-                    adapter?.updateList(App.database.getAppDao().searchCustomer(App.getString(toolbar.edt_search)))
+                    adapter?.updateList(App.database.getAppDao().searchCustomer(App.branch(), App.getString(toolbar.edt_search)))
                     adapterTag?.removeSelection()
                     App.closeKeyboard(this)
                 }
@@ -130,12 +130,12 @@ class CustomerActivity : AppCompatActivity(), InsertCustomerDialog.Listener, Cus
 
     private fun selectCustomer(query: String) : List<Customers>{
         return when(query){
-            "active" -> App.database.getAppDao().selectCustomerByStatus(1)
-            "inactive" -> App.database.getAppDao().selectCustomerByStatus(0)
-            "most_order" -> App.database.getAppDao().selectCustomer()
-            "least_order" -> App.database.getAppDao().selectCustomer()
-            "debtor" -> App.database.getAppDao().selectCustomer()
-            else -> App.database.getAppDao().selectCustomer()
+            "active" -> App.database.getAppDao().selectCustomerByStatus(App.branch(),1)
+            "inactive" -> App.database.getAppDao().selectCustomerByStatus(App.branch(),0)
+            "most_order" -> App.database.getAppDao().selectCustomer(App.branch())
+            "least_order" -> App.database.getAppDao().selectCustomer(App.branch())
+            "debtor" -> App.database.getAppDao().selectCustomer(App.branch())
+            else -> App.database.getAppDao().selectCustomer(App.branch())
         }
     }
 

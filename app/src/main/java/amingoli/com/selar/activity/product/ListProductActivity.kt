@@ -35,7 +35,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
                 if (result.data!= null){
                     if (result.data!!.extras!= null){
                         val product_id:Int = result.data!!.getIntExtra("product_id",-1)
-                        adapterProduct?.add(App.database.getAppDao().selectProduct(product_id))
+                        adapterProduct?.add(App.database.getAppDao().selectProduct(App.branch(), product_id))
                     }
                 }
             }
@@ -49,7 +49,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
                         val product_id:Int = result.data!!.getIntExtra("product_id",-1)
                         val product_position:Int = result.data!!.getIntExtra("product_position",-1)
                         Log.e("qqqq", "id: ${product_id} - pos: ${product_position}")
-                        adapterProduct?.update(product_position, App.database.getAppDao().selectProduct(product_id))
+                        adapterProduct?.update(product_position, App.database.getAppDao().selectProduct(App.branch(), product_id))
                     }
                 }
             }
@@ -117,7 +117,7 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
     private fun searchProduct(q:String){
         if (!q.isNullOrEmpty() && q != last_search){
             last_search = q
-            adapterProduct?.updateList(App.database.getAppDao().searchSmallSizeProduct(q))
+            adapterProduct?.updateList(App.database.getAppDao().searchSmallSizeProduct(App.branch(),q))
             listCategoryForBack.clear()
             listCategoryForBack.add( TagList(resources.getString(R.string.back),"0"))
             initVisibilityIcBack()
@@ -126,20 +126,20 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
 
     private fun initAdapter(){
         adapterTagList = CategoryListAdapter(this,
-            ArrayList(App.database.getAppDao().selectUnderCategory(0)),
+            ArrayList(App.database.getAppDao().selectUnderCategory(App.branch(),0)),
             object : CategoryListAdapter.Listener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClicked(position: Int, item: Category) {
                     listCategoryForBack.add(listCategoryForBack.size, TagList(item.name,item.id_mother.toString()))
                     initVisibilityIcBack()
 
-                    adapterProduct?.updateList(App.database.getAppDao().selectSmallSizeProductByCategory(item.id!!))
-                    adapterTagList?.updateList(App.database.getAppDao().selectUnderCategory(item.id!!))
+                    adapterProduct?.updateList(App.database.getAppDao().selectSmallSizeProductByCategory(App.branch(), item.id!!))
+                    adapterTagList?.updateList(App.database.getAppDao().selectUnderCategory(App.branch(),item.id!!))
                 }
             })
 
         adapterProduct = ProductListManagerAdapter(this,
-            ArrayList(App.database.getAppDao().selectSmallSizeProduct()),
+            ArrayList(App.database.getAppDao().selectSmallSizeProduct(App.branch())),
             object : ProductListManagerAdapter.Listener{
                 override fun onEmpty(size: Int) {
                     if (size == 0) statuser.onEmpty()
@@ -159,10 +159,10 @@ class ListProductActivity : AppCompatActivity(), ProductViewDialog.Listener {
         tv_back_category.setOnClickListener {
             if (!listCategoryForBack.isNullOrEmpty()){
                 val pos = listCategoryForBack.size-1
-                adapterTagList?.updateList(App.database.getAppDao().selectUnderCategory(listCategoryForBack[pos].tag!!.toInt()))
+                adapterTagList?.updateList(App.database.getAppDao().selectUnderCategory(App.branch(),listCategoryForBack[pos].tag!!.toInt()))
                 if (listCategoryForBack[pos].tag!!.toInt() == 0){
-                    adapterProduct?.updateList(App.database.getAppDao().selectProduct())
-                }else adapterProduct?.updateList(App.database.getAppDao().selectProductByCategory(listCategoryForBack[pos].tag!!.toInt()))
+                    adapterProduct?.updateList(App.database.getAppDao().selectProduct(App.branch()))
+                }else adapterProduct?.updateList(App.database.getAppDao().selectProductByCategory(App.branch(), listCategoryForBack[pos].tag!!.toInt()))
                 listCategoryForBack.removeAt(pos)
             }
             initVisibilityIcBack()

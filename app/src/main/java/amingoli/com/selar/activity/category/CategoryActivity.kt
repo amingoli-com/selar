@@ -106,10 +106,10 @@ class CategoryActivity : AppCompatActivity(), InsertCategoryDialog.Listener {
         }
     }
     private fun selectCategory(idMother: Int) : List<Category>{
-        val l = App.database.getAppDao().selectUnderCategory(idMother)
+        val l = App.database.getAppDao().selectUnderCategory(App.branch(),idMother)
         val m = ArrayList<Category>()
         for (i in l.listIterator()){
-            val sizeOfUnderCategory = App.database.getAppDao().sizeCategory(i.id!!)
+            val sizeOfUnderCategory = App.database.getAppDao().sizeCategory(App.branch(), i.id!!)
             val content = getString(R.string.under_category_by_value,
                 if (sizeOfUnderCategory == 0) getString(R.string.dont_have)
                 else sizeOfUnderCategory.toString()

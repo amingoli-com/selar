@@ -94,8 +94,8 @@ class StockActivity : AppCompatActivity() {
 
     private fun selectOrder(query: String) : List<Product>{
         return when(query){
-            "all"->         App.database.getAppDao().selectProduct()
-            else ->         App.database.getAppDao().selectProduct()
+            "all"->         App.database.getAppDao().selectProduct(App.branch())
+            else ->         App.database.getAppDao().selectProduct(App.branch())
         }
     }
 

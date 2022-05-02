@@ -42,8 +42,8 @@ class OrdersListAdapter(val context: Context,
                 "#${model.id}"
             } else model.customer_name
         ))
-        item.content.text = App.getFormattedDate(model.create_at?.time)
-        item.amount.text = App.priceFormat(model.total_price_order!!,true)
+        if (model.create_at != null) item.content.text = App.getFormattedDate(model.create_at!!.time)
+        item.amount.text = App.priceFormat(model.total_price_order,true)
 
         item.background_card.backgroundTintList = if (model.status == 1){
             ContextCompat.getColorStateList(context, R.color.white)
