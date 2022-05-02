@@ -26,6 +26,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperTextTextColor="@color/black_content"
                 app:helperText="@string/helper_text_min_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -38,6 +39,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperTextTextColor="@color/black_content"
                 app:helperText="@string/helper_text_tax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -52,6 +54,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperTextTextColor="@color/black_content"
                 app:helperText="@string/helper_text_money_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -64,6 +67,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperTextTextColor="@color/black_content"
                 app:helperText="@string/helper_text_shipping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

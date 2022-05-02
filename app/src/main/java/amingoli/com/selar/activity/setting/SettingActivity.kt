@@ -44,11 +44,11 @@ class SettingActivity : AppCompatActivity() {
     private fun initData(){
         initTextWatcherPrice()
 
-        edt_min_order.setText("${setting.min_order?:0.0}")
+        edt_min_order.setText("${setting.min_order?:0}")
         edt_tax.setText("${setting.tax?:0}")
         edt_money_type.setText(setting.currency?:MONEY_TYPE_DEFAULT)
-        edt_price_shipping.setText("${setting.shipping_price?:0.0}")
-        edt_free_shipping.setText("${setting.shipping_free_on_order?:0.0}")
+        edt_price_shipping.setText("${setting.shipping_price?:0}")
+        edt_free_shipping.setText("${setting.shipping_free_on_order?:0}")
 
         checkbox_discount.isChecked = setting.cash_discount?:false
         checkbox_money.isChecked = setting.cash_money?:false
@@ -66,13 +66,14 @@ class SettingActivity : AppCompatActivity() {
         setting.cash_money = checkbox_money.isChecked
         setting.cash_card = checkbox_card.isChecked
         setting.cash_debit = checkbox_debit.isChecked
-
         saveData()
     }
 
     @SuppressLint("SetTextI18n")
     private fun initTextWatcherPrice(){
+        edt_min_order?.addTextChangedListener(PriceTextWatcher(edt_min_order) {})
         edt_price_shipping?.addTextChangedListener(PriceTextWatcher(edt_price_shipping) {})
+        edt_free_shipping?.addTextChangedListener(PriceTextWatcher(edt_free_shipping) {})
     }
 
     private fun saveData(){
