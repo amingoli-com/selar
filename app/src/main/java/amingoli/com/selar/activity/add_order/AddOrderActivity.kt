@@ -4,6 +4,7 @@ import amingoli.com.selar.R
 import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.dialog.CustomerDialog
 import amingoli.com.selar.dialog.EditPriceDialog
+import amingoli.com.selar.dialog.OrderDetailViewDialog
 import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
@@ -33,7 +34,8 @@ import kotlinx.android.synthetic.main.activity_add_order_camera.recyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener, EditPriceDialog.Listener {
+class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener,
+    EditPriceDialog.Listener, OrderDetailViewDialog.Listener {
 
     private var ORDER_CODE = System.currentTimeMillis().toString()
     private var EDIT = false
@@ -155,6 +157,8 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private fun initOrderList(){
         adapter = AddOrderAdapter(this,ORDER_CODE, order_detail,object : AddOrderAdapter.Listener{
             override fun onItemClicked(position: Int, orderDetail: OrderDetail) {
+                OrderDetailViewDialog(this@AddOrderActivity,orderDetail,position,
+                    this@AddOrderActivity).show(supportFragmentManager,"order_detail")
             }
             override fun onChangeListener(position: Int, listOrderDetail: ArrayList<OrderDetail>) {
                 calculator(listOrderDetail)
@@ -359,5 +363,13 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         }
         if (!order_detail.isNullOrEmpty()) calculator(order_detail)
         dialog.dismiss()
+    }
+
+    override fun onEditOrderDetail(dialog: OrderDetailViewDialog, position: Int, orderDetail: OrderDetail) {
+        adapter?.addItem(position,orderDetail)
+    }
+
+    override fun onRemoveOrderDetail(dialog: OrderDetailViewDialog, position: Int, orderDetail: OrderDetail) {
+        adapter?.removeItem(position)
     }
 }

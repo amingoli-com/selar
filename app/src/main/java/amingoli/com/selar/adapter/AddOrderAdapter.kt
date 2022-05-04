@@ -77,6 +77,18 @@ class AddOrderAdapter(
         listener.onChangeListener(list.size,list)
     }
 
+    fun addItem(position: Int, orderDetail: OrderDetail){
+        list[position] = orderDetail
+        notifyItemChanged(position,orderDetail)
+        listener.onChangeListener(position,list)
+    }
+
+    fun removeItem(position: Int){
+        listener.onChangeListener(position,list)
+        list.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     fun populateOrderDetailToDatabase(customer_id :Int?){
         for (i in 0 until list.size){
             list[i].customer_id = customer_id ?: 0

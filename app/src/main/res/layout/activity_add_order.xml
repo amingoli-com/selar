@@ -238,8 +238,9 @@
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:background="@drawable/background_complementary"
                         android:backgroundTint="@color/green_2"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_7sdp"
                         android:text="@string/pay_and_submit_order"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
 
@@ -253,8 +254,9 @@
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:background="@drawable/background_complementary"
                         android:backgroundTint="@color/blue"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_7sdp"
                         android:text="@string/save_order_status_waiting"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
 
@@ -269,8 +271,9 @@
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:background="@drawable/background_complementary"
                         android:backgroundTint="@color/red"
-                        android:padding="@dimen/_5sdp"
-                        android:text="@string/cancel_order"
+                        android:padding="@dimen/_7sdp"
+                        android:text="@string/close"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
                 </LinearLayout>

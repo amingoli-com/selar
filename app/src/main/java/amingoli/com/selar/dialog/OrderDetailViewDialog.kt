@@ -1,8 +1,8 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
-import amingoli.com.selar.helper.App
-import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
+import amingoli.com.selar.model.OrderDetail
+import amingoli.com.selar.widget.BasketAdder
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,27 +11,37 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.dialog_edit_price.*
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.dialog_order_detail_view.*
 
 
-class EditPriceDialog(context: Context,val type:String, val hint:String, val price: Double,
-                      val listener: Listener) : DialogFragment() {
-
+class OrderDetailViewDialog(
+    private val _context: Context, val orderDetail: OrderDetail, val position: Int,
+    val listener: Listener) : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_edit_price, container, false)
+        return inflater.inflate(R.layout.dialog_order_detail_view, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.isCancelable = true
-        initOnClick()
-        box_edit_price.hint = hint
-        edt_price.addTextChangedListener(PriceTextWatcher(edt_price){})
-        edt_price.setText(price.toString())
+        title.text = orderDetail.name
+        if (!orderDetail.product_image.isNullOrEmpty()){
+            image.visibility = View.VISIBLE
+            Glide.with(_context).load(orderDetail.product_image).into(image)
+        }else image.visibility = View.GONE
+        basketAdder.show(orderDetail, object : BasketAdder.Listener{
+            override fun onChangeBasketAdder(count: Double) {
+                orderDetail.stock = count
+                if (orderDetail.stock == 0.0){
+                    listener.onRemoveOrderDetail(this@OrderDetailViewDialog,position, orderDetail)
+                    dismiss()
+                }else listener.onEditOrderDetail(this@OrderDetailViewDialog,position, orderDetail)
+            }
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -41,13 +51,7 @@ class EditPriceDialog(context: Context,val type:String, val hint:String, val pri
     }
 
     interface Listener {
-        fun onEditPrice(dialog: EditPriceDialog, price:Double, type: String)
+        fun onEditOrderDetail(dialog: OrderDetailViewDialog,position: Int, orderDetail: OrderDetail)
+        fun onRemoveOrderDetail(dialog: OrderDetailViewDialog,position: Int, orderDetail: OrderDetail)
     }
-
-    private fun initOnClick(){
-        submit.btn.setOnClickListener {
-            listener.onEditPrice(this, App.convertToDouble(edt_price),type)
-        }
-    }
-
 }

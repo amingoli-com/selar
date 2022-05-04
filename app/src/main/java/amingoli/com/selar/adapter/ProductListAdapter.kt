@@ -44,7 +44,7 @@ class ProductListAdapter(
             item.title.text = model.name
             item.price_sela.text = App.priceFormat(model.price_sale!!)
             item.price_on_product.text = App.priceFormat(model.price_sale_on_product!!)
-            item.basketAdder.setText("10 عدد")
+//            item.basketAdder.setText("10 عدد")
 
         }catch (e : Exception){
         }
