@@ -50,4 +50,11 @@ class OrderWaitingAdapter(
         list.add(item)
         notifyDataSetChanged()
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(items: ArrayList<Orders>){
+        this.list.clear()
+        this.list.addAll(items)
+        notifyDataSetChanged()
+    }
 }

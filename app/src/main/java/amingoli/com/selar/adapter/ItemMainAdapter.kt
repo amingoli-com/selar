@@ -53,4 +53,11 @@ class ItemMainAdapter(
         list.add(item)
         notifyDataSetChanged()
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(items: ArrayList<MainModel>){
+        list.clear()
+        list.addAll(items)
+        notifyDataSetChanged()
+    }
 }

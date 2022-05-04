@@ -44,6 +44,9 @@ interface AppDao {
             "WHERE product.branch=:branch and categoryproduct.id_category = :id_category ")
     fun selectProductByCategory(branch: Int, id_category: Int): List<Product>
 
+    @Query("select stock,price_buy from product where branch=:branch")
+    fun productCount(branch: Int): List<Product>
+
     @Query("select count(id) from product where branch=:branch")
     fun getAllProductCount(branch: Int): Int
 
@@ -68,6 +71,9 @@ interface AppDao {
 
     @Query("select count(id) from category where branch=:branch and id_mother = :id_mother")
     fun sizeCategory(branch: Int,id_mother: Int): Int
+
+    @Query("select count(id) from category where branch=:branch")
+    fun categoryCount(branch: Int): Int
 
 //    Category Product
     @Query("DELETE FROM categoryproduct WHERE id_product = :id_product")
@@ -144,6 +150,9 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCustomer(customer: Customers) : Long
 
+    @Query("select count(id) from customers where branch=:branch")
+    fun customerCount(branch: Int): Int
+
 //    order
     @Query("select * from orders where branch=:branch ORDER BY ID DESC")
     fun selectOrders(branch: Int): List<Orders>
@@ -190,6 +199,9 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrder(orders: Orders) : Long
+
+    @Query("select count(id) from orders where branch=:branch")
+    fun orderCount(branch: Int): Int
 
 //    order detail
     @Insert(onConflict = OnConflictStrategy.REPLACE)

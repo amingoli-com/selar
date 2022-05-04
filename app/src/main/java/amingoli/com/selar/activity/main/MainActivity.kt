@@ -20,35 +20,23 @@ import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
 import amingoli.com.selar.model.MainModel
 import amingoli.com.selar.model.Orders
-import amingoli.com.selar.model.TagList
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.*
-import com.github.mikephil.charting.components.Legend.LegendForm
-import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.utils.MPPointF
-import com.github.mikephil.charting.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_main_toolbar.view.*
 
 
 class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValueSelectedListener {
 
-    private var ordersWaiting = ArrayList<Orders>()
+    private var adapterWaiting : OrderWaitingAdapter? = null
+    private var adapterMain : ItemMainAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +45,8 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         initToolbar()
 
 //        test
-        initRecyclerViewOrderWaiting()
-        initRecyclerViewItemMain()
+        initRecyclerView()
+        updateItemMainModel()
         barChartAdapter()
         initOnClick()
     }
@@ -72,7 +60,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         toolbar.content.setOnClickListener {
             BusinessMenuDialog(this,object : BusinessMenuDialog.Listener{
                 override fun onEditBusiness(dialog: BusinessMenuDialog, business: Business?) {
-                    initDataSetText()
+                    businessSetText()
                 }
                 override fun onBusinessList(dialog: BusinessMenuDialog, business: Business) {
                     initData()
@@ -88,44 +76,72 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
     }
 
     private fun initData(){
-        initDataSetText()
-        initVisibilityOrderWaiting()
+        businessSetText()
+        orderWaitingVisibility()
+        updateItemMainModel()
     }
 
-    private fun initDataSetText(){
+    private fun businessSetText(){
         toolbar.title.setText(resources.getString(R.string.welcome_owner,Session.getInstance().businessOwnerName))
         toolbar.content.setText(resources.getString(R.string.welcome_to_business,Session.getInstance().businessName))
     }
 
-    private fun initVisibilityOrderWaiting(){
-        if (!ordersWaiting.isNullOrEmpty()){
+    private fun orderWaitingVisibility(){
+        val arrayList = ArrayList(App.database.getAppDao().selectOrders(App.branch(),ORDER_STATUS_WAITING))
+        if (!arrayList.isNullOrEmpty()){
+            adapterWaiting?.updateList(arrayList)
             box_order_waiting.visibility = View.VISIBLE
         }else if (box_order_waiting.visibility != View.GONE) box_order_waiting.visibility = View.GONE
     }
 
-//    test
-    private fun initRecyclerViewOrderWaiting(){
-        ordersWaiting = ArrayList(App.database.getAppDao().selectOrders(App.branch(),ORDER_STATUS_WAITING))
-        recyclerView_order_waiting.adapter = OrderWaitingAdapter(this,ordersWaiting,object : OrderWaitingAdapter.Listener{
+    private fun initRecyclerView(){
+        adapterWaiting = OrderWaitingAdapter(this, ArrayList(),object : OrderWaitingAdapter.Listener{
             override fun onItemClicked(position: Int, item: Orders) {
                 OrderViewDialog(this@MainActivity,item.id!!,null, null)
                     .show(supportFragmentManager,"order_view")
             }
-
         })
+        recyclerView_order_waiting.adapter = adapterWaiting
+
+        adapterMain = ItemMainAdapter(this,ArrayList(),this)
+        recyclerView.adapter = adapterMain
     }
 
-    private fun initRecyclerViewItemMain(){
+    private fun updateItemMainModel(){
+        val branch = Session.getInstance().branch
+
+        val array_product = ArrayList(App.database.getAppDao().productCount(branch))
+        var qalamkala = 0.0
+        var sarmayeh = 0.0
+        for (i in array_product.indices){
+            qalamkala += array_product[i].stock?:0.0
+            sarmayeh += qalamkala * (array_product[i].price_buy?:0.0)
+        }
+        val product_count = array_product.size
+
         val arrayList = ArrayList<MainModel>()
-        arrayList.add(MainModel(R.drawable.ic_baseline_extension_24,"محصولات","محصولات ثبت شده","290,000 محصول", ListProductActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_shopping_cart_24,"سفارشات","سفارشات انجام شده","290 سفارش", OrderActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_category_24,"دسته‌بندی","دسته‌بندی های ثبت شده","290,000 محصول", CategoryActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_account_circle_black_24dp,"مشتریان","خریداران شما","290,000 محصول", CustomerActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_storefront_24,"گزارش انبار","کالاهای موجود","290,000 محصول", StockActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_monetization_on_24,"گزارش مالی","سرمایه موجود","290,000 محصول", FinanceActivity::class.java))
-        arrayList.add(MainModel(R.drawable.ic_baseline_settings_24,"تنظیمات","مالیات، واحدپول و..","", SettingActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_extension_24,"محصولات","محصولات ثبت شده",
+            "${product_count} محصول",
+            ListProductActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_shopping_cart_24,"سفارشات","سفارشات انجام شده",
+            "${App.database.getAppDao().orderCount(branch)} سفارش",
+            OrderActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_category_24,"دسته‌بندی","دسته‌بندی های ثبت شده",
+            "${App.database.getAppDao().categoryCount(branch)} دسته‌بندی",
+            CategoryActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_account_circle_black_24dp,"مشتریان","خریداران شما",
+            "${App.database.getAppDao().customerCount(branch)} مشتری",
+            CustomerActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_storefront_24,"گزارش انبار","کالاهای موجود",
+            "${App.priceFormat(qalamkala)} قلم‌",
+            StockActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_monetization_on_24,"گزارش مالی","سرمایه موجود",
+            "${App.priceFormat(sarmayeh,true)}",
+            FinanceActivity::class.java))
+        arrayList.add(MainModel(R.drawable.ic_baseline_settings_24,"تنظیمات", "مالیات، واحدپول و..", "", SettingActivity::class.java))
         arrayList.add(MainModel(R.drawable.ic_baseline_import_contacts_24,"پشتیبانی","راه های ارتباطی","", SupportActivity::class.java))
-        recyclerView.adapter = ItemMainAdapter(this,arrayList,this)
+
+        adapterMain?.updateList(arrayList)
     }
 
 //    Test
