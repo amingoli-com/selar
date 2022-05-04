@@ -4,82 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/background_radius_not_padding"
+    android:backgroundTint="@color/white"
     android:gravity="center"
-    android:padding="@dimen/_5sdp"
+    android:padding="@dimen/_10sdp"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/box_image"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="start">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_90sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_gallery" />
-
-            <ImageView
-                android:id="@+id/ic_delete"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentEnd="true"
-                android:padding="@dimen/_3sdp"
-                android:src="@drawable/ic_baseline_close_24"
-                android:visibility="gone"
-                app:tint="@color/red"
-                tools:visibility="visible" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:layout_toEndOf="@+id/box_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/edt_name"
-                    style="@style/Edittext.product"
-                    android:drawableStart="@drawable/ic_baseline_category_24"
-                    android:hint="@string/name" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <CheckBox
-                android:id="@+id/checkbox"
-                android:checked="true"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/category_is_enable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-    </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:visibility="gone"
+        android:id="@+id/box_edit_price"
+        android:hint="@string/price"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/edt_content"
-            android:layout_marginBottom="@dimen/_5sdp"
-            style="@style/Edittext.product"
-            android:drawableStart="@drawable/ic_baseline_description_24"
-            android:hint="@string/description" />
+            android:id="@+id/edt_price"
+            style="@style/Edittext.product.Price"
+            android:drawableStart="@drawable/ic_attach_money_black_24dp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <amingoli.com.selar.widget.loader_button.LoaderButton
         android:id="@+id/submit"

@@ -147,5 +147,6 @@
     <string name="cash_discount">تخفیف اضافه تر بر روی سفارش</string>
     <string name="discount">تخفیف</string>
     <string name="price_discount_on_product">جمع تخفیف محصولات</string>
+    <string name="price">قیمت</string>
 
 </resources>

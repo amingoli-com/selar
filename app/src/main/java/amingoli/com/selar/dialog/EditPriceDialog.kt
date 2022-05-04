@@ -1,98 +1,53 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
-import amingoli.com.selar.adapter.CategoryListManagerAdapter
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Category
+import amingoli.com.selar.widget.text_watcher.PriceTextWatcher
 import android.content.Context
-import android.net.Uri
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import android.view.WindowManager
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.dialog_insert_category.*
+import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.dialog_edit_price.*
 
 
-class InsertCategoryDialog(context: Context,val _category: Category?, val _position: Int,
-                           val _id_mother:Int, val listener: Listener) : AlertDialog(context) {
-
-    private var _ID = -1
-    private var _IMAGE_PATH: String? = null
-    private var _POS = -1
+class EditPriceDialog(context: Context,val type:String, val hint:String, val price: Double,
+                      val listener: Listener) : DialogFragment() {
 
 
-    init {
-        setCancelable(true)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.dialog_edit_price, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_insert_category)
-        this.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-        Log.e("qqq", "InsertCategoryDialog onCreate: id: $_ID - id_mother: $_id_mother - image: $_IMAGE_PATH - pos: $_POS ")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this.isCancelable = true
         initOnClick()
-        if (_category != null) setValue(_category, _position)
+        box_edit_price.hint = hint
+        edt_price.addTextChangedListener(PriceTextWatcher(edt_price){})
+        edt_price.setText(price.toString())
     }
 
-    fun initImage(resultUri: Uri){
-        Glide.with(context).load(resultUri).into(image)
-        _IMAGE_PATH = App.saveFile(App.getByte(resultUri))
-        ic_delete.visibility = View.VISIBLE
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog!!.window!!.setGravity(Gravity.CENTER)
     }
 
     interface Listener {
-        fun chooseImage(dialog: AlertDialog)
-        fun insert(dialog: AlertDialog, category: Category, position: Int)
+        fun onEditPrice(dialog: EditPriceDialog, price:Double, type: String)
     }
 
     private fun initOnClick(){
         submit.btn.setOnClickListener {
-            if (formIsValid()) listener.insert(this, getValue(), _POS)
-        }
-        image.setOnClickListener {
-            listener.chooseImage(this)
-        }
-        ic_delete.setOnClickListener {
-            _IMAGE_PATH = null
-            image.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_add_photo_alternate_black_24dp))
-            ic_delete.visibility = View.GONE
+            listener.onEditPrice(this, App.convertToDouble(edt_price),type)
         }
     }
 
-    private fun formIsValid() :Boolean{
-        if(App.getString(edt_name).isNullOrEmpty()){
-            edt_name.setError(context.resources.getString(R.string.not_valid))
-            return false
-        }
-        return true
-    }
-
-    private fun setValue(category: Category, position: Int){
-        _POS = position
-        if (category.id != null) _ID = category.id!!
-        if (!category.name.isNullOrEmpty()) edt_name.setText(category.name)
-        if (!category.content.isNullOrEmpty()) edt_content.setText(category.content)
-        checkbox.isChecked = category.status != null && category.status == 1
-        if (!category.image.isNullOrEmpty()) {
-            Glide.with(context).load(category.image).into(image)
-            _IMAGE_PATH = category.image
-            ic_delete.visibility = View.VISIBLE
-        }
-    }
-
-    private fun getValue(): Category{
-        val category = Category()
-        if (_ID != -1) category.id = _ID
-        category.id_mother = _id_mother
-        category.name = App.getString(edt_name)
-        category.content = App.getString(edt_content)
-        category.image = _IMAGE_PATH
-        category.branch = Session.getInstance().branch
-        category.status = if(checkbox.isChecked) 1 else 0
-        return category
-    }
 }

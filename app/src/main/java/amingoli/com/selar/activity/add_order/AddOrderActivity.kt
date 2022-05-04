@@ -3,9 +3,9 @@ package amingoli.com.selar.activity.add_order
 import amingoli.com.selar.R
 import amingoli.com.selar.adapter.AddOrderAdapter
 import amingoli.com.selar.dialog.CustomerDialog
+import amingoli.com.selar.dialog.EditPriceDialog
 import amingoli.com.selar.dialog.SetPaymentDialog
 import amingoli.com.selar.helper.App
-import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Config.ORDER_STATUS_WAITING
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.*
@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
@@ -32,12 +33,12 @@ import kotlinx.android.synthetic.main.activity_add_order_camera.recyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener {
+class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectProduct.Listener, EditPriceDialog.Listener {
 
     private var ORDER_CODE = System.currentTimeMillis().toString()
     private var EDIT = false
     private var _POSITION: Int? = null
-    private val TAX_ALL = Session.getInstance().taxPercent
+    private var TAX_ALL = 0
 
     private var this_order = Orders()
     private var order_detail = ArrayList<OrderDetail>()
@@ -49,7 +50,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private var totla_count_orders = 0.0
     private var totla_price_orders_sale = 0.0
     private var totla_tax = 0.0
-    private var totla_shipping = 0.0
+    private var total_shipping = 0.0
     private var totla_discount = 0.0
     private var totla_all = 0.0
 
@@ -57,6 +58,8 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
 
+        TAX_ALL = Session.getInstance().taxPercent
+        total_shipping = Session.getInstance().shippingPrice
         initExtrasDataIntent()
         initOtherView()
         initOnClick()
@@ -95,7 +98,6 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         totla_price_orders_sale = 0.0
         total_price_profit = 0.0
         totla_tax = 0.0
-        totla_shipping = Session.getInstance().shippingPrice
         totla_discount = 0.0
         totla_all = 0.0
 
@@ -107,7 +109,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 totla_tax += ((list[i].price_sale!! * list[i].stock!!) / 100) * calculateTax(list[i].tax_percent)
                 totla_count_orders += list[i].stock!!
             }
-            totla_all = totla_price_orders_sale + totla_tax + totla_shipping
+            totla_all = totla_price_orders_sale + totla_tax + total_shipping
         }
         setTextBoxFactor()
         showViewFactor()
@@ -120,7 +122,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private fun setTextBoxFactor(){
         view_orders.setText(resources.getString(R.string.all_order_one),totla_price_orders_sale)
         view_tax.setText(resources.getString(R.string.tax),totla_tax)
-        view_shipping.setText(resources.getString(R.string.shipping_price),totla_shipping)
+        view_shipping.setText(resources.getString(R.string.shipping_price),total_shipping)
         view_discount.setText(resources.getString(R.string.price_discount),totla_discount,ContextCompat.getColor(this,R.color.green))
         view_total_price.setText(resources.getString(R.string.amount_pay),totla_all)
 
@@ -227,6 +229,11 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 }
             }).show(supportFragmentManager,"customer")
         }
+        view_shipping.setOnClickListener {
+            EditPriceDialog(this,"total_shipping",
+                resources.getString(R.string.shipping_price),total_shipping,this)
+                .show(supportFragmentManager,"edit_price")
+        }
         submit_order.setOnClickListener {
             SetPaymentDialog(this,getOrder(),this).show()
         }
@@ -261,7 +268,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         this_order.total_price_order = totla_price_orders_sale
         this_order.total_price_profit = total_price_profit
         this_order.total_tax = totla_tax
-        this_order.totla_shipping = totla_shipping
+        this_order.totla_shipping = total_shipping
         this_order.amount_discount = totla_discount
         this_order.totla_all = totla_all
         this_order.create_at = if (this_order.create_at == null) Date() else this_order.create_at
@@ -344,5 +351,13 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         if (_POSITION != null) i.putExtra("order_position",_POSITION)
         setResult(RESULT_OK, i)
         finish()
+    }
+
+    override fun onEditPrice(dialog: EditPriceDialog, price: Double, type: String) {
+        when(type){
+            "total_shipping"-> total_shipping = price
+        }
+        if (!order_detail.isNullOrEmpty()) calculator(order_detail)
+        dialog.dismiss()
     }
 }
