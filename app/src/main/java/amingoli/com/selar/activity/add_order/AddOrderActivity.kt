@@ -280,13 +280,18 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
         return this_order
     }
 
+    private fun play_beeb(){
+        if (Session.getInstance().checkBoxSoundScanner){
+            sound_scaner?.start()
+        }
+    }
+
     /**
      * Listener
      * */
     private fun resultScan(barcode:String, device:String){
-        sound_scaner?.start()
+        play_beeb()
         val p = App.database.getAppDao().selectProductByQR(App.branch(), barcode)
-
         if ( p != null){
             adapter?.addItem(p)
         }
@@ -301,7 +306,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     }
 
     override fun onProduct(product: Product) {
-        sound_scaner?.start()
+        play_beeb()
         adapter?.addItem(product)
     }
 

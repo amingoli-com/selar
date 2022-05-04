@@ -8,6 +8,7 @@ import amingoli.com.selar.helper.Config.KEY_EXTRA_TYPE_SCAN
 import amingoli.com.selar.helper.Config.REQUEST_CODE
 import amingoli.com.selar.helper.Config.SCAN_BARCODE_ARRAY
 import amingoli.com.selar.helper.Config.SCAN_BARCODE_SINGLE
+import amingoli.com.selar.helper.Session
 import android.Manifest.permission.CAMERA
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -56,6 +57,12 @@ class BarcodeScannerActivity : AppCompatActivity() {
         super.onPause()
     }
 
+    private fun play_beeb(){
+        if (Session.getInstance().checkBoxSoundScanner){
+            sound_scaner?.start()
+        }
+    }
+
     private fun initScaner(){
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
 
@@ -99,7 +106,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
     }
 
     private fun resultScan(barcode:String){
-        sound_scaner?.start()
+        play_beeb()
         when(TYPE_SCAN){
             SCAN_BARCODE_SINGLE ->{
                 val intent = Intent()

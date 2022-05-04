@@ -17,6 +17,7 @@ class Setting {
     var min_order: Double? = null
     var shipping_price: Double? = null
     var shipping_free_on_order: Double? = null
+    var sound_scanner: Boolean? = null
     var cash_money: Boolean? = null
     var cash_card: Boolean? = null
     var cash_debit: Boolean? = null
@@ -32,6 +33,7 @@ class Setting {
         this.min_order = 0.0
         this.shipping_price = 0.0
         this.shipping_free_on_order = 0.0
+        this.sound_scanner = true
         this.cash_money = true
         this.cash_card = true
         this.cash_debit = true
@@ -47,6 +49,7 @@ class Setting {
         min_order: Double?,
         shipping_price: Double?,
         shipping_free_on_order: Double?,
+        sound_scanner: Boolean?,
         cash_money: Boolean?,
         cash_card: Boolean?,
         cash_debit: Boolean?,
@@ -59,6 +62,7 @@ class Setting {
         this.min_order = min_order
         this.shipping_price = shipping_price
         this.shipping_free_on_order = shipping_free_on_order
+        this.sound_scanner = sound_scanner
         this.cash_money = cash_money
         this.cash_card = cash_card
         this.cash_debit = cash_debit

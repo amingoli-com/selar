@@ -174,7 +174,8 @@ public class Session {
         return ExtrasPref.getInt(Config.TAX_PERCENT, 0);
     }
 
-    public void setCheckBox(boolean money, boolean card, boolean debit, boolean discount){
+    public void setCheckBox(boolean sound_scanner, boolean money, boolean card, boolean debit, boolean discount){
+        extraEditor.putBoolean(Config.CHECK_BOX_SOUND_SCANNER,sound_scanner);
         extraEditor.putBoolean(Config.CHECK_BOX_MONEY,money);
         extraEditor.putBoolean(Config.CHECK_BOX_CARD,card);
         extraEditor.putBoolean(Config.CHECK_BOX_DEBIT,debit);
@@ -212,5 +213,13 @@ public class Session {
     }
     public boolean getCheckBoxDiscount() {
         return ExtrasPref.getBoolean(Config.CHECK_BOX_DISCOUNT, true);
+    }
+
+    public void setCheckBoxSoundScanner(boolean checkBox) {
+        extraEditor.putBoolean(Config.CHECK_BOX_SOUND_SCANNER,checkBox);
+        extraEditor.commit();
+    }
+    public boolean getCheckBoxSoundScanner() {
+        return ExtrasPref.getBoolean(Config.CHECK_BOX_SOUND_SCANNER, true);
     }
 }

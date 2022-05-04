@@ -150,5 +150,6 @@
     <string name="price">قیمت</string>
     <string name="product_name">نام محصول</string>
     <string name="helper_dialog_order_detail_view">برای نوشتن مقدار انتخابی بر روی نوشته لمس کنید و برای حذف تمامی مقادیر محصول آیکون منفی (-) را نگه دارید.</string>
+    <string name="play_sound_scanner">پخش صدای \'بیب\' اسکنر</string>
 
 </resources>
