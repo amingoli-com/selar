@@ -6,6 +6,7 @@ import amingoli.com.selar.helper.Config.PATH_IMAGES
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
@@ -19,6 +20,10 @@ import androidx.multidex.MultiDexApplication
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import java.io.*
+import java.net.URL
+import java.nio.channels.Channels
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.*
 
@@ -92,6 +97,12 @@ class App : MultiDexApplication() {
 
         fun getDrawable(context: Context, id:Int) : Drawable{
             return ContextCompat.getDrawable(context, id)!!
+        }
+
+        fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+            return stream.toByteArray()
         }
 
         fun getByte(uri: Uri): ByteArray{
