@@ -54,6 +54,23 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/add_order"
+            style="@style/Text.Body1"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:drawablePadding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:drawableStart="@drawable/ic_baseline_add_shopping_cart_24"
+            android:background="@drawable/background_radius"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"
+            android:text="@string/add_new_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UnusedAttribute,UseCompatTextViewDrawableXml" />
 
         <LinearLayout
             android:id="@+id/box_order_waiting"
@@ -98,7 +115,10 @@
             tools:listitem="@layout/item_main"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
-            android:padding="@dimen/_10sdp"
+            tools:itemCount="2"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

@@ -31,6 +31,7 @@ import com.budiyev.android.codescanner.ScanMode
 import kotlinx.android.synthetic.main.activity_add_order.*
 import kotlinx.android.synthetic.main.activity_add_order_camera.edt
 import kotlinx.android.synthetic.main.activity_add_order_camera.recyclerView
+import kotlinx.android.synthetic.main.dialog_order_view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -48,6 +49,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private var codeScanner: CodeScanner? = null
     private var sound_scaner: MediaPlayer? = null
 
+    private var action_free_shipping = true
     private var total_price_profit = 0.0
     private var totla_count_orders = 0.0
     private var totla_price_orders_sale = 0.0
@@ -111,6 +113,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 totla_tax += ((list[i].price_sale!! * list[i].stock!!) / 100) * calculateTax(list[i].tax_percent)
                 totla_count_orders += list[i].stock!!
             }
+            calculateShippingFree()
             totla_all = totla_price_orders_sale + totla_tax + total_shipping
         }
         setTextBoxFactor()
@@ -119,6 +122,14 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
 
     private fun calculateTax(product_tax : Int?): Int {
         return product_tax?:TAX_ALL
+    }
+
+    private fun calculateShippingFree(){
+        val freeShippingPrice = Session.getInstance().freeShippingPrice
+        if (action_free_shipping && freeShippingPrice > 0){
+            total_shipping = if (totla_price_orders_sale >= freeShippingPrice) 0.0
+            else Session.getInstance().shippingPrice
+        }
     }
 
     private fun setTextBoxFactor(){
@@ -239,7 +250,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 .show(supportFragmentManager,"edit_price")
         }
         submit_order.setOnClickListener {
-            SetPaymentDialog(this,getOrder(),this).show()
+            if (orderIsValid()) SetPaymentDialog(this,getOrder(),this).show()
         }
         submit_order_waiting.setOnClickListener {
             this_order.status = ORDER_STATUS_WAITING
@@ -335,15 +346,17 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     }
 
     private fun readyToAddOrder(){
-        Log.e("qqqq",
-            "customer id: ${this_order.customer} - ${this_order.customer_name} \n" +
-                "cahs money: ${this_order.pay_cash} \n" +
-                "card: ${this_order.pay_card} \n" +
-                "card info: ${this_order.pay_card_info} \n" +
-                "debit customer: ${this_order.customer_debtor} \n" )
-        adapter?.populateOrderDetailToDatabase(this_order.customer)
+        if (orderIsValid()) adapter?.populateOrderDetailToDatabase(this_order.customer)
     }
 
+    private fun orderIsValid() : Boolean{
+        val min_order = Session.getInstance().minOrder
+        val o = min_order - totla_price_orders_sale
+        if (totla_price_orders_sale >= min_order){
+            return true
+        }else App.toast("مبلغ ${App.priceFormat(o,true)} دیگر به سفارش اضافه کنید")
+        return false
+    }
     /**
      * Insert Database
      * */
@@ -364,7 +377,10 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
 
     override fun onEditPrice(dialog: EditPriceDialog, price: Double, type: String) {
         when(type){
-            "total_shipping"-> total_shipping = price
+            "total_shipping"->{
+                action_free_shipping = false
+                total_shipping = price
+            }
         }
         if (!order_detail.isNullOrEmpty()) calculator(order_detail)
         dialog.dismiss()

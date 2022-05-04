@@ -151,5 +151,8 @@
     <string name="product_name">نام محصول</string>
     <string name="helper_dialog_order_detail_view">برای نوشتن مقدار انتخابی بر روی نوشته لمس کنید و برای حذف تمامی مقادیر محصول آیکون منفی (-) را نگه دارید.</string>
     <string name="play_sound_scanner">پخش صدای \'بیب\' اسکنر</string>
+    <string name="add_fast_order">ثبت سریع سفارش</string>
+    <string name="add_order">ثبت سفارش</string>
+    <string name="add_new_order">ثبت سفارش جدید</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package amingoli.com.selar.activity.main
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.add_order.AddOrderActivity
 import amingoli.com.selar.activity.category.CategoryActivity
 import amingoli.com.selar.activity.customer.CustomerActivity
 import amingoli.com.selar.activity.finance.FinanceActivity
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
         initRecyclerViewOrderWaiting()
         initRecyclerViewItemMain()
         barChartAdapter()
-
+        initOnClick()
     }
 
     override fun onResume() {
@@ -77,6 +78,12 @@ class MainActivity : AppCompatActivity(), ItemMainAdapter.Listener, OnChartValue
                     initData()
                 }
             }).show(supportFragmentManager,"menu")
+        }
+    }
+
+    private fun initOnClick(){
+        add_order.setOnClickListener {
+            startActivity(Intent(this,AddOrderActivity::class.java))
         }
     }
 
