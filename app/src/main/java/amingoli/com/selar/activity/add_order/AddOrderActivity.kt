@@ -37,6 +37,7 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
     private var ORDER_CODE = System.currentTimeMillis().toString()
     private var EDIT = false
     private var _POSITION: Int? = null
+    private val TAX_ALL = Session.getInstance().taxPercent
 
     private var this_order = Orders()
     private var order_detail = ArrayList<OrderDetail>()
@@ -103,13 +104,17 @@ class AddOrderActivity : AppCompatActivity(), SetPaymentDialog.Listener, SelectP
                 totla_price_orders_sale += list[i].price_sale!! * list[i].stock!!
                 totla_discount += list[i].price_discount!! * list[i].stock!!
                 total_price_profit += list[i].price_profit!! * list[i].stock!!
-                if (list[i].tax_percent != null) totla_tax += (list[i].price_sale!! * list[i].stock!!) / 100 * list[i].tax_percent!!
+                totla_tax += ((list[i].price_sale!! * list[i].stock!!) / 100) * calculateTax(list[i].tax_percent)
                 totla_count_orders += list[i].stock!!
             }
             totla_all = totla_price_orders_sale + totla_tax + totla_shipping
         }
         setTextBoxFactor()
         showViewFactor()
+    }
+
+    private fun calculateTax(product_tax : Int?): Int {
+        return product_tax?:TAX_ALL
     }
 
     private fun setTextBoxFactor(){
