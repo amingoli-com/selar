@@ -1,6 +1,7 @@
 package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
+import amingoli.com.selar.model.ResponseBusinessSample
 import amingoli.com.selar.model.TagList
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_business.view.*
 
 class BusinessAdapter(val context: Context,
-                      val list: ArrayList<TagList>,
+                      val list: ArrayList<ResponseBusinessSample.item>,
                       val listener: Listener?
 ) : RecyclerView.Adapter<BusinessAdapter.ListViewHolder>() {
 
@@ -22,7 +23,7 @@ class BusinessAdapter(val context: Context,
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface Listener{
-        fun onItemClicked(position: Int, item: TagList)
+        fun onItemClicked(position: Int, item: ResponseBusinessSample.item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -38,8 +39,8 @@ class BusinessAdapter(val context: Context,
         val item = holder.itemView
         val model = list[position]
 
-        item.title.text = model.title
-        item.content.setText(model.tag)
+        item.title.text = model.name
+        item.content.setText(model.content)
 
         if (listener != null){
             setItemSelected(position_selected != -1 && position_selected == position,item.parent_item)
@@ -62,12 +63,27 @@ class BusinessAdapter(val context: Context,
         }
     }
 
-    fun addItem(item: TagList){
+    fun addItem(item: ResponseBusinessSample.item){
         list.add(list.size,item)
         notifyItemInserted(list.size)
     }
 
-    fun addItem(item: TagList, position: Int){
+    fun addItemDefault(){
+        if (list.isNullOrEmpty()){
+            list.add(0,ResponseBusinessSample.item(true))
+            notifyItemInserted(0)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addItem(item: ArrayList<ResponseBusinessSample.item>){
+        list.clear()
+        list.add(0,ResponseBusinessSample.item(true))
+        list.addAll(item)
+        notifyDataSetChanged()
+    }
+
+    fun addItem(item: ResponseBusinessSample.item, position: Int){
         if (position == -1) addItem(item)
         else {
             Log.e("qqq", "addItem status is pos: $position" )

@@ -1,13 +1,11 @@
 package amingoli.com.selar.dialog
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.first_open.FirstOpenActivity
-import amingoli.com.selar.adapter.BusinessAdapter
+import amingoli.com.selar.activity.business_add.FirstOpenActivity
 import amingoli.com.selar.adapter.BusinessListAdapter
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
-import amingoli.com.selar.model.TagList
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -18,7 +16,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.activity_first_open.*
 import kotlinx.android.synthetic.main.dialog_menu_business.*

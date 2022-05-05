@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.first_open.FirstOpenActivity">
+    tools:context=".activity.business_add.FirstOpenActivity">
     <LinearLayout
         android:id="@+id/parent_view"
         android:alpha="0"
@@ -58,18 +58,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/background_radius"
-            android:backgroundTint="@color/white"
-            tools:listitem="@layout/item_business"
-            tools:itemCount="5"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:minHeight="@dimen/_220sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/background_radius"
+                android:backgroundTint="@color/white"
+                tools:listitem="@layout/item_business"
+                tools:itemCount="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <amingoli.com.selar.widget.Statuser
+                android:id="@+id/statuser"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
         <CheckBox
             android:id="@+id/checkbox"

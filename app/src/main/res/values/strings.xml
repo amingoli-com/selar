@@ -154,5 +154,7 @@
     <string name="add_fast_order">ثبت سریع سفارش</string>
     <string name="add_order">ثبت سفارش</string>
     <string name="add_new_order">ثبت سفارش جدید</string>
+    <string name="error_connection_server">خطا در ارتباط با سرور</string>
+    <string name="try_again">تلاش مجدد</string>
 
 </resources>

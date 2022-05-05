@@ -3,6 +3,8 @@ package amingoli.com.selar.helper
 object Config {
     const val REQUEST_CODE = 100
 
+    const val BASE_URL = "http://192.168.1.108/saler"
+
     const val KEY_EXTRA_BARCODE = "barcode"
     const val KEY_EXTRA_BITMAP = "bitmap"
     const val KEY_EXTRA_TYPE_SCAN = "type_scan"

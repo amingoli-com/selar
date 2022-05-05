@@ -38,7 +38,7 @@
             android:name=".activity.customer.CustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.first_open.FirstOpenActivity"
+            android:name=".activity.business_add.FirstOpenActivity"
             android:exported="false" />
         <activity
             android:name=".activity.add_order.AddOrderBasketActivity"

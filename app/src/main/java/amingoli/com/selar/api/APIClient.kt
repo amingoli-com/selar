@@ -1,9 +1,9 @@
-package ir.trano.keeper.api
+package amingoli.com.selar.api
 
+import amingoli.com.selar.helper.Config.BASE_URL
+import amingoli.com.selar.helper.Session
 import android.util.Log
 import com.google.gson.GsonBuilder
-import ir.trano.keeper.helper.Session
-import ir.trano.user.helper.Config.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,15 +18,15 @@ class ApiClient {
             client.addInterceptor { chain ->
                 val original = chain.request()
                 val builder = original.newBuilder()
-                builder.addHeader("Authorization", "Bearer "+ Session.getInstance().token)
+                builder.addHeader("Authorization", "Bearer "+ Session.getInstance().sessionKey)
                 builder.addHeader("Accept", "application/json")
-                Log.e("session api", "" + Session.getInstance().token)
+                Log.e("session api", "" + Session.getInstance().sessionKey)
                 builder.method(original.method(), original.body())
                 val request = builder.build()
                 chain.proceed(request)
             }
             val retrofit = Retrofit.Builder()
-                .baseUrl("$BASE_URL/api/user/v1/")
+                .baseUrl("$BASE_URL/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
                 .client(client.build())

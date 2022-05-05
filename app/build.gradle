@@ -78,4 +78,9 @@ dependencies {
 //    Persian Date Picker
     implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
     implementation 'com.github.samanzamani:PersianDate:1.3.4'
+//    connection to server
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 }

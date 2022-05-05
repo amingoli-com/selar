@@ -1,7 +1,7 @@
 package amingoli.com.selar.activity.splash
 
 import amingoli.com.selar.R
-import amingoli.com.selar.activity.first_open.FirstOpenActivity
+import amingoli.com.selar.activity.business_add.FirstOpenActivity
 import amingoli.com.selar.activity.main.MainActivity
 import amingoli.com.selar.helper.Config
 import amingoli.com.selar.helper.Session
@@ -23,8 +23,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        start()
 
+        start()
+//        DownloadDataSampleDialog(this).show(supportFragmentManager,"download_data")
         Log.e("qqqq", "onCreate: ${Session.getInstance().sessionKey}" )
     }
 

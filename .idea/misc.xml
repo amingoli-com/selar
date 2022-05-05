@@ -81,6 +81,7 @@
         <entry key="app/src/main/res/layout/activity_support.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/activity_under_category.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/dialog_customer.xml" value="0.17225747960108795" />
+        <entry key="app/src/main/res/layout/dialog_download_data_sample.xml" value="0.17225747960108795" />
         <entry key="app/src/main/res/layout/dialog_edit_business.xml" value="0.17225747960108795" />
         <entry key="app/src/main/res/layout/dialog_edit_price.xml" value="0.24711415134672937" />
         <entry key="app/src/main/res/layout/dialog_insert_category.xml" value="0.2552083333333333" />
@@ -145,7 +146,7 @@
         <entry key="app/src/main/res/layout/widget_message_box.xml" value="0.25" />
         <entry key="app/src/main/res/layout/widget_select_product.xml" value="0.2182916307161346" />
         <entry key="app/src/main/res/layout/widget_singel_item_card.xml" value="0.2552083333333333" />
-        <entry key="app/src/main/res/layout/widget_statuser.xml" value="0.42481884057971014" />
+        <entry key="app/src/main/res/layout/widget_statuser.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main_buttom_nav.xml" value="0.25277777777777777" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.212" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.2552083333333333" />
