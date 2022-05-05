@@ -1,31 +1,42 @@
 package amingoli.com.selar.activity.first_open
 
 import amingoli.com.selar.R
+import amingoli.com.selar.activity.first_open.mvp.FirstOpenModel
+import amingoli.com.selar.activity.first_open.mvp.FirstOpenView
 import amingoli.com.selar.activity.main.MainActivity
 import amingoli.com.selar.adapter.BusinessAdapter
+import amingoli.com.selar.dialog.DownloadDataSampleDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
 import amingoli.com.selar.model.Business
+import amingoli.com.selar.model.ResponseBusinessSample
 import amingoli.com.selar.model.Setting
 import amingoli.com.selar.model.TagList
+import amingoli.com.selar.widget.Statuser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_first_open.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
+class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOpenView {
 
     private var adapter: BusinessAdapter? = null
+    private var presenter: FirstOpenModel? = null
+    private var URL_SAMPLE_DATA : String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_open)
+
+        presenter = FirstOpenModel(this)
+        presenter?.getBusinessSample()
 
         initShowOnlyFirst()
         initOnClick()
@@ -56,7 +67,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
                     App.getString(edt_business_name),
                     id_business.toInt()
                 )
-                Handler().postDelayed({ next() },2500)
+                Handler().postDelayed({ getSampleData() },2500)
             }else submit.hideLoader()
         }
 
@@ -66,6 +77,14 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
     private fun initShowOnlyFirst(){
         box_only_first.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.VISIBLE else View.GONE
         exit.visibility = if (Session.getInstance().sessionKey.isNullOrEmpty()) View.GONE else View.VISIBLE
+    }
+
+    private fun getSampleData(){
+        if (URL_SAMPLE_DATA!= null){
+            DownloadDataSampleDialog(this).show(supportFragmentManager,"ss")
+        }else{
+            next()
+        }
     }
 
     private fun next(){
@@ -79,14 +98,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
     }
 
     private fun initRecyclerView(){
-        val arrayList = ArrayList<TagList>()
-        arrayList.add(0,TagList("کسب‌وکار شخصی شما","ایجاد کسب‌وکار جدید با اطلاعات دلخواه شما"))
-        arrayList.add(TagList("سوپر مارکت","شامل ۱,۸۰۰ محصول و ۲۹۰ دسته بندی"))
-        arrayList.add(TagList("نانوایی","شامل ۱۹ نان با ۸ دسته بندی"))
-        arrayList.add(TagList("کافی‌شاپ","شامل ۹۲ سرو با ۱۴ دسته‌بندی"))
-        arrayList.add(TagList("مطب پزشک","شامل ۱۸ خدمت با ۴ دسته‌بندی"))
-        arrayList.add(TagList("رستوران","شامل ۱۲۰ غذا و محصول با ۸۲ دسته‌بندی"))
-        adapter = BusinessAdapter(this,arrayList,this)
+        adapter = BusinessAdapter(this, ArrayList(),this)
         recyclerView.adapter = adapter
     }
 
@@ -109,6 +121,28 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener {
     /**
      * Listener
     * */
-    override fun onItemClicked(position: Int, item: TagList) {
+    override fun onItemClicked(position: Int, item: ResponseBusinessSample.item) {
+        URL_SAMPLE_DATA = item.data_url
+    }
+
+    override fun onResponse(arrayListBusinessSample: ArrayList<ResponseBusinessSample.item>?) {
+        if (!arrayListBusinessSample.isNullOrEmpty()){
+            adapter?.addItem(arrayListBusinessSample)
+        }else{
+            adapter?.addItemDefault()
+        }
+    }
+
+    override fun onError(message: String) {
+        adapter?.addItemDefault()
+        statuser.onError(object : Statuser.Listener{
+            override fun onTryAgain() {
+                presenter?.getBusinessSample()
+            }
+        })
+    }
+
+    override fun stopResponse() {
+        statuser.onFinish()
     }
 }
