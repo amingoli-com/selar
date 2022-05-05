@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_first_open.*
 import java.util.*
@@ -101,7 +102,7 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOp
 
     private fun getSampleData(){
         if (URL_SAMPLE_DATA!= null){
-            DownloadDataSampleDialog(this).show(supportFragmentManager,"ss")
+            presenter?.getBusinessSample(URL_SAMPLE_DATA!!)
         }else{
             next()
         }
@@ -135,9 +136,11 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOp
     override fun onResponseSampleData(sampleData: ResponseBusinessSample.SampleData) {
         if (!sampleData.product.isNullOrEmpty()){
             for (i in 0 until sampleData.product.size){
-                App.database.getAppDao().insertProduct()
+                Log.e("qqqaddp", "onResponseSampleData: ${sampleData.product[i].title}" )
+//                App.database.getAppDao().insertProduct()
             }
         }
+        next()
     }
 
     override fun onError(message: String) {
