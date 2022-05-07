@@ -61,7 +61,11 @@ class CustomerViewDialog(val _context: Context, val customer_id:Int, val positio
         tv_amount_all_order.setText(App.priceFormat(28000000.0,true))
         tv_order_last_date.setText(App.getFormattedDate(Date()))
 
-        tv_date.setText("در تاریخ ${App.getFormattedDate(this_customer?.updated_at)}ویرایش شده \n در تاریخ${App.getFormattedDate(this_customer?.created_at)} ثبت شده")
+        try {
+            tv_date.setText("در تاریخ ${App.getFormattedDate(this_customer?.updated_at)}ویرایش شده \n در تاریخ${App.getFormattedDate(this_customer?.created_at)} ثبت شده")
+        }catch (e:Exception){
+
+        }
     }
 
     private fun initOnClick(){
