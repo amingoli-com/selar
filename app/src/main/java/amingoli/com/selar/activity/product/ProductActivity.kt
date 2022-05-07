@@ -291,7 +291,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
         atc_unit.setAdapter(adapter)
         atc_unit.setOnItemClickListener { parent, view, position, id ->
             val r: Spinner = parent.getItemAtPosition(position) as Spinner
-            App.toast(r.name)
         }
         atc_unit.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) atc_unit.showDropDown()
@@ -385,7 +384,6 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
             _PRODUCT_OBJECT?.created_at = Date()
             _PRODUCT_OBJECT?.updated_at = Date()
         }
-//        _PRODUCT_OBJECT?.image_code = ""
         return _PRODUCT_OBJECT!!
     }
 
@@ -407,15 +405,15 @@ class ProductActivity : AppCompatActivity(), SelectCategoryDialog.Listener  {
                 edt_tax_percent.isEnabled = false
             }
 
-            edt_barcode.setText(_PRODUCT_OBJECT?.qrcode)
-            atc_unit.setText(_PRODUCT_OBJECT?.increase)
-            edt_name.setText(_PRODUCT_OBJECT?.name)
-            edt_max_selection.setText(_PRODUCT_OBJECT!!.max_selection!!.toInt().toString())
+            edt_barcode.setText(_PRODUCT_OBJECT?.qrcode?:"")
+            atc_unit.setText(_PRODUCT_OBJECT?.increase?:"")
+            edt_name.setText(_PRODUCT_OBJECT?.name?:"")
+            edt_max_selection.setText((_PRODUCT_OBJECT?.max_selection?.toInt()?:0).toString())
             initCategoryProductList()
-            edt_price_buy.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_buy!!))
-            edt_price_sela_on_product.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale_on_product!!))
-            edt_price_sela.setText(App.priceFormat(_PRODUCT_OBJECT!!.price_sale!!))
-            edt_stock.setText(App.stockFormat(_PRODUCT_OBJECT!!.stock!!))
+            edt_price_buy.setText(App.priceFormat(_PRODUCT_OBJECT?.price_buy?:0.0))
+            edt_price_sela_on_product.setText(App.priceFormat(_PRODUCT_OBJECT?.price_sale_on_product?:0.0))
+            edt_price_sela.setText(App.priceFormat(_PRODUCT_OBJECT?.price_sale?:0.0))
+            edt_stock.setText(App.stockFormat(_PRODUCT_OBJECT?.stock?:0.0))
             if (_PRODUCT_OBJECT?.date_expired != null){
                 tv_add_date_expire.setText(resources.getString(R.string.expired_at,App.getFormattedDate(_PRODUCT_OBJECT?.date_expired)))
                 edt_date.setText(App.getFormattedDate(_PRODUCT_OBJECT?.date_expired))

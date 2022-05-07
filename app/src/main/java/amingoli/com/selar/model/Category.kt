@@ -9,6 +9,7 @@ class Category {
     @PrimaryKey(autoGenerate = true)
     var id :Int? = null
     var id_mother :Int? = null
+    var id_code :String? = null
     var name :String? = null
     var content :String? = null
     var image :String? = null
@@ -34,6 +35,16 @@ class Category {
         this.image = image
         this.branch = branch
         this.status = status
+    }
+
+    @Ignore
+    constructor(id_mother: Int?, id_code: String?, name: String?, image: String?, branch: Int?) {
+        this.id_mother = id_mother
+        this.id_code = id_code
+        this.name = name
+        this.image = image
+        this.branch = branch
+        this.status = 1
     }
 
 

@@ -51,7 +51,7 @@ class ProductListHorizontalAdapter_2(
 
         if (!model.image_defult.isNullOrEmpty()){
             item.image.visibility = View.VISIBLE
-            Glide.with(context).load(File(model.image_defult)).into(item.image)
+            Glide.with(context).load(model.image_defult).into(item.image)
         }else item.image.visibility = View.GONE
 
         item.setOnClickListener {

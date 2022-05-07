@@ -1,6 +1,8 @@
 package amingoli.com.selar.helper
 
 object Config {
+    const val TAG = "qqqq-tag"
+
     const val REQUEST_CODE = 100
 
     const val BASE_URL = "http://192.168.1.108/saler"

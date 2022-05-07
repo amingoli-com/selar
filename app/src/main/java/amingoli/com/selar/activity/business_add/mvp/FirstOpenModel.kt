@@ -37,7 +37,7 @@ class FirstOpenModel(val view: FirstOpenView) : FirstOpenPresenter {
         ApiClient.getClient().getBusinessSample(url)
             .enqueue(object : retrofit2.Callback<ResponseData<ResponseBusinessSample>> {
                 override fun onFailure(call: Call<ResponseData<ResponseBusinessSample>>, t: Throwable) {
-                    Log.e("qqqq", "getBusinessSample onFailure" ,t)
+                    Log.e("qqqq", "getBusinessSample url onFailure" ,t)
                     view.stopResponse()
                     view.onError(t.message.toString())
                 }

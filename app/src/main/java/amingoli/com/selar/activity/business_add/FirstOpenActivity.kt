@@ -8,10 +8,7 @@ import amingoli.com.selar.adapter.BusinessAdapter
 import amingoli.com.selar.dialog.DownloadDataSampleDialog
 import amingoli.com.selar.helper.App
 import amingoli.com.selar.helper.Session
-import amingoli.com.selar.model.Business
-import amingoli.com.selar.model.Product
-import amingoli.com.selar.model.ResponseBusinessSample
-import amingoli.com.selar.model.Setting
+import amingoli.com.selar.model.*
 import amingoli.com.selar.widget.Statuser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +23,7 @@ import kotlin.collections.ArrayList
 
 class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOpenView {
 
+    private var branch = App.branch()
     private var adapter: BusinessAdapter? = null
     private var presenter: FirstOpenModel? = null
     private var URL_SAMPLE_DATA : String? = null
@@ -61,13 +59,14 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOp
                         Date()
                     )
                 )
+                branch = id_business.toInt()
                 App.database.getAppDao().insertSetting(Setting(id_business.toInt()))
                 Session.getInstance().setBusiness(
                     App.getString(edt_name),
                     App.getString(edt_business_name),
                     id_business.toInt()
                 )
-                Handler().postDelayed({ getSampleData() },2500)
+                Handler().postDelayed({ getSampleData() },300)
             }else submit.hideLoader()
         }
 
@@ -119,6 +118,45 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOp
     }
 
     /**
+     * Object Insert by convert
+     * */
+
+    private fun insertProduct(pl : ArrayList<ResponseBusinessSample.Product>){
+        val l = ArrayList<Product>()
+        for (i in 0 until pl.size){
+            val p = pl[i];
+            l.add(Product(p.id_code,p.qrCode,p.title,p.image,branch,p.stock,p.price_buy,p.price_on_product,p.price_sale,p.unit))
+        }
+        App.database.getAppDao().insertProduct(l)
+    }
+
+    private fun insertCategory(cl : ArrayList<ResponseBusinessSample.Category>){
+        val l = ArrayList<Category>()
+        for (i in 0 until cl.size){
+            val c = cl[i]
+            l.add(Category(0,c.id_code,c.name,c.image,branch))
+        }
+        App.database.getAppDao().insertCategory(l)
+        return
+    }
+
+    private fun insertCategoryProduct(cp : ArrayList<ResponseBusinessSample.ProductCategory>){
+        val l = ArrayList<CategoryProduct>()
+        for (i in 0 until cp.size){
+            val p = App.database.getAppDao().selectProductByIdCode(branch,cp[i].id_code_product!!)
+            val c = App.database.getAppDao().selectCategoryByIdCode(branch,cp[i].id_code_category!!)
+            l.add(CategoryProduct(p.id,c.id))
+        }
+        App.database.getAppDao().insertCategoryProduct(l)
+    }
+
+    private fun insertUnit(string: ArrayList<String>){
+        val l = ArrayList<UnitModel>()
+        for (i in 0 until string.size) l.add(UnitModel(string[i],branch))
+        App.database.getAppDao().insertUnit(l)
+    }
+
+    /**
      * Listener
     * */
     override fun onItemClicked(position: Int, item: ResponseBusinessSample.item) {
@@ -135,15 +173,16 @@ class FirstOpenActivity : AppCompatActivity(), BusinessAdapter.Listener, FirstOp
 
     override fun onResponseSampleData(sampleData: ResponseBusinessSample.SampleData) {
         if (!sampleData.product.isNullOrEmpty()){
-            for (i in 0 until sampleData.product.size){
-                Log.e("qqqaddp", "onResponseSampleData: ${sampleData.product[i].title}" )
-//                App.database.getAppDao().insertProduct()
-            }
+            insertProduct(sampleData.product)
+            insertCategory(sampleData.category!!)
+            insertCategoryProduct(sampleData.product_category!!)
+            insertUnit(sampleData.unit!!)
         }
-        next()
+        Handler().postDelayed({next()},2500)
     }
 
     override fun onError(message: String) {
+        submit.hideLoader()
         adapter?.addItemDefault()
         statuser.onError(object : Statuser.Listener{
             override fun onTryAgain() {

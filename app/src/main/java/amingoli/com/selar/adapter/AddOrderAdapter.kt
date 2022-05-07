@@ -53,7 +53,7 @@ class AddOrderAdapter(
 
         if (!model.product_image.isNullOrEmpty()){
             item.image.visibility = View.VISIBLE
-            Glide.with(context).load(File(model.product_image)).into(item.image)
+            Glide.with(context).load(model.product_image).into(item.image)
         }
 
         item.setOnClickListener { listener.onItemClicked(position, model) }

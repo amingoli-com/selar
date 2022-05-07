@@ -13,8 +13,14 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(product: Product) : Long
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProduct(product: ArrayList<Product>) : List<Long>
+
     @Query("select * from product where branch=:branch")
     fun selectProduct(branch: Int): List<Product>
+
+    @Query("select id from product where branch=:branch and id_code=:id_code limit 1")
+    fun selectProductByIdCode(branch: Int, id_code:String): Product
 
     @Query("select id,image_defult,name,price_sale from product where branch=:branch")
     fun selectSmallSizeProduct(branch: Int): List<Product>
@@ -57,8 +63,14 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: Category): Long
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCategory(category: ArrayList<Category>): List<Long>
+
     @Query("select * from category where branch=:branch")
     fun selectCategory(branch: Int): List<Category>
+
+    @Query("select id from category where branch=:branch and id_code=:id_code limit 1")
+    fun selectCategoryByIdCode(branch: Int, id_code:String): Category
 
     @Query("select * from category where branch=:branch and id = :id")
     fun selectCategory(branch: Int, id: Int): Category
@@ -99,8 +111,11 @@ interface AppDao {
     @Query("select * from unitmodel where branch=:branch and title = :unit_title")
     fun selectUnit(branch: Int, unit_title: String): UnitModel?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUnit(unit: UnitModel)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUnit(unit: ArrayList<UnitModel>)
 
 
 //    Business

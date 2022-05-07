@@ -2,6 +2,7 @@ package amingoli.com.selar.adapter
 
 import amingoli.com.selar.R
 import amingoli.com.selar.helper.App
+import amingoli.com.selar.helper.Config.TAG
 import amingoli.com.selar.model.Category
 import amingoli.com.selar.model.Product
 import android.annotation.SuppressLint
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_category.view.*
 import java.io.File
+import java.lang.Exception
 
 class CategoryListManagerAdapter(
     val context: Context,
@@ -54,8 +56,8 @@ class CategoryListManagerAdapter(
         }else item.box_content.visibility = View.GONE
 
 
-        if (!model.image.isNullOrEmpty() && File(model.image).exists()){
-            Glide.with(context).load(File(model.image)).into(item.image)
+        if (!model.image.isNullOrEmpty()){
+            Glide.with(context).load(model.image).into(item.image)
             item.image.visibility = View.VISIBLE
         }else item.image.visibility = View.GONE
 
@@ -75,11 +77,14 @@ class CategoryListManagerAdapter(
     }
 
     fun addItem(category: Category, position: Int){
-        if (position == -1) addItem(category)
-        else {
-            Log.e("qqq", "addItem status is : ${category.status} - pos: $position" )
-            list[position] = category
-            notifyItemChanged(position,category)
+        try {
+            if (position == -1) addItem(category)
+            else {
+                list[position] = category
+                notifyItemChanged(position,category)
+            }
+        }catch (e:Exception){
+            Log.e(TAG, "addItem: ",e )
         }
     }
     @SuppressLint("NotifyDataSetChanged")

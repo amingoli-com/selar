@@ -38,8 +38,14 @@ class ResponseBusinessSample {
     class Product{
         var id_code:String?=null
         var category:String?=null
+        var qrCode:String?=null
+
+        var stock:Double= 0.0
+        var price_buy:Double= 0.0
+        var price_on_product:Double= 0.0
+        var price_sale:Double= 0.0
+
         var title:String?=null
-        var price:Double? = 0.0
         var unit:String?=null
         var image:String?=null
     }
